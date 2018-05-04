@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class Auction {
-
+	
 	private static int MAX_AMOUNT_OF_ITEMS = 10;
 	private List<Item> myItems;
 	private LocalDate myDate;
@@ -46,5 +46,6 @@ public class Auction {
 	public void setMyTime(LocalTime myTime) {
 		this.myTime = myTime;
 	}
+
 
 }

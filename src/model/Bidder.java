@@ -23,6 +23,7 @@ public class Bidder {
 	private static int myBid;
 	*/
 	
+	//Change here to test
 
 	public Bidder() {
 		myTotalBids = 0;

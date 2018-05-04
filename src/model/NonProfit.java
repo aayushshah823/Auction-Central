@@ -54,12 +54,12 @@ public class NonProfit {
 	
 	
 	//only works for current auction
-	public List<Item> getItemsInAuction() {
-		if (myCurrentAuction < 0) {
-			throw new NullPointerException();
-		}
-		return myAuctions.get(myCurrentAuction).getItems();
-	}
+//	public List<Item> getItemsInAuction() {
+//		if (myCurrentAuction < 0) {
+//			throw new NullPointerException();
+//		}
+//		//return myAuctions.get(myCurrentAuction).getItems();
+//	}
 	
 	public String getOrg() {
 		return myOrg;
