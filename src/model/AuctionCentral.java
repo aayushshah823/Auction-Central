@@ -17,12 +17,10 @@ public class AuctionCentral implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = -3851687924011616060L;
 	private Map<NonProfit, ArrayList<Auction>> myOrganization;
-	//Username / name of the person
 	private ArrayList<NonProfit> nonProfits;
 	
 	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25; 
 	
-	//Decrement once an auction finishes.. ? 
 	private int numCurrentAuctions;
 	
 	public AuctionCentral() {
@@ -32,10 +30,13 @@ public class AuctionCentral implements java.io.Serializable{
 	}
 	
 	public void addNonprofit(NonProfit theNonProfit) {
-		if (!myOrganization.containsKey(theNonProfit)) {
-			myOrganization.put(theNonProfit, new ArrayList<Auction>());
-			nonProfits.add(theNonProfit);
-		}
+		if (theNonProfit != null) {
+			if (!myOrganization.containsKey(theNonProfit)) {
+				myOrganization.put(theNonProfit, new ArrayList<Auction>());
+				nonProfits.add(theNonProfit);
+			}
+		} else 
+			throw new IllegalArgumentException();
 	}
 	
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
@@ -43,6 +44,8 @@ public class AuctionCentral implements java.io.Serializable{
 				&& numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS) {
 			myOrganization.get(theNonProfit).add(theAuction);
 			numCurrentAuctions++;
+		} else {
+			throw new IllegalArgumentException();
 		}
 	}
 }
