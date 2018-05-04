@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * 
+ * @author Allen Whitemarsh
+ * @version 5/4/2018
+ */
 public class AuctionCentral implements java.io.Serializable{
 	
 	/**
@@ -26,9 +32,6 @@ public class AuctionCentral implements java.io.Serializable{
 	}
 	
 	public void addNonprofit(NonProfit theNonProfit) {
-		//If the nonprofit is not in the system yet
-		//add a new key value and the name of the auction if any
-		// "None" if not auction is booked yet
 		if (!myOrganization.containsKey(theNonProfit)) {
 			myOrganization.put(theNonProfit, new ArrayList<Auction>());
 			nonProfits.add(theNonProfit);
