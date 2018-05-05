@@ -12,7 +12,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable {
+public class Auction implements Serializable, Comparable<LocalDate> {
 
 
 	//Serial Number ID
@@ -109,6 +109,19 @@ public class Auction implements Serializable {
 
 	public void setEndTime(LocalTime myTime) {
 		this.myEndTime = myTime;
+	}
+
+	@Override
+	public int compareTo(LocalDate theDate) {
+		int result = 0;
+		if ( myStartDate.compareTo(theDate) > 0) {
+			result = 1;
+		} else if (myStartDate.compareTo(theDate) < 0) {
+			result = -1;
+		} else {
+			result = 0;
+		}
+		return result;
 	}
 
 
