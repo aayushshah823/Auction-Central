@@ -1,56 +1,131 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-public class Bidder {
+public class Bidder extends User implements Serializable {
+
+	private static final long serialVersionUID = 8268184277531088723L;
 	
-	/** Constant for minimum about of bid. */
 	public static final int MIN_AMOUNT_BID_PER_ITEM = 500;
-	
 	public static final int MIN_BIDS_PER_ITEM = 0;
-	public static final int MAX_BIDS_PER_ITEM = 4;
-	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10;
+	public static final int MAX_BIDS_PER_AUCTION = 4;
+	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 
+	private Map<Auction, ArrayList<Item>> myAuctions;
 
-	//Private
-	private int myTotalBids;
-	private Map<Auction, ArrayList<Item>> myAuctions;	
-	
-	/* This was already there. Not sure if we need this
-	   or not as bid amount is going to be double.
-	
-	private static int myBid;
-	*/
-	
-	//Change here to test
+	public Bidder() { 
+		myAuctions = new TreeMap<Auction, ArrayList<Item>>();
+	}
 
-	public Bidder() {
-		myTotalBids = 0;
-		myAuctions = new HashMap<Auction, ArrayList<Item>>();
+	/**
+	 * Pre: User has placed a bid in any auction at some point Post:
+	 * 
+	 * @return ArrayList containing  all auction user has placed bids on
+	 * @author Raisa
+	 */
+	public ArrayList<Auction> getAllAuctions() {
+		ArrayList<Auction> auctions = null;
+		if(this.myAuctions == null) {
+			System.out.println("No Auction found in your records");
+		} else {
+			Set<Auction> a = myAuctions.keySet();
+			auctions = new ArrayList<Auction>();
+			auctions.addAll(a);
+		}
+
+		return auctions;
+	
+	}
+
+	/**
+	 * Pre: User must have placed an bid in any items of the given auction
+	 * 
+	 * @param auction
+	 * @return ArrayList containing of items user has bid on
+	 */
+	public ArrayList<Item> getAllItemsInOneAuction(Auction auction) {
+		ArrayList <Item> items = new ArrayList<Item>();
+		if(!this.myAuctions.containsKey(auction)) {
+			System.out.println("You have place no bids in this auction");
+		
+		} else {
+			items.addAll(this.myAuctions.get(auction));	
+		}
+
+		return items;
+
+	}
+	/**
+	 * Pre: user must have placed bids on at least one item.
+	 * @return ArrayList containing of items user has bid on. 
+	 */
+	public ArrayList<Item> getAllIntemsInAllAuctions(){
+		ArrayList<Item> items = new ArrayList<Item>();
+		if(this.myAuctions == null) {
+			System.out.println("No Items found in your records");
+		} else {
+			for(Auction auction : this.myAuctions.keySet()) {
+				items.addAll(this.myAuctions.get(auction));				
+			}
+		}
+		
+		
+		return items;
 	}
 	
-//	Bid(double): void
-//	getAuctionsWithBid(): List<Auction>
-//	getMyItemsWithBidsSingleAuction(Auction): List
-//	getMyItemsWithBidsAllAuctions(): List
-//	getMyBids(): void
-//	getMyItems(): void
-//	getAllAuctions(): List
+	//TODO need to think about this one for a bit 
+	public int myTotalBidAllFutureAuctions() {
+		int totalBid = 0;		
+		LocalDate today = LocalDate.now();
 	
-	public void makeBid(double bid, Item theItem) {
-		//if (isBidValid()) {}
+		for(Auction auction : this.myAuctions.keySet()) {
+			if(today.compareTo(auction.getStartDate())<=0) {
+				totalBid += (this.myAuctions.get(auction).size() - 1);
+			}
+		}
+		
+		return totalBid;
 	}
-	
-	public boolean isUnderMaxBidsPerAuction() {
-		return myTotalBids < MAX_BIDS_ALLOWED_PER_BIDDER;
-		//No more than 4 bids per auction
+	/**	  
+	 * @param auction
+	 * @return amount of bids placed in one auction
+	 */
+	public int myTotalBidPerAuction(Auction auction) {
+		int numOfBids = 0;
+		if(this.myAuctions.containsKey(auction)) {
+			numOfBids = (this.myAuctions.get(auction).size() - 1);
+		}	
+		return numOfBids;
 	}
-	public boolean isUnderMaxBidsTotal() {
-		return myTotalBids < MAX_BIDS_ALLOWED_PER_BIDDER;
-		//NO mre than 10 items for all future auctions.
+
+	/**
+	 * This option will only show if 
+	 * the date is valid for a bid
+	 * return 2 if bid amount < minMidAmout
+	 * return 3 if the user has bid in the max # if bids fir auctions
+	 * return 4 if the user has bid in the max # of total items
+	 * return 5 if the bid was successful 
+	 * @param bid amount and Item to bid on
+	 * @param theItem
+	 */
+	public int makeBid(Item theItem, Auction theAuction, double theBid) {
+		int success = 0;
+		if(!isBidGreaterThanMinAmount(theBid))
+			return 2;
+		if(isMaxBidPerAuction(theAuction))
+			return 3;		
+		if(isMaxBidPerAuction(theAuction))
+			return 3;
+		if(isMaxTotalBid(theAuction))
+			return 4;
+		
+		return success;
 	}
-	
+
 	/**
 	 * @author Raisa
 	 * @param auction
@@ -58,47 +133,25 @@ public class Bidder {
 	 * @return False if Bid is placed after 12:00 am on the day of the Auction
 	 */
 	public boolean isDateValidForBid(Auction auction) {
-		//checks if the bid is not on the current day
-		//or if the bid already passed
-		return true;
+		LocalDate today = LocalDate.now();
+		return (today.compareTo(auction.getStartDate()) < 0);
 	}
-	
-	public ArrayList<Auction> getAuctionsWithBid(){
-		return null;
-	}
-	
-	public ArrayList<Auction> getMyItemsWithBidsSingleAuction(Auction theAuction){
-		return null;
-	}
-	
-	public ArrayList<Auction> getMyItemsWithBidsAllAuctions(){
-		return null;
-	}
-	
-	public void getMyBids() {
-		
-	}	
-	
-	public void getMyItems() {
-		
-	}
-	
-	public int getBidsPerItem(Item theItem) {
-		return 0;
-	}
-	
-	public ArrayList<Auction> getAllAuctions() {
-		return null;
-	}
-
-
 	/**
-	 * Checks if bid is valid or not.
+	 * 
+	 * 
 	 * @param myBid The bid passed by user.
 	 * @return True if bid is valid, false otherwise.
 	 */
-	public boolean isBidGreaterThanMinAmount(double myBid) {
-		return myBid > MIN_AMOUNT_BID_PER_ITEM;
+	public boolean isBidGreaterThanMinAmount(double theBid) {
+		return theBid > MIN_AMOUNT_BID_PER_ITEM;
 	}
 
+	
+	public boolean isMaxBidPerAuction(Auction auction) {
+		return (myTotalBidPerAuction(auction) >= MIN_AMOUNT_BID_PER_ITEM);
+	}
+	
+	public boolean isMaxTotalBid(Auction auction) {
+		return (myTotalBidAllFutureAuctions() >= MAX_BIDS_ALLOWED_PER_BIDDER);
+	}
 }
