@@ -12,7 +12,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable, Comparable<LocalDate> {
+public class Auction implements Serializable, Comparable<LocalDate>{
 
 
 	//Serial Number ID
@@ -123,6 +123,4 @@ public class Auction implements Serializable, Comparable<LocalDate> {
 		}
 		return result;
 	}
-
-
 }
