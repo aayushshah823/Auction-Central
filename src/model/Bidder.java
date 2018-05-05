@@ -11,6 +11,7 @@ public class Bidder extends User implements Serializable {
 
 	private static final long serialVersionUID = 8268184277531088723L;
 	
+	private static final String USER_TYPE = "bidder";
 	public static final int MIN_AMOUNT_BID_PER_ITEM = 500;
 	public static final int MIN_BIDS_PER_ITEM = 0;
 	public static final int MAX_BIDS_PER_AUCTION = 4;
@@ -30,14 +31,13 @@ public class Bidder extends User implements Serializable {
 	public ArrayList<Auction> getAllAuctions() {
 		ArrayList<Auction> auctions = null;
 		if(this.myAuctions == null) {
-			System.out.println("No Auction found in your records");
+			return auctions;
 		} else {
 			Set<Auction> a = myAuctions.keySet();
 			auctions = new ArrayList<Auction>();
 			auctions.addAll(a);
-		}
-
-		return auctions;
+			return auctions;
+		}	
 	
 	}
 
@@ -77,7 +77,7 @@ public class Bidder extends User implements Serializable {
 		return items;
 	}
 	
-	//TODO need to think about this one for a bit 
+	
 	public int myTotalBidAllFutureAuctions() {
 		int totalBid = 0;		
 		LocalDate today = LocalDate.now();
@@ -108,22 +108,58 @@ public class Bidder extends User implements Serializable {
 	 * return 2 if bid amount < minMidAmout
 	 * return 3 if the user has bid in the max # if bids fir auctions
 	 * return 4 if the user has bid in the max # of total items
-	 * return 5 if the bid was successful 
+	 * return 1 if the bid was successful 
 	 * @param bid amount and Item to bid on
 	 * @param theItem
 	 */
-	public int makeBid(Item theItem, Auction theAuction, double theBid) {
+	public int makeBid(Item item, Auction auction, double bid) {
+		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;
-		if(!isBidGreaterThanMinAmount(theBid))
-			return 2;
-		if(isMaxBidPerAuction(theAuction))
-			return 3;		
-		if(isMaxBidPerAuction(theAuction))
-			return 3;
-		if(isMaxTotalBid(theAuction))
-			return 4;
+		if(!isBidGreaterThanMinAmount(bid))
+			success = 2;
+		else if(isMaxBidPerAuction(auction))
+			success = 3;		
+		else if(isMaxBidPerAuction(auction))
+			success = 3;
+		else if(isMaxTotalBid(auction))
+			success = 4;
+		else {
+			if (!this.myAuctions.containsKey(auction)) { //The user has not bid on this auction yet
+				items.add(item);
+				this.myAuctions.put(auction, items);
+				updateItemHighestBid(item, bid);
+			} if (isExistingBidOnItem(auction, item)){ //If I have already bid on this item
+				updateItemHighestBid(item, bid);
+				
+			}else {
+				this.myAuctions.get(auction).add(item);
+				updateItemHighestBid(item, bid);
+			} 
+			success = 1;
+		}
 		
 		return success;
+	}
+	
+	private void updateItemHighestBid(Item item, double bid) {
+		if(bid > item.getCurrentBid()) {
+			item.setCurrentBid(bid);
+		}
+	}
+	/**
+	 * Checks if the user has a previous bid 
+	 * on a Item. Used as a helper to not add the 
+	 * same item twice to the list of items
+	 * @param auction
+	 * @param item
+	 * @return true if item has already bid on for a specific auction
+	 */
+	private boolean isExistingBidOnItem(Auction auction, Item item) {
+		for(int i = 0; i < this.myAuctions.get(auction).size(); i++) {
+			if(this.myAuctions.get(auction).get(i).getItemName().equals(item.getItemName()))
+				return true;
+		}
+		return false;
 	}
 
 	/**
