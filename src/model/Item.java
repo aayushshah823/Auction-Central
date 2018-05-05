@@ -1,7 +1,8 @@
 package model;
 
-public class Item {
+public class Item implements java.io.Serializable{
 	
+	private static final long serialVersionUID = 3631678504023639370L;
 	private String myName;
 	private double myStartingBid;
 	private long myItemNumber;
