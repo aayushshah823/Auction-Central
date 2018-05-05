@@ -1,15 +1,18 @@
 package model;
 
+/**
+ * @author Allen Whitemarsh
+ * @version 5/4/2018
+ *
+ */
 public class Item implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 3631678504023639370L;
 	private String myName;
 	private double myStartingBid;
-	private long myItemNumber;
 	private String myDescription;
 	private int myItemCount;
 	private double myCurrentBid;
-//	private boolean myBundle; IS THIS NEEDED?
 	
 	public Item() {
 		//Default Constructor. Do nothing
@@ -18,10 +21,8 @@ public class Item implements java.io.Serializable{
 	public Item(String theName, double theStartingBid, String theDescription, int theItemCount) {
 		myName = theName;
 		myStartingBid = theStartingBid;
-//		myItemNumber = generateItemNumber(); Should this be done in another class?
 		myItemCount = theItemCount;
 		myDescription = theDescription;
-		//myBundle = false;
 	}
 	
 	public void setCurrentBid(double theBid){
@@ -34,10 +35,6 @@ public class Item implements java.io.Serializable{
 	
 	public String getItemName() {
 		return myName;
-	}
-	
-	public long getItemNumber() {
-		return myItemNumber;
 	}
 	
 	public String getItemDesciption() {
@@ -55,13 +52,13 @@ public class Item implements java.io.Serializable{
 	public double getStartingBid() {
 		return myStartingBid;
 	}
-	
-//	public boolean isBundle() {
-//		return myBundle;
-//	}
 
 	public String toString() {
-		return "";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Item Name: " + myName);
+		builder.append("Item Description: " + myDescription);
+		builder.append("Starting Bid: $" + myStartingBid);
+		return builder.toString();
 	}
 
 }

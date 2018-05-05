@@ -3,8 +3,6 @@ package model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class is where all the auctions are held. By storing each 
@@ -76,5 +74,14 @@ public class AuctionCentral implements java.io.Serializable{
 				}
 			}
 		}
+	}
+	
+	/**
+	 * This method is used for testing purposes only. Allows easy
+	 * testing with different number of total Auctions.
+	 * @param theNumberOfAuctions
+	 */
+	public void setNumCurrentAuctions(int theNumberOfAuctions) {
+		numCurrentAuctions = theNumberOfAuctions;
 	}
 }
