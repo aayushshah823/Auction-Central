@@ -175,16 +175,7 @@ public class Bidder implements Serializable, User{
 		return false;
 	}
 
-	/**
-	 * @author Raisa
-	 * @param auction
-	 * @return true if the bid is placed before 12:00 am on the day of the Auction
-	 * @return False if Bid is placed after 12:00 am on the day of the Auction
-	 */
-	public boolean isDateValidForBid(Auction auction) {
-		LocalDate today = LocalDate.now();
-		return (today.compareTo(auction.getStartDate()) < 0);
-	}
+
 	/**
 	 * 
 	 * 

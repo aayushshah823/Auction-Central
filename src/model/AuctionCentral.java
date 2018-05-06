@@ -18,7 +18,7 @@ public class AuctionCentral implements java.io.Serializable{
 	private static final long serialVersionUID = -3851687924011616060L;
 	
 	/*
-	 * Variable to define the maximum number of auctions allowed
+	 * Constant to define the maximum number of auctions allowed
 	 * to be scheduled at a time.
 	 */
 	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25; 
@@ -107,6 +107,17 @@ public class AuctionCentral implements java.io.Serializable{
 		}
 		
 		return futureAuctions;
+	}
+	
+	/**
+	 * @author Raisa
+	 * @param auction
+	 * @return true if the bid is placed before 12:00 am on the day of the Auction
+	 * @return False if Bid is placed after 12:00 am on the day of the Auction
+	 */
+	public boolean isDateValidForBid(Auction auction) {
+		LocalDate today = LocalDate.now();
+		return (today.compareTo(auction.getStartDate()) < 0);
 	}
 	/**
 	 * This method is used for testing purposes only. Allows easy
