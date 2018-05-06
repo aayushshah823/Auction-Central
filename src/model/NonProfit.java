@@ -15,11 +15,11 @@ import java.util.List;
 public class NonProfit implements Serializable, User {
 
 
-	/** */
+	/** Serial id. */
 	private static final long serialVersionUID = 6004350978105195837L;
 	private static final String USER_TYPE = "nonprofit";
-	private static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
-	private static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
+	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
+	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
 	
 	
 	/** My Organizations.*/
@@ -88,10 +88,10 @@ public class NonProfit implements Serializable, User {
 	 * Checking if non profit can do or not.
 	 * @return True if within date range, false otherwise.
 	 */
-	public boolean isDateRangeValid() {
+	public boolean isDateRangeValid(long theDate) {
 
-		long a = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
-		return (a >= MIN_DAYS_AWAY_FOR_AUCTION && a <= MAX_DAYS_AWAY_FOR_AUCTION);
+		theDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
+		return (theDate >= MIN_DAYS_AWAY_FOR_AUCTION && theDate <= MAX_DAYS_AWAY_FOR_AUCTION);
 	}
 
 	/**
@@ -184,6 +184,31 @@ public class NonProfit implements Serializable, User {
 	public String getUserType() {
 		return USER_TYPE;
 	}
+	
+	public boolean isMaxDaysForAuction(int theDays) {
+		return theDays <= MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+	
+	public boolean isMinDaysForAuctionValid(int theDays) {
+		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
+	}
+
+	
+	public boolean isListValid(List<Auction> list) {
+		return list.size() > myAuctions.size();
+	}
+
+
+	public int getMaxDays() {
+		return MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+	
+	public int getMinDays() {
+		return MIN_DAYS_AWAY_FOR_AUCTION;
+	}
+	
+	
+
 
 
 }
