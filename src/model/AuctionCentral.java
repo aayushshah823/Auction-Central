@@ -6,73 +6,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is where all the auctions are held. By storing each 
- * non-profit that submits an auction we can access every auction
- * and keep track of all future auctions. 
+ * This class is where all the auctions are held. By storing each non-profit
+ * that submits an auction we can access every auction and keep track of all
+ * future auctions.
  * 
  * @author Allen Whitemarsh
  * @version 5/4/2018
  */
-public class AuctionCentral implements java.io.Serializable{
-	
+public class AuctionCentral implements java.io.Serializable {
+
 	private static final long serialVersionUID = -3851687924011616060L;
-	
+
 	/*
-	 * Constant to define the maximum number of auctions allowed
-	 * to be scheduled at a time.
+	 * Constant to define the maximum number of auctions allowed to be scheduled at
+	 * a time.
 	 */
-	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25; 
+	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25;
 	/*
 	 * List that stores all nonProfit's who have had an auction approved.
 	 */
 	private ArrayList<NonProfit> allNonProfits;
 	private ArrayList<User> users;
-	
+
 	/*
 	 * Variable to keep track of the number of total auctions scheduled.
 	 */
 	private int numCurrentAuctions;
-	
+
 	public AuctionCentral() {
 		users = new ArrayList<User>();
 		allNonProfits = new ArrayList<NonProfit>();
 		numCurrentAuctions = 0;
 	}
-	
+
 	/*
 	 * Method that adds a nonProfit to the List of nonProfits
 	 */
 	public void addNonprofit(NonProfit theNonProfit) {
 		if (theNonProfit != null) {
 			allNonProfits.add(theNonProfit);
-		} else 
+		} else
 			throw new IllegalArgumentException();
 	}
-	
+
 	public void addNewUser(User user) {
-		if(!(user instanceof User))
+		if (!(user instanceof User))
 			throw new IllegalArgumentException();
-		users.add(user);	
+		users.add(user);
 	}
+
 	public ArrayList<NonProfit> getAllNonProfits() {
 		return allNonProfits;
 	}
-	
+
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
-		if (theNonProfit != null && theAuction != null
-				&& numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS) {
+		if (theNonProfit != null && theAuction != null && numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS) {
 			theNonProfit.addAuction(theAuction);
 			updateNumberOfCurrentAuctions();
 		} else {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 	/**
-	 * This method iterates through all auctions and compares the end
-	 * date of each to the current date. This ensures that the number
-	 * of current auctions stays below or at the maximum number of
-	 * auctions.
+	 * This method iterates through all auctions and compares the end date of each
+	 * to the current date. This ensures that the number of current auctions stays
+	 * below or at the maximum number of auctions.
 	 */
 	private void updateNumberOfCurrentAuctions() {
 		numCurrentAuctions = 0;
@@ -82,33 +81,34 @@ public class AuctionCentral implements java.io.Serializable{
 			nonProfitAuctions = np.getAuctions();
 			for (Auction auction : nonProfitAuctions) {
 				if (auction.getEndDate().isAfter(currentDate.toLocalDate())) {
-					numCurrentAuctions++;					
+					numCurrentAuctions++;
 				}
 			}
 		}
 	}
+
 	/**
 	 * @author Raisa
 	 * @return list of all future auctions
 	 */
-	public ArrayList<Auction>  displayFutureAuctions() {
+	public ArrayList<Auction> displayFutureAuctions() {
 		LocalDate today = LocalDate.now();
 		ArrayList<Auction> futureAuctions = new ArrayList<Auction>();
-		ArrayList<Auction> tempAuction = new  ArrayList<Auction>();
-		for(int i = 0; i < this.allNonProfits.size(); i++) {
-			tempAuction =  (ArrayList<Auction>) this.allNonProfits.get(i).getAuctions();
-			if(!tempAuction.isEmpty()) {
-				for(int j = 1; i < tempAuction.size(); j++) {
-					if(tempAuction.get(j).getStartDate().compareTo(today) > 0) {
+		ArrayList<Auction> tempAuction = new ArrayList<Auction>();
+		for (int i = 0; i < this.allNonProfits.size(); i++) {
+			tempAuction = (ArrayList<Auction>) this.allNonProfits.get(i).getAuctions();
+			if (!tempAuction.isEmpty()) {
+				for (int j = 0; i < tempAuction.size(); j++) {
+					if (tempAuction.get(j).getStartDate().compareTo(today) > 0) {
 						futureAuctions.add(tempAuction.get(j));
 					}
 				}
-			}		
+			}
 		}
-		
+
 		return futureAuctions;
 	}
-	
+
 	/**
 	 * @author Raisa
 	 * @param auction
@@ -119,9 +119,11 @@ public class AuctionCentral implements java.io.Serializable{
 		LocalDate today = LocalDate.now();
 		return (today.compareTo(auction.getStartDate()) < 0);
 	}
+
 	/**
-	 * This method is used for testing purposes only. Allows easy
-	 * testing with different number of total Auctions.
+	 * This method is used for testing purposes only. Allows easy testing with
+	 * different number of total Auctions.
+	 * 
 	 * @param theNumberOfAuctions
 	 */
 	public void setNumCurrentAuctions(int theNumberOfAuctions) {
