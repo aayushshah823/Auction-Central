@@ -6,8 +6,8 @@ public class User {
 
 	private Map<String, String> users;
 	
-	public void addUser() {
-		
+	public void addUser(String theUserName, String theRealName) {
+		users.put(theUserName, theRealName);
 	}
 	
 	public String welcomeUser() {

@@ -55,9 +55,9 @@ public class Item implements java.io.Serializable{
 
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Item Name: " + myName);
-		builder.append("Item Description: " + myDescription);
-		builder.append("Starting Bid: $" + myStartingBid);
+		builder.append("\tItem Name: " + myName);
+		builder.append("\tItem Description: " + myDescription);
+		builder.append("\tStarting Bid: $" + myStartingBid);
 		return builder.toString();
 	}
 
