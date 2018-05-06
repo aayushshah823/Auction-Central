@@ -87,7 +87,7 @@ public class Bidder implements Serializable, User{
 		LocalDate today = LocalDate.now();	
 		for(Auction auction : this.myAuctions.keySet()) {
 			if(today.compareTo(auction.getStartDate())<=0) {
-				totalBid += (this.myAuctions.get(auction).size() - 1);
+				totalBid += (this.myAuctions.get(auction).size());
 			}
 		}
 		
@@ -99,11 +99,11 @@ public class Bidder implements Serializable, User{
 	 * @param auction
 	 * @return amount of bids placed in one auction
 	 */
-	private int myTotalBidPerAuction(Auction auction) {
+	public int myTotalBidPerAuction(Auction auction) {
 		int numOfBids = 0;
 		if(this.myAuctions.containsKey(auction)) {
-			numOfBids = (this.myAuctions.get(auction).size() - 1);
-		}	
+			numOfBids = this.myAuctions.get(auction).size() ;
+		}
 		return numOfBids;
 	}
 
@@ -123,9 +123,7 @@ public class Bidder implements Serializable, User{
 		if(!isBidGreaterThanMinAmount(bid))
 			success = 2;
 		else if(isMaxBidPerAuction(auction))
-			success = 3;		
-		else if(isMaxBidPerAuction(auction))
-			success = 3;
+			success = 3;	
 		else if(isMaxTotalBid(auction))
 			success = 4;
 		else {
@@ -133,8 +131,8 @@ public class Bidder implements Serializable, User{
 				items.add(item);
 				this.myAuctions.put(auction, items);
 				updateItemHighestBid(item, bid);
-			} if (isExistingBidOnItem(auction, item)){ //If I have already bid on this item
-				updateItemHighestBid(item, bid);
+//			} if (isExistingBidOnItem(auction, item)){ //If I have already bid on this item
+//				updateItemHighestBid(item, bid);
 				
 			}else {
 				this.myAuctions.get(auction).add(item);
@@ -160,8 +158,11 @@ public class Bidder implements Serializable, User{
 	 * @return true if item has already bid on for a specific auction
 	 */
 	private boolean isExistingBidOnItem(Auction auction, Item item) {
-		for(int i = 0; i < this.myAuctions.get(auction).size() - 1; i++) {
-			if(this.myAuctions.get(auction).get(i).getItemName().equals(item.getItemName()))
+		int numberOfItems = this.myAuctions.get(auction).size() - 1;
+		System.out.println(numberOfItems);
+		ArrayList<Item> items = this.myAuctions.get(auction);
+		for(int i = 0; i < numberOfItems; i++) {
+			if(items.get(i).getItemName().equals(item.getItemName()))
 				return true;
 		}
 		return false;
@@ -189,11 +190,11 @@ public class Bidder implements Serializable, User{
 
 	
 	public boolean isMaxBidPerAuction(Auction auction) {
-		return (myTotalBidPerAuction(auction) >= MIN_AMOUNT_BID_PER_ITEM);
+		return (myTotalBidPerAuction(auction) == MAX_BIDS_PER_AUCTION);
 	}
 	
 	public boolean isMaxTotalBid(Auction auction) {
-		return (myTotalBidAllFutureAuctions() >= MAX_BIDS_ALLOWED_PER_BIDDER);
+		return (myTotalBidAllFutureAuctions() == MAX_BIDS_ALLOWED_PER_BIDDER);
 	}
 
 	@Override
