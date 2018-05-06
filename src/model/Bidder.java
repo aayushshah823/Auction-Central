@@ -55,8 +55,7 @@ public class Bidder implements Serializable, User{
 	public ArrayList<Item> getAllItemsInOneAuction(Auction auction) {
 		ArrayList <Item> items = new ArrayList<Item>();
 		if(!this.myAuctions.containsKey(auction)) {
-			System.out.println("You have place no bids in this auction");
-		
+			return items;
 		} else {
 			items.addAll(this.myAuctions.get(auction));	
 		}
@@ -71,7 +70,7 @@ public class Bidder implements Serializable, User{
 	public ArrayList<Item> getAllIntemsInAllAuctions(){
 		ArrayList<Item> items = new ArrayList<Item>();
 		if(this.myAuctions == null) {
-			System.out.println("No Items found in your records");
+			return items;
 		} else {
 			for(Auction auction : this.myAuctions.keySet()) {
 				items.addAll(this.myAuctions.get(auction));				
@@ -83,10 +82,9 @@ public class Bidder implements Serializable, User{
 	}
 	
 	
-	public int myTotalBidAllFutureAuctions() {
+	private int myTotalBidAllFutureAuctions() {
 		int totalBid = 0;		
-		LocalDate today = LocalDate.now();
-	
+		LocalDate today = LocalDate.now();	
 		for(Auction auction : this.myAuctions.keySet()) {
 			if(today.compareTo(auction.getStartDate())<=0) {
 				totalBid += (this.myAuctions.get(auction).size() - 1);
@@ -95,11 +93,13 @@ public class Bidder implements Serializable, User{
 		
 		return totalBid;
 	}
+	
+
 	/**	  
 	 * @param auction
 	 * @return amount of bids placed in one auction
 	 */
-	public int myTotalBidPerAuction(Auction auction) {
+	private int myTotalBidPerAuction(Auction auction) {
 		int numOfBids = 0;
 		if(this.myAuctions.containsKey(auction)) {
 			numOfBids = (this.myAuctions.get(auction).size() - 1);
