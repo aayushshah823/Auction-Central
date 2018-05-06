@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 /**
  * 
@@ -12,7 +11,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable, Comparable<LocalDate>{
+public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 
 
 	//Serial Number ID
@@ -111,16 +110,16 @@ public class Auction implements Serializable, Comparable<LocalDate>{
 		this.myEndTime = myTime;
 	}
 
-	@Override
-	public int compareTo(LocalDate theDate) {
-		int result = 0;
-		if ( myStartDate.compareTo(theDate) > 0) {
-			result = 1;
-		} else if (myStartDate.compareTo(theDate) < 0) {
-			result = -1;
-		} else {
-			result = 0;
-		}
-		return result;
-	}
+//	@Override
+//	public int compareTo(LocalDate theDate) {
+//		int result = 0;
+//		if ( myStartDate.compareTo(theDate) > 0) {
+//			result = 1;
+//		} else if (myStartDate.compareTo(theDate) < 0) {
+//			result = -1;
+//		} else {
+//			result = 0;
+//		}
+//		return result;
+//	}
 }

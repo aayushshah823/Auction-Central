@@ -3,23 +3,28 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
-public class Bidder extends User implements Serializable {
+public class Bidder implements Serializable, User{
 
 	private static final long serialVersionUID = 8268184277531088723L;
 	
 	private static final String USER_TYPE = "bidder";
+	private Map<Auction, ArrayList<Item>> myAuctions;
+	private String userName;
+	private String name;
 	public static final int MIN_AMOUNT_BID_PER_ITEM = 500;
 	public static final int MIN_BIDS_PER_ITEM = 0;
 	public static final int MAX_BIDS_PER_AUCTION = 4;
 	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 
-	private Map<Auction, ArrayList<Item>> myAuctions;
+	
 
-	public Bidder() { 
-		myAuctions = new TreeMap<Auction, ArrayList<Item>>();
+	public Bidder(String userName, String name) { 
+		this.name = name;
+		this.userName = userName;
+		myAuctions = new HashMap<Auction, ArrayList<Item>>();
 	}
 
 	/**
@@ -155,7 +160,7 @@ public class Bidder extends User implements Serializable {
 	 * @return true if item has already bid on for a specific auction
 	 */
 	private boolean isExistingBidOnItem(Auction auction, Item item) {
-		for(int i = 0; i < this.myAuctions.get(auction).size(); i++) {
+		for(int i = 0; i < this.myAuctions.get(auction).size() - 1; i++) {
 			if(this.myAuctions.get(auction).get(i).getItemName().equals(item.getItemName()))
 				return true;
 		}
@@ -189,5 +194,32 @@ public class Bidder extends User implements Serializable {
 	
 	public boolean isMaxTotalBid(Auction auction) {
 		return (myTotalBidAllFutureAuctions() >= MAX_BIDS_ALLOWED_PER_BIDDER);
+	}
+
+	@Override
+	public void setUsername(String userName) {
+		this.userName = userName;
+		
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+		
+	}
+
+	@Override
+	public String getUsername() {
+		return this.userName;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public String getUserType() {
+		return this.USER_TYPE;
 	}
 }

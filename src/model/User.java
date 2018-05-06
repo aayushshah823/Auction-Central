@@ -1,21 +1,17 @@
 package model;
 
-import java.util.Map;
 
-public class User {
+public interface User {
 
-	private Map<String, String> users;
+	public void setUsername(String userName);
 	
-	public void addUser() {
-		
-	}
+	public void setName(String name);
 	
-	public String welcomeUser() {
-		StringBuilder sb = new StringBuilder();
-		//check for userName and 
-		//Greet user
-		
-		return sb.toString();
-	}
+	public String getUsername();
+	
+	public String getName();
+	
+	public String getUserType();
+	
 
 }

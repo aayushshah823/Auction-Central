@@ -12,13 +12,15 @@ import java.util.List;
  * @version 5/5/18
  *
  */
-public class NonProfit implements Serializable {
+public class NonProfit implements Serializable, User {
 
 
 	/** */
 	private static final long serialVersionUID = 6004350978105195837L;
-	private static int MAX_DAYS_AWAY_FOR_AUCTION = 60;
-	private static int MIN_DAYS_AWAY_FOR_AUCTION = 14;
+	private static final String USER_TYPE = "nonprofit";
+	private static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
+	private static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
+	
 	
 	/** My Organizations.*/
 	private String myOrg;
@@ -141,6 +143,7 @@ public class NonProfit implements Serializable {
 	 * Name of non- profit.
 	 * @return name associated with non-profit.
 	 */
+	@Override
 	public String getName() {
 		return myName;
 	}
@@ -157,6 +160,32 @@ public class NonProfit implements Serializable {
 
 	public List<Auction> getAuctions() {
 		return myAuctions;
+	}
+
+
+	@Override
+	public void setUsername(String userName) {
+		this.myOrg = userName;
+		
+	}
+
+
+	@Override
+	public void setName(String name) {
+		this.myName = name;
+		
+	}
+
+
+	@Override
+	public String getUsername() { 
+		return this.myOrg;
+	}
+
+
+	@Override
+	public String getUserType() {
+		return USER_TYPE;
 	}
 
 

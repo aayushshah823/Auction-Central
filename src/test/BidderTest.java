@@ -20,6 +20,8 @@ public class BidderTest {
 	private static final LocalTime AUCTION_START_TIME = LocalTime.NOON;
 	private static final LocalDate AUCTION_END_DATE = AUCTION_START_DATE;
 	private static final LocalTime AUCTION_END_TIME = AUCTION_START_TIME.plusHours(4);
+	private static final String USERNAME = "bidder1";
+	private static final String NAME = "Jack";
 	private Bidder bidder;
 	private Auction auction;
 	private Item dress;
@@ -27,7 +29,7 @@ public class BidderTest {
 	@Before
 	public void setUp() throws Exception {
 		auction = new Auction(AUCTION_START_DATE, AUCTION_END_DATE, AUCTION_START_TIME, AUCTION_END_TIME);
-		bidder = new Bidder();
+		bidder = new Bidder(USERNAME, NAME);
 		dress = new Item();
 	}
 
@@ -36,11 +38,16 @@ public class BidderTest {
 		assertTrue(bidder.getAllAuctions().isEmpty());
 	}
 	
-//	@Test
-//	public void getAllAuctions_ExistingAuction_AuctionList() {
-//		bidder.makeBid(dress, auction, bid);
-//		assertTrue(!bidder.getAllAuctions().isEmpty());
-//	}
+	@Test
+	public void getAllAuctions_ExistingAuction_AuctionList() {
+		bidder.makeBid(dress, auction, bid);
+		assertTrue(!(bidder.getAllAuctions().isEmpty()));
+	}
+	
+	@Test
+	public void getAllItemsInOneAuction_NoItemsInAuction_EmptyList() {
+		
+	}
 
 
 }

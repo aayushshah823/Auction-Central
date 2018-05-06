@@ -25,6 +25,7 @@ public class AuctionCentral implements java.io.Serializable{
 	 * List that stores all nonProfit's who have had an auction approved.
 	 */
 	private ArrayList<NonProfit> allNonProfits;
+	private ArrayList<User> users;
 	
 	/*
 	 * Variable to keep track of the number of total auctions scheduled.
@@ -32,6 +33,7 @@ public class AuctionCentral implements java.io.Serializable{
 	private int numCurrentAuctions;
 	
 	public AuctionCentral() {
+		users = new ArrayList<User>();
 		allNonProfits = new ArrayList<>();
 		numCurrentAuctions = 0;
 	}
@@ -44,6 +46,12 @@ public class AuctionCentral implements java.io.Serializable{
 			allNonProfits.add(theNonProfit);
 		} else 
 			throw new IllegalArgumentException();
+	}
+	
+	public void addNewUser(User user) {
+		if(!(user instanceof User))
+			throw new IllegalArgumentException();
+		users.add(user);		
 	}
 	
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
