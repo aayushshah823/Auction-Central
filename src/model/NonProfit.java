@@ -20,20 +20,20 @@ public class NonProfit implements Serializable, User {
 	private static final String USER_TYPE = "nonprofit";
 	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
 	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
-	
-	
+
+
 	/** My Organizations.*/
 	private String myOrg;
-	
+
 	/** Name of nonprofit org.*/
 	private String myName;
-	
+
 	/** List that stores all the non-profit's auction .*/
 	private List<Auction> myAuctions;
-	
+
 	/** Last day when non profit auctioned.*/
 	private LocalDate myLastAuctionDate;
-	
+
 	/** .*/
 	private int myCurrentAuction;
 
@@ -47,10 +47,6 @@ public class NonProfit implements Serializable, User {
 		myName = theName;
 		myAuctions = new ArrayList<Auction>();
 		myLastAuctionDate = null;
-
-		// WHY IS IT -1?
-		// myCurrentAuction = -1;
-
 		myCurrentAuction = 0;
 	}
 
@@ -81,28 +77,8 @@ public class NonProfit implements Serializable, User {
 	 * @param theAuction The auction happening.
 	 */
 	public void addAuction(Auction theAuction) {
+		myCurrentAuction++;
 		myAuctions.add(theAuction);
-	}
-
-	/**
-	 * Checking if non profit can do or not.
-	 * @return True if within date range, false otherwise.
-	 */
-	public boolean isDateRangeValid(long theDate) {
-
-		theDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
-		return (theDate >= MIN_DAYS_AWAY_FOR_AUCTION && theDate <= MAX_DAYS_AWAY_FOR_AUCTION);
-	}
-
-	/**
-	 * Get's the items for the auction
-	 * @return list that stores the items of this auction.
-	 */
-	public List<Item> getItemsInAuction() {
-		if (myCurrentAuction < 0) {
-			throw new NullPointerException("No Auctions.");
-		}
-		return myAuctions.get(myCurrentAuction).getItems();
 	}
 
 	/**
@@ -110,11 +86,22 @@ public class NonProfit implements Serializable, User {
 	 * @param theItem The name of item.
 	 */
 	public void addItem(Item theItem) {
-		if (myCurrentAuction < 0) {
-			throw new NullPointerException("No Current Auctions.");
+		if (myCurrentAuction == 0) {
+			throw new NullPointerException("No Current Auctions, so item's can't be added");
 		}
-		// This isn't recursive call. It's calling addItem from Auction class.
+
 		myAuctions.get(myCurrentAuction).addItem(theItem);
+	}
+
+	/**
+	 * Get's the items for the auction
+	 * @return list that stores the items of this auction.
+	 */
+	public List<Item> getItemsInAuction() {
+		if (myCurrentAuction == 0) {
+			throw new NullPointerException("No Auctions - No items are available.");
+		}
+		return myAuctions.get(myCurrentAuction).getItems();
 	}
 
 	/**
@@ -122,7 +109,7 @@ public class NonProfit implements Serializable, User {
 	 * @return The list of auctions.
 	 */
 	public List<Auction> getListOfAuction() {
-		if(myAuctions.size() <= 0) 
+		if(myAuctions.size() < 0) 
 			throw new IllegalArgumentException("No Auctions found");
 		else
 			return myAuctions;
@@ -135,7 +122,7 @@ public class NonProfit implements Serializable, User {
 	public String getOrg() {
 		return myOrg;
 	}
-	
+
 	/**
 	 * Name of non- profit.
 	 * @return name associated with non-profit.
@@ -163,14 +150,14 @@ public class NonProfit implements Serializable, User {
 	@Override
 	public void setUsername(String userName) {
 		this.myOrg = userName;
-		
+
 	}
 
 
 	@Override
 	public void setName(String name) {
 		this.myName = name;
-		
+
 	}
 
 
@@ -184,31 +171,39 @@ public class NonProfit implements Serializable, User {
 	public String getUserType() {
 		return USER_TYPE;
 	}
-	
-	public boolean isMaxDaysForAuction(int theDays) {
-		return theDays <= MAX_DAYS_AWAY_FOR_AUCTION;
-	}
-	
-	public boolean isMinDaysForAuctionValid(int theDays) {
-		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	
-	public boolean isListValid(List<Auction> list) {
-		return list.size() > myAuctions.size();
-	}
-
 
 	public int getMaxDays() {
 		return MAX_DAYS_AWAY_FOR_AUCTION;
 	}
-	
+
 	public int getMinDays() {
 		return MIN_DAYS_AWAY_FOR_AUCTION;
 	}
-	
-	
 
+	public void setMaxDays(int theMaxDays) {
+		theMaxDays = MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+	public void setMinDays(int theMinDays) {
+		theMinDays = MIN_DAYS_AWAY_FOR_AUCTION;
+	}
 
+	// ******************** Boolean methods ****************	
 
+	public boolean isMaxDaysForAuction(int theDays) {
+		return theDays <= MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+
+	public boolean isMinDaysForAuctionValid(int theDays) {
+		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
+	}
+
+	/**
+	 * Checking if non profit can do or not.
+	 * @return True if within date range, false otherwise.
+	 */
+	public boolean isDateRangeValid(long theDate) {
+
+		theDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
+		return (theDate >= MIN_DAYS_AWAY_FOR_AUCTION && theDate <= MAX_DAYS_AWAY_FOR_AUCTION);
+	}
 }
