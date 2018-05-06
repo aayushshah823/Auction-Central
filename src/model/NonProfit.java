@@ -29,7 +29,7 @@ public class NonProfit implements Serializable, User {
 	private String myName;
 
 	/** List that stores all the non-profit's auction .*/
-	private List<Auction> myAuctions;
+	private ArrayList<Auction> myAuctions;
 
 	/** Last day when non profit auctioned.*/
 	private LocalDate myLastAuctionDate;
@@ -108,7 +108,7 @@ public class NonProfit implements Serializable, User {
 	 * 
 	 * @return The list of auctions.
 	 */
-	public List<Auction> getListOfAuction() {
+	public ArrayList<Auction> getListOfAuction() {
 		if(myAuctions.size() < 0) 
 			throw new IllegalArgumentException("No Auctions found");
 		else

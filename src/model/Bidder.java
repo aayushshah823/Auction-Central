@@ -51,8 +51,7 @@ public class Bidder implements Serializable, User{
 	}
 
 	/**
-	 * Pre: User must have placed an bid in any items of the given auction
-	 * 
+	 * Pre: User must have placed an bid in any items of the given auction	 * 
 	 * @param auction
 	 * @return ArrayList containing of items user has bid on
 	 */
@@ -104,9 +103,10 @@ public class Bidder implements Serializable, User{
 	 * @return amount of bids placed in one auction
 	 */
 	public int myTotalBidPerAuction(Auction auction) {
-		int numOfBids = 0;
+		int numOfBids = 0; 
 		if(this.myAuctions.containsKey(auction)) {
-			numOfBids = this.myAuctions.get(auction).size() ;
+			numOfBids = this.myAuctions.get(auction).size();
+			System.out.println(numOfBids);
 		}
 		return numOfBids;
 	}
@@ -124,7 +124,7 @@ public class Bidder implements Serializable, User{
 	public int makeBid(Item item, Auction auction, double bid) {
 		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;
-		if(!isBidGreaterThanMinAmount(bid))
+		if(!(isBidGreaterThanMinAmount(bid)))
 			success = 2;
 		else if(isMaxBidPerAuction(auction))
 			success = 3;	
@@ -135,10 +135,9 @@ public class Bidder implements Serializable, User{
 				items.add(item);
 				this.myAuctions.put(auction, items);
 				updateItemHighestBid(item, bid);
-//			} if (isExistingBidOnItem(auction, item)){ //If I have already bid on this item
-//				updateItemHighestBid(item, bid);
-				
-			}else {
+			} 
+			
+			if(this.myAuctions.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
 				this.myAuctions.get(auction).add(item);
 				updateItemHighestBid(item, bid);
 			} 
@@ -163,12 +162,16 @@ public class Bidder implements Serializable, User{
 	 */
 	private boolean isExistingBidOnItem(Auction auction, Item item) {
 		int numberOfItems = this.myAuctions.get(auction).size() - 1;
-		System.out.println(numberOfItems);
-		ArrayList<Item> items = this.myAuctions.get(auction);
-		for(int i = 0; i < numberOfItems; i++) {
-			if(items.get(i).getItemName().equals(item.getItemName()))
-				return true;
+		if(numberOfItems == 0) {
+			return false; 
+		}else {
+			ArrayList<Item> items = this.myAuctions.get(auction);
+			for(int i = 0; i < numberOfItems; i++) {
+				if(items.get(i).getItemName().equals(item.getItemName()))
+					return true;
+			}
 		}
+	
 		return false;
 	}
 

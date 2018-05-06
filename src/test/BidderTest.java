@@ -144,16 +144,16 @@ public class BidderTest {
 	@Test
 	public void makeBid_BetOnTheSameItemMultipleTimes_BetNumberDoesntIncrease_ItemListSize1() {
 		bidder.makeBid(dress, futureAuction, bidMoreThanMin);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 10);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 20);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 30);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 40);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 10);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 20);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 30);
-//		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 40);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 10);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 20);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 30);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 40);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 10);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 20);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 30);
+		bidder.makeBid(dress, futureAuction, bidMoreThanMin + 40);
 		
-		assertEquals(1, bidder.myTotalBidPerAuction(futureAuction));
+		assertEquals(1, bidder.myTotalBidPerAuction(futureAuction) - 1);
 		
 	}
 

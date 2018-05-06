@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class AuctionCentral implements java.io.Serializable{
 	
 	public AuctionCentral() {
 		users = new ArrayList<User>();
-		allNonProfits = new ArrayList<>();
+		allNonProfits = new ArrayList<NonProfit>();
 		numCurrentAuctions = 0;
 	}
 	
@@ -86,7 +87,27 @@ public class AuctionCentral implements java.io.Serializable{
 			}
 		}
 	}
-	
+	/**
+	 * @author Raisa
+	 * @return list of all future auctions
+	 */
+	public ArrayList<Auction>  displayFutureAuctions() {
+		LocalDate today = LocalDate.now();
+		ArrayList<Auction> futureAuctions = new ArrayList<Auction>();
+		ArrayList<Auction> tempAuction = new  ArrayList<Auction>();
+		for(int i = 0; i < this.allNonProfits.size(); i++) {
+			tempAuction =  (ArrayList<Auction>) this.allNonProfits.get(i).getAuctions();
+			if(!tempAuction.isEmpty()) {
+				for(int j = 1; i < tempAuction.size(); j++) {
+					if(tempAuction.get(j).getStartDate().compareTo(today) > 0) {
+						futureAuctions.add(tempAuction.get(j));
+					}
+				}
+			}		
+		}
+		
+		return futureAuctions;
+	}
 	/**
 	 * This method is used for testing purposes only. Allows easy
 	 * testing with different number of total Auctions.
