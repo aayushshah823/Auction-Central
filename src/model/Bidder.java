@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
+/**
+ * 
+ * @author Raisa
+ *
+ */
 public class Bidder implements Serializable, User{
 
 	private static final long serialVersionUID = 8268184277531088723L;
