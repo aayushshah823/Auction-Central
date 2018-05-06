@@ -51,13 +51,16 @@ public class AuctionCentral implements java.io.Serializable{
 	public void addNewUser(User user) {
 		if(!(user instanceof User))
 			throw new IllegalArgumentException();
-		users.add(user);		
+		users.add(user);	
+	}
+	public ArrayList<NonProfit> getAllNonProfits() {
+		return allNonProfits;
 	}
 	
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
 		if (theNonProfit != null && theAuction != null
 				&& numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS) {
-//			theNonProfit.addAuction(theAuction);
+			theNonProfit.addAuction(theAuction);
 			updateNumberOfCurrentAuctions();
 		} else {
 			throw new IllegalArgumentException();

@@ -81,10 +81,7 @@ public class NonProfit implements Serializable, User {
 	 * @param theAuction The auction happening.
 	 */
 	public void addAuction(Auction theAuction) {
-		if(myAuctions.isEmpty())
-			throw new IllegalArgumentException("No Non Profit auctions");
-		else
-			myAuctions.add(theAuction);
+		myAuctions.add(theAuction);
 	}
 
 	/**
