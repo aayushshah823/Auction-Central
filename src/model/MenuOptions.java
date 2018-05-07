@@ -52,26 +52,23 @@ public class MenuOptions {
 	}
 	//------------------------------------------- BIDDER PROMPTS START -------------------------------------------------
 	/**
-	 * Pre: The Login method for Auction Central is called to return the real name
-	 * of the user
-	 * @param sc
-	 * @param theRealName, Scanner
+	 * Pre: The Logged in to AuctionCentral as a bidder
+	 *  
+	 * 
+	 * @param Scanner, AuctionCentral
 	 */
 	
 	public void bidderMenuOptions(Scanner sc, Bidder bidder, AuctionCentral ac) {
 		System.out.println("Welcome back " + bidder.getName() + 
 			"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
 		int bidderChoice = -1;
-		do {
 			System.out.println("\t1: View all Auctions in which I can bid");
 			System.out.println("\t2: View all auctions in which I have placed bids");
 			System.out.println("\t3: View all items I have bid on in an auction");
 			System.out.println("\t4: View all items I have bid on in all auctions");
 			System.out.println("\t0: Logout");
 			System.out.print("\tPlease select an option:");
-			bidderChoice = sc.nextInt();
-		} while (bidderChoice != 1 || bidderChoice != 2 ||
-				 bidderChoice != 3 || bidderChoice != 0);
+			bidderChoice = sc.nextInt();		
 		
 		switch (bidderChoice) {
 			case 1:
@@ -92,7 +89,11 @@ public class MenuOptions {
 				break;
 			case 0:
 				logout(sc);
-				break;		
+				break;
+			default: 
+				System.out.println("Please enter a valid option. "
+						+ "1 - 2 - 3 - 4 or 0");
+				break;
 		
 		}
 		
@@ -138,21 +139,23 @@ public class MenuOptions {
 	public void allFutureAuctionOptions(Scanner sc, Bidder bidder, AuctionCentral ac) {
 		System.out.println("\tWhat would you like to do nex?"); 
 		int bidderChoice = -1;
-		do {
-			System.out.println("\t1: Select an auction");
-			System.out.println("\t2: Go back");
-			System.out.println("\t0: Logout");
-			System.out.print("\tPlease select an option:");
-			bidderChoice = sc.nextInt();
-		} while (bidderChoice != 1 || bidderChoice != 2 ||
-				 bidderChoice != 0);
-		
+		System.out.println("\t1: Select an auction");
+		System.out.println("\t2: Go back");
+		System.out.println("\t0: Logout");
+		System.out.print("\tPlease select an option:");
+		bidderChoice = sc.nextInt();
+			
 		switch (bidderChoice) {
 		case 1:	selectAnAuctionToBid(sc);	 
 		case 2: 
 		case 0:
 			logout(sc);
 			break;	
+		default:
+			System.out.println("Please enter a valid option. "
+					+ "1 - 2 or 0");
+			break;
+	
 		}	
 	}
 	
