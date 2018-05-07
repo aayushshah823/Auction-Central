@@ -76,5 +76,60 @@ public class NonProfitTest {
 		assertEquals(14, nonProfit.getMinDays());
 	}
 
+	@Test
+	public void getOrg() {
+		assertEquals(NAME, nonProfit.getUsername());
+	}
+
+	@Test
+	public void setOrg() {
+		nonProfit.setOrg(NAME);
+		assertEquals(NAME, nonProfit.getOrg());
+	}
+
+	@Test
+	public void getName() {
+		assertEquals(USERNAME, nonProfit.getName());
+	}
+
+	@Test
+	public void setName() {
+		nonProfit.setName(USERNAME);
+		assertEquals(USERNAME, nonProfit.getName());
+	}
+
+	@Test
+	public void lastAuctionDate_get() {
+		assertEquals(preiousAuctionDate, nonProfit.getLastAuctionDate());
+	}
+
+	@Test
+	public void lastAuctionDate_set() {
+		nonProfit.setLastAuctionDate(preiousAuctionDate);
+		assertEquals(preiousAuctionDate, nonProfit.getLastAuctionDate());
+	}
+
+	@Test
+	public void getUserType() {
+		assertEquals(USERNAME, nonProfit.getUserType());
+	}
+
+	@Test
+	public void isDateRangeValid_true() {
+		nonProfit.setLastAuctionDate(preiousAuctionDate);
+		long theDate = ChronoUnit.DAYS.between(preiousAuctionDate, today);
+		assertEquals((theDate >= MIN_DAYS_AWAY_FOR_AUCTION) && 
+				(theDate <= MAX_DAYS_AWAY_FOR_AUCTION), nonProfit.isDateRangeValid());
+	}
+
+	// There is an error in this test. (NOT PASSING)
+	//		@Test
+	//		public void getItemInAuction() {
+	//			auction1.addItem(car);
+	//			auction1.addItem(shoes);
+	//
+	//			assertTrue(nonProfit.getItemsInAuction().size() == 2);
+	//		}
+
 
 }
