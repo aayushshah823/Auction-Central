@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +28,7 @@ public class NonProfitTest {
 	private Item car;
 	private Item shoes;
 	private Auction auction1;
+	private ArrayList<Auction> myAuctions;
 
 	private static final String USERNAME = "nonprofit";
 	private static final String NAME = "Group 3 Org";
@@ -35,6 +38,7 @@ public class NonProfitTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		nonProfit = new NonProfit(NAME, USERNAME);
 		nonProfit.setUsername(NAME);
 		nonProfit.setName(USERNAME);
@@ -44,6 +48,7 @@ public class NonProfitTest {
 		shoes = new Item("Shoes", Bidder.MIN_AMOUNT_BID_PER_ITEM + 5,"Nike", 1);
 		auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
 				today.minus(368, ChronoUnit.DAYS), LocalTime.NOON, LocalTime.NOON.plus(4, ChronoUnit.HOURS));
+		nonProfit.addAuction(auction1);
 		nonProfit.setLastAuctionDate(preiousAuctionDate);
 
 	}
@@ -126,16 +131,13 @@ public class NonProfitTest {
 		assertEquals((theDate >= MIN_DAYS_AWAY_FOR_AUCTION) && 
 				(theDate <= MAX_DAYS_AWAY_FOR_AUCTION), nonProfit.isDateRangeValid());
 	}
-
-	/**
-
-	 There are errors in this test. (NOT PASSING)
-
-
+	
+	
 	@Test
 	public void addItem_AddedItems_True() {
 		nonProfit.addItem(car);
 		nonProfit.addItem(shoes);
+
 		assertEquals(2, nonProfit.getItemsInAuction().size());
 	}
 
@@ -152,7 +154,7 @@ public class NonProfitTest {
 		assertTrue(nonProfit.getItemsInAuction().size() == 2);
 	}
 
-	 */
+	 
 
 
 }

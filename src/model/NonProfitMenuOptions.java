@@ -64,7 +64,7 @@ public class NonProfitMenuOptions {
 			break;
 		case 1: 
 			//View active auctions 
-			printFutureAuctions(ac.displayFutureAuctions());
+//			printFutureAuctions(ac.displayFutureAuctions());
 			System.out.println("3: Back");
 			System.out.println("4: Logout");
 

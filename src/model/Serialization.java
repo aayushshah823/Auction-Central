@@ -25,7 +25,7 @@ public class Serialization {
 		LocalTime noon = LocalTime.NOON;
 		AuctionCentral auctionCentral = new AuctionCentral();
 		NonProfit nonProfit1 = new NonProfit("Pro Youth Foundation", "Billy Pilgrim");
-		NonProfit nonProfit2 = new NonProfit("Chicago Men’s Club", "John Doe");
+		NonProfit nonProfit2 = new NonProfit("Chicago Menï¿½s Club", "John Doe");
 		NonProfit nonProfit3 = new NonProfit("Project Alert", "Jane Doe");
 		NonProfit nonProfit4 = new NonProfit("Going Green Foundation", "Donald");
 		NonProfit nonProfit5 = new NonProfit("Nursing Mothers Foundation", "Naomi");	
@@ -76,7 +76,7 @@ public class Serialization {
 		auction3.addItem(new Item("Metal Watch", 6.00, "IEason, Women Metal Strap Watch (White)", 2));
 		auction3.addItem(new Item("Thermal Gloves", 5.00, "Gloves us Knitted Touch Screen Winter Extra Thick Knit Gloves Soft Warm Thick Wool Windproof Cold Proof Thermal Mittens for Women girl", 1));
 		auction3.addItem(new Item("Pet Comb", 13, "Andis Pet 7-1/2-Inch Steel Comb", 1));
-		auction3.addItem(new Item("Paper Clips", 27, "Office Depot® Brand Binder Clips, Small, 3/4\" Wide, 3/8\" Capacity, Black, Pack Of 36", 3000));
+		auction3.addItem(new Item("Paper Clips", 27, "Office Depotï¿½ Brand Binder Clips, Small, 3/4\" Wide, 3/8\" Capacity, Black, Pack Of 36", 3000));
 		auction3.addItem(new Item("Wampa Plush", 42, "Star Wars Celebration V Exclusive Wampa 18 Inch Plush With Detachable Arm", 1));
 		Auction auction4 = new Auction(today.plus(50, ChronoUnit.DAYS), 
 				today.plus(51, ChronoUnit.DAYS), noon, noon.plus(11, ChronoUnit.HOURS));
@@ -171,13 +171,19 @@ public class Serialization {
 		auctionCentral.addNewUser(bidder6);
 		auctionCentral.addNewUser(bidder7);
 		auctionCentral.addNewUser(bidder8);
+		auctionCentral.addNewUser(nonProfit1);
+		auctionCentral.addNewUser(nonProfit2);
+		auctionCentral.addNewUser(nonProfit3);
+		auctionCentral.addNewUser(nonProfit4);
+		auctionCentral.addNewUser(nonProfit5);
+		auctionCentral.addNewUser(nonProfit6);
 		auctionCentral.addAuction(nonProfit2, auction1);
 		auctionCentral.addAuction(nonProfit3, auction2);
 		auctionCentral.addAuction(nonProfit4, auction3);
-		auctionCentral.addAuction(nonProfit5, auction4);
 		auctionCentral.addAuction(nonProfit5, auction5);
 		auctionCentral.addAuction(nonProfit5, auction6);
 		auctionCentral.addAuction(nonProfit5, auction7);
+		auctionCentral.addAuction(nonProfit5, auction4);
 		auctionCentral.addAuction(nonProfit6, auction8);
 		
 		// serialization
@@ -191,26 +197,6 @@ public class Serialization {
 		} catch (IOException exception) {
 			System.out.println("IOException");
 		}
-		
-		// deserialization
-		try {   
-            FileInputStream file = new FileInputStream("auctionCentralData.ser");
-            ObjectInputStream in = new ObjectInputStream(file);        
-            AuctionCentral auctionCentralCopy = (AuctionCentral)in.readObject();
-            in.close();
-            file.close(); 
-            System.out.println("Deserialized!!!!!");
-        } catch(IOException exception) {
-            System.out.println("IOException");
-        } catch(ClassNotFoundException exception) {
-            System.out.println("ClassNotFoundException");
-        }
- 
-		//logInMenu(sc, auctionCentral);
-		//bidderWelcomeScreen(sc, "John Doe");
 	}
-	
-	
-	
 }
 
