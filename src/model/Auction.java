@@ -11,7 +11,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable /*, Comparable<LocalDate>*/{
+public class Auction implements Serializable {
 
 
 	//Serial Number ID
@@ -23,6 +23,8 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
 	private LocalTime myEndTime;
+	private String myAuctionName;
+	private String myAuctionLocation;
 	
 	
 	public Auction(LocalDate theStartDate, LocalDate theEndDate, 
@@ -32,6 +34,8 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 		myStartTime = theStartTime;
 		myEndDate = theEndDate;
 		myEndTime = theEndTime;
+		myAuctionName = "";
+		myAuctionLocation = "";
 	}
 	
 	/**
@@ -57,6 +61,34 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 	public void setMyItems(List<Item> myItems) {
 		this.myItems = myItems;
 	}
+	
+	/**
+	 * Getter for name of auction.
+	 * @return auction name.
+	 */
+	public String getAuctionName() {
+		return myAuctionName;
+	}
+
+	/**
+	 * Setter for auction name
+	 * @param name 
+	 */
+	public void setAuctionName(String name) {
+		myAuctionName = name;
+	}
+	
+	/**
+	 * Getter for location of auction.
+	 * @return auction location
+	 */
+	public String getAuctionLocation() {
+		return myAuctionLocation;
+	}
+
+	public void setAuctionLocation(String location) {
+		myAuctionLocation = location;
+	}
 
 	/**
 	 * 
@@ -68,7 +100,11 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 
 
 	public void setStartDate(LocalDate myDate) {
-		this.myStartDate = myDate;
+		if (myDate != null) {
+			this.myStartDate = myDate;
+		} else {
+			throw new NullPointerException();
+		}
 	}
 
 	/**
@@ -110,16 +146,4 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 		this.myEndTime = myTime;
 	}
 
-//	@Override
-//	public int compareTo(LocalDate theDate) {
-//		int result = 0;
-//		if ( myStartDate.compareTo(theDate) > 0) {
-//			result = 1;
-//		} else if (myStartDate.compareTo(theDate) < 0) {
-//			result = -1;
-//		} else {
-//			result = 0;
-//		}
-//		return result;
-//	}
 }
