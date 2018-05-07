@@ -21,7 +21,7 @@ public class NonProfit implements Serializable, User {
 	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
 	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
 
-
+	private Long myDate;
 	/** My Organizations.*/
 	private String myOrg;
 
@@ -72,6 +72,8 @@ public class NonProfit implements Serializable, User {
 
 	 */
 
+	// *********************************************************
+
 	/**
 	 * Add's Non Profit's auction to list.
 	 * @param theAuction The auction happening.
@@ -115,12 +117,34 @@ public class NonProfit implements Serializable, User {
 			return myAuctions;
 	}
 
+
+	public List<Auction> getAuctions() {
+		return myAuctions;
+	}
+
+	// *********************************************************
+
 	/**
 	 * Getter for non profit.
 	 * @return The organization.
 	 */
 	public String getOrg() {
 		return myOrg;
+	}
+
+	public void setOrg(String theOrg) {
+		myOrg = theOrg;
+	}
+
+	@Override
+	public String getUsername() { 
+		return this.myOrg;
+	}
+
+	@Override
+	public void setUsername(String userName) {
+		this.myOrg = userName;
+
 	}
 
 	/**
@@ -132,6 +156,12 @@ public class NonProfit implements Serializable, User {
 		return myName;
 	}
 
+	@Override
+	public void setName(String name) {
+		this.myName = name;
+
+	}
+
 	/**
 	 * Method that keeps track of when
 	 * was last auction of Non-profit.
@@ -141,48 +171,28 @@ public class NonProfit implements Serializable, User {
 		return myLastAuctionDate;
 	}
 
-
-	public List<Auction> getAuctions() {
-		return myAuctions;
+	public void setLastAuctionDate(LocalDate ld) {
+		myLastAuctionDate = ld;
 	}
-
-
-	@Override
-	public void setUsername(String userName) {
-		this.myOrg = userName;
-
-	}
-
-
-	@Override
-	public void setName(String name) {
-		this.myName = name;
-
-	}
-
-
-	@Override
-	public String getUsername() { 
-		return this.myOrg;
-	}
-
 
 	@Override
 	public String getUserType() {
 		return USER_TYPE;
 	}
 
+
 	public int getMaxDays() {
 		return MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+
+	public void setMaxDays(int theMaxDays) {
+		theMaxDays = MAX_DAYS_AWAY_FOR_AUCTION;
 	}
 
 	public int getMinDays() {
 		return MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 
-	public void setMaxDays(int theMaxDays) {
-		theMaxDays = MAX_DAYS_AWAY_FOR_AUCTION;
-	}
 	public void setMinDays(int theMinDays) {
 		theMinDays = MIN_DAYS_AWAY_FOR_AUCTION;
 	}
@@ -201,9 +211,10 @@ public class NonProfit implements Serializable, User {
 	 * Checking if non profit can do or not.
 	 * @return True if within date range, false otherwise.
 	 */
-	public boolean isDateRangeValid(long theDate) {
+	public boolean isDateRangeValid() {
 
-		theDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
-		return (theDate >= MIN_DAYS_AWAY_FOR_AUCTION && theDate <= MAX_DAYS_AWAY_FOR_AUCTION);
+		myDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
+		return (myDate >= MIN_DAYS_AWAY_FOR_AUCTION && myDate <= MAX_DAYS_AWAY_FOR_AUCTION);
 	}
+	
 }
