@@ -1,9 +1,10 @@
 package model;
 
 /**
- * @author Allen Whitemarsh
- * @version 5/4/2018
- *
+ * 
+ * @author Benjamin Yuen, Raisa Meneses, Aayush Shah, 
+ * 		   Allen Whitemarsh, Jake Yang
+ * @version May 4, 2018
  */
 public class Item implements java.io.Serializable{
 	
