@@ -24,7 +24,7 @@ public class BidderMenuOptions {
 	 * @param Scanner, AuctionCentral
 	 */
 
-	public void bidderMenuOptions(Scanner sc, Bidder bidder, AuctionCentral ac) {
+	public void bidderMenuOptions() {
 		System.out.println("Welcome back " + bidder.getName() + 
 				"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
 		int bidderChoice = -1;
@@ -120,7 +120,7 @@ public class BidderMenuOptions {
 			String auctionName = sc.next();
 			selectAnAuctionToBid(sc, auctionName, bidder);	//TODO 
 		case 2: 
-			bidderMenuOptions(sc, bidder, ac);
+			bidderMenuOptions();
 		case 0:
 			logout(sc);
 			break;	
@@ -132,7 +132,7 @@ public class BidderMenuOptions {
 		}	
 	}
 
-	private void selectAnAuctionToBid(Scanner sc, String auctionName, Bidder bidder) {
+	public void selectAnAuctionToBid(Scanner sc, String auctionName, Bidder bidder) {
 		ArrayList<Auction> auction = bidder.getAllAuctions();
 		Auction myauction = null; 
 		for(int i = 0; i < auction.size(); i++) {

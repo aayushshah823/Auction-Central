@@ -121,7 +121,9 @@ public class Bidder implements Serializable, User{
 	 * @param bid amount and Item to bid on
 	 * @param theItem
 	 */
-	public int makeBid(Item item, Auction auction, double bid) {
+	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
+		Auction auction = findAuction(ac, auctionName);
+		Item item = findItemInAuction(auction, itemName);
 		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;
 		if(!(isBidGreaterThanMinAmount(bid)))
@@ -147,10 +149,32 @@ public class Bidder implements Serializable, User{
 		return success;
 	}
 	
+	private Item findItemInAuction(Auction auction, String itemName) {
+		ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
+		Item theItem = null;
+		for(int i = 0; i < items.size(); i ++) {
+			if(items.get(i).getItemName().equals(itemName)) {
+				theItem = items.get(i);
+			}
+		}
+		return theItem;
+	}
+
 	private void updateItemHighestBid(Item item, double bid) {
 		if(bid > item.getCurrentBid()) {
 			item.setCurrentBid(bid);
 		}
+	}
+	
+	
+	public Auction findAuction(AuctionCentral ac, String auctionName) {
+		ArrayList<Auction> auctions = ac.displayFutureAuctions();
+		Auction auction = null;
+		for(int i = 0; i < auctions.size(); i++) {
+			if(auctions.get(i).getAuctionName().equals(auctionName))
+				auction = auctions.get(i);				
+		}
+		return auction;
 	}
 	/**
 	 * Checks if the user has a previous bid 
