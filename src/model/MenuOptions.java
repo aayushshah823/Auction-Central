@@ -99,12 +99,26 @@ public class MenuOptions {
 	}
 
 	private void printAllItemsInAllAuctions(Scanner sc, Bidder bidder, AuctionCentral ac) {
-		// TODO Auto-generated method stub
+		ArrayList<Item> items = bidder.getAllIntemsInAllAuctions();
+		for(int i = 0; i < items.size(); i++) {
+			System.out.println((i + 1) + ": " + items.get(i).getItemName());
+		}
 		
 	}
 
 	private void selectAnAuctionToViewBids(String auctionName, Bidder bidder) {
-		// TODO Auto-generated method stub
+		ArrayList<Auction> auction = bidder.getAllAuctions();
+		Auction myauction = null; 
+		for(int i = 0; i < auction.size(); i++) {
+			if(auction.get(i).getAuctionName().equals(auctionName)) {
+				myauction = auction.get(i);
+			}
+		}
+		ArrayList<Item> items = bidder.getAllItemsInOneAuction(myauction);
+		for(int j = 0; j < items.size(); j++) {
+			System.out.println((j + 1) + ": " + items.get(j).getItemName()); 
+		}
+
 		
 	}
 
