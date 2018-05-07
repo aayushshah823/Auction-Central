@@ -13,6 +13,11 @@ import model.Bidder;
 import model.Item;
 import model.NonProfit;
 
+/**
+ * This class tests NonProfit Class.
+ * @author aayushshah
+ *
+ */
 public class NonProfitTest {
 
 	private NonProfit nonProfit;
@@ -22,7 +27,7 @@ public class NonProfitTest {
 	private Item shoes;
 	private Auction auction1;
 
-	private static final String USERNAME = "non-profit";
+	private static final String USERNAME = "nonprofit";
 	private static final String NAME = "Group 3 Org";
 	private static final int MAX_DAYS_AWAY_FOR_AUCTION = NonProfit.MAX_DAYS_AWAY_FOR_AUCTION - 10;
 	private static final int MIN_DAYS_AWAY_FOR_AUCTION = NonProfit.MIN_DAYS_AWAY_FOR_AUCTION + 1;
@@ -31,12 +36,15 @@ public class NonProfitTest {
 	@Before
 	public void setUp() throws Exception {
 		nonProfit = new NonProfit(NAME, USERNAME);
+		nonProfit.setUsername(NAME);
+		nonProfit.setName(USERNAME);
 		preiousAuctionDate = LocalDate.of(2018, 05, 1);
 		today = LocalDate.now();
 		car = new Item("Car", Bidder.MIN_AMOUNT_BID_PER_ITEM + 500,"BMW", 1);
 		shoes = new Item("Shoes", Bidder.MIN_AMOUNT_BID_PER_ITEM + 5,"Nike", 1);
 		auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
 				today.minus(368, ChronoUnit.DAYS), LocalTime.NOON, LocalTime.NOON.plus(4, ChronoUnit.HOURS));
+		nonProfit.setLastAuctionDate(preiousAuctionDate);
 
 	}
 
@@ -73,19 +81,78 @@ public class NonProfitTest {
 		assertEquals(14, nonProfit.getMinDays());
 	}
 
-	// There is an error in this test. (NOT PASSING)
-	//	@Test
-	//	public void isDateRangeValid() {
-	//		long theDate = ChronoUnit.DAYS.between(preiousAuctionDate, today);
-	//		assertEquals(theDate, nonProfit.isDateRangeValid(theDate));
-	//	}
+	@Test
+	public void getOrg() {
+		assertEquals(NAME, nonProfit.getUsername());
+	}
 
-	// There is an error in this test. (NOT PASSING)
-	//	@Test
-	//	public void getItemInAuction() {
-	//		auction1.addItem(car);
-	//		auction1.addItem(shoes);
-	//
-	//		assertTrue(nonProfit.getItemsInAuction().size() == 2);
-	//	}
+	@Test
+	public void setOrg() {
+		nonProfit.setOrg(NAME);
+		assertEquals(NAME, nonProfit.getOrg());
+	}
+
+	@Test
+	public void getName() {
+		assertEquals(USERNAME, nonProfit.getName());
+	}
+
+	@Test
+	public void setName() {
+		nonProfit.setName(USERNAME);
+		assertEquals(USERNAME, nonProfit.getName());
+	}
+
+	@Test
+	public void lastAuctionDate_get() {
+		assertEquals(preiousAuctionDate, nonProfit.getLastAuctionDate());
+	}
+
+	@Test
+	public void lastAuctionDate_set() {
+		nonProfit.setLastAuctionDate(preiousAuctionDate);
+		assertEquals(preiousAuctionDate, nonProfit.getLastAuctionDate());
+	}
+
+	@Test
+	public void getUserType() {
+		assertEquals(USERNAME, nonProfit.getUserType());
+	}
+
+	@Test
+	public void isDateRangeValid_true() {
+		nonProfit.setLastAuctionDate(preiousAuctionDate);
+		long theDate = ChronoUnit.DAYS.between(preiousAuctionDate, today);
+		assertEquals((theDate >= MIN_DAYS_AWAY_FOR_AUCTION) && 
+				(theDate <= MAX_DAYS_AWAY_FOR_AUCTION), nonProfit.isDateRangeValid());
+	}
+
+	/**
+
+	 There are errors in this test. (NOT PASSING)
+
+
+	@Test
+	public void addItem_AddedItems_True() {
+		nonProfit.addItem(car);
+		nonProfit.addItem(shoes);
+		assertEquals(2, nonProfit.getItemsInAuction().size());
+	}
+
+	@Test
+	public void addItem_NoItemsAdded_True() {
+		assertEquals(0, nonProfit.getItemsInAuction().size());
+	}
+
+	@Test
+	public void getItemInAuction() {
+		auction1.addItem(car);
+		auction1.addItem(shoes);
+
+		assertTrue(nonProfit.getItemsInAuction().size() == 2);
+	}
+
+	 */
+
+
 }
