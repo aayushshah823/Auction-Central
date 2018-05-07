@@ -88,11 +88,10 @@ public class NonProfit implements Serializable, User {
 	 * @param theItem The name of item.
 	 */
 	public void addItem(Item theItem) {
-		if (myCurrentAuction == 0) {
-			throw new NullPointerException("No Current Auctions, so item's can't be added");
-		}
-
+		// myCurrentAuction++;
 		myAuctions.get(myCurrentAuction).addItem(theItem);
+
+
 	}
 
 	/**
@@ -100,9 +99,6 @@ public class NonProfit implements Serializable, User {
 	 * @return list that stores the items of this auction.
 	 */
 	public List<Item> getItemsInAuction() {
-		if (myCurrentAuction == 0) {
-			throw new NullPointerException("No Auctions - No items are available.");
-		}
 		return myAuctions.get(myCurrentAuction).getItems();
 	}
 
@@ -110,12 +106,12 @@ public class NonProfit implements Serializable, User {
 	 * 
 	 * @return The list of auctions.
 	 */
-	public ArrayList<Auction> getListOfAuction() {
-		if(myAuctions.size() < 0) 
-			throw new IllegalArgumentException("No Auctions found");
-		else
-			return myAuctions;
-	}
+	//	public ArrayList<Auction> getListOfAuction() {
+	//		if(myAuctions.size() < 0) 
+	//			throw new IllegalArgumentException("No Auctions found");
+	//		else
+	//			return myAuctions;
+	//	}
 
 
 	public List<Auction> getAuctions() {
@@ -216,5 +212,5 @@ public class NonProfit implements Serializable, User {
 		myDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
 		return (myDate >= MIN_DAYS_AWAY_FOR_AUCTION && myDate <= MAX_DAYS_AWAY_FOR_AUCTION);
 	}
-	
+
 }
