@@ -23,6 +23,8 @@ public class Auction implements Serializable {
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
 	private LocalTime myEndTime;
+	private String myAuctionName;
+	private String myAuctionLocation;
 	
 	public Auction(LocalDate theStartDate, LocalDate theEndDate, 
 					LocalTime theStartTime, LocalTime theEndTime) {
@@ -31,6 +33,8 @@ public class Auction implements Serializable {
 		myStartTime = theStartTime;
 		myEndDate = theEndDate;
 		myEndTime = theEndTime;
+		myAuctionName = "";
+		myAuctionLocation = "";
 	}
 	
 	/**
@@ -57,6 +61,34 @@ public class Auction implements Serializable {
 	public void setMyItems(List<Item> myItems) {
 		this.myItems = myItems;
 	}
+	
+	/**
+	 * Getter for name of auction.
+	 * @return auction name.
+	 */
+	public String getAuctionName() {
+		return myAuctionName;
+	}
+
+	/**
+	 * Setter for auction name
+	 * @param name 
+	 */
+	public void setAuctionName(String name) {
+		myAuctionName = name;
+	}
+	
+	/**
+	 * Getter for location of auction.
+	 * @return auction location
+	 */
+	public String getAuctionLocation() {
+		return myAuctionLocation;
+	}
+
+	public void setAuctionLocation(String location) {
+		myAuctionLocation = location;
+	}
 
 	/**
 	 * 
@@ -68,7 +100,11 @@ public class Auction implements Serializable {
 
 
 	public void setStartDate(LocalDate myDate) {
-		this.myStartDate = myDate;
+		if (myDate != null) {
+			this.myStartDate = myDate;
+		} else {
+			throw new NullPointerException();
+		}
 	}
 
 	/**
