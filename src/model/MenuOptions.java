@@ -146,7 +146,13 @@ public class MenuOptions {
 		bidderChoice = sc.nextInt();
 			
 		switch (bidderChoice) {
-		case 1:	selectAnAuctionToBid(sc);	 
+		case 1:	
+			System.out.println("The auctions available to bid are: ");
+			printFutureAuctions(ac.displayFutureAuctions());
+			System.out.println("");
+			System.out.println("Please enter the auction name: ");
+			String auctionName = sc.next();
+			selectAnAuctionToBid(sc, auctionName, bidder);	//TODO 
 		case 2: 
 		case 0:
 			logout(sc);
@@ -159,8 +165,21 @@ public class MenuOptions {
 		}	
 	}
 	
-	private void selectAnAuctionToBid(Scanner sc) {
-		// TODO Auto-generated method stub
+	private void selectAnAuctionToBid(Scanner sc, String auctionName, Bidder bidder) {
+		ArrayList<Auction> auction = bidder.getAllAuctions();
+		Auction myauction = null; 
+		for(int i = 0; i < auction.size(); i++) {
+			if(auction.get(i).getAuctionName().equals(auctionName)) {
+				myauction = auction.get(i);
+			}
+		}
+		
+		//DISPLAY THE ITEMS
+		//HAVE THE USER SELECT THE ITEMS
+		//ASK FOR A BID AMOUNT 
+		//BID
+		
+		//int result = bidder.makeBid(item, auction, bid);
 		
 	}
 
