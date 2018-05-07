@@ -171,13 +171,19 @@ public class Serialization {
 		auctionCentral.addNewUser(bidder6);
 		auctionCentral.addNewUser(bidder7);
 		auctionCentral.addNewUser(bidder8);
+		auctionCentral.addNewUser(nonProfit1);
+		auctionCentral.addNewUser(nonProfit2);
+		auctionCentral.addNewUser(nonProfit3);
+		auctionCentral.addNewUser(nonProfit4);
+		auctionCentral.addNewUser(nonProfit5);
+		auctionCentral.addNewUser(nonProfit6);
 		auctionCentral.addAuction(nonProfit2, auction1);
 		auctionCentral.addAuction(nonProfit3, auction2);
 		auctionCentral.addAuction(nonProfit4, auction3);
-		auctionCentral.addAuction(nonProfit5, auction4);
 		auctionCentral.addAuction(nonProfit5, auction5);
 		auctionCentral.addAuction(nonProfit5, auction6);
 		auctionCentral.addAuction(nonProfit5, auction7);
+		auctionCentral.addAuction(nonProfit5, auction4);
 		auctionCentral.addAuction(nonProfit6, auction8);
 		
 		// serialization
@@ -191,26 +197,6 @@ public class Serialization {
 		} catch (IOException exception) {
 			System.out.println("IOException");
 		}
-		
-		// deserialization
-		try {   
-            FileInputStream file = new FileInputStream("auctionCentralData.ser");
-            ObjectInputStream in = new ObjectInputStream(file);        
-            AuctionCentral auctionCentralCopy = (AuctionCentral)in.readObject();
-            in.close();
-            file.close(); 
-            System.out.println("Deserialized!!!!!");
-        } catch(IOException exception) {
-            System.out.println("IOException");
-        } catch(ClassNotFoundException exception) {
-            System.out.println("ClassNotFoundException");
-        }
- 
-		//logInMenu(sc, auctionCentral);
-		//bidderWelcomeScreen(sc, "John Doe");
 	}
-	
-	
-	
 }
 
