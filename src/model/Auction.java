@@ -11,7 +11,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable /*, Comparable<LocalDate>*/{
+public class Auction implements Serializable {
 
 
 	//Serial Number ID
@@ -23,7 +23,6 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
 	private LocalTime myEndTime;
-	
 	
 	public Auction(LocalDate theStartDate, LocalDate theEndDate, 
 					LocalTime theStartTime, LocalTime theEndTime) {
@@ -41,6 +40,7 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 	public void addItem(Item theItem) {
 		myItems.add(theItem);
 	}
+	
 	
 	/**
 	 * 
@@ -110,16 +110,5 @@ public class Auction implements Serializable /*, Comparable<LocalDate>*/{
 		this.myEndTime = myTime;
 	}
 
-//	@Override
-//	public int compareTo(LocalDate theDate) {
-//		int result = 0;
-//		if ( myStartDate.compareTo(theDate) > 0) {
-//			result = 1;
-//		} else if (myStartDate.compareTo(theDate) < 0) {
-//			result = -1;
-//		} else {
-//			result = 0;
-//		}
-//		return result;
-//	}
+
 }
