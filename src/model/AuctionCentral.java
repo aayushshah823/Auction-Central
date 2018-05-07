@@ -2,8 +2,11 @@ package model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is where all the auctions are held. By storing each non-profit
@@ -16,7 +19,9 @@ import java.util.List;
 public class AuctionCentral implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3851687924011616060L;
-
+	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
+	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
+	public static final int MAX_AUCTIONS_PER_DAY = 2;
 	/*
 	 * Constant to define the maximum number of auctions allowed to be scheduled at
 	 * a time.
@@ -27,6 +32,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	private ArrayList<NonProfit> allNonProfits;
 	private ArrayList<User> users;
+	private Map<LocalDate, Integer> myCalendar;
 
 	/*
 	 * Variable to keep track of the number of total auctions scheduled.
@@ -36,6 +42,7 @@ public class AuctionCentral implements java.io.Serializable {
 	public AuctionCentral() {
 		users = new ArrayList<User>();
 		allNonProfits = new ArrayList<NonProfit>();
+		myCalendar = new HashMap<>();
 		numCurrentAuctions = 0;
 	}
 
@@ -60,11 +67,30 @@ public class AuctionCentral implements java.io.Serializable {
 	}
 
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
-		if (theNonProfit != null && theAuction != null && numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS) {
+		if (theNonProfit != null && theAuction != null) {
+			addAuctionToCalendar(theAuction);
 			theNonProfit.addAuction(theAuction);
 			updateNumberOfCurrentAuctions();
 		} else {
 			throw new IllegalArgumentException();
+		}
+	}
+	
+	private void addAuctionToCalendar(Auction theAuction) {
+		if ((theAuction.getEndDate().isEqual(theAuction.getStartDate())) ||
+				(theAuction.getEndDate().isAfter(theAuction.getStartDate()))) {
+			long daysApart = ChronoUnit.DAYS.between(theAuction.getStartDate(),
+															theAuction.getEndDate());
+			for (int i = 0; i < daysApart; i++) {
+				LocalDate temp = theAuction.getStartDate().plusDays(i);
+				if (!myCalendar.containsKey(temp)) {
+					myCalendar.put(temp, 1);
+				} else {
+					int days = myCalendar.get(temp);
+					days++;
+					myCalendar.put(temp, days);
+				}
+			}
 		}
 	}
 
@@ -80,7 +106,8 @@ public class AuctionCentral implements java.io.Serializable {
 		for (NonProfit np : allNonProfits) {
 			nonProfitAuctions = np.getAuctions();
 			for (Auction auction : nonProfitAuctions) {
-				if (auction.getEndDate().isAfter(currentDate.toLocalDate())) {
+				if ((auction.getEndDate().isAfter(currentDate.toLocalDate())) ||
+					(auction.getEndDate().isEqual(currentDate.toLocalDate()))) {
 					numCurrentAuctions++;
 				}
 			}
@@ -105,7 +132,6 @@ public class AuctionCentral implements java.io.Serializable {
 				}
 			}
 		}
-
 		return futureAuctions;
 	}
 	
@@ -116,9 +142,7 @@ public class AuctionCentral implements java.io.Serializable {
 				user = this.users.get(i);
 			}
 		}
-		
-		return user;
-		
+		return user;		
 	}
 
 	/**
@@ -140,5 +164,62 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	public void setNumCurrentAuctions(int theNumberOfAuctions) {
 		numCurrentAuctions = theNumberOfAuctions;
+	}
+	
+	public Map<Integer, ArrayList<LocalDate>> auctionRequest(NonProfit theNonProfit, LocalDate theStartDate,
+							  LocalDate theEndDate, LocalDate theStartTime) {
+		HashMap<Integer, ArrayList<LocalDate>> errorMap = new HashMap<>();
+		if (theStartDate.isAfter(theEndDate)) {
+			errorMap.put(0, null); //End Date is before the Start Date
+		}
+		if (!isYearSinceLastAuction(theNonProfit)) {
+			errorMap.put(1, null);
+		}
+		if (!isDateRangeValid(theStartDate, theEndDate)) {
+			errorMap.put(2, null);
+		}
+		if (!isLessThanMaxAuctionsScheduled()) {
+			errorMap.put(3, null);
+		}
+		ArrayList<LocalDate> unavailableDates = isMoreThanMaxAuctionsPerDay(theStartDate, theEndDate);
+		if (!unavailableDates.isEmpty()) {
+				errorMap.put(4, unavailableDates); 
+		}
+		return errorMap;
+	}
+	
+	/**
+	 * Method that checks if it has been a year since the last Auction by the same
+	 * Non-Profit. 
+	 * @param theNonProfit
+	 * @return Returns 1 if it has been a year, returns a 0 otherwise.
+	 */
+	public boolean isYearSinceLastAuction(NonProfit theNonProfit) {
+		return (ChronoUnit.DAYS.between(theNonProfit.getLastAuctionDate(), LocalDate.now()) >= 365);
+	}
+	
+	public boolean isDateRangeValid(LocalDate theStartDate, LocalDate theEndDate) {
+		long startDate = ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
+		long endDate = ChronoUnit.DAYS.between(theEndDate, LocalDate.now());
+		return (startDate >= MIN_DAYS_AWAY_FOR_AUCTION && endDate <= MAX_DAYS_AWAY_FOR_AUCTION);
+	}
+	
+	public ArrayList<LocalDate> isMoreThanMaxAuctionsPerDay(LocalDate theStartDate, LocalDate theEndDate) {
+		long lengthOfAuction = ChronoUnit.DAYS.between(theStartDate, theEndDate);
+		ArrayList<LocalDate> unavailableDates = new ArrayList<>();
+		for (int i = 0; i < lengthOfAuction; i++) {
+			LocalDate temp = theStartDate.plusDays(i);
+			if (myCalendar.containsKey(temp)) {
+				int auctionsThatDay = myCalendar.get(temp);
+				if (auctionsThatDay >= MAX_AUCTIONS_PER_DAY) {
+					unavailableDates.add(temp);
+				}
+			}
+		}
+		return unavailableDates;
+	}
+	
+	public boolean isLessThanMaxAuctionsScheduled() {
+		return numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS;
 	}
 }
