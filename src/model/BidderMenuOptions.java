@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BidderMenuOptions {
+	
+	Scanner sc;
+	AuctionCentral ac;
+	Bidder bidder;
 
-	BidderMenuOptions(Scanner sc, Bidder bidder) {
+	BidderMenuOptions(Scanner sc, AuctionCentral ac, Bidder bidder) {
+		this.sc = sc;
+		this.ac = ac;
+		this.bidder = bidder;
 	}
 
-	/**
-	 * 
-	 * @param Scanner
-	 * @returns 1 if the user wants to login, 2 if the user wants to exit
-	 */
 
-	public void exitOption() {
-		System.out.println("Thank you for visiting Auction Central. Have a great rest of the day!");
-	} 
 	//------------------------------------------- BIDDER PROMPTS START -------------------------------------------------
 	/**
 	 * Pre: The Logged in to AuctionCentral as a bidder
