@@ -3,53 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuOptions {
+public class BidderMenuOptions {
 	
-	/**
-	 * 
-	 * @param Scanner
-	 * @returns 1 if the user wants to login, 2 if the user wants to exit
-	 */
-	public void logInMenu(Scanner sc, AuctionCentral ac) {
-		System.out.println("Welcome to Auction Central.");
-		System.out.print("\tPlease select an option: ");
-		System.out.println("\t1: Login as a Bidder");
-		System.out.println("\t2: Login as a Non-Profit");
-		System.out.println("\t0: Logout");
-		
-		int userChoice;
-		do {
-			userChoice = sc.nextInt();			
-			System.out.print("    Please enter a number to select an option: ");
-			
-		} while (userChoice != 1 || userChoice != 2  || userChoice != 3);
+	BidderMenuOptions(Scanner sc, Bidder bidder, )
+	
 
-		switch(userChoice) {
-			case 1: 
-				System.out.println("\tPlease enter your username:");
-				String bidderUsername = sc.next();				
-				Bidder bidder = (Bidder) ac.login(bidderUsername);
-				bidderMenuOptions(sc, bidder, ac);
-				break;
-			case 2: 
-				System.out.println("\tPlease enter your username:");
-				String nonprofitUserName = sc.next();				
-				NonProfit np = (NonProfit) ac.login(nonprofitUserName);
-				nonProfitMenuOptions(sc, np, ac);
-				break;
-				
-			case 3: 				
-				logout(sc);
-				break;		
-		
-				
-				
-		}
-	}
-	
-	public void exitOption() {
-		System.out.println("Thank you for visiting Auction Central. Have a great rest of the day!");
-	}
 	//------------------------------------------- BIDDER PROMPTS START -------------------------------------------------
 	/**
 	 * Pre: The Logged in to AuctionCentral as a bidder
@@ -74,7 +32,7 @@ public class MenuOptions {
 			case 1:
 				printFutureAuctions(ac.displayFutureAuctions());
 				System.out.println();
-			    allFutureAuctionOptions(sc, bidder, ac);
+			    optionsAfterPrintingFutureAuctions(sc, bidder, ac);
 			    break;
 			case 2: 
 				printAllAuctionsWithBids(sc, bidder);
@@ -136,7 +94,7 @@ public class MenuOptions {
 	/**
 	 * Options displayed if a user wants to see all auctions
 	 */
-	public void allFutureAuctionOptions(Scanner sc, Bidder bidder, AuctionCentral ac) {
+	public void optionsAfterPrintingFutureAuctions(Scanner sc, Bidder bidder, AuctionCentral ac) {
 		System.out.println("\tWhat would you like to do nex?"); 
 		int bidderChoice = -1;
 		System.out.println("\t1: Select an auction");
@@ -154,13 +112,16 @@ public class MenuOptions {
 			String auctionName = sc.next();
 			selectAnAuctionToBid(sc, auctionName, bidder);	//TODO 
 		case 2: 
+			bidderMenuOptions(sc, bidder, ac);
 		case 0:
 			logout(sc);
 			break;	
 		default:
 			System.out.println("Please enter a valid option. "
 					+ "1 - 2 or 0");
+			bidderChoice = sc.nextInt();
 			break;
+			
 	
 		}	
 	}
@@ -203,9 +164,6 @@ public class MenuOptions {
 		
 	}
 	
-	//------------------------------------------- NonProfit PROMPTS START -------------------------------------------------
-	public void nonProfitMenuOptions(Scanner sc, NonProfit nonprofit, AuctionCentral ac) {
-		
-	}
+
 
 }
