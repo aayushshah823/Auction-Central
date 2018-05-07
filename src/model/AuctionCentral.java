@@ -108,6 +108,20 @@ public class AuctionCentral implements java.io.Serializable {
 
 		return futureAuctions;
 	}
+	
+	public String login(String username) {
+		String name = null; 
+		for(int i = 0; i < this.users.size(); i++) {
+			if(this.users.get(i).getUsername().equals(username)){
+				name = this.users.get(i).getName();
+			}
+		}
+		if(name != null) {
+			return name;
+		} else {
+			return "unKnown username";
+		}
+	}
 
 	/**
 	 * @author Raisa
