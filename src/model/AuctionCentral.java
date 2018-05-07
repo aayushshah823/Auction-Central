@@ -98,7 +98,7 @@ public class AuctionCentral implements java.io.Serializable {
 		for (int i = 0; i < this.allNonProfits.size(); i++) {
 			tempAuction = (ArrayList<Auction>) this.allNonProfits.get(i).getAuctions();
 			if (!tempAuction.isEmpty()) {
-				for (int j = 0; i < tempAuction.size(); j++) {
+				for (int j = 0; j < tempAuction.size(); j++) {
 					if (tempAuction.get(j).getStartDate().compareTo(today) > 0) {
 						futureAuctions.add(tempAuction.get(j));
 					}
