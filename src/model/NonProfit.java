@@ -2,13 +2,14 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 
- * @author Aayush, Allen, Ben, Raisa
+ * @author Aayush Shah
  * @version 5/5/18
  *
  */
@@ -35,7 +36,7 @@ public class NonProfit implements Serializable, User {
 	private LocalDate myLastAuctionDate;
 
 	/** .*/
-	private int myCurrentAuction;
+	//	private int myCurrentAuction;
 
 	/**
 	 * 
@@ -47,30 +48,34 @@ public class NonProfit implements Serializable, User {
 		myName = theName;
 		myAuctions = new ArrayList<Auction>();
 		myLastAuctionDate = null;
-		myCurrentAuction = 0;
+		//		myCurrentAuction = -1;
 	}
 
 
 	/**
-
-		Checks when the last auction was held
-		every time a non-profit request for auction is accepted
-		the  lastAuctionDate must be updated 
-
+	 * Checks when the last auction was held
+	 * 	every time a non-profit request for auction is accepted 
+	 * the  lastAuctionDate must be updated
+	 * @param auctions The auction which I submit for approval.
+	 * @return True if auction is approved, false otherwise.
+		
+	 
 	public boolean submitAuctionRequest(AuctionCentral auctions) {
 
 		if (myLastAuctionDate == null || (myLastAuctionDate.getYear() - (LocalDate.now().getYear()) >= 1)) {
 			myLastAuctionDate = LocalDate.now();
-			myCurrentAuction++;
+			// myCurrentAuction++;
 			return true;
 		} 
 		else{ 
 			return false;
 		}
 
+		// AuctionCentral .requestAuction(auctions);
+
 	}
 
-	 */
+	*/
 
 	// *********************************************************
 
@@ -79,8 +84,12 @@ public class NonProfit implements Serializable, User {
 	 * @param theAuction The auction happening.
 	 */
 	public void addAuction(Auction theAuction) {
-		myCurrentAuction++;
+		// myCurrentAuction++;
 		myAuctions.add(theAuction);
+	}
+
+	public Auction getCurrentAuction() {
+		return myAuctions.get(myAuctions.size() - 1);
 	}
 
 	/**
@@ -88,18 +97,33 @@ public class NonProfit implements Serializable, User {
 	 * @param theItem The name of item.
 	 */
 	public void addItem(Item theItem) {
-		// myCurrentAuction++;
-		myAuctions.get(myCurrentAuction).addItem(theItem);
-
+		//	System.out.println(myCurrentAuction);
+		getCurrentAuction().addItem(theItem);
+		System.out.println("This method is called " + getItemsInAuction().size());
 
 	}
+
+	/*
+	public static void main(String[] args) {
+		NonProfit n = new NonProfit("Group 3", "nonP");
+		LocalDate today = LocalDate.now();
+		LocalTime noon = LocalTime.NOON;
+		n.addAuction(new Auction(today.plus(10, ChronoUnit.DAYS), 
+				today.plus(10, ChronoUnit.DAYS), noon, noon.plus(6, ChronoUnit.HOURS)));
+		System.out.println("Main method working");
+		Item i = new Item("Car", Bidder.MIN_AMOUNT_BID_PER_ITEM + 500,"BMW", 1);
+		System.out.println("Item being add");
+		n.addItem(i);
+
+	}*/
 
 	/**
 	 * Get's the items for the auction
 	 * @return list that stores the items of this auction.
 	 */
 	public List<Item> getItemsInAuction() {
-		return myAuctions.get(myCurrentAuction).getItems();
+
+		return getCurrentAuction().getItems();
 	}
 
 	/**
