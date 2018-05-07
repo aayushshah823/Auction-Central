@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BidderMenuOptions {
-	
-	BidderMenuOptions(Scanner sc, Bidder bidder, )
-	
 
+	BidderMenuOptions(Scanner sc, Bidder bidder) {
+	}
+
+	/**
+	 * 
+	 * @param Scanner
+	 * @returns 1 if the user wants to login, 2 if the user wants to exit
+	 */
+
+	public void exitOption() {
+		System.out.println("Thank you for visiting Auction Central. Have a great rest of the day!");
+	} 
 	//------------------------------------------- BIDDER PROMPTS START -------------------------------------------------
 	/**
 	 * Pre: The Logged in to AuctionCentral as a bidder
@@ -15,19 +24,19 @@ public class BidderMenuOptions {
 	 * 
 	 * @param Scanner, AuctionCentral
 	 */
-	
+
 	public void bidderMenuOptions(Scanner sc, Bidder bidder, AuctionCentral ac) {
 		System.out.println("Welcome back " + bidder.getName() + 
-			"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
+				"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
 		int bidderChoice = -1;
-			System.out.println("\t1: View all Auctions in which I can bid");
-			System.out.println("\t2: View all auctions in which I have placed bids");
-			System.out.println("\t3: View all items I have bid on in an auction");
-			System.out.println("\t4: View all items I have bid on in all auctions");
-			System.out.println("\t0: Logout");
-			System.out.print("\tPlease select an option:");
-			bidderChoice = sc.nextInt();		
-		
+		System.out.println("\t1: View all Auctions in which I can bid");
+		System.out.println("\t2: View all auctions in which I have placed bids");
+		System.out.println("\t3: View all items I have bid on in an auction");
+		System.out.println("\t4: View all items I have bid on in all auctions");
+		System.out.println("\t0: Logout");
+		System.out.print("\tPlease select an option:");
+		bidderChoice = sc.nextInt();		
+
 		switch (bidderChoice) {
 			case 1:
 				printFutureAuctions(ac.displayFutureAuctions());
@@ -51,10 +60,10 @@ public class BidderMenuOptions {
 			default: 
 				System.out.println("Please enter a valid option. "
 						+ "1 - 2 - 3 - 4 or 0");
-				break;
-		
+				break;		
+
 		}
-		
+
 	}
 
 	private void printAllItemsInAllAuctions(Scanner sc, Bidder bidder, AuctionCentral ac) {
@@ -62,7 +71,7 @@ public class BidderMenuOptions {
 		for(int i = 0; i < items.size(); i++) {
 			System.out.println((i + 1) + ": " + items.get(i).getItemName());
 		}
-		
+
 	}
 
 	private void selectAnAuctionToViewBids(String auctionName, Bidder bidder) {
@@ -78,7 +87,7 @@ public class BidderMenuOptions {
 			System.out.println((j + 1) + ": " + items.get(j).getItemName()); 
 		}
 
-		
+
 	}
 
 	private void printAllAuctionsWithBids(Scanner sc, Bidder bidder) {
@@ -88,7 +97,7 @@ public class BidderMenuOptions {
 			System.out.println("Auction Date: " + auction.get(i).getEndDate());
 			System.out.println();
 		}
-		
+
 	}
 
 	/**
@@ -102,7 +111,7 @@ public class BidderMenuOptions {
 		System.out.println("\t0: Logout");
 		System.out.print("\tPlease select an option:");
 		bidderChoice = sc.nextInt();
-			
+
 		switch (bidderChoice) {
 		case 1:	
 			System.out.println("The auctions available to bid are: ");
@@ -121,11 +130,9 @@ public class BidderMenuOptions {
 					+ "1 - 2 or 0");
 			bidderChoice = sc.nextInt();
 			break;
-			
-	
 		}	
 	}
-	
+
 	private void selectAnAuctionToBid(Scanner sc, String auctionName, Bidder bidder) {
 		ArrayList<Auction> auction = bidder.getAllAuctions();
 		Auction myauction = null; 
@@ -134,14 +141,14 @@ public class BidderMenuOptions {
 				myauction = auction.get(i);
 			}
 		}
-		
+
 		//DISPLAY THE ITEMS
 		//HAVE THE USER SELECT THE ITEMS
 		//ASK FOR A BID AMOUNT 
 		//BID
-		
+
 		//int result = bidder.makeBid(item, auction, bid);
-		
+
 	}
 
 	public void logout(Scanner sc) {
@@ -149,7 +156,7 @@ public class BidderMenuOptions {
 		System.out.println("\tEnter 1 to log back in");
 		sc.hasNextInt();
 	}
-		
+
 
 	//Displays the current available auction
 	private void printFutureAuctions(ArrayList<Auction> displayFutureAuctions) {
@@ -161,9 +168,7 @@ public class BidderMenuOptions {
 			System.out.println("\tAuction Time: " + displayFutureAuctions.get(i).getStartTime());
 			System.out.println( );
 		}
-		
-	}
-	
 
+	}
 
 }

@@ -68,18 +68,20 @@ public class AuctionCentralMain {
 				System.out.println("\tWelcome to the Bidder menu options!");
 				System.out.println("\tPlease enter your username:");
 				String bidderUsername = sc.next();				
-				Bidder bidder = (Bidder) ac.login(bidderUsername);
-				bidderMenuOptions(sc, bidder, ac);
+				//Bidder bidder = (Bidder) ac.login(bidderUsername);
+				//bidderMenuOptions(sc, bidder, ac);
 				break;
 			case 2: 
 				System.out.println("\tPlease enter your username:");
 				String nonprofitUserName = sc.next();				
 				NonProfit np = (NonProfit) ac.login(nonprofitUserName);
-				nonProfitMenuOptions(sc, np, ac);
+				//nonProfitMenuOptions(sc, np, ac);
 				break;
 				
 			case 3: 				
-				logout(sc);
+				System.out.println("\tThank you for using Auction Cenral. Have a great day!");
+				System.out.println("\tEnter 1 to log back in");
+				sc.hasNextInt();
 				break;			
 				
 				

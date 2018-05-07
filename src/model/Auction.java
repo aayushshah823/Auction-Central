@@ -45,6 +45,14 @@ public class Auction implements Serializable {
 		myItems.add(theItem);
 	}
 	
+	public boolean isAddItemValid() {
+		boolean result = false;
+		if (myItems.size() <= MAX_AMOUNT_OF_ITEMS) {
+			result = true;
+		}
+		return result;
+	}
+	
 	
 	/**
 	 * 
