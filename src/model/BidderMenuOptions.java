@@ -198,11 +198,11 @@ public class BidderMenuOptions {
 			itemName = sc.next();
 			double bidAmount = 0.0;
 			System.out.println("\tPlease enter your bid amount");
-			itemName = sc.next();
+			bidAmount = sc.nextDouble();
 			
 			int result =
 				this.bidder.makeBid(itemName, auctionName, bidAmount, this.ac);
-			bidError(result,itemName, auctionName);
+			bidError(result, itemName, auctionName);
 		}
 	}
 	
