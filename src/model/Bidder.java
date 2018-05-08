@@ -49,6 +49,10 @@ public class Bidder implements Serializable, User{
 		}	
 	
 	}
+	
+	public void addAuction(Auction auction, ArrayList<Item> items) {
+		this.myAuctions.put(auction, items);
+	}
 
 	/**
 	 * Pre: User must have placed an bid in any items of the given auction	 * 
@@ -123,6 +127,8 @@ public class Bidder implements Serializable, User{
 	 */
 	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
 		Auction auction = findAuction(ac, auctionName);
+		System.out.println("Is auction Null?");
+		System.out.println(auction == null);
 		Item item = findItemInAuction(auction, itemName);
 		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;

@@ -18,7 +18,7 @@ public class Auction implements Serializable {
 	private static final long serialVersionUID = -5620536666756226632L;
 	
 	private static final int MAX_AMOUNT_OF_ITEMS = 10;
-	private List<Item> myItems;
+	private ArrayList<Item> myItems;
 	private LocalDate myStartDate;
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
@@ -58,7 +58,7 @@ public class Auction implements Serializable {
 	 * 
 	 * @return
 	 */
-	public List<Item> getItems() {
+	public ArrayList<Item> getItems() {
 		return myItems;
 	}
 
@@ -66,7 +66,7 @@ public class Auction implements Serializable {
 	 * 
 	 * @param myItems
 	 */
-	public void setMyItems(List<Item> myItems) {
+	public void setMyItems(ArrayList<Item> myItems) {
 		this.myItems = myItems;
 	}
 	
