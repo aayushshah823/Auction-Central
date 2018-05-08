@@ -48,50 +48,34 @@ public class BidderMenuOptions {
 		System.out.println("\t0: Logout");
 		System.out.print("\tPlease select an option:");
 		bidderChoice = sc.nextInt();		
-		
-		if(bidderChoice == 1) {
-			printFutureAuctions(ac.getFutureAuctions());
-			System.out.println();
-		    optionsAfterPrintingFutureAuctions();
-		} else if(bidderChoice == 2) {
-			printAllAuctionsWithBids(); 
-		} else if(bidderChoice == 3) {
-			System.out.println("Please enter the auction name: "); 
-			String auctionName = sc.next();
-			selectAnAuctionToViewBids(auctionName);
-		}else if(bidderChoice == 4) {
-			printAllItemsInAllAuctions(); 
-		} else {
-			logout();
+
+
+		switch (bidderChoice) {
+			case 1:
+				printFutureAuctions(ac.getFutureAuctions());
+				System.out.println();
+			    optionsAfterPrintingFutureAuctions();
+			    break;
+			case 2: 
+				printAllAuctionsWithBids(); 
+				break;
+			case 3: 
+				System.out.println("Please enter the auction name: "); 
+				String auctionName = sc.next();
+				selectAnAuctionToViewBids(auctionName);
+				break;
+			case 4:
+				printAllItemsInAllAuctions(); 
+				break;
+			case 0:
+				logout();
+				break;
+			default: 
+				System.out.println("Please enter a valid option. "
+						+ "1 - 2 - 3 - 4 or 0");
+				break;	
+
 		}
-
-
-//		switch (bidderChoice) {
-//			case 1:
-//				printFutureAuctions(ac.getFutureAuctions());
-//				System.out.println();
-//			    optionsAfterPrintingFutureAuctions();
-//			    break;
-//			case 2: 
-//				printAllAuctionsWithBids(); 
-//				break;
-//			case 3: 
-//				System.out.println("Please enter the auction name: "); 
-//				String auctionName = sc.next();
-//				selectAnAuctionToViewBids(auctionName);
-//				break;
-//			case 4:
-//				printAllItemsInAllAuctions(); 
-//				break;
-//			case 0:
-//				logout();
-//				break;
-//			default: 
-//				System.out.println("Please enter a valid option. "
-//						+ "1 - 2 - 3 - 4 or 0");
-//				break;	
-//
-//		}
 
 	}
 
@@ -123,7 +107,7 @@ public class BidderMenuOptions {
 	}
 
 	private void printAllAuctionsWithBids() {
-		//banner();
+		banner();
 		ArrayList<Auction> auction = new ArrayList<Auction>();
 		auction =	bidder.getAllAuctions();
 		for(int i = 0; i < auction.size(); i++) {
@@ -134,7 +118,7 @@ public class BidderMenuOptions {
 			System.out.println();
 		}
 		
-		//this.endOfRequest();
+		this.endOfRequest();
 
 	}
 
@@ -154,8 +138,6 @@ public class BidderMenuOptions {
 		case 1:			
 			System.out.println("\tThe auctions available to bid are: ");
 			printFutureAuctions(ac.getFutureAuctions());
-
-			System.out.println("");	
 			System.out.println("\tPlease enter the auction name: ");
 			String auctionName = sc.next();
 			selectAnAuctionToBid(auctionName);	 
@@ -191,7 +173,7 @@ public class BidderMenuOptions {
 			}
 		}
 		
-		if(auction == null || !ac.isDateValidForBid(auction)) {			
+		if(auction == null ) {			
 			System.out.println("\tThe auction you have requested "
 					+ "is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
