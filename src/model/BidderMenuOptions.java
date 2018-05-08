@@ -195,7 +195,8 @@ public class BidderMenuOptions {
 			String itemName = null;
 			System.out.println("\tPlease enter the name of the item "
 					+ "you would like to bid on:");
-			itemName = sc.next();
+			sc.nextLine();
+			itemName = sc.nextLine();
 			double bidAmount = 0.0;
 			System.out.println("\tPlease enter your bid amount");
 			bidAmount = sc.nextDouble();
