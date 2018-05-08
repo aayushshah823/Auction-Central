@@ -127,7 +127,7 @@ public class NonProfitMenuOptions {
 		int nonprofitChoice = -1;
 		System.out.println();
 		for(int i = 0; i < auctions.size(); i++) {
-			System.out.println("\t" + (i + 1) + ".");
+			System.out.println("\t" + (i + 2) + ".");
 			System.out.println("\tAuction Name: " + auctions.get(i).getAuctionName());
 			System.out.println("\tAuction Date: " + auctions.get(i).getStartDate());
 			System.out.println("\tAuction Time: " + auctions.get(i).getStartTime());
@@ -142,7 +142,7 @@ public class NonProfitMenuOptions {
 		} else if (nonprofitChoice == 1){
 			nonProfitMenuOptions();
 		} else {
-			aucOpt(auctions.get(nonprofitChoice), auctions);
+			aucOpt(auctions.get(nonprofitChoice-2), auctions);
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class NonProfitMenuOptions {
 		System.out.print(auctions.getAuctionName() + " - ");
 		System.out.print(auctions.getAuctionLocation() + " - ");
 		System.out.print(auctions.getStartDate() + " at ");
-		System.out.print(auctions.getStartTime());
+		System.out.println(auctions.getStartTime());
 		
 		System.out.println("\t2: View Item List");
 		System.out.println("\t3: Add an Item");
@@ -171,17 +171,21 @@ public class NonProfitMenuOptions {
 			} else {
 				System.out.println("Sorry, you reached the maximum number of items for this auction");
 			}
+			aucOpt( auctions, auctionList);
 		}
 	}
 	
 	private void addItemMenu(Auction auction) {
 		System.out.println("Enter the name of the item: ");
 		String itemName = myScan.next();
+		System.out.println("Enter starting bid: ");
 		Double startBid = myScan.nextDouble();
+		System.out.println("Enter item description: ");
 		String itemDes = myScan.next();
+		System.out.println("Enter item count: ");
 		int itemCount = myScan.nextInt();
 		Item newItem = new Item(itemName, startBid, itemDes,  itemCount);
-		auction.addItem(newItem);
+		auction.addItem(newItem);		
 	}
 
 	/**
@@ -191,7 +195,7 @@ public class NonProfitMenuOptions {
 		int nonprofitChoice = -1;
 		System.out.println();
 		for(int i = 0; i < auctions.size(); i++) {
-			System.out.println("\t" + (i + 1) + ".");
+			System.out.println("\t" + (i + 2) + ".");
 			System.out.println("\tAuction Name: " + auctions.get(i).getAuctionName());
 			System.out.println("\tAuction Date: " + auctions.get(i).getStartDate());
 			System.out.println("\tAuction Time: " + auctions.get(i).getStartTime());
@@ -234,6 +238,7 @@ public class NonProfitMenuOptions {
 			} else {
 				System.out.println("Sorry, you reached the maximum number of items for this auction");
 			}
+			auctionOptions( auctions, auctionList);
 		}		
 	}
 	
