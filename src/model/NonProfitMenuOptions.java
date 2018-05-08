@@ -128,12 +128,12 @@ public class NonProfitMenuOptions {
 	private void displayActiveAuctions(List<Auction> auctions) {
 		int nonprofitChoice = -1;
 		for(int i = 0; i < auctions.size(); i++) {
-			System.out.print("\t" + (i + 1) + ":");
-			System.out.print(auctions.get(i).getAuctionName() + " - ");
-			System.out.print(auctions.get(i).getAuctionLocation() + " - ");
-			System.out.print(auctions.get(i).getStartDate() + " at ");
-			System.out.print(auctions.get(i).getStartTime());
-			
+			System.out.println("\t" + (i + 1) + ".");
+			System.out.println("\tAuction Name: " + auctions.get(i).getAuctionName());
+			//System.out.print(auctions.get(i).getAuctionLocation() + " - ");
+			System.out.println("\tAuction Date: " + auctions.get(i).getStartDate());
+			System.out.println("\tAuction Time: " + auctions.get(i).getStartTime());
+			System.out.println();
 		}
 		System.out.println("\t1: Back");
 		System.out.println("\t0: Logout");
@@ -280,7 +280,7 @@ public class NonProfitMenuOptions {
 	}
 	
 	public void logout() {
-		System.out.println("\tThank you for using Auction Cenral. Have a great day!");
+		System.out.println("\tThank you for using Auction Central. Have a great day!");
 	}
 
 
