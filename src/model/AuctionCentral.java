@@ -106,7 +106,8 @@ public class AuctionCentral implements java.io.Serializable {
 	}
 
 	/**
-	 * Method that adds an auction to 
+	 * Method that adds an auction to the Calendar and informs the NonProfit
+	 * that requested the auction that it has been created and scheduled.
 	 * @param theNonProfit
 	 * @param theAuction
 	 */
@@ -120,6 +121,12 @@ public class AuctionCentral implements java.io.Serializable {
 		}
 	}
 	
+	/**
+	 * Method that adds an Auction to the calendar. The calendar is a map
+	 * that contains a date and the number of auctions that day. This method
+	 * adds an auction to each day within the Auction Timeframe.
+	 * @param theAuction
+	 */
 	private void addAuctionToCalendar(Auction theAuction) {
 		if ((theAuction.getEndDate().isEqual(theAuction.getStartDate())) ||
 				(theAuction.getEndDate().isAfter(theAuction.getStartDate()))) {
@@ -159,10 +166,12 @@ public class AuctionCentral implements java.io.Serializable {
 	}
 
 	/**
+	 * This Method is used to get all the auctions scheduled including and after
+	 * today's date.
 	 * @author Raisa
 	 * @return list of all future auctions
 	 */
-	public ArrayList<Auction> displayFutureAuctions() {
+	public ArrayList<Auction> getFutureAuctions() {
 		LocalDate today = LocalDate.now();
 		ArrayList<Auction> futureAuctions = new ArrayList<Auction>();
 		ArrayList<Auction> tempAuction = new ArrayList<Auction>();
@@ -179,6 +188,12 @@ public class AuctionCentral implements java.io.Serializable {
 		return futureAuctions;
 	}
 	
+	/**
+	 * This method is used when a user is logging in. It verifies that the
+	 * user is in the system before logging the user in.
+	 * @param username
+	 * @return returns the user associated with the passed username.
+	 */
 	public User login(String username) {
 		User user = null; 
 		for(int i = 0; i < this.users.size(); i++) {
@@ -210,24 +225,48 @@ public class AuctionCentral implements java.io.Serializable {
 		numCurrentAuctions = theNumberOfAuctions;
 	}
 	
+	/**
+	 * This method is the "master" method for handling an auction request. It
+	 * calls several other methods to test to see if the auction can be held
+	 * for the requested dates. The Map that is returned contains an error code
+	 * (an Integer) and an ArrayList of LocalDates. If any test fails, the 
+	 * error code is added to the Map, but when an auction is requested on a
+	 * day that has more than the Maximum number of auctions per day, it adds
+	 * an error code and an ArrayList of all the unavailable dates throughout
+	 * the requested period. If all tests pass, an auction is created. The
+	 * returned Map is used for giving a NonProfit a reason as to why they
+	 * cannot schedule an auction.
+	 * 
+	 * 
+	 * @param theNonProfit
+	 * @param theStartDate
+	 * @param theEndDate
+	 * @param theStartTime
+	 * @param theEndTime
+	 * @return a Map that is empty if all tests pass, or contains error codes
+	 * when they fail.
+	 */
 	public Map<Integer, ArrayList<LocalDate>> auctionRequest(NonProfit theNonProfit, LocalDate theStartDate,
 							  LocalDate theEndDate, LocalTime theStartTime, LocalTime theEndTime) {
 		HashMap<Integer, ArrayList<LocalDate>> errorMap = new HashMap<>();
 		if (theStartDate.isAfter(theEndDate)) {
-			errorMap.put(0, null); //End Date is before the Start Date
+			errorMap.put(0, null); //Error code 0: The start date is after the end date.
 		}
 		if (!isYearSinceLastAuction(theNonProfit)) {
-			errorMap.put(1, null);
+			errorMap.put(1, null); //Error code 1: Hasn't been a year since last auction
 		}
-		if (!isDateRangeValid(theStartDate, theEndDate)) {
-			errorMap.put(2, null);
+		if (!isStartDateAfterMinDaysAway(theStartDate)) {
+			errorMap.put(2, null); //Error code 2: The start date is less than 14 days away from todays date.
+		}
+		if (!isDateBeforeMaxDaysAway(theStartDate, theEndDate)) {
+			errorMap.put(3, null); //Error code 3: The start date is less than 14 days away from todays date.
 		}
 		if (!isLessThanMaxAuctionsScheduled()) {
-			errorMap.put(3, null);
+			errorMap.put(4, null); //Error code 4: The dates requested are more than 60 days away from todays date.
 		}
 		ArrayList<LocalDate> unavailableDates = isMoreThanMaxAuctionsPerDay(theStartDate, theEndDate);
 		if (!unavailableDates.isEmpty()) {
-				errorMap.put(4, unavailableDates); 
+				errorMap.put(5, unavailableDates); // Error code 5: There is a day or days requested with 2 or more auctions scheduled that day.
 		}
 		if (errorMap.isEmpty()) {
 			Auction newAuction = new Auction(theStartDate, theEndDate, theStartTime, theEndTime);
@@ -246,12 +285,36 @@ public class AuctionCentral implements java.io.Serializable {
 		return (ChronoUnit.DAYS.between(theNonProfit.getLastAuctionDate(), LocalDate.now()) >= 365);
 	}
 	
-	public boolean isDateRangeValid(LocalDate theStartDate, LocalDate theEndDate) {
-		long startDate = ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
-		long endDate = ChronoUnit.DAYS.between(theEndDate, LocalDate.now());
-		return (startDate >= MIN_DAYS_AWAY_FOR_AUCTION && endDate <= MAX_DAYS_AWAY_FOR_AUCTION);
+	/**
+	 * Method that checks to see if the dates requested are after a set number of days
+	 * from the current date.
+	 * @param theStartDate
+	 * @return
+	 */
+	public boolean isStartDateAfterMinDaysAway(LocalDate theStartDate) {
+		long startDateDaysAway = ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
+		return startDateDaysAway >= MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 	
+	/**
+	 * Method that checks to see if the dates requested are before a set number of days
+	 * from the current date.
+	 * @param theStartDate
+	 * @return
+	 */
+	public boolean isDateBeforeMaxDaysAway(LocalDate theStartDate, LocalDate theEndDate) {
+		long startDateDaysAway = ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
+		long endDateDaysAway = ChronoUnit.DAYS.between(theEndDate, LocalDate.now());
+		return startDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION && endDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION;
+	}
+	
+	/**
+	 * Method that checks to see if there are already a set number of auctions
+	 * per day in the requested date interval.
+	 * @param theStartDate
+	 * @param theEndDate
+	 * @return
+	 */
 	public ArrayList<LocalDate> isMoreThanMaxAuctionsPerDay(LocalDate theStartDate, LocalDate theEndDate) {
 		long lengthOfAuction = ChronoUnit.DAYS.between(theStartDate, theEndDate);
 		ArrayList<LocalDate> unavailableDates = new ArrayList<>();

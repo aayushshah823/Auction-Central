@@ -46,7 +46,7 @@ public class BidderMenuOptions {
 
 		switch (bidderChoice) {
 			case 1:
-				printFutureAuctions(ac.displayFutureAuctions());
+				printFutureAuctions(ac.getFutureAuctions());
 				System.out.println();
 			    optionsAfterPrintingFutureAuctions();
 			    break;
@@ -122,7 +122,7 @@ public class BidderMenuOptions {
 		switch (bidderChoice) {
 		case 1:	
 			System.out.println("\tThe auctions available to bid are: ");
-			printFutureAuctions(ac.displayFutureAuctions());
+			printFutureAuctions(ac.getFutureAuctions());
 			System.out.println("");
 			System.out.println("\tPlease enter the auction name: ");
 			String auctionName = sc.next();
@@ -149,16 +149,16 @@ public class BidderMenuOptions {
 	public void selectAnAuctionToBid(String auctionName) {		
 		Auction auction = null;
 		
-		for(int i = 0; i < this.ac.displayFutureAuctions().size(); i++) {
-			if(this.ac.displayFutureAuctions().get(i).getAuctionName().equals(auctionName)) {
-				auction = this.ac.displayFutureAuctions().get(i);
+		for(int i = 0; i < this.ac.getFutureAuctions().size(); i++) {
+			if(this.ac.getFutureAuctions().get(i).getAuctionName().equals(auctionName)) {
+				auction = this.ac.getFutureAuctions().get(i);
 			}
 		}
 		
 		if(auction == null) {			
 			System.out.println("\tThe auction you have requested is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
-			printFutureAuctions(ac.displayFutureAuctions());
+			printFutureAuctions(ac.getFutureAuctions());
 			failedOperation();
 			
 		} else {
