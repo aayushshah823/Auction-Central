@@ -106,7 +106,7 @@ public class Serialization {
 				today.plus(51, ChronoUnit.DAYS), noon, 
 				noon.plus(11, ChronoUnit.HOURS));
 		auction4.setAuctionName("NMF2018");
-		auction4.addItem(new Item("Mystery Skin Care Gift Box", 42, "Charlene"
+		auction4.addItem(new Item("SkincareGiftbox", 42, "Charlene"
 				+ " New York Mystery Gift Box For Mother's Day, Moms, Bridal"
 				+ " Showers, Teens Birthdays, Handmade With Moisturizing Skin"
 				+ " Care", 1));
