@@ -25,8 +25,16 @@ public class BidderMenuOptions {
 	 */
 
 	public void bidderMenuOptions() {
+		System.out.println("------------  A U C T I O N   C E N T R A L ------------");
 		System.out.println("Welcome back " + bidder.getName() + 
 				"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
+		mainMenu();
+	}
+	
+	public void mainMenu() {
+		
+		System.out.println("------------  A U C T I O N   C E N T R A L ------------");
+		System.out.println();
 		int bidderChoice = -1;
 		System.out.println("\t1: View all Auctions in which I can bid");
 		System.out.println("\t2: View all auctions in which I have placed bids");
@@ -54,12 +62,12 @@ public class BidderMenuOptions {
 				printAllItemsInAllAuctions();
 				break;
 			case 0:
-				logout(sc);
+				logout();
 				break;
 			default: 
 				System.out.println("Please enter a valid option. "
 						+ "1 - 2 - 3 - 4 or 0");
-				break;		
+				break;	
 
 		}
 
@@ -122,7 +130,7 @@ public class BidderMenuOptions {
 		case 2: 
 			bidderMenuOptions();
 		case 0:
-			logout(sc);
+			logout();
 			break;	
 		default:
 			System.out.println("\tPlease enter a valid option. "
@@ -147,11 +155,12 @@ public class BidderMenuOptions {
 			}
 		}
 		
-		if(auction == null) {
+		if(auction == null) {			
 			System.out.println("\tThe auction you have requested is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
 			printFutureAuctions(ac.displayFutureAuctions());
-			//GO BACK TO THE MAIN MENU? OR CREATE A TEMP MENU THAT WILL SHOW UP EVERY TIME A USER MAKES A MISTAKE UP??? !! 
+			failedOperation();
+			
 		} else {
 			System.out.println("\tThe items available in the " + auction.getAuctionName() + " are:");
 			ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
@@ -162,21 +171,32 @@ public class BidderMenuOptions {
 			}
 		}
 		
-		//display the auction items. 
-	
-		//DISPLAY THE ITEMS
-		//HAVE THE USER SELECT THE ITEMS
-		//ASK FOR A BID AMOUNT 
-		//BID
-
-		//int result = bidder.makeBid(item, auction, bid);
+		
 
 	}
+	
+	public void failedOperation() {
+		int bidderChoice = -1;
+		System.out.println(" ");
+		System.out.println("Please select an option:");
+		System.out.println("\t1: Go back to main menu");
+		System.out.println("\t0: Logout");
+		
+		bidderChoice = sc.nextInt();
+		
+		switch(bidderChoice) {
+		case 1: 
+			this.mainMenu();
+			break;
+		case 2:
+			this.logout();
+			break;
+		}
+		
+	}
 
-	public void logout(Scanner sc) {
+	public void logout() {
 		System.out.println("\tThank you for using Auction Cenral. Have a great day!");
-		System.out.println("\tEnter 1 to log back in");
-		sc.hasNextInt();
 	}
 
 
