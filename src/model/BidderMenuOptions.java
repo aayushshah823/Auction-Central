@@ -128,6 +128,7 @@ public class BidderMenuOptions {
 		case 1:			
 			System.out.println("\tThe auctions available to bid are: ");
 			printFutureAuctions(ac.getFutureAuctions());
+
 			System.out.println("");	
 			System.out.println("\tPlease enter the auction name: ");
 			String auctionName = sc.next();

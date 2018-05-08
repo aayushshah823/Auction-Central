@@ -79,7 +79,7 @@ public class AuctionCentralTest {
 		nonProfit4.addAuction(auction4);
 		nonProfit5.addAuction(auction5);
 		
-		assertEquals(5, central.displayFutureAuctions().size());
+		assertEquals(5, central.getFutureAuctions().size());
 	}
 
 
