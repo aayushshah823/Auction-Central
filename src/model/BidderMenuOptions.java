@@ -151,7 +151,7 @@ public class BidderMenuOptions {
 			System.out.println("\tThe auction you have requested is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
 			printFutureAuctions(ac.displayFutureAuctions());
-			//GO BACK TO THE MAIN MENU? OR CREATE A TEMP MENU THAT WILL SHOW UP EVERY TIME A USER FUCKS UP??? !! 
+			//GO BACK TO THE MAIN MENU? OR CREATE A TEMP MENU THAT WILL SHOW UP EVERY TIME A USER MAKES A MISTAKE UP??? !! 
 		} else {
 			System.out.println("\tThe items available in the " + auction.getAuctionName() + " are:");
 			ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
