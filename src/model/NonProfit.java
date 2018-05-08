@@ -83,20 +83,6 @@ public class NonProfit implements Serializable, User {
 		getCurrentAuction().addItem(theItem);
 	}
 
-	/*
-	public static void main(String[] args) {
-		NonProfit n = new NonProfit("Group 3", "nonP");
-		LocalDate today = LocalDate.now();
-		LocalTime noon = LocalTime.NOON;
-		n.addAuction(new Auction(today.plus(10, ChronoUnit.DAYS), 
-				today.plus(10, ChronoUnit.DAYS), noon, noon.plus(6, ChronoUnit.HOURS)));
-		System.out.println("Main method working");
-		Item i = new Item("Car", Bidder.MIN_AMOUNT_BID_PER_ITEM + 500,"BMW", 1);
-		System.out.println("Item being add");
-		n.addItem(i);
-
-	}*/
-
 	/**
 	 * Get's the items for the auction
 	 * @return list that stores the items of this auction.
@@ -104,14 +90,6 @@ public class NonProfit implements Serializable, User {
 	public List<Item> getItemsInAuction() {
 		return getCurrentAuction().getItems();
 	}
-
-
-	//	public ArrayList<Auction> getListOfAuction() {
-	//		if(myAuctions.size() < 0) 
-	//			throw new IllegalArgumentException("No Auctions found");
-	//		else
-	//			return myAuctions;
-	//	}
 
 
 	/**
@@ -219,18 +197,37 @@ public class NonProfit implements Serializable, User {
 		theMaxDays = MAX_DAYS_AWAY_FOR_AUCTION;
 	}
 
+	/**
+	 * Get's the least days away from auction.
+	 * @return The num of days.
+	 */
 	public int getMinDays() {
 		return MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 
+	/**
+	 * Sets the min days after which 
+	 * user_type can't request an auction.
+	 * @param theMinDays The days after which they can book aution.
+	 */
 	public void setMinDays(int theMinDays) {
 		theMinDays = MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 
+	/**
+	 * checking if max days are valid or not.
+	 * @param theDays the auction request start this days before.
+	 * @return True if days valid, false otherwise.
+	 */
 	public boolean isMaxDaysForAuction(int theDays) {
 		return theDays <= MAX_DAYS_AWAY_FOR_AUCTION;
 	}
 
+	/**
+	 * checking if dates are valid or not.
+	 * @param theDays the auction request stops after this.
+	 * @return True if dates valid, false otherwise.
+	 */
 	public boolean isMinDaysForAuctionValid(int theDays) {
 		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
 	}

@@ -18,6 +18,7 @@ import model.NonProfit;
 /**
  * This class tests NonProfit Class.
  * @author aayushshah
+ * @version 5/8/18
  *
  */
 public class NonProfitTest {
