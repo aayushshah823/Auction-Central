@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,32 +14,60 @@ import java.util.Map;
  * that submits an auction we can access every auction and keep track of all
  * future auctions.
  * 
- * @author Allen Whitemarsh
+ * @author Allen Whitemarsh, Raisa
  * @version 5/4/2018
  */
 public class AuctionCentral implements java.io.Serializable {
 
+	/**
+	 * Automatically Generated serialVersionUID
+	 */
 	private static final long serialVersionUID = -3851687924011616060L;
+	
+	/**
+	 * Default max days away an auction can be scheduled.
+	 */
 	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
+	
+	/**
+	 * Default min days away an auction can be scheduled.
+	 */
 	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
+	
+	/**
+	 * Default max auctions scheduled per day.
+	 */
 	public static final int MAX_AUCTIONS_PER_DAY = 2;
-	/*
+	
+	/**
 	 * Constant to define the maximum number of auctions allowed to be scheduled at
 	 * a time.
 	 */
 	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25;
-	/*
+	
+	/**
 	 * List that stores all nonProfit's who have had an auction approved.
 	 */
 	private ArrayList<NonProfit> allNonProfits;
+	
+	/**
+	 * List of all users within the System.
+	 */
 	private ArrayList<User> users;
+	
+	/**
+	 * Map that tracks Auctions scheduled per day.
+	 */
 	private Map<LocalDate, Integer> myCalendar;
 
-	/*
+	/**
 	 * Variable to keep track of the number of total auctions scheduled.
 	 */
 	private int numCurrentAuctions;
 
+	/**
+	 * Constructor to initialize AuctionCentral's fields.
+	 */
 	public AuctionCentral() {
 		users = new ArrayList<User>();
 		allNonProfits = new ArrayList<NonProfit>();
@@ -46,8 +75,10 @@ public class AuctionCentral implements java.io.Serializable {
 		numCurrentAuctions = 0;
 	}
 
-	/*
-	 * Method that adds a nonProfit to the List of nonProfits
+	/**
+	 * Method that adds a NonProfit to the list of NonProfits.
+	 * This allows easy access to all auctions within AuctionCentral.
+	 * @param theNonProfit
 	 */
 	public void addNonprofit(NonProfit theNonProfit) {
 		if (theNonProfit != null) {
@@ -56,16 +87,29 @@ public class AuctionCentral implements java.io.Serializable {
 			throw new IllegalArgumentException();
 	}
 
+	/**
+	 * Method that adds a new user to the List of users.
+	 * @param user
+	 */
 	public void addNewUser(User user) {
 		if (!(user instanceof User))
 			throw new IllegalArgumentException();
 		users.add(user);
 	}
 
+	/**
+	 * Method to return all NonProfits within the system.
+	 * @return a List of NonProfits
+	 */
 	public ArrayList<NonProfit> getAllNonProfits() {
 		return allNonProfits;
 	}
 
+	/**
+	 * Method that adds an auction to 
+	 * @param theNonProfit
+	 * @param theAuction
+	 */
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
 		if (theNonProfit != null && theAuction != null) {
 			addAuctionToCalendar(theAuction);
@@ -167,7 +211,7 @@ public class AuctionCentral implements java.io.Serializable {
 	}
 	
 	public Map<Integer, ArrayList<LocalDate>> auctionRequest(NonProfit theNonProfit, LocalDate theStartDate,
-							  LocalDate theEndDate, LocalDate theStartTime) {
+							  LocalDate theEndDate, LocalTime theStartTime, LocalTime theEndTime) {
 		HashMap<Integer, ArrayList<LocalDate>> errorMap = new HashMap<>();
 		if (theStartDate.isAfter(theEndDate)) {
 			errorMap.put(0, null); //End Date is before the Start Date
@@ -184,6 +228,10 @@ public class AuctionCentral implements java.io.Serializable {
 		ArrayList<LocalDate> unavailableDates = isMoreThanMaxAuctionsPerDay(theStartDate, theEndDate);
 		if (!unavailableDates.isEmpty()) {
 				errorMap.put(4, unavailableDates); 
+		}
+		if (errorMap.isEmpty()) {
+			Auction newAuction = new Auction(theStartDate, theEndDate, theStartTime, theEndTime);
+			addAuction(theNonProfit, newAuction);
 		}
 		return errorMap;
 	}
