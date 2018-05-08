@@ -162,7 +162,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * @author Raisa
 	 * @return list of all future auctions
 	 */
-	public ArrayList<Auction> displayFutureAuctions() {
+	public ArrayList<Auction> getFutureAuctions() {
 		LocalDate today = LocalDate.now();
 		ArrayList<Auction> futureAuctions = new ArrayList<Auction>();
 		ArrayList<Auction> tempAuction = new ArrayList<Auction>();

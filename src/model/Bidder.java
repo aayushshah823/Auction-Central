@@ -168,7 +168,7 @@ public class Bidder implements Serializable, User{
 	
 	
 	public Auction findAuction(AuctionCentral ac, String auctionName) {
-		ArrayList<Auction> auctions = ac.displayFutureAuctions();
+		ArrayList<Auction> auctions = ac.getFutureAuctions();
 		Auction auction = null;
 		for(int i = 0; i < auctions.size(); i++) {
 			if(auctions.get(i).getAuctionName().equals(auctionName))

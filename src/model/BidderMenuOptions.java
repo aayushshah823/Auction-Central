@@ -25,16 +25,20 @@ public class BidderMenuOptions {
 	 */
 
 	public void bidderMenuOptions() {
-		System.out.println("------------  A U C T I O N   C E N T R A L ------------");
+		banner();
 		System.out.println("Welcome back " + bidder.getName() + 
-				"! You are logged in as a " + bidder.getUserType() +". What would you like to do?");
+				"! You are logged in as a " + bidder.getUserType() +". Here are your options:");
+		System.out.println();
 		mainMenu();
 	}
 	
-	public void mainMenu() {
-		
+	public void banner() {
+		System.out.println();
 		System.out.println("------------  A U C T I O N   C E N T R A L ------------");
 		System.out.println();
+	}
+	
+	public void mainMenu() {
 		int bidderChoice = -1;
 		System.out.println("\t1: View all Auctions in which I can bid");
 		System.out.println("\t2: View all auctions in which I have placed bids");
@@ -46,20 +50,20 @@ public class BidderMenuOptions {
 
 		switch (bidderChoice) {
 			case 1:
-				printFutureAuctions(ac.displayFutureAuctions());
+				printFutureAuctions(ac.getFutureAuctions()); //Options in which I can bid
 				System.out.println();
 			    optionsAfterPrintingFutureAuctions();
 			    break;
 			case 2: 
-				printAllAuctionsWithBids();
+				printAllAuctionsWithBids(); //All auctions with bids
 				break;
 			case 3: 
-				System.out.println("Please enter the auction name: ");
+				System.out.println("Please enter the auction name: "); //All items I have bid on in an auction
 				String auctionName = sc.next();
 				selectAnAuctionToViewBids(auctionName);
 				break;
 			case 4:
-				printAllItemsInAllAuctions();
+				printAllItemsInAllAuctions(); //All items in all auction
 				break;
 			case 0:
 				logout();
@@ -98,6 +102,7 @@ public class BidderMenuOptions {
 	}
 
 	private void printAllAuctionsWithBids() {
+		banner();
 		ArrayList<Auction> auction = bidder.getAllAuctions();
 		for(int i = 0; i < auction.size(); i++) {
 			System.out.println("Auction Name: " + auction.get(i).getAuctionName());
@@ -111,24 +116,26 @@ public class BidderMenuOptions {
 	 * Options displayed if a user wants to see all auctions
 	 */
 	public void optionsAfterPrintingFutureAuctions() {
-		System.out.println("\tWhat would you like to do nex?"); 
+		banner();
+		System.out.println("\tWhat would you like to do next?"); 
 		int bidderChoice = -1;
 		System.out.println("\t1: Select an auction to bid on");
 		System.out.println("\t2: Go back");
 		System.out.println("\t0: Logout");
-		System.out.print("\tPlease select an option:");
 		bidderChoice = sc.nextInt();
 
 		switch (bidderChoice) {
-		case 1:	
+		case 1:			
 			System.out.println("\tThe auctions available to bid are: ");
-			printFutureAuctions(ac.displayFutureAuctions());
-			System.out.println("");
+			printFutureAuctions(ac.getFutureAuctions());
+			System.out.println("");	
 			System.out.println("\tPlease enter the auction name: ");
 			String auctionName = sc.next();
-			selectAnAuctionToBid(auctionName);	//TODO 
+			selectAnAuctionToBid(auctionName);	 
 		case 2: 
-			bidderMenuOptions();
+			this.banner();
+			mainMenu();
+			break;
 		case 0:
 			logout();
 			break;	
@@ -149,17 +156,17 @@ public class BidderMenuOptions {
 	public void selectAnAuctionToBid(String auctionName) {		
 		Auction auction = null;
 		
-		for(int i = 0; i < this.ac.displayFutureAuctions().size(); i++) {
-			if(this.ac.displayFutureAuctions().get(i).getAuctionName().equals(auctionName)) {
-				auction = this.ac.displayFutureAuctions().get(i);
+		for(int i = 0; i < this.ac.getFutureAuctions().size(); i++) {
+			if(this.ac.getFutureAuctions().get(i).getAuctionName().equals(auctionName)) {
+				auction = this.ac.getFutureAuctions().get(i);
 			}
 		}
 		
-		if(auction == null) {			
+		if(auction == null || !ac.isDateValidForBid(auction)) {			
 			System.out.println("\tThe auction you have requested is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
-			printFutureAuctions(ac.displayFutureAuctions());
-			failedOperation();
+			printFutureAuctions(ac.getFutureAuctions());
+			endOfRequest();
 			
 		} else {
 			System.out.println("\tThe items available in the " + auction.getAuctionName() + " are:");
@@ -169,15 +176,43 @@ public class BidderMenuOptions {
 				System.out.println("\tItem Description: " + items.get(i).getItemDesciption());
 				System.out.println("\tItem Starting Bid: " + items.get(i).getStartingBid());
 			}
+			
+			String itemName = null;
+			System.out.println("\tPlease enter the name of the item you would like to bid on:");
+			itemName = sc.next();
+			double bidAmount = 0.0;
+			System.out.println("\tPlease enter your bid amount");
+			itemName = sc.next();
+			
+			int result = this.bidder.makeBid(itemName, auctionName, bidAmount, this.ac);
+			bidError(result,itemName, auctionName);
 		}
-		
-		
-
 	}
 	
-	public void failedOperation() {
+	public void bidError(int result, String item, String auction) {
+		switch (result) {
+		case 1:			
+			System.out.println("\tYou have suceessfully placed a bid");
+			endOfRequest();
+		case 2: 
+			endOfRequest();
+		case 3:
+			endOfRequest();
+			break;	
+			
+		case 4:
+			endOfRequest();
+			break;
+		default:
+			endOfRequest();
+			break;
+		}	
+	}
+	
+	public void endOfRequest() {
 		int bidderChoice = -1;
 		System.out.println(" ");
+		System.out.println("What would you like to do next?");
 		System.out.println("Please select an option:");
 		System.out.println("\t1: Go back to main menu");
 		System.out.println("\t0: Logout");
@@ -186,6 +221,7 @@ public class BidderMenuOptions {
 		
 		switch(bidderChoice) {
 		case 1: 
+			banner();
 			this.mainMenu();
 			break;
 		case 2:
@@ -202,6 +238,8 @@ public class BidderMenuOptions {
 
 	//Displays the current available auction
 	private void printFutureAuctions(ArrayList<Auction> displayFutureAuctions) {
+		System.out.println("The auctions scheduled to take place in the near future are:");
+		System.out.println();
 		for(int i = 0; i < displayFutureAuctions.size(); i++) {
 			System.out.println("\t" + (i + 1) + ".");
 			System.out.println("\tAuction Name: " + displayFutureAuctions.get(i).getAuctionName());
