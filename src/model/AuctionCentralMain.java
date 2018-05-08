@@ -41,11 +41,11 @@ public class AuctionCentralMain {
 			System.out.println("IOException");
 		}
 		
-		BidderMenuOptions bidderMenu = null;
-		NonProfitMenuOptions nonProfitMenu = null;
+		//BidderMenuOptions bidderMenu;
+		//NonProfitMenuOptions nonProfitMenu = null;
 		Scanner sc = new Scanner(System.in);
 		
-		logInMenu(sc, auctionCentral, bidderMenu, nonProfitMenu);
+		logInMenu(sc, auctionCentral);
 		
 	}
 	
@@ -54,7 +54,9 @@ public class AuctionCentralMain {
 	 * @param Scanner
 	 * @returns 1 if the user wants to login, 2 if the user wants to exit
 	 */
-	public static void logInMenu(Scanner sc, AuctionCentral ac, BidderMenuOptions bidderMenu, NonProfitMenuOptions nonProfitMenu) {
+	public static void logInMenu(Scanner sc, AuctionCentral ac) {
+		System.out.println("------------ "
+				+ " A U C T I O N   C E N T R A L ------------");
 		System.out.println("Welcome to Auction Central.");
 		System.out.print("\tPlease select an option: ");
 		System.out.println("\t1: Login as a Bidder");
@@ -62,11 +64,7 @@ public class AuctionCentralMain {
 		System.out.println("\t0: Logout");
 		
 		int userChoice;
-		do {
-			userChoice = sc.nextInt();			
-			System.out.print("    Please enter a number to select an option: ");
-			
-		} while (userChoice != 1 || userChoice != 2  || userChoice != 3);
+		userChoice = sc.nextInt();	
 
 		switch(userChoice) {
 			case 1: 
@@ -74,14 +72,14 @@ public class AuctionCentralMain {
 				System.out.println("\tPlease enter your username:");
 				String bidderUsername = sc.next();				
 				Bidder bidder = (Bidder) ac.login(bidderUsername);
-				bidderMenu = new BidderMenuOptions (sc, ac, bidder);
+				BidderMenuOptions bidderMenu = new BidderMenuOptions (sc, ac, bidder);
 				bidderMenu.bidderMenuOptions(); 
 				break;
 			case 2: 
 				System.out.println("\tPlease enter your username:");
 				String nonprofitUserName = sc.next();				
 				NonProfit np = (NonProfit) ac.login(nonprofitUserName);
-				nonProfitMenu = new NonProfitMenuOptions(sc, ac, np);
+				NonProfitMenuOptions nonProfitMenu = new NonProfitMenuOptions(sc, ac, np);
 				nonProfitMenu.nonProfitMenuOptions(); 
 				break;
 				

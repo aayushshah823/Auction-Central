@@ -48,33 +48,50 @@ public class BidderMenuOptions {
 		System.out.println("\t0: Logout");
 		System.out.print("\tPlease select an option:");
 		bidderChoice = sc.nextInt();		
-
-		switch (bidderChoice) {
-			case 1:
-				printFutureAuctions(ac.getFutureAuctions());
-				System.out.println();
-			    optionsAfterPrintingFutureAuctions();
-			    break;
-			case 2: 
-				printAllAuctionsWithBids(); 
-				break;
-			case 3: 
-				System.out.println("Please enter the auction name: "); 
-				String auctionName = sc.next();
-				selectAnAuctionToViewBids(auctionName);
-				break;
-			case 4:
-				printAllItemsInAllAuctions(); 
-				break;
-			case 0:
-				logout();
-				break;
-			default: 
-				System.out.println("Please enter a valid option. "
-						+ "1 - 2 - 3 - 4 or 0");
-				break;	
-
+		
+		if(bidderChoice == 1) {
+			printFutureAuctions(ac.getFutureAuctions());
+			System.out.println();
+		    optionsAfterPrintingFutureAuctions();
+		} else if(bidderChoice == 2) {
+			printAllAuctionsWithBids(); 
+		} else if(bidderChoice == 3) {
+			System.out.println("Please enter the auction name: "); 
+			String auctionName = sc.next();
+			selectAnAuctionToViewBids(auctionName);
+		}else if(bidderChoice == 4) {
+			printAllItemsInAllAuctions(); 
+		} else {
+			logout();
 		}
+
+
+//		switch (bidderChoice) {
+//			case 1:
+//				printFutureAuctions(ac.getFutureAuctions());
+//				System.out.println();
+//			    optionsAfterPrintingFutureAuctions();
+//			    break;
+//			case 2: 
+//				printAllAuctionsWithBids(); 
+//				break;
+//			case 3: 
+//				System.out.println("Please enter the auction name: "); 
+//				String auctionName = sc.next();
+//				selectAnAuctionToViewBids(auctionName);
+//				break;
+//			case 4:
+//				printAllItemsInAllAuctions(); 
+//				break;
+//			case 0:
+//				logout();
+//				break;
+//			default: 
+//				System.out.println("Please enter a valid option. "
+//						+ "1 - 2 - 3 - 4 or 0");
+//				break;	
+//
+//		}
 
 	}
 
@@ -112,7 +129,7 @@ public class BidderMenuOptions {
 			System.out.println("Auction Name:"
 					+ " " + auction.get(i).getAuctionName());
 			System.out.println("Auction Date:"
-					+ " " + auction.get(i).getEndDate());
+					+ " " + auction.get(i).getStartDate());
 			System.out.println();
 		}
 		
@@ -266,10 +283,7 @@ public class BidderMenuOptions {
 			System.out.println("\t" + (i + 1) + ".");
 			System.out.println("\tAuction Name: "
 					+ "" + displayFutureAuctions.get(i).getAuctionName());
-			System.out.println("\tAuction Location:"
-					+ " " + displayFutureAuctions.get(i).getAuctionLocation());
 			System.out.println("\tAuction Date:"
-					+ ""
 					+ " " + displayFutureAuctions.get(i).getEndDate());
 			System.out.println("\tAuction Time:"
 					+ " " + displayFutureAuctions.get(i).getStartTime());

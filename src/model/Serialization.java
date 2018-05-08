@@ -221,7 +221,7 @@ public class Serialization {
 		Bidder bidder2 = new Bidder("kungfu kenny", "Augustus Caesar");
 		Bidder bidder3 = new Bidder("theDonald", "Donald Trump");
 		Bidder bidder4 = new Bidder("Kelly", "Maud'Dib");
-		Bidder bidder5 = new Bidder("", "Kelly");
+		Bidder bidder5 = new Bidder("username", "Kelly");
 		Bidder bidder6 = new Bidder("Franks814", "Charlemagne The Great");
 		Bidder bidder7 = new Bidder("Transcontinental", "Dagny Taggart");
 		
