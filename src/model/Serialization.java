@@ -32,40 +32,22 @@ public class Serialization {
 		NonProfit nonProfit6 = new NonProfit("Yo Bois", "Paul Lazaro");
 		Auction auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
 				today.minus(368, ChronoUnit.DAYS), noon, noon.plus(4, ChronoUnit.HOURS));
-		auction1.addItem(new Item("A Random Walk Down Wall Street: The Time-tested "
-				+ "Strategy for Successful Investing", 5.00, "Reassuring, authoritative,"
-				+ " and perennially best-selling guide to investing.", 2));
-		auction1.addItem(new Item("Children's building blocks", 10, "120 Piece Magnetic"
-				+ " Tiles magnetic Building Blocks Toys for Kids", 1));
-		auction1.addItem(new Item("iPhone Screen Protectors", 21.99, "Premium Real "
-				+ "Screen Protector Tempered Glass Film For iPhone 6 6s 7 Plus", 150));
+		auction1.addItem(new Item("A Random Walk Down Wall Street: The Time-tested Strategy for Successful Investing", 5.00, "Reassuring, authoritative, and perennially best-selling guide to investing.", 2));
+		auction1.addItem(new Item("Children's building blocks", 10, "120 Piece Magnetic Tiles magnetic Building Blocks Toys for Kids", 1));
+		auction1.addItem(new Item("iPhone Screen Protectors", 21.99, "Premium Real Screen Protector Tempered Glass Film For iPhone 6 6s 7 Plus", 150));
 		auction1.addItem(new Item("24\" Computer Monitor", 5.00, "Dell 24\" Monitor: P2418D", 2));
-		auction1.addItem(new Item("White Gold Diamond Necklace", 8000.35, "20.57ct 18k "
-				+ "White Gold Diamond Necklace.", 1));
+		auction1.addItem(new Item("White Gold Diamond Necklace", 8000.35, "20.57ct 18k White Gold Diamond Necklace.", 1));
 		Auction auction2 = new Auction(today.minus(150, ChronoUnit.DAYS), 
 				today.minus(149, ChronoUnit.DAYS), noon, noon.plus(2, ChronoUnit.HOURS));
-		auction2.addItem(new Item("Toddler's Soft Sneaker Shoes", 1.00, "Urberry Fashion"
-				+ " Toddlers Prewalker Shoes Infant Baby Boys Girls Soft Sneaker Shoes", 23));
-		auction2.addItem(new Item("2\" Locking Olympic Size Barbell Clamp Collars", 3.00, "Quick "
-				+ "Release Pair of Locking 2\" Olympic Size Barbell Clamp Collar Great for Pro "
-				+ "Training by Clout Fitness", 1));
-		auction2.addItem(new Item("Amazon Fire Cover Case", 17.00, "Cover Case for All Amazon Fire "
-				+ "HD 10 Tablet(7th Generation, 2017 Release)Premium PU Leather Slim Fit Smart Stand "
-				+ "Cover for Fire HD 10.1\" Tablet with Auto Wake&Sleep (bird)", 1));
-		auction2.addItem(new Item("Unisex Cloth Slippers", 1, "Waffle Open Toe Adult "
-				+ "Slippers Cloth Spa Hotel Unisex Slippers for Women and Men", 1));
-		auction2.addItem(new Item("Moana Play Set", 20, "Moana 27 Piece Play Set Featuring "
-				+ "Moana and Friends Characters and Tropical Themed Accessories", 1));
-		auction2.addItem(new Item("Razor Hoverboard", 300.00, "Razor Hovertrax 2.0 "
-				+ "Hoverboard Self-Balancing Smart Scooter", 1));
-		auction2.addItem(new Item("Destroy All Humans - Xbox", 4.20, "Destroy All Humans "
-				+ "Videogame for the Original Xbox", 1));
-		auction2.addItem(new Item("Waterproof Lip Gloss", 1.88, "MISS ROSE Natural Moisturizing"
-				+ " Lipstick, 12 Colors Long Lasting Creamy Waterproof Lip Gloss, All-Day Smudge"
-				+ " Proof Makeup with Non-Toxic Formula, Great Gift for Wife, Girlfriend (40# - "
-				+ "Inked Heart)", 8));
-		auction2.addItem(new Item("Engagement Rings", 200000, "Tiffany & Co.'s \"Tiffany Setting\""
-				+ " one-carat engagement ring", 15));
+		auction2.addItem(new Item("Toddler's Soft Sneaker Shoes", 1.00, "Urberry Fashion Toddlers Prewalker Shoes Infant Baby Boys Girls Soft Sneaker Shoes", 23));
+		auction2.addItem(new Item("2\" Locking Olympic Size Barbell Clamp Collars", 3.00, "Quick Release Pair of Locking 2\" Olympic Size Barbell Clamp Collar Great for Pro Training by Clout Fitness", 1));
+		auction2.addItem(new Item("Amazon Fire Cover Case", 17.00, "Cover Case for All Amazon Fire HD 10 Tablet(7th Generation, 2017 Release)Premium PU Leather Slim Fit Smart Stand Cover for Fire HD 10.1\" Tablet with Auto Wake&Sleep (bird)", 1));
+		auction2.addItem(new Item("Unisex Cloth Slippers", 1, "Waffle Open Toe Adult Slippers Cloth Spa Hotel Unisex Slippers for Women and Men", 1));
+		auction2.addItem(new Item("Moana Play Set", 20, "Moana 27 Piece Play Set Featuring Moana and Friends Characters and Tropical Themed Accessories", 1));
+		auction2.addItem(new Item("Razor Hoverboard", 300.00, "Razor Hovertrax 2.0 Hoverboard Self-Balancing Smart Scooter", 1));
+		auction2.addItem(new Item("Destroy All Humans - Xbox", 4.20, "Destroy All Humans Videogame for the Original Xbox", 1));
+		auction2.addItem(new Item("Waterproof Lip Gloss", 1.88, "MISS ROSE Natural Moisturizing Lipstick, 12 Colors Long Lasting Creamy Waterproof Lip Gloss, All-Day Smudge Proof Makeup with Non-Toxic Formula, Great Gift for Wife, Girlfriend (40# - Inked Heart)", 8));
+		auction2.addItem(new Item("Engagement Rings", 200000, "Tiffany & Co.'s \"Tiffany Setting\" one-carat engagement ring", 15));
 		auction2.addItem(new Item("Penny", 0.007, "1996 Copper Penny", 1));
 		Auction auction3 = new Auction(today.plus(10, ChronoUnit.DAYS), 
 				today.plus(10, ChronoUnit.DAYS), noon, noon.plus(6, ChronoUnit.HOURS));
@@ -115,54 +97,54 @@ public class Serialization {
 		Bidder bidder6 = new Bidder("Franks814", "Charlemagne The Great"); // 10 bids across current + previous auctions
 		Bidder bidder7 = new Bidder("Transcontinental", "Dagny Taggart"); // 10 bids across all previous auctions + 2 in current auctions
 		Bidder bidder8 = new Bidder("\n", "lInE bReAk");  // 5 bids in previous auctions + 5 in current auctions
-		bidder2.makeBid(auction2.getItems().get(0), auction2, 100);
-		bidder3.makeBid(auction3.getItems().get(1), auction3, 200);
-		bidder4.makeBid(auction3.getItems().get(1), auction3, 150);
-		bidder4.makeBid(auction3.getItems().get(2), auction3, 300);//auct7 i5
-		bidder4.makeBid(auction3.getItems().get(3), auction3, 250);
-		bidder4.makeBid(auction3.getItems().get(4), auction3, 1500);
-		bidder5.makeBid(auction1.getItems().get(0), auction1, 200);
-		bidder5.makeBid(auction1.getItems().get(1), auction1, 200);
-		bidder5.makeBid(auction1.getItems().get(2), auction1, 200);
-		bidder5.makeBid(auction1.getItems().get(3), auction1, 200);
-		bidder5.makeBid(auction6.getItems().get(0), auction6, 200);
-		bidder5.makeBid(auction6.getItems().get(1), auction6, 200);
-		bidder5.makeBid(auction6.getItems().get(2), auction6, 200);
-		bidder5.makeBid(auction7.getItems().get(0), auction7, 200);
-		bidder5.makeBid(auction7.getItems().get(1), auction7, 200);
-		bidder5.makeBid(auction7.getItems().get(2), auction7, 200);
-		bidder6.makeBid(auction1.getItems().get(1), auction1, 200);
-		bidder6.makeBid(auction1.getItems().get(2), auction1, 200);
-		bidder6.makeBid(auction1.getItems().get(3), auction1, 200);
-		bidder6.makeBid(auction2.getItems().get(2), auction2, 200);
-		bidder6.makeBid(auction2.getItems().get(3), auction2, 200);
-		bidder6.makeBid(auction2.getItems().get(4), auction2, 200);
-		bidder6.makeBid(auction3.getItems().get(1), auction3, 200);
-		bidder6.makeBid(auction3.getItems().get(2), auction3, 200);
-		bidder6.makeBid(auction3.getItems().get(3), auction3, 200);
-		bidder6.makeBid(auction4.getItems().get(0), auction4, 200);
-		bidder7.makeBid(auction1.getItems().get(0), auction1, 200);
-		bidder7.makeBid(auction1.getItems().get(1), auction1, 200);
-		bidder7.makeBid(auction1.getItems().get(2), auction1, 200);
-		bidder7.makeBid(auction1.getItems().get(3), auction1, 200);
-		bidder7.makeBid(auction6.getItems().get(0), auction6, 200);
-		bidder7.makeBid(auction6.getItems().get(1), auction6, 200);
-		bidder7.makeBid(auction6.getItems().get(2), auction6, 200);
-		bidder7.makeBid(auction7.getItems().get(0), auction7, 200);
-		bidder7.makeBid(auction7.getItems().get(1), auction7, 200);
-		bidder7.makeBid(auction7.getItems().get(2), auction7, 200);
-		bidder7.makeBid(auction3.getItems().get(4), auction3, 200);
-		bidder7.makeBid(auction3.getItems().get(5), auction3, 200);
-		bidder8.makeBid(auction7.getItems().get(0), auction7, 200);
-		bidder8.makeBid(auction7.getItems().get(1), auction7, 200);
-		bidder8.makeBid(auction7.getItems().get(2), auction7, 200);
-		bidder8.makeBid(auction6.getItems().get(0), auction6, 200);
-		bidder8.makeBid(auction6.getItems().get(1), auction6, 200);
-		bidder8.makeBid(auction3.getItems().get(2), auction3, 200);
-		bidder8.makeBid(auction3.getItems().get(3), auction3, 200);
-		bidder8.makeBid(auction3.getItems().get(4), auction3, 200);
-		bidder8.makeBid(auction3.getItems().get(5), auction3, 200);
-		bidder8.makeBid(auction4.getItems().get(0), auction4, 200);
+		bidder2.makeBid(auction2.getItems().get(0).getItemName(), auction2.getAuctionName(), 100, auctionCentral);
+		bidder3.makeBid(auction3.getItems().get(1).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder4.makeBid(auction3.getItems().get(1).getItemName(), auction3.getAuctionName(), 150, auctionCentral);
+		bidder4.makeBid(auction3.getItems().get(2).getItemName(), auction3.getAuctionName(), 300, auctionCentral);
+		bidder4.makeBid(auction3.getItems().get(3).getItemName(), auction3.getAuctionName(), 250, auctionCentral);
+		bidder4.makeBid(auction3.getItems().get(4).getItemName(), auction3.getAuctionName(), 1500, auctionCentral);
+		bidder5.makeBid(auction1.getItems().get(0).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction1.getItems().get(1).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction1.getItems().get(2).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction1.getItems().get(3).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction6.getItems().get(0).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction6.getItems().get(1).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction6.getItems().get(2).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction7.getItems().get(0).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction7.getItems().get(1).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder5.makeBid(auction7.getItems().get(2).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction1.getItems().get(1).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction1.getItems().get(2).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction1.getItems().get(3).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction2.getItems().get(2).getItemName(), auction2.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction2.getItems().get(3).getItemName(), auction2.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction2.getItems().get(4).getItemName(), auction2.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction3.getItems().get(1).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction3.getItems().get(2).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction3.getItems().get(3).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder6.makeBid(auction4.getItems().get(0).getItemName(), auction4.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction1.getItems().get(0).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction1.getItems().get(1).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction1.getItems().get(2).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction1.getItems().get(3).getItemName(), auction1.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction6.getItems().get(0).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction6.getItems().get(1).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction6.getItems().get(2).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction7.getItems().get(0).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction7.getItems().get(1).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction7.getItems().get(2).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction3.getItems().get(4).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder7.makeBid(auction3.getItems().get(5).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction7.getItems().get(0).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction7.getItems().get(1).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction7.getItems().get(2).getItemName(), auction7.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction6.getItems().get(0).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction6.getItems().get(1).getItemName(), auction6.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction3.getItems().get(2).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction3.getItems().get(3).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction3.getItems().get(4).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction3.getItems().get(5).getItemName(), auction3.getAuctionName(), 200, auctionCentral);
+		bidder8.makeBid(auction4.getItems().get(0).getItemName(), auction4.getAuctionName(), 200, auctionCentral);
 		auctionCentral.addNewUser(bidder1);
 		auctionCentral.addNewUser(bidder2);
 		auctionCentral.addNewUser(bidder3);
@@ -185,10 +167,22 @@ public class Serialization {
 		auctionCentral.addAuction(nonProfit5, auction7);
 		auctionCentral.addAuction(nonProfit5, auction4);
 		auctionCentral.addAuction(nonProfit6, auction8);
+		serialize("auctionCentralDefault", auctionCentral);	
 		
-		// serialization
+		// 2 auctions same day - add to default
+		// 1 auction tomorrow
+		// 1 auction today
+		
+		
+		// 25 future auctions
+		serialize("auctionCentralFull", auctionCentral);
+		// empty auctionCentral
+		serialize("auctionCentralEmpty", new AuctionCentral());
+	}
+	
+	private static void serialize(String fileName, AuctionCentral auctionCentral) {
 		try {
-			FileOutputStream file = new FileOutputStream("auctionCentralData.ser");
+			FileOutputStream file = new FileOutputStream(fileName + ".ser");
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			out.writeObject(auctionCentral);
 			out.close();
@@ -198,5 +192,6 @@ public class Serialization {
 			System.out.println("IOException");
 		}
 	}
+
 }
 
