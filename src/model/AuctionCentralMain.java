@@ -75,6 +75,7 @@ public class AuctionCentralMain {
 				String bidderUsername = sc.next();				
 				Bidder bidder = (Bidder) ac.login(bidderUsername);
 				bidderMenu = new BidderMenuOptions (sc, ac, bidder);
+				bidderMenu.bidderMenuOptions(); 
 				break;
 			case 2: 
 				System.out.println("\tPlease enter your username:");
