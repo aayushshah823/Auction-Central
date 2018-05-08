@@ -60,33 +60,6 @@ public class NonProfit implements Serializable, User {
 
 
 	/**
-	 * Checks when the last auction was held
-	 * 	every time a non-profit request for auction is accepted 
-	 * the  lastAuctionDate must be updated
-	 * @param auctions The auction which I submit for approval.
-	 * @return True if auction is approved, false otherwise.
-
-
-	public boolean submitAuctionRequest(AuctionCentral auctions) {
-
-		if (myLastAuctionDate == null || (myLastAuctionDate.getYear() - (LocalDate.now().getYear()) >= 1)) {
-			myLastAuctionDate = LocalDate.now();
-			// myCurrentAuction++;
-			return true;
-		} 
-		else{ 
-			return false;
-		}
-
-		// AuctionCentral .requestAuction(auctions);
-
-	}
-
-	 */
-
-	// *********************************************************
-
-	/**
 	 * Add's Non Profit's auction to list.
 	 * @param theAuction The auction happening.
 	 */
@@ -260,16 +233,6 @@ public class NonProfit implements Serializable, User {
 
 	public boolean isMinDaysForAuctionValid(int theDays) {
 		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * Checking if non profit can do or not.
-	 * @return True if within date range, false otherwise.
-	 */
-	public boolean isDateRangeValid() {
-
-		myDate = ChronoUnit.DAYS.between(myLastAuctionDate, LocalDate.now());
-		return (myDate >= MIN_DAYS_AWAY_FOR_AUCTION && myDate <= MAX_DAYS_AWAY_FOR_AUCTION);
 	}
 
 }

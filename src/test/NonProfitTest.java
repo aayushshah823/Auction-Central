@@ -123,15 +123,6 @@ public class NonProfitTest {
 	public void getUserType() {
 		assertEquals(USERNAME, nonProfit.getUserType());
 	}
-
-	@Test
-	public void isDateRangeValid_true() {
-		nonProfit.setLastAuctionDate(preiousAuctionDate);
-		long theDate = ChronoUnit.DAYS.between(preiousAuctionDate, today);
-		assertEquals((theDate >= MIN_DAYS_AWAY_FOR_AUCTION) && 
-				(theDate <= MAX_DAYS_AWAY_FOR_AUCTION), nonProfit.isDateRangeValid());
-	}
-	
 	
 	@Test
 	public void addItem_AddedItems_True() {
