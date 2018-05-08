@@ -38,13 +38,16 @@ public class Bidder implements Serializable, User{
 	 * @author Raisa
 	 */
 	public ArrayList<Auction> getAllAuctions() {
-		ArrayList<Auction> auctions = null;
+		ArrayList<Auction> auctions = new ArrayList<Auction>();
 		if(this.myAuctions == null) {
 			return auctions;
 		} else {
 			Set<Auction> a = myAuctions.keySet();
-			auctions = new ArrayList<Auction>();
-			auctions.addAll(a);
+			for(Auction auction : a) {
+				auctions.add(auction);
+			}
+//			auctions = new ArrayList<Auction>();
+//			auctions.addAll(a);
 			return auctions;
 		}	
 	

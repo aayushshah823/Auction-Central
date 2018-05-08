@@ -123,8 +123,9 @@ public class BidderMenuOptions {
 	}
 
 	private void printAllAuctionsWithBids() {
-		banner();
-		ArrayList<Auction> auction = bidder.getAllAuctions();
+		//banner();
+		ArrayList<Auction> auction = new ArrayList<Auction>();
+		auction =	bidder.getAllAuctions();
 		for(int i = 0; i < auction.size(); i++) {
 			System.out.println("Auction Name:"
 					+ " " + auction.get(i).getAuctionName());
@@ -133,7 +134,7 @@ public class BidderMenuOptions {
 			System.out.println();
 		}
 		
-		this.endOfRequest();
+		//this.endOfRequest();
 
 	}
 
