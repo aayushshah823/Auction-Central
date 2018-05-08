@@ -137,7 +137,7 @@ public class AuctionCentral implements java.io.Serializable {
 				(theAuction.getEndDate().isAfter(theAuction.getStartDate()))) {
 			long daysApart = ChronoUnit.DAYS.between(theAuction.getStartDate(),
 													  theAuction.getEndDate());
-			for (int i = 0; i < daysApart; i++) {
+			for (int i = 0; i <= daysApart; i++) {
 				LocalDate temp = theAuction.getStartDate().plusDays(i);
 				if (!myCalendar.containsKey(temp)) {
 					myCalendar.put(temp, 1);
@@ -262,7 +262,7 @@ public class AuctionCentral implements java.io.Serializable {
 			errorMap.put(4, null); //Error code 4: The dates requested are more than 60 days away from todays date.
 		}
 		ArrayList<LocalDate> unavailableDates = 
-				         isMoreThanMaxAuctionsPerDay(theStartDate, theEndDate);
+				         checkNumberOfAuctionsPerDay(theStartDate, theEndDate);
 		if (!unavailableDates.isEmpty()) {
 				errorMap.put(5, unavailableDates); // Error code 5: There is a day or days requested with 2 or more auctions scheduled that day.
 		}
@@ -282,8 +282,11 @@ public class AuctionCentral implements java.io.Serializable {
 	 * @return Returns 1 if it has been a year, returns a 0 otherwise.
 	 */
 	public boolean isYearSinceLastAuction(NonProfit theNonProfit) {
-		return (ChronoUnit.DAYS.between(theNonProfit.getLastAuctionDate(), 
-													LocalDate.now()) >= 365);
+		if (theNonProfit.getLastAuctionDate() == null) {
+			return true;
+		}
+		return ChronoUnit.DAYS.between(theNonProfit.getLastAuctionDate(), 
+				LocalDate.now()) >= 365;
 	}
 	
 	/**
@@ -295,7 +298,9 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	public boolean isStartDateAfterMinDaysAway(LocalDate theStartDate) {
 		long startDateDaysAway = 
-					    ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
+					    ChronoUnit.DAYS.between(LocalDate.now(), theStartDate);
+		System.out.println(startDateDaysAway);
+		System.out.println(startDateDaysAway >= MIN_DAYS_AWAY_FOR_AUCTION);
 		return startDateDaysAway >= MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 	
@@ -309,11 +314,11 @@ public class AuctionCentral implements java.io.Serializable {
 	public boolean isDateBeforeMaxDaysAway(LocalDate theStartDate, 
 													    LocalDate theEndDate) {
 		long startDateDaysAway = 
-						ChronoUnit.DAYS.between(theStartDate, LocalDate.now());
+						ChronoUnit.DAYS.between(LocalDate.now(), theStartDate);
 		long endDateDaysAway = 
-						ChronoUnit.DAYS.between(theEndDate, LocalDate.now());
-		return startDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION && 
-			   endDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION;
+						ChronoUnit.DAYS.between(LocalDate.now(), theEndDate);
+		return (startDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION && 
+			   endDateDaysAway <= MAX_DAYS_AWAY_FOR_AUCTION);
 	}
 	
 	/**
@@ -324,12 +329,12 @@ public class AuctionCentral implements java.io.Serializable {
 	 * @param theEndDate
 	 * @return
 	 */
-	public ArrayList<LocalDate> isMoreThanMaxAuctionsPerDay(LocalDate theStartDate,
+	public ArrayList<LocalDate> checkNumberOfAuctionsPerDay(LocalDate theStartDate,
 														    LocalDate theEndDate) {
 		long lengthOfAuction = 
 							 ChronoUnit.DAYS.between(theStartDate, theEndDate);
 		ArrayList<LocalDate> unavailableDates = new ArrayList<>();
-		for (int i = 0; i < lengthOfAuction; i++) {
+		for (int i = 0; i <= lengthOfAuction; i++) {
 			LocalDate temp = theStartDate.plusDays(i);
 			if (myCalendar.containsKey(temp)) {
 				int auctionsThatDay = myCalendar.get(temp);

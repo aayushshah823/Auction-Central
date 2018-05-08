@@ -4,47 +4,62 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import model.Auction;
 import model.AuctionCentral;
-import model.Item;
 import model.NonProfit;
 
 public class AuctionCentralTest {
 	
 	static LocalDate today = LocalDate.now();
-	private static final LocalDate AUCTION_START_DATE_VALID = today.plusDays(14);
+	private static final LocalDate AUCTION_START_DATE_VALID = today.plusDays(30);
 	private static final LocalTime AUCTION_START_TIME = LocalTime.NOON;
 	private static final LocalDate AUCTION_END_DATE_VALID = AUCTION_START_DATE_VALID;
 	private static final LocalTime AUCTION_END_TIME = AUCTION_START_TIME.plusHours(4);
-	private static final LocalDate AUCTION_6_MONTHS_AGO = LocalDate.now().minusMonths(6);
+	private static final LocalDate DATE_364_DAYS_AGO = 
+											LocalDate.now().minusYears(1).plusDays(1);
+	private static final LocalDate DATE_MIN_DAYS_BEFORE_ANOTHER_AUCTION_BYSAMENONPROFIT
+														= LocalDate.now().minusYears(1);
+	private static final LocalDate DATE_MAX_DAYS_FROM_NOW = LocalDate.now().plusDays(60);
+	private static final LocalDate DATE_ONEMORETHANMAX_DAYS_FROM_NOW = 
+															LocalDate.now().plusDays(61);
+	private static final LocalDate DATE_MIN_DAYS_FROM_NOW = LocalDate.now().plusDays(14);
+	private static final LocalDate DATE_ONELESSTHANMIN_DAYS_FROM_NOW =
+															LocalDate.now().plusDays(13);
 	
 	
 	
-	NonProfit nonProfitForFutureAuction1;
-	NonProfit nonProfitForFutureAuction2;
-	NonProfit nonProfitForFutureAuction3;
-	NonProfit nonProfitForFutureAuction4;
-	NonProfit nonProfitForFutureAuction5;
-	NonProfit beenLessThanYearSinceLastAuction;
 	
-	Auction futureAuction1; 
-	Auction futureAuction2; 
-	Auction futureAuction3; 
-	Auction futureAuction4; 
-	Auction futureAuction5;
-	Auction pastAuction;
-	Auction validAuctionforNonProfit;
+	NonProfit defaultNonProfit;
+	NonProfit nonProfitLessThanYearSinceLastAuction;
+	NonProfit nonProfitNoPriorAuctions;
+	NonProfit nonProfitExactlyOneYearAgoSinceLastAuction;
+	
+	Auction defaultFutureAuction;
+	Auction defaultPastAuction;
+	Auction pastAuction354DaysAgo;
 	Auction invalidAuctionforNonProfit;
+	Auction auctionExactlyOneYearAgo;
+	Auction auctionOnSameDay1;
+	Auction auctionOnSameDay2;
+	Auction auctionOnSameDay3;
+	Auction auctionMaxDaysFromNow;
+	Auction auctionMaxDaysPlusOne;
+	Auction auctionMinDaysFromNow;
+	Auction auctionMinDaysMinusOne;
 	
+	
+	
+	AuctionCentral auctionCentral;
 	AuctionCentral auctionCentralWithSeveralFutureAuctions;
 	AuctionCentral auctionCentralWithMaxTotalAuctions;
+	AuctionCentral auctionCentralWithOneLessThanMaxTotalAuctions;
 	AuctionCentral auctionCentralWithMaxAuctionsOnOneDay;
-	AuctionCentral auctionCentral;
+	AuctionCentral auctionCentralWithNoNonProfits;
+	AuctionCentral auctionCentralWithOneAuction;
 	
 
 	@Before
@@ -53,75 +68,171 @@ public class AuctionCentralTest {
 		auctionCentralWithSeveralFutureAuctions = new AuctionCentral();
 		auctionCentralWithMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithMaxAuctionsOnOneDay = new AuctionCentral();
+		auctionCentralWithOneLessThanMaxTotalAuctions = new AuctionCentral();
+		auctionCentralWithNoNonProfits = new AuctionCentral();
+		auctionCentralWithOneAuction = new AuctionCentral();
 		
 		
-		nonProfitForFutureAuction1 = new NonProfit("organization1", "nonProfitName1");
-		nonProfitForFutureAuction2 = new NonProfit("organization2", "nonProfitName2");
-		nonProfitForFutureAuction3 = new NonProfit("organization3", "nonProfitName3");
-		nonProfitForFutureAuction4 = new NonProfit("organization4", "nonProfitName4");
-		nonProfitForFutureAuction5 = new NonProfit("organization5", "nonProfitName5");
-		beenLessThanYearSinceLastAuction = new NonProfit("org6", "name6");
+		defaultNonProfit = new NonProfit("org", "name");
+		nonProfitLessThanYearSinceLastAuction = new NonProfit("org", "name");
+		nonProfitNoPriorAuctions = new NonProfit("org", "name");
+		nonProfitExactlyOneYearAgoSinceLastAuction = new NonProfit("org", "name");
 		
 		
-		validAuctionforNonProfit = new Auction(AUCTION_6_MONTHS_AGO, AUCTION_6_MONTHS_AGO, AUCTION_START_TIME, AUCTION_END_TIME);
-		futureAuction1 = new Auction(AUCTION_START_DATE_VALID.plusDays(1), AUCTION_END_DATE_VALID.plusDays(1), AUCTION_START_TIME, AUCTION_END_TIME); 
-		futureAuction2 = new Auction(AUCTION_START_DATE_VALID.plusDays(2), AUCTION_END_DATE_VALID.plusDays(2), AUCTION_START_TIME, AUCTION_END_TIME); 
-		futureAuction3 = new Auction(AUCTION_START_DATE_VALID.plusDays(3), AUCTION_END_DATE_VALID.plusDays(3), AUCTION_START_TIME, AUCTION_END_TIME); 
-		futureAuction4 = new Auction(AUCTION_START_DATE_VALID.plusDays(4), AUCTION_END_DATE_VALID.plusDays(4), AUCTION_START_TIME, AUCTION_END_TIME); 
-		futureAuction5 = new Auction(AUCTION_START_DATE_VALID.plusDays(5), AUCTION_END_DATE_VALID.plusDays(5), AUCTION_START_TIME, AUCTION_END_TIME); 
-		pastAuction = new Auction(today.minusDays(2), today.minusDays(2), AUCTION_START_TIME, AUCTION_END_TIME);
+		pastAuction354DaysAgo = new Auction(DATE_364_DAYS_AGO, DATE_364_DAYS_AGO, 
+											AUCTION_START_TIME, AUCTION_END_TIME);
+		defaultFutureAuction = new Auction(AUCTION_START_DATE_VALID, 
+					AUCTION_END_DATE_VALID, AUCTION_START_TIME, AUCTION_END_TIME); 
+		defaultPastAuction = new Auction(today.minusDays(2), today.minusDays(2),
+											AUCTION_START_TIME, AUCTION_END_TIME);
+		auctionExactlyOneYearAgo = new Auction(DATE_MIN_DAYS_BEFORE_ANOTHER_AUCTION_BYSAMENONPROFIT,
+												DATE_MIN_DAYS_BEFORE_ANOTHER_AUCTION_BYSAMENONPROFIT,
+												AUCTION_START_TIME, AUCTION_END_TIME);
+		auctionOnSameDay1 = new Auction(today, today, AUCTION_START_TIME, 
+																AUCTION_END_TIME);
+		auctionOnSameDay2 = new Auction(today, today, AUCTION_START_TIME, 
+																AUCTION_END_TIME);
+		auctionOnSameDay3 = new Auction(today, today, AUCTION_START_TIME,
+																AUCTION_END_TIME);
+		auctionMaxDaysFromNow = new Auction(DATE_MAX_DAYS_FROM_NOW, DATE_MAX_DAYS_FROM_NOW,
+														AUCTION_START_TIME, AUCTION_END_TIME);
+		auctionMaxDaysPlusOne = new Auction(DATE_ONEMORETHANMAX_DAYS_FROM_NOW, 
+					DATE_ONEMORETHANMAX_DAYS_FROM_NOW, AUCTION_START_TIME, AUCTION_END_TIME);
+		auctionMinDaysFromNow = new Auction(DATE_MIN_DAYS_FROM_NOW, DATE_MIN_DAYS_FROM_NOW,
+														AUCTION_START_TIME, AUCTION_END_TIME);
+		auctionMinDaysMinusOne = new Auction(DATE_ONELESSTHANMIN_DAYS_FROM_NOW, 
+											 DATE_ONELESSTHANMIN_DAYS_FROM_NOW,
+										 AUCTION_START_TIME, AUCTION_END_TIME);
+		
+		for (int i = 0; i < 5; i++) {
+			Auction fillerAuction = new Auction(AUCTION_START_DATE_VALID.plusDays(i), 
+					AUCTION_END_DATE_VALID.plusDays(i), AUCTION_START_TIME, AUCTION_END_TIME);
+			NonProfit fillerNonProfit = new NonProfit("filler Org", "filler nonProfit");
+			auctionCentral.addNonprofit(fillerNonProfit);
+			auctionCentral.addAuction(fillerNonProfit, fillerAuction);
+		}
 		
 		for (int i = 0; i < 25; i++) {
-			Auction fillerAuction = new Auction(AUCTION_START_DATE_VALID.plusDays(i), AUCTION_END_DATE_VALID.plusDays(i), AUCTION_START_TIME, AUCTION_END_TIME);
+			Auction fillerAuction = new Auction(AUCTION_START_DATE_VALID.plusDays(i), 
+					AUCTION_END_DATE_VALID.plusDays(i), AUCTION_START_TIME, AUCTION_END_TIME);
 			NonProfit fillerNonProfit = new NonProfit("filler Org", "filler nonProfit");
 			auctionCentralWithMaxTotalAuctions.addNonprofit(fillerNonProfit);
 			auctionCentralWithMaxTotalAuctions.addAuction(fillerNonProfit, fillerAuction);
 		}
 
+		for (int i = 0; i < 24; i++) {
+			Auction fillerAuction = new Auction(AUCTION_START_DATE_VALID.plusDays(i), 
+					AUCTION_END_DATE_VALID.plusDays(i), AUCTION_START_TIME, AUCTION_END_TIME);
+			NonProfit fillerNonProfit = new NonProfit("filler Org", "filler nonProfit");
+			auctionCentralWithOneLessThanMaxTotalAuctions.addNonprofit(fillerNonProfit);
+			auctionCentralWithOneLessThanMaxTotalAuctions.addAuction(fillerNonProfit, fillerAuction);
+		}
 	}
 
 	@Test
-	public void addNonprofit_successfully_nonprofitListIncreases() {
-		auctionCentral.addNonprofit(nonProfitForFutureAuction1);
-		assertEquals(1, auctionCentral.getAllNonProfits().size());
+	public void addNonprofit_nonprofitListIncreases_PASS() {
+		auctionCentralWithNoNonProfits.addNonprofit(defaultNonProfit);
+		assertEquals(1, auctionCentralWithNoNonProfits.getAllNonProfits().size());
 	}
 	
 	@Test
 	public void isDateValidForBid_InvalidDate_false() {
-		assertFalse(auctionCentral.isDateValidForBid(pastAuction));
+		assertFalse(auctionCentral.isDateValidForBid(defaultPastAuction));
 	}
 	
 	@Test
 	public void isDateValidForBid_ValidDate_True() {
-		assertTrue(auctionCentral.isDateValidForBid(futureAuction1));
+		assertTrue(auctionCentral.isDateValidForBid(defaultFutureAuction));
 	}
 	
 	@Test
 	public void getFutureAuctions_FutureAuctionsExist_AuctionListSize() {
-		auctionCentral.addNonprofit(nonProfitForFutureAuction1);
-		auctionCentral.addNonprofit(nonProfitForFutureAuction2);
-		auctionCentral.addNonprofit(nonProfitForFutureAuction3);
-		auctionCentral.addNonprofit(nonProfitForFutureAuction4);
-		auctionCentral.addNonprofit(nonProfitForFutureAuction5);
-		nonProfitForFutureAuction1.addAuction(futureAuction1);
-		nonProfitForFutureAuction2.addAuction(futureAuction2);
-		nonProfitForFutureAuction3.addAuction(futureAuction3);
-		nonProfitForFutureAuction4.addAuction(futureAuction4);
-		nonProfitForFutureAuction5.addAuction(futureAuction5);
 		
 		assertEquals(5, auctionCentral.getFutureAuctions().size());
 	}
 	
 	@Test
 	public void isLessThanMaxAuctionsScheduled_FALSE() {
-		System.out.println(auctionCentralWithMaxTotalAuctions.getNumCurrentAuctions());
 		assertFalse(auctionCentralWithMaxTotalAuctions.isLessThanMaxAuctionsScheduled());
+	}
+	
+	@Test
+	public void isLessThanMaxAuctionsScheduled_TRUE() {
+		assertTrue(auctionCentralWithOneLessThanMaxTotalAuctions.isLessThanMaxAuctionsScheduled());
 	}
 
 	@Test
-	public void isYearSinceLastAuction_FALSE() {
-		auctionCentral.addAuction(beenLessThanYearSinceLastAuction, validAuctionforNonProfit);
-		System.out.println(beenLessThanYearSinceLastAuction.getLastAuctionDate());
-		assertFalse(auctionCentral.isYearSinceLastAuction(beenLessThanYearSinceLastAuction));
+	public void isYearSinceLastAuction_LessThanYearSinceLastAuction_FALSE() {
+		auctionCentral.addAuction(nonProfitLessThanYearSinceLastAuction, pastAuction354DaysAgo);
+		assertFalse(auctionCentral.isYearSinceLastAuction(nonProfitLessThanYearSinceLastAuction));
+	}
+	
+	@Test
+	public void isYearSinceLastAuction_NoPriorAuction_TRUE() {
+		auctionCentral.addNonprofit(nonProfitNoPriorAuctions);
+		assertTrue(auctionCentral.isYearSinceLastAuction(nonProfitNoPriorAuctions));
+	}
+	
+	@Test
+	public void isYearSinceLastAuction_ExactlyOneYearSinceLastAuction_TRUE() {
+		auctionCentral.addNonprofit(nonProfitExactlyOneYearAgoSinceLastAuction);
+		assertTrue(auctionCentral.isYearSinceLastAuction(nonProfitExactlyOneYearAgoSinceLastAuction));
+	}
+	
+	@Test
+	public void checkNumberOfAuctionsPerDay_NoAuctionsThatDay_TRUE() {
+		assertTrue(auctionCentralWithOneAuction.checkNumberOfAuctionsPerDay(
+				defaultFutureAuction.getStartDate(),defaultFutureAuction.getEndDate()).isEmpty());
+	}
+	
+	@Test
+	public void checkNumberOfAuctionsPerDay_ExactlyOneLessThanMaxAuctionsThatDay_TRUE() {
+		auctionCentralWithOneAuction.addAuction(defaultNonProfit, auctionOnSameDay1);
+		assertTrue(auctionCentralWithOneAuction.checkNumberOfAuctionsPerDay(
+				defaultFutureAuction.getStartDate(),defaultFutureAuction.getEndDate()).isEmpty());
+	}
+	
+	@Test
+	public void checkNumberOfAuctionsPerDay_ExactlyMaxAuctionsThatDay_FALSE() {
+		auctionCentralWithOneAuction.addAuction(defaultNonProfit, auctionOnSameDay1);
+		auctionCentralWithOneAuction.addAuction(nonProfitNoPriorAuctions, auctionOnSameDay2);
+		assertFalse(auctionCentralWithOneAuction.checkNumberOfAuctionsPerDay(
+				auctionOnSameDay1.getStartDate(),auctionOnSameDay1.getEndDate()).isEmpty());
+	}
+	
+	@Test
+	public void isStartDateAfterMinDaysAway_MoreThanMin_TRUE() {
+		assertTrue(auctionCentralWithOneAuction.isStartDateAfterMinDaysAway(
+										defaultFutureAuction.getStartDate()));
+	}
+	
+	@Test
+	public void isStartDateAfterMinDaysAway_ExactlyMin_TRUE() {
+		assertTrue(auctionCentralWithOneAuction.isStartDateAfterMinDaysAway(
+										auctionMinDaysFromNow.getStartDate()));
+	}
+	
+	@Test
+	public void isStartDateAfterMinDaysAway_LessThanMin_FALSE() {
+		assertFalse(auctionCentralWithOneAuction.isStartDateAfterMinDaysAway(
+										auctionMinDaysMinusOne.getStartDate()));
+	}
+	
+	@Test
+	public void isStartDateBeforeMaxDaysAway_MoreThanMax_FALSE() {
+		assertFalse(auctionCentralWithOneAuction.isDateBeforeMaxDaysAway(
+				auctionMaxDaysPlusOne.getStartDate(), auctionMaxDaysPlusOne.getEndDate()));
+	}
+	
+	@Test
+	public void sStartDateBeforeMaxDaysAway_ExactlyMax_TRUE() {
+		assertTrue(auctionCentralWithOneAuction.isDateBeforeMaxDaysAway(
+				auctionMaxDaysFromNow.getStartDate(), auctionMaxDaysFromNow.getEndDate()));
+	}
+	
+	@Test
+	public void sStartDateBeforeMaxDaysAway_LessThanMax_TRUE() {
+		assertTrue(auctionCentralWithOneAuction.isDateBeforeMaxDaysAway(
+				defaultFutureAuction.getStartDate(), defaultFutureAuction.getEndDate()));
 	}
 }
