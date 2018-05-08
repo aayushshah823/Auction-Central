@@ -25,9 +25,11 @@ public class AuctionCentralMain {
 	        System.out.println("ClassNotFoundException");
 	    }
 		
-		//logInMenu(sc, auctionCentral);
-		//bidderWelcomeScreen(sc, "John Doe");
+		BidderMenuOptions bidderMenu = null;
+		NonProfitMenuOptions nonProfitMenu = null;
+		Scanner sc = new Scanner(System.in);
 		
+		logInMenu(sc, auctionCentral, bidderMenu, nonProfitMenu);
 		
 		// serialization
 		try {
@@ -40,12 +42,6 @@ public class AuctionCentralMain {
 		} catch (IOException exception) {
 			System.out.println("IOException");
 		}
-		
-		BidderMenuOptions bidderMenu = null;
-		NonProfitMenuOptions nonProfitMenu = null;
-		Scanner sc = new Scanner(System.in);
-		
-		logInMenu(sc, auctionCentral, bidderMenu, nonProfitMenu);
 		
 	}
 	
@@ -86,7 +82,7 @@ public class AuctionCentralMain {
 				break;
 				
 			case 3: 				
-				System.out.println("\tThank you for using Auction Cenral. Have a great day!");
+				System.out.println("\tThank you for using Auction Central. Have a great day!");
 				break;			
 				
 				
