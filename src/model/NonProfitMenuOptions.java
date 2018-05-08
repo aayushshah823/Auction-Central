@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Benjamin
+ * @author Benjamin, Jake
  */
 public class NonProfitMenuOptions {
 
@@ -127,10 +127,10 @@ public class NonProfitMenuOptions {
 	 */
 	private void displayActiveAuctions(List<Auction> auctions) {
 		int nonprofitChoice = -1;
+		System.out.println();
 		for(int i = 0; i < auctions.size(); i++) {
 			System.out.println("\t" + (i + 1) + ".");
 			System.out.println("\tAuction Name: " + auctions.get(i).getAuctionName());
-			//System.out.print(auctions.get(i).getAuctionLocation() + " - ");
 			System.out.println("\tAuction Date: " + auctions.get(i).getStartDate());
 			System.out.println("\tAuction Time: " + auctions.get(i).getStartTime());
 			System.out.println();
@@ -191,13 +191,13 @@ public class NonProfitMenuOptions {
 	 */
 	private void printSubmittedAuctions(List<Auction> auctions) {
 		int nonprofitChoice = -1;
+		System.out.println();
 		for(int i = 0; i < auctions.size(); i++) {
-			System.out.print("\t" + (i + 1) + ":");
-			System.out.print(auctions.get(i).getAuctionName() + " - ");
-			System.out.print(auctions.get(i).getAuctionLocation() + " - ");
-			System.out.print(auctions.get(i).getStartDate() + " at ");
-			System.out.print(auctions.get(i).getStartTime());
-			
+			System.out.println("\t" + (i + 1) + ".");
+			System.out.println("\tAuction Name: " + auctions.get(i).getAuctionName());
+			System.out.println("\tAuction Date: " + auctions.get(i).getStartDate());
+			System.out.println("\tAuction Time: " + auctions.get(i).getStartTime());
+			System.out.println();
 		}
 		System.out.println("\t1: Back");
 		System.out.println("\t0: Logout");
@@ -208,19 +208,18 @@ public class NonProfitMenuOptions {
 		} else if (nonprofitChoice == 1){
 			nonProfitMenuOptions();
 		} else {
-			auctionOptions(auctions.get(nonprofitChoice), auctions);
+			auctionOptions(auctions.get(0), auctions);
 		}
 	}
 	
 	public void auctionOptions(Auction auctions, List<Auction> auctionList) {
-		System.out.print(auctions.getAuctionName() + " - ");
-		System.out.print(auctions.getAuctionLocation() + " - ");
-		System.out.print(auctions.getStartDate() + " at ");
-		System.out.print(auctions.getStartTime());
-		
+		System.out.println("\tAuction Name: " + auctions.getAuctionName());
+		System.out.println("\tAuction Date: " + auctions.getStartDate());
+		System.out.println("\tAuction Time: " + auctions.getStartTime());
+		System.out.println();
+		System.out.println("\t1: Back");
 		System.out.println("\t2: View Item List");
 		System.out.println("\t3: Add an Item");
-		System.out.println("\t1: Back");
 		System.out.println("\t0: Logout");
 		
 		int choice = myScan.nextInt();		
@@ -241,11 +240,11 @@ public class NonProfitMenuOptions {
 	}
 	
 	public void displayAuctionItems(List<Item> items, List<Auction> auctionList, Auction auction) {
-		for (int i = 0 ; i < items.size(); i++) {
-			System.out.print("\t" + (i + 1) + ":");
-			System.out.println("\tItem Name: " + items.get(i).getItemName());
-		}
 		System.out.println("\t1: Back");
+		for (int i = 0 ; i < items.size(); i++) {
+			System.out.print("\t" + (i + 2) + ":");
+			System.out.println(" Item: " + items.get(i).getItemName());
+		}
 		System.out.println("\t0: Logout");
 		
 		int choice = myScan.nextInt();		
@@ -258,7 +257,7 @@ public class NonProfitMenuOptions {
 				aucOpt(auction, auctionList);
 			}
 		} else {
-			displayItem(items.get(choice), items, auctionList, auction);
+			displayItem(items.get(choice - 2), items, auctionList, auction);
 		}
 	}
 	
