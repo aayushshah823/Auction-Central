@@ -13,7 +13,7 @@ public class AuctionCentralMain {
 		// deserialization
 		AuctionCentral auctionCentral = null;
 		try {   
-	        FileInputStream file = new FileInputStream("auctionCentralData.ser");
+	        FileInputStream file = new FileInputStream("auctionCentralDefault.ser");
 	        ObjectInputStream in = new ObjectInputStream(file);        
 	        auctionCentral = (AuctionCentral)in.readObject();
 	        in.close();
@@ -33,7 +33,7 @@ public class AuctionCentralMain {
 		
 		// serialization
 		try {
-			FileOutputStream file = new FileOutputStream("auctionCentralData.ser");
+			FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			out.writeObject(auctionCentral);
 			out.close();
