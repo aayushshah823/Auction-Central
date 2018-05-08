@@ -16,7 +16,6 @@ public class BidderMenuOptions {
 	}
 
 
-	//------------------------------------------- BIDDER PROMPTS START -------------------------------------------------
 	/**
 	 * Pre: The Logged in to AuctionCentral as a bidder
 	 *  
@@ -27,14 +26,16 @@ public class BidderMenuOptions {
 	public void bidderMenuOptions() {
 		banner();
 		System.out.println("Welcome back " + bidder.getName() + 
-				"! You are logged in as a " + bidder.getUserType() +". Here are your options:");
+				"! You are logged in as a"
+				+ " " + bidder.getUserType() +". Here are your options:");
 		System.out.println();
 		mainMenu();
 	}
 	
 	public void banner() {
 		System.out.println();
-		System.out.println("------------  A U C T I O N   C E N T R A L ------------");
+		System.out.println("------------ "
+				+ " A U C T I O N   C E N T R A L ------------");
 		System.out.println();
 	}
 	
@@ -50,20 +51,20 @@ public class BidderMenuOptions {
 
 		switch (bidderChoice) {
 			case 1:
-				printFutureAuctions(ac.getFutureAuctions()); //Options in which I can bid
+				printFutureAuctions(ac.getFutureAuctions());
 				System.out.println();
 			    optionsAfterPrintingFutureAuctions();
 			    break;
 			case 2: 
-				printAllAuctionsWithBids(); //All auctions with bids
+				printAllAuctionsWithBids(); 
 				break;
 			case 3: 
-				System.out.println("Please enter the auction name: "); //All items I have bid on in an auction
+				System.out.println("Please enter the auction name: "); 
 				String auctionName = sc.next();
 				selectAnAuctionToViewBids(auctionName);
 				break;
 			case 4:
-				printAllItemsInAllAuctions(); //All items in all auction
+				printAllItemsInAllAuctions(); 
 				break;
 			case 0:
 				logout();
@@ -81,7 +82,9 @@ public class BidderMenuOptions {
 		ArrayList<Item> items = bidder.getAllIntemsInAllAuctions();
 		for(int i = 0; i < items.size(); i++) {
 			System.out.println((i + 1) + ": " + items.get(i).getItemName());
-		}
+		}	
+
+		this.endOfRequest();
 
 	}
 
@@ -97,7 +100,8 @@ public class BidderMenuOptions {
 		for(int j = 0; j < items.size(); j++) {
 			System.out.println((j + 1) + ": " + items.get(j).getItemName()); 
 		}
-
+    
+		this.endOfRequest();
 
 	}
 
@@ -105,10 +109,14 @@ public class BidderMenuOptions {
 		banner();
 		ArrayList<Auction> auction = bidder.getAllAuctions();
 		for(int i = 0; i < auction.size(); i++) {
-			System.out.println("Auction Name: " + auction.get(i).getAuctionName());
-			System.out.println("Auction Date: " + auction.get(i).getEndDate());
+			System.out.println("Auction Name:"
+					+ " " + auction.get(i).getAuctionName());
+			System.out.println("Auction Date:"
+					+ " " + auction.get(i).getEndDate());
 			System.out.println();
 		}
+		
+		this.endOfRequest();
 
 	}
 
@@ -149,7 +157,8 @@ public class BidderMenuOptions {
 	}
 
 	/**
-	 * Aucion available to bid. The auction date must be > than today's date for this to show up. 
+	 * Aucion available to bid. The auction date must 
+	 * be > than today's date for this to show up. 
 	 * @param sc
 	 * @param auctionName
 	 * @param bidder
@@ -158,34 +167,41 @@ public class BidderMenuOptions {
 		Auction auction = null;
 		
 		for(int i = 0; i < this.ac.getFutureAuctions().size(); i++) {
-			if(this.ac.getFutureAuctions().get(i).getAuctionName().equals(auctionName)) {
+			if(this.ac.getFutureAuctions().get(i)
+					.getAuctionName().equals(auctionName)) {
 				auction = this.ac.getFutureAuctions().get(i);
 			}
 		}
 		
 		if(auction == null || !ac.isDateValidForBid(auction)) {			
-			System.out.println("\tThe auction you have requested is not available for bids");
+			System.out.println("\tThe auction you have requested "
+					+ "is not available for bids");
 			System.out.println("\tThe auctions available to bid are: ");
 			printFutureAuctions(ac.getFutureAuctions());
 			endOfRequest();
 			
 		} else {
-			System.out.println("\tThe items available in the " + auction.getAuctionName() + " are:");
+			System.out.println("\tThe items available in "
+					+ "the " + auction.getAuctionName() + " are:");
 			ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
 			for(int i = 0; i < items.size(); i ++) {
 				System.out.println("\tItem Name: " + items.get(i).getItemName());
-				System.out.println("\tItem Description: " + items.get(i).getItemDesciption());
-				System.out.println("\tItem Starting Bid: " + items.get(i).getStartingBid());
+				System.out.println("\tItem Description: "
+						+ "" + items.get(i).getItemDesciption());
+				System.out.println("\tItem Starting Bid: "
+						+ "" + items.get(i).getStartingBid());
 			}
 			
 			String itemName = null;
-			System.out.println("\tPlease enter the name of the item you would like to bid on:");
+			System.out.println("\tPlease enter the name of the item "
+					+ "you would like to bid on:");
 			itemName = sc.next();
 			double bidAmount = 0.0;
 			System.out.println("\tPlease enter your bid amount");
 			itemName = sc.next();
 			
-			int result = this.bidder.makeBid(itemName, auctionName, bidAmount, this.ac);
+			int result =
+				this.bidder.makeBid(itemName, auctionName, bidAmount, this.ac);
 			bidError(result,itemName, auctionName);
 		}
 	}
@@ -196,12 +212,15 @@ public class BidderMenuOptions {
 			System.out.println("\tYou have suceessfully placed a bid");
 			endOfRequest();
 		case 2: 
+			System.out.println("\tThe minimum bid amount is " + bidder.MIN_AMOUNT_BID_PER_ITEM);
 			endOfRequest();
 		case 3:
+			System.out.println("\tYou have reached the limit of bids allowed in this auction");
 			endOfRequest();
 			break;	
 			
 		case 4:
+			System.out.println("\tYou have reached the limit of total bids in all auctions");
 			endOfRequest();
 			break;
 		default:
@@ -233,20 +252,26 @@ public class BidderMenuOptions {
 	}
 
 	public void logout() {
-		System.out.println("\tThank you for using Auction Cenral. Have a great day!");
+		System.out.println("\tThank you for using Auction Cenral. "
+				+ "Have a great day!");
 	}
 
 
-	//Displays the current available auction
 	private void printFutureAuctions(ArrayList<Auction> displayFutureAuctions) {
-		System.out.println("The auctions scheduled to take place in the near future are:");
+		System.out.println("The auctions scheduled to take place "
+				+ "in the near future are:");
 		System.out.println();
 		for(int i = 0; i < displayFutureAuctions.size(); i++) {
 			System.out.println("\t" + (i + 1) + ".");
-			System.out.println("\tAuction Name: " + displayFutureAuctions.get(i).getAuctionName());
-			System.out.println("\tAuction Location: " + displayFutureAuctions.get(i).getAuctionLocation());
-			System.out.println("\tAuction Date: " + displayFutureAuctions.get(i).getEndDate());
-			System.out.println("\tAuction Time: " + displayFutureAuctions.get(i).getStartTime());
+			System.out.println("\tAuction Name: "
+					+ "" + displayFutureAuctions.get(i).getAuctionName());
+			System.out.println("\tAuction Location:"
+					+ " " + displayFutureAuctions.get(i).getAuctionLocation());
+			System.out.println("\tAuction Date:"
+					+ ""
+					+ " " + displayFutureAuctions.get(i).getEndDate());
+			System.out.println("\tAuction Time:"
+					+ " " + displayFutureAuctions.get(i).getStartTime());
 			System.out.println( );
 		}
 
