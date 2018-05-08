@@ -107,10 +107,10 @@ public class Bidder implements Serializable, User{
 	 * @return amount of bids placed in one auction
 	 */
 	public int myTotalBidPerAuction(Auction auction) {
-		int numOfBids = 0; 
+		int numOfBids = 1; 
 		if(this.myAuctions.containsKey(auction)) {
-			numOfBids = this.myAuctions.get(auction).size();
-			System.out.println(numOfBids);
+			ArrayList<Item> items =  this.myAuctions.get(auction);
+			numOfBids = items.size();			
 		}
 		return numOfBids;
 	}
@@ -126,9 +126,7 @@ public class Bidder implements Serializable, User{
 	 * @param theItem
 	 */
 	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
-		Auction auction = findAuction(ac, auctionName);
-		System.out.println("Is auction Null?");
-		System.out.println(auction == null);
+		Auction auction = findAuction(ac, auctionName);		
 		Item item = findItemInAuction(auction, itemName);
 		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;

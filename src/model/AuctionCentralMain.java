@@ -42,10 +42,10 @@ public class AuctionCentralMain {
 		}
 		
 		BidderMenuOptions bidderMenu = null;
-		NonProfitMenuOptions nonprofit = null;
+		NonProfitMenuOptions nonProfitMenu = null;
 		Scanner sc = new Scanner(System.in);
 		
-		logInMenu(sc, auctionCentral, bidderMenu, nonprofit);
+		logInMenu(sc, auctionCentral, bidderMenu, nonProfitMenu);
 		
 	}
 	
@@ -54,7 +54,7 @@ public class AuctionCentralMain {
 	 * @param Scanner
 	 * @returns 1 if the user wants to login, 2 if the user wants to exit
 	 */
-	public static void logInMenu(Scanner sc, AuctionCentral ac, BidderMenuOptions bidderMenu, NonProfitMenuOptions nonprofit) {
+	public static void logInMenu(Scanner sc, AuctionCentral ac, BidderMenuOptions bidderMenu, NonProfitMenuOptions nonProfitMenu) {
 		System.out.println("Welcome to Auction Central.");
 		System.out.print("\tPlease select an option: ");
 		System.out.println("\t1: Login as a Bidder");
@@ -81,7 +81,8 @@ public class AuctionCentralMain {
 				System.out.println("\tPlease enter your username:");
 				String nonprofitUserName = sc.next();				
 				NonProfit np = (NonProfit) ac.login(nonprofitUserName);
-				nonprofit = new NonProfitMenuOptions(); //needs to add the parameters BEN
+				nonProfitMenu = new NonProfitMenuOptions(sc, ac, np);
+				nonProfitMenu.nonProfitMenuOptions(); 
 				break;
 				
 			case 3: 				

@@ -224,6 +224,7 @@ public class BidderMenuOptions {
 			endOfRequest();
 			break;
 		default:
+			System.out.println("Auction not available to place bids");
 			endOfRequest();
 			break;
 		}	
