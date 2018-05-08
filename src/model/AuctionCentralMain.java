@@ -17,8 +17,7 @@ public class AuctionCentralMain {
 	        ObjectInputStream in = new ObjectInputStream(file);        
 	        auctionCentral = (AuctionCentral)in.readObject();
 	        in.close();
-	        file.close(); 
-	        System.out.println("Deserialized!!!!!");
+	        file.close();
 	    } catch(IOException exception) {
 	        System.out.println("IOException");
 	    } catch(ClassNotFoundException exception) {
@@ -38,7 +37,6 @@ public class AuctionCentralMain {
 			out.writeObject(auctionCentral);
 			out.close();
 			file.close();
-			System.out.println("Serialized!!!!!");
 		} catch (IOException exception) {
 			System.out.println("IOException");
 		}
@@ -56,17 +54,17 @@ public class AuctionCentralMain {
 		System.out.println("------------ "
 				+ " A U C T I O N   C E N T R A L ------------");
 		System.out.println("Welcome to Auction Central.");
-		System.out.print("\tPlease select an option: ");
 		System.out.println("\t1: Login as a Bidder");
 		System.out.println("\t2: Login as a Non-Profit");
-		System.out.println("\t0: Logout");
+		System.out.println("\t0: Exit");
+		System.out.print("\tPlease select an option: ");
 		
 		int userChoice;
 		userChoice = sc.nextInt();	
 
 		switch(userChoice) {
 			case 1: 
-				System.out.println("\tWelcome to the Bidder menu options!");
+				System.out.println("\n\tWelcome to the Bidder menu options!");
 				System.out.println("\tPlease enter your username:");
 				String bidderUsername = sc.next();				
 				Bidder bidder = (Bidder) ac.login(bidderUsername);

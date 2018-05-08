@@ -299,8 +299,6 @@ public class AuctionCentral implements java.io.Serializable {
 	public boolean isStartDateAfterMinDaysAway(LocalDate theStartDate) {
 		long startDateDaysAway = 
 					    ChronoUnit.DAYS.between(LocalDate.now(), theStartDate);
-		System.out.println(startDateDaysAway);
-		System.out.println(startDateDaysAway >= MIN_DAYS_AWAY_FOR_AUCTION);
 		return startDateDaysAway >= MIN_DAYS_AWAY_FOR_AUCTION;
 	}
 	
