@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -69,8 +70,11 @@ public class NonProfitMenuOptions {
 		LocalTime theStartTime = getTime();
 		System.out.println("\tPlease enter the end time in the form of \"hour : minutes\"");
 		LocalTime theEndTime = getTime();
-		Map<Integer, ArrayList<LocalDate>> aucReqMap = myAucCent.auctionRequest(myNonProfit, 
-													theStartDate, theStartTime, theEndTime);
+		System.out.println("\tPlease enter an auction name");
+		myScan.nextLine();
+		String theName = myScan.nextLine();
+		HashMap<Integer, LocalDate> aucReqMap = myAucCent.auctionRequest(myNonProfit, 
+													theStartDate, theStartTime, 5, theName);
 		if (aucReqMap.isEmpty()) {	
 			System.out.println("Congratulations!! Your Auction Request has been submitted!");
 
@@ -148,7 +152,6 @@ public class NonProfitMenuOptions {
 	
 	private void aucOpt(Auction auctions, List<Auction> auctionList) {
 		System.out.print(auctions.getAuctionName() + " - ");
-		System.out.print(auctions.getAuctionLocation() + " - ");
 		System.out.print(auctions.getStartDate() + " at ");
 		System.out.println(auctions.getStartTime());
 		
