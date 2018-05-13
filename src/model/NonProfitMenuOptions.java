@@ -70,7 +70,7 @@ public class NonProfitMenuOptions {
 		System.out.println("\tPlease enter the end time in the form of \"hour : minutes\"");
 		LocalTime theEndTime = getTime();
 		Map<Integer, ArrayList<LocalDate>> aucReqMap = myAucCent.auctionRequest(myNonProfit, 
-													theStartDate, theEndDate, theStartTime, theEndTime);
+													theStartDate, theStartTime, theEndTime);
 		if (aucReqMap.isEmpty()) {	
 			System.out.println("Congratulations!! Your Auction Request has been submitted!");
 

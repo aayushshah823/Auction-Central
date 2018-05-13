@@ -24,17 +24,14 @@ public class Auction implements Serializable {
 	private LocalDate myEndDate;
 	private LocalTime myEndTime;
 	private String myAuctionName;
-	private String myAuctionLocation;
 	
-	public Auction(LocalDate theStartDate, LocalDate theEndDate, 
-					LocalTime theStartTime, LocalTime theEndTime) {
+	public Auction(LocalDate theStartDate, LocalTime theStartTime, 
+					LocalTime theEndTime, String theName) {
 		myItems = new ArrayList<Item>();
 		myStartDate = theStartDate;
 		myStartTime = theStartTime;
-		myEndDate = theEndDate;
 		myEndTime = theEndTime;
-		myAuctionName = "";
-		myAuctionLocation = "";
+		myAuctionName = theName;
 	}
 	
 	/**
@@ -85,18 +82,6 @@ public class Auction implements Serializable {
 	public void setAuctionName(String name) {
 		myAuctionName = name;
 	}
-	
-	/**
-	 * Getter for location of auction.
-	 * @return auction location
-	 */
-	public String getAuctionLocation() {
-		return myAuctionLocation;
-	}
-
-	public void setAuctionLocation(String location) {
-		myAuctionLocation = location;
-	}
 
 	/**
 	 * 
@@ -145,14 +130,12 @@ public class Auction implements Serializable {
 	 * 
 	 * @return
 	 */
-	public LocalTime getEndTime() {
+	public LocalTime getMyEndTime() {
 		return myEndTime;
 	}
 
 
-	public void setEndTime(LocalTime myTime) {
-		this.myEndTime = myTime;
+	public void setEndTime(LocalTime theEndTime) {
+		this.myEndTime = theEndTime;
 	}
-
-
 }

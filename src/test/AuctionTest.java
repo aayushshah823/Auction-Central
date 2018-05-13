@@ -45,8 +45,7 @@ public class AuctionTest {
 
 	@Before
 	public void setUp() throws Exception {
-		auction = new Auction(AUCTION_START_DATE, AUCTION_END_DATE, AUCTION_START_TIME, 
-								AUCTION_END_TIME);
+		auction = new Auction(AUCTION_START_DATE, AUCTION_START_TIME, AUCTION_END_TIME);
 		batItem = new Item("bat", START_BIDPRICE_BAT, "light, high-quality", ITEM_COUNT_BAT);
 		ballItem = new Item("ball", START_BIDPRICE_BALL, "round, white", ITEM_COUNT_BALL);
 		itemsList = new ArrayList<>();

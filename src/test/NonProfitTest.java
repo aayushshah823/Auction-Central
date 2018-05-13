@@ -48,7 +48,7 @@ public class NonProfitTest {
 		car = new Item("Car", Bidder.MIN_AMOUNT_BID_PER_ITEM + 500,"BMW", 1);
 		shoes = new Item("Shoes", Bidder.MIN_AMOUNT_BID_PER_ITEM + 5,"Nike", 1);
 		auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
-				today.minus(368, ChronoUnit.DAYS), LocalTime.NOON, LocalTime.NOON.plus(4, ChronoUnit.HOURS));
+				LocalTime.NOON, LocalTime.NOON.plus(4, ChronoUnit.HOURS));
 		nonProfit.addAuction(auction1);
 		nonProfit.setLastAuctionDate(preiousAuctionDate);
 

@@ -23,8 +23,7 @@ public class Serialization {
 		LocalTime noon = LocalTime.NOON;
 		
 		Auction auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
-				today.minus(368, ChronoUnit.DAYS), noon, 
-				noon.plus(4, ChronoUnit.HOURS));
+				noon, noon.plus(4, ChronoUnit.HOURS));
 		auction1.setAuctionName("Chicago-Men's-Club-Annual-Auction");
 		auction1.addItem(new Item("A Random Walk Down Wall Street: The "
 				+ "Time-tested Strategy for Successful Investing", 5.00, 
@@ -41,8 +40,7 @@ public class Serialization {
 		auction1.addItem(new Item("White Gold Diamond Necklace", 8000.35, 
 				"20.57ct 18k White Gold Diamond Necklace.", 1));
 		Auction auction2 = new Auction(today.minus(150, ChronoUnit.DAYS),
-				today.minus(149, ChronoUnit.DAYS), noon, 
-				noon.plus(2, ChronoUnit.HOURS));
+				noon, noon.plus(2, ChronoUnit.HOURS));
 		auction2.setAuctionName("Project-Alert-Auction");
 		auction2.addItem(new Item("Toddler's Soft Sneaker Shoes", 1.00, 
 				"Urberry Fashion Toddlers Prewalker Shoes Infant Baby Boys "
@@ -74,8 +72,7 @@ public class Serialization {
 				+ " \"Tiffany Setting\" one-carat engagement ring", 15));
 		auction2.addItem(new Item("Penny", 0.007, "1996 Copper Penny", 1));
 		Auction auction3 = new Auction(today.plus(10, ChronoUnit.DAYS), 
-				today.plus(10, ChronoUnit.DAYS), noon, 
-				noon.plus(6, ChronoUnit.HOURS));
+				noon, noon.plus(6, ChronoUnit.HOURS));
 		auction3.setAuctionName("The-Going-Green-Emporium");
 		auction3.addItem(new Item("Mesh Bag", 1.00, "Mesh Bag ,IEason "
 				+ "Clearance Sale! Underwear Aid Socks Lingerie Laundry "
@@ -103,20 +100,17 @@ public class Serialization {
 		auction3.addItem(new Item("Wampa Plush", 42, "Star Wars Celebration V"
 				+ " Exclusive Wampa 18 Inch Plush With Detachable Arm", 1));
 		Auction auction4 = new Auction(today.plus(50, ChronoUnit.DAYS), 
-				today.plus(51, ChronoUnit.DAYS), noon, 
-				noon.plus(11, ChronoUnit.HOURS));
+				noon, noon.plus(11, ChronoUnit.HOURS));
 		auction4.setAuctionName("NMF2018");
 		auction4.addItem(new Item("SkincareGiftbox", 42, "Charlene"
 				+ " New York Mystery Gift Box For Mother's Day, Moms, Bridal"
 				+ " Showers, Teens Birthdays, Handmade With Moisturizing Skin"
 				+ " Care", 1));
 		Auction auction5 = new Auction(today.minus(769, ChronoUnit.DAYS),
-				today.minus(767, ChronoUnit.DAYS), noon, 
-				noon.plus(7, ChronoUnit.HOURS));
+				noon, noon.plus(7, ChronoUnit.HOURS));
 		auction5.setAuctionName("NMF2016Auction");
 		Auction auction6 = new Auction(today.minus(367, ChronoUnit.DAYS),
-				today.minus(367, ChronoUnit.DAYS), noon,
-				noon.plus(8, ChronoUnit.HOURS));
+				noon, noon.plus(8, ChronoUnit.HOURS));
 		auction6.setAuctionName("NMF2017Auction");
 		auction6.addItem(new Item("Nail Stencil Sticker", 0.01, "TOPBeauty "
 				+ "Nail Stencil Sticker", 1));
@@ -132,8 +126,7 @@ public class Serialization {
 		auction6.addItem(new Item("Storage Bag Hanger", 1, "16-pocket Green "
 				+ "Storage Bag Hanger", 1));
 		Auction auction7 = new Auction(today.minus(1500, ChronoUnit.DAYS), 
-				today.minus(1499, ChronoUnit.DAYS), noon, 
-				noon.plus(10, ChronoUnit.HOURS));
+				noon, noon.plus(10, ChronoUnit.HOURS));
 		auction7.setAuctionName("Nursing-Mothers-Foundation-Auction");
 		auction7.addItem(new Item("Vacuum Bags", 1.00, "SINMA Practical "
 				+ "Handheld Vacuum Bags", 23));
@@ -150,11 +143,10 @@ public class Serialization {
 		auction7.addItem(new Item("Gravy Mix", 300.00, "McCormik Brown Gravy"
 				+ " Mix 0.87 oz", 3));
 		Auction auction8 = new Auction(today.plus(45, ChronoUnit.DAYS), 
-				today.plus(46, ChronoUnit.DAYS), noon,
-				noon.plus(7, ChronoUnit.HOURS));
+				noon, noon.plus(7, ChronoUnit.HOURS));
 		auction8.setAuctionName("YoBoisFundraisingEvent");
 		Auction auction9 = new Auction(today.plus(1, ChronoUnit.DAYS), 
-				today.plus(1, ChronoUnit.DAYS), noon.minus(3, 
+				noon.minus(3, 
 				ChronoUnit.HOURS), noon.plus(6, ChronoUnit.HOURS));
 		auction9.setAuctionName("2018-DreamAlive");
 		auction9.addItem(new Item("Bluetooth Headphones", 12.49, "SENSO "
@@ -162,7 +154,7 @@ public class Serialization {
 				+ "IPX7 Waterproof HD Stereo Sweatproof Earbuds for Gym "
 				+ "Running Workout 8 Hour Battery Noise Cancelling "
 				+ "Headsets", 1));
-		Auction auction10 = new Auction(today, today, noon.minus(2, 
+		Auction auction10 = new Auction(today, noon.minus(2, 
 				ChronoUnit.HOURS), noon.plus(7, ChronoUnit.HOURS));
 		auction10.setAuctionName("BuyMyStuffPlease");
 		auction10.addItem(new Item("Aromatherapy Diffuser", 19.99, 
@@ -175,7 +167,7 @@ public class Serialization {
 				+ "Cosmetics Foundation Blending Blush Eyeliner Face Powder "
 				+ "Brush Makeup Brush Kit", 10));
 		Auction auction11 = new Auction(today.plus(13, ChronoUnit.DAYS), 
-				today.plus(13, ChronoUnit.DAYS), noon.plus(1, 
+				noon.plus(1, 
 						ChronoUnit.HOURS), noon.plus(5, ChronoUnit.HOURS));
 		auction11.setAuctionName("Semi-AnnualPro-LifeFoundationGiveaway");
 		auction11.addItem(new Item("Pressure Cooker", 50.95, "Instant Pot Duo "
@@ -183,7 +175,7 @@ public class Serialization {
 				+ "Slow Cooker, Rice Cooker, Steamer, Sauté, Yogurt Maker and "
 				+ "Warmer", 1));
 		Auction auction12 = new Auction(today.plus(12, ChronoUnit.DAYS), 
-				today.plus(13, ChronoUnit.DAYS), noon.minus(8, 
+				noon.minus(8, 
 						ChronoUnit.HOURS), noon.plus(1, ChronoUnit.HOURS));
 		auction12.setAuctionName("MC-Ride'sAlbumAuction");
 		auction12.addItem(new Item("Facial Spray", 6.00, "Mario Badescu Facial"
@@ -371,8 +363,7 @@ public class Serialization {
 					"contactPerson" + i);
 			auctionCentral.addNonprofit(nonProfit);
 			Auction auction = new Auction(today.plus(2*i, ChronoUnit.DAYS), 
-					today.plus(2*i, ChronoUnit.DAYS), noon, 
-					noon.plus(7, ChronoUnit.HOURS));
+					noon, noon.plus(7, ChronoUnit.HOURS));
 			auction.setAuctionName("auction"+i);
 			auctionCentral.addAuction(nonProfit, auction);
 		}
