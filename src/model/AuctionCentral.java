@@ -222,6 +222,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * 
 	 * @param username
 	 * @return returns the user associated with the passed username.
+	 * @return null user if the user doesn't exist
 	 */
 	public User login(String username) {
 		User user = null; 
