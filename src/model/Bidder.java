@@ -16,10 +16,10 @@ public class Bidder implements Serializable, User{
 	private static final long serialVersionUID = 8268184277531088723L;
 	
 	private static final String USER_TYPE = "bidder";
-	private Map<Auction, ArrayList<Item>> myAuctions;
+	private Map<Auction, Map<Item, Double>> myBiddingHistory;
+	
 	private String userName;
 	private String name;
-	public static final int MIN_AMOUNT_BID_PER_ITEM = 500;
 	public static final int MIN_BIDS_PER_ITEM = 0;
 	public static final int MAX_BIDS_PER_AUCTION = 4;
 	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 
@@ -28,76 +28,74 @@ public class Bidder implements Serializable, User{
 	public Bidder(String userName, String name) { 
 		this.name = name;
 		this.userName = userName;
-		myAuctions = new HashMap<Auction, ArrayList<Item>>();
+		myBiddingHistory = new HashMap<Auction, Map<Item, Double>>();
 	}
 
 	/**
-	 * Pre: User has placed a bid in any auction at some point Post:
-	 * 
+	 * Pre: User has placed a bid in any auction at some point 
+	 * Pos: Generates a list of all auction where bidder has participated
 	 * @return ArrayList containing  all auction user has placed bids on
 	 * @author Raisa
 	 */
 	public ArrayList<Auction> getAllAuctions() {
 		ArrayList<Auction> auctions = new ArrayList<Auction>();
-		if(this.myAuctions == null) {
+		if(this.myBiddingHistory == null) {
 			return auctions;
 		} else {
-			Set<Auction> a = myAuctions.keySet();
+			Set<Auction> a = myBiddingHistory.keySet();
 			for(Auction auction : a) {
 				auctions.add(auction);
 			}
-//			auctions = new ArrayList<Auction>();
-//			auctions.addAll(a);
 			return auctions;
 		}	
 	
 	}
-	
-	public void addAuction(Auction auction, ArrayList<Item> items) {
-		this.myAuctions.put(auction, items);
+	/**
+	 * If the bidding is successful, add item to 
+	 * the user's history
+	 * @param auction
+	 * @param Map with Item Object and Bid amount
+	 */
+	public void addInfoToBidderHistory(Auction auction, Map<Item, Double> itemsAndBid) {
+		this.myBiddingHistory.put(auction, itemsAndBid);
 	}
 
 	/**
-	 * Pre: User must have placed an bid in any items of the given auction	 * 
+	 * Pre: User must have placed an bid in any items of the given auction	 
+	 * 
 	 * @param auction
 	 * @return ArrayList containing of items user has bid on
+	 * @return an empty ArrayList if user has no bidding history
 	 */
 	public ArrayList<Item> getAllItemsInOneAuction(Auction auction) {
 		ArrayList <Item> items = new ArrayList<Item>();
-		if(!this.myAuctions.containsKey(auction)) {
+		if(!this.myBiddingHistory.containsKey(auction)) {
 			return items;
 		} else {
-			items.addAll(this.myAuctions.get(auction));	
+			items.addAll(this.myBiddingHistory.get(auction).keySet());	//TODO TEST THIS CAREFULLY !
 		}
 
 		return items;
 
-	}
+	} 
 	/**
 	 * Pre: user must have placed bids on at least one item.
-	 * @return ArrayList containing of items user has bid on. 
+	 * @return Map with auction as key value and another Map with Item
+	 * as the key and the bid amount as the value
+	 * 
+	 * TODO create display method. Look how to display information in SceneBuilder
 	 */
-	public ArrayList<Item> getAllIntemsInAllAuctions(){
-		ArrayList<Item> items = new ArrayList<Item>();
-		if(this.myAuctions == null) {
-			return items;
-		} else {
-			for(Auction auction : this.myAuctions.keySet()) {
-				items.addAll(this.myAuctions.get(auction));				
-			}
-		}
-		
-		
-		return items;
+	public Map<Auction, Map<Item, Double>> getAllIntemsInAllAuctions(){
+		return this.myBiddingHistory;
 	}
 	
 	
 	private int myTotalBidAllFutureAuctions() {
 		int totalBid = 0;		
 		LocalDate today = LocalDate.now();	
-		for(Auction auction : this.myAuctions.keySet()) {
+		for(Auction auction : this.myBiddingHistory.keySet()) {
 			if(today.compareTo(auction.getStartDate())<=0) {
-				totalBid += (this.myAuctions.get(auction).size());
+				totalBid += (this.myBiddingHistory.get(auction).size());
 			}
 		}
 		
@@ -108,12 +106,12 @@ public class Bidder implements Serializable, User{
 	/**	  
 	 * @param auction
 	 * @return amount of bids placed in one auction
+	 * @return -1 if no bids have been placed
 	 */
 	public int myTotalBidPerAuction(Auction auction) {
 		int numOfBids = 1; 
-		if(this.myAuctions.containsKey(auction)) {
-			ArrayList<Item> items =  this.myAuctions.get(auction);
-			numOfBids = items.size();			
+		if(this.myBiddingHistory.containsKey(auction)) {
+			numOfBids = this.myBiddingHistory.get(auction).size();
 		}
 		return numOfBids;
 	}
@@ -133,21 +131,21 @@ public class Bidder implements Serializable, User{
 		Item item = findItemInAuction(auction, itemName);
 		ArrayList<Item> items = new ArrayList<Item>();
 		int success = 0;
-		if(!(isBidGreaterThanMinAmount(bid)))
+		if(!(isBidGreaterThanMinAmount(bid, item)))
 			success = 2;
 		else if(isMaxBidPerAuction(auction))
 			success = 3;	
 		else if(isMaxTotalBid(auction))
 			success = 4;
 		else {
-			if (!this.myAuctions.containsKey(auction)) { //The user has not bid on this auction yet
+			if (!this.myBiddingHistory.containsKey(auction)) { //The user has not bid on this auction yet
 				items.add(item);
-				this.myAuctions.put(auction, items);
+				//this.myBiddingHistory.put(auction, items); //TODO refactor to new map
 				updateItemHighestBid(item, bid);
 			} 
 			
-			if(this.myAuctions.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
-				this.myAuctions.get(auction).add(item);
+			if(this.myBiddingHistory.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
+				//this.myBiddingHistory.get(auction).add(item); //TODO refactor to new map
 				updateItemHighestBid(item, bid);
 			} 
 			success = 1;
@@ -192,13 +190,13 @@ public class Bidder implements Serializable, User{
 	 * @return true if item has already bid on for a specific auction
 	 */
 	private boolean isExistingBidOnItem(Auction auction, Item item) {
-		int numberOfItems = this.myAuctions.get(auction).size() - 1;
+		int numberOfItems = this.myBiddingHistory.get(auction).size() - 1;
 		if(numberOfItems == 0) {
 			return false; 
 		}else {
-			ArrayList<Item> items = this.myAuctions.get(auction);
+			//ArrayList<Item> items = this.myBiddingHistory.get(auction); //TODO REFACTOR TO NEW MAP
 			for(int i = 0; i < numberOfItems; i++) {
-				if(items.get(i).getItemName().equals(item.getItemName()))
+			//	if(items.get(i).getItemName().equals(item.getItemName())) //TODO REFACTOR TO NEW MAP
 					return true;
 			}
 		}
@@ -213,8 +211,8 @@ public class Bidder implements Serializable, User{
 	 * @param myBid The bid passed by user.
 	 * @return True if bid is valid, false otherwise.
 	 */
-	public boolean isBidGreaterThanMinAmount(double theBid) {
-		return theBid > MIN_AMOUNT_BID_PER_ITEM;
+	public boolean isBidGreaterThanMinAmount(double theBid, Item item) {
+		return theBid > item.getStartingBid();
 	}
 
 	
