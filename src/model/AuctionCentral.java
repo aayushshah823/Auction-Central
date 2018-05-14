@@ -13,7 +13,7 @@ import java.util.Map;
  * that submits an auction we can access every auction and keep track of all
  * future auctions.
  *
- * @author Allen Whitemarsh, Raisa
+ * @author Allen Whitemarsh, Raisa, Jake
  * @version 5/4/2018
  */
 public class AuctionCentral implements java.io.Serializable {
@@ -45,7 +45,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Constant to define the maximum number of auctions allowed to be 
 	 * scheduled at a time.
 	 */
-	private static final int MAX_NUM_UPCOMING_AUCTIONS = 25;
+	private int maxUpcomingAuctions = 25;
 	
 	private HashMap<NonProfit, ArrayList<Auction>> myAuctions;
 	
@@ -83,6 +83,23 @@ public class AuctionCentral implements java.io.Serializable {
 		if (!(user instanceof User))
 			throw new IllegalArgumentException();
 		users.add(user);
+	}
+	
+	public void updateAuctionLimit(int max) {
+		HashMap<Integer, LocalDate> errorMap = new HashMap<>();
+		int currentCount = 0;
+		for (NonProfit nonProfit : myAuctions.keySet()) {
+			currentCount += myAuctions.get(nonProfit).size();
+		}
+		if (max <= currentCount) { // Error code 0: Max is not greater
+			errorMap.put(0, null); // than current amount of auctions.
+		}
+		if (max < 1) {
+			errorMap.put(1, null); // Error code 1: Max is non-positive.
+		}
+		if (errorMap.isEmpty()) {
+			maxUpcomingAuctions = max;
+		}
 	}
 
 	/**
@@ -350,7 +367,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * @return
 	 */
 	public boolean isLessThanMaxAuctionsScheduled() {
-		return numCurrentAuctions < MAX_NUM_UPCOMING_AUCTIONS;
+		return numCurrentAuctions < maxUpcomingAuctions;
 	}
 	
 	
