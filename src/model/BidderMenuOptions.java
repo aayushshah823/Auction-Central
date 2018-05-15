@@ -80,7 +80,7 @@ public class BidderMenuOptions {
 	}
 
 	private void printAllItemsInAllAuctions() {
-		ArrayList<Item> items = bidder.getAllIntemsInAllAuctions();
+		ArrayList<Item> items = (ArrayList<Item>) bidder.getAllIntemsInAllAuctions();
 		for(int i = 0; i < items.size(); i++) {
 			System.out.println((i + 1) + ": " + items.get(i).getItemName());
 		}	
@@ -213,7 +213,7 @@ public class BidderMenuOptions {
 			System.out.println("\tYou have suceessfully placed a bid");
 			endOfRequest();
 		case 2: 
-			System.out.println("\tThe minimum bid amount is " + bidder.MIN_AMOUNT_BID_PER_ITEM);
+		//	System.out.println("\tThe minimum bid amount is " + bidder.MIN_AMOUNT_BID_PER_ITEM);
 			endOfRequest();
 		case 3:
 			System.out.println("\tYou have reached the limit of bids allowed in this auction");

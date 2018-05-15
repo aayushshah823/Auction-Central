@@ -287,11 +287,11 @@ public class Serialization {
 		bidder5Auction7Items.add(new Item("Rechargeable Light up Glasses", 
 				17.00, "Satu Brown Rechargeable Slotted Shutter Light up LED"
 				+ " Flash Glasses, Black", 1));
-		bidder2.addAuction(auction1, bidder1Auction1Items);
-		bidder5.addAuction(auction1, bidder5Auction1Items);
-		bidder5.addAuction(auction6,  bidder5Auction6Items);
-		bidder7.addAuction(auction2, bidder7Auction2Items);
-		bidder7.addAuction(auction6, bidder7Auction6Items);
+//		bidder2.addAuction(auction1, bidder1Auction1Items);
+//		bidder5.addAuction(auction1, bidder5Auction1Items);
+//		bidder5.addAuction(auction6,  bidder5Auction6Items);
+//		bidder7.addAuction(auction2, bidder7Auction2Items);
+//		bidder7.addAuction(auction6, bidder7Auction6Items);
 		
 		// Adds bids for future auctions
 		bidder3.makeBid(auction3.getItems().get(1).getItemName(), 

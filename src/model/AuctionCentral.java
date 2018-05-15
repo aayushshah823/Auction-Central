@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,21 +86,30 @@ public class AuctionCentral implements java.io.Serializable {
 		users.add(user);
 	}
 	
-	public void updateAuctionLimit(int max) {
-		HashMap<Integer, LocalDate> errorMap = new HashMap<>();
+
+	/**
+	 * Modifies the number of future auctions that can be scheduled.
+	 * 
+	 * @param max - the new future auction limit
+	 * @return a map of errors encountered from given max
+	 */
+	public HashMap<Integer, String> updateAuctionLimit(int max) {
+		HashMap<Integer, String> errorMap = new HashMap<>();
 		int currentCount = 0;
 		for (NonProfit nonProfit : myAuctions.keySet()) {
 			currentCount += myAuctions.get(nonProfit).size();
 		}
-		if (max <= currentCount) { // Error code 0: Max is not greater
-			errorMap.put(0, null); // than current amount of auctions.
+		if (max <= currentCount) {
+			errorMap.put(0, "Current amount of auctions is equal or "
+					+ "less than the max"); 
 		}
 		if (max < 1) {
-			errorMap.put(1, null); // Error code 1: Max is non-positive.
+			errorMap.put(1, "Max is non-positive");
 		}
 		if (errorMap.isEmpty()) {
 			maxUpcomingAuctions = max;
 		}
+		return errorMap;
 	}
 
 	/**
@@ -214,6 +224,21 @@ public class AuctionCentral implements java.io.Serializable {
 		return futureAuctions;
 	}
 	
+	
+	/**
+	 * Gets a list of all auctions sorted by chronological order
+	 * 
+	 * @author Jake
+	 * @return list of sorted auctions
+	 */
+	public ArrayList<Auction> getAuctionsSortedByDate() {
+		ArrayList<Auction> auctions = new ArrayList<Auction>();
+		for (NonProfit nonProfit : myAuctions.keySet()) {
+			auctions.addAll(myAuctions.get(nonProfit));
+		}
+		Collections.sort(auctions);
+		return auctions;
+	}
 
 	
 	/**
