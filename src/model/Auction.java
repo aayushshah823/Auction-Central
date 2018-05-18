@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * 
  * @author Benjamin Yuen, Raisa Meneses
@@ -16,11 +18,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 	private static final long serialVersionUID = -5620536666756226632L;
 	
 	private static final int MAX_AMOUNT_OF_ITEMS = 10;
-	public static final int MAX_BIDS_PER_AUCTION = 4;
-	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 	
+	public static final int MAX_BIDS_PER_AUCTION = 8;
+	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 12; 	
 	public static final int MIN_BIDS_PER_ITEM = 0;
 	private ArrayList<Item> myItems;
-	private ArrayList<Bidder> myBidders;
+	private Map<Bidder, Integer> myBidders;
 	private LocalDate myStartDate;
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
@@ -30,7 +32,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	public Auction(LocalDate theStartDate, LocalTime theStartTime, 
 					LocalTime theEndTime, String theName) {
 		myItems = new ArrayList<Item>();
-		myBidders = new ArrayList<Bidder>();
+		myBidders = new HashMap<Bidder, Integer>();
 		myStartDate = theStartDate;
 		myStartTime = theStartTime;
 		myEndTime = theEndTime;
@@ -142,83 +144,87 @@ public class Auction implements Serializable, Comparable<Auction> {
 		this.myEndTime = theEndTime;
 	}
 	
-	
+	//............Biding methods start .......................//
 
 	/**
-	 * 
-	 * 
-	 * @param myBid The bid passed by user.
-	 * @return True if bid is valid, false otherwise.
-	 * THIS GOES IN AUCTION
+	 *  
+	 * @param myBid amount
+	 * @param bidder who wishes to make a bid
+	 * @return True if bid amount is more than the item's min bid.
 	 */
-	public boolean isBidGreaterThanMinAmount(double theBid, Item item) {
+	public boolean isBidGreaterThanMinAmount(double theBid,Item item) {
 		return theBid > item.getStartingBid();
+	}
+	
+	/**
+	 * Pre: bidder wishes to make a bid on an auction
+	 * @param bidder 
+	 * @return true if the bidder has reached the max number of allowed bids 
+	 * per auction
+	 */
+	public boolean isMaxBidsPerAuction(Bidder bidder) { 
+		if( this.myBidders.containsKey(bidder)) {
+			return this.myBidders.get(bidder) == 4;
+		} 
+		
+		  return false; 
 	}
 
 	/**
 	 * This option will only show if 
 	 * the date is valid for a bid
-	 * return 2 if bid amount < minMidAmout
-	 * return 3 if the user has bid in the max # if bids fir auctions
-	 * return 4 if the user has bid in the max # of total items
-	 * return 1 if the bid was successful 
+	 * @return 2 if bid amount < minMidAmout 
+	 * @return 0 if the bid has been placed successfully 
 	 * @param bid amount and Item to bid on
 	 * @param theItem
 	 */
-	//TODO: TRANSFER TO AUCTION
-//	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
-//		Auction auction = findAuction(ac, auctionName);		
-//		Item item = findItemInAuction(auction, itemName);
-//		ArrayList<Item> items = new ArrayList<Item>();
-//		int success = 0;
-//		if(!(isBidGreaterThanMinAmount(bid, item)))
-//			success = 2;
-//		else if(isMaxBidPerAuction(auction))
-//			success = 3;	
-//		else if(isMaxTotalBid(auction))
-//			success = 4;
-//		else {
-//			if (!this.myBiddingHistory.containsKey(auction)) { //The user has not bid on this auction yet
-//				items.add(item);
-//				//this.myBiddingHistory.put(auction, items); //TODO refactor to new map
-//				updateItemHighestBid(item, bid);
-//			} 
-//			
-//			if(this.myBiddingHistory.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
-//				//this.myBiddingHistory.get(auction).add(item); //TODO refactor to new map
-//				updateItemHighestBid(item, bid);
-//			} 
-//			success = 1;
-//		}
-//		
-//		return success;
-//	}
-//	
-	//AUCTION SHOULD DO THIS
-//	private Item findItemInAuction(Auction auction, String itemName) {
-//		ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
-//		Item theItem = null;
-//		for(int i = 0; i < items.size(); i ++) {
-//			if(items.get(i).getItemName().equals(itemName)) {
-//				theItem = items.get(i);
-//			}
-//		}
-//		return theItem;
-//	}
 	
-	//AUCTION SHOULD DO THIS
+	public int makeBid(Item item, double bidAmount, Bidder bidder) {
+		int success = 0;		
+		if(bidAmount < item.getStartingBid()){
+			success = 2;
+		} else {
+			if(!this.myBidders.containsKey(bidder)) {
+				this.myBidders.put(bidder, 1);
+			} else {
+				int numberOfBids = this.myBidders.get(bidder);
+				numberOfBids++;
+				this.myBidders.put(bidder, numberOfBids);
+			}
+			
+			bidder.addNewToBiddingHistory(this, item, bidAmount);
+		}
+				
+		
+		return success;
+	}
 
-//	private void updateItemHighestBid(Item item, double bid) {
-//		if(bid > item.getCurrentBid()) {
-//			item.setCurrentBid(bid);
-//		}
-//	}
-	
-	
-	//THIS GOES IN AUCTION	
-//	public boolean isMaxBidPerAuction(Auction auction) {
-//		return (myTotalBidPerAuction(auction) == MAX_BIDS_PER_AUCTION);
-//	}
+	/**
+	 * 
+	 * Precondition: Bidder has logged in. The bidding options
+	 * is about to be displayed
+	 * @return Arraylist with list of errors 
+	 * if the user can't bid. The List of auctions in which
+	 * the bidder can bid will only be displayed if 
+	 * this map is empty. 
+	 * 1: Bidder has reached total number of allowed bids.
+	 * 2: Bidder has reached total number of allowed bids per auction.
+	 * 3: The auction will take place today.
+	 */
+
+	public ArrayList<Integer>checkBiddingConditions(Bidder bidder){
+		LocalDate today = LocalDate.now();
+		ArrayList<Integer> errors = new ArrayList<Integer>();
+		if(bidder.getTotalNumberOfBids() == this.MAX_BIDS_ALLOWED_PER_BIDDER)
+			errors.add(1);
+		if(this.isMaxBidsPerAuction(bidder))
+			errors.add(2);
+		if(today.equals(this.myStartDate))
+			errors.add(3);
+		return errors;
+	}
+	//...............Bidding Methods end ........................//
+
 	@Override
 	public int compareTo(Auction other) {
 		if (this.getStartDate().isBefore(other.getStartDate())) {
