@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 /**
  * 
  * @author Raisa
@@ -18,10 +17,6 @@ public class Bidder extends User implements Serializable {
 	
 	private Map<Auction, Map<Item, Double>> myBiddingHistory;
 	
-	public static final int MIN_BIDS_PER_ITEM = 0;
-	public static final int MAX_BIDS_PER_AUCTION = 4;
-	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 
-	
 
 	public Bidder(String theUserName, String theName) { 
 		super(theUserName, theName, "bidder");
@@ -29,10 +24,10 @@ public class Bidder extends User implements Serializable {
 	}
 
 	/**
-	 * Pre: User has placed a bid in any auction at some point 
-	 * Pos: Generates a list of all auction where bidder has participated
+	 * Precondition: User has placed a bid in any auction at some point 
+	 * Postcondition: Generates a list of all auction where bidder has participated
 	 * @return ArrayList containing  all auction user has placed bids on
-	 * @author Raisa
+	 * 
 	 */
 	public ArrayList<Auction> getAllAuctions() {
 		ArrayList<Auction> auctions = new ArrayList<Auction>();
@@ -48,8 +43,8 @@ public class Bidder extends User implements Serializable {
 	
 	}
 	/**
-	 * Pre: Bidder has successfully placed a bid
-	 * Post: Auction, Item and bid amount is added to bidder bidding history 
+	 * Precondition: Bidder has successfully placed a bid
+	 * Postcondition: Auction, Item and bid amount is added to bidder bidding history 
 	 * @param auction
 	 * @param Map with Item Object and Bid amount
 	 */
@@ -61,10 +56,9 @@ public class Bidder extends User implements Serializable {
 	
 
 	/**
-	 * Pre: User must have placed an bid in any items of the given auction	 
-	 * 
+	 * Precondition: User must have placed an bid in any items of the given auction	 	 * 
 	 * @param auction
-	 * @return ArrayList containing of items user has bid on
+	 * @return ArrayList containing of items user has bid on for a give auction
 	 * @return an empty ArrayList if user has no bidding history
 	 */
 	public ArrayList<Item> getAllItemsInOneAuction(Auction auction) {
@@ -72,25 +66,24 @@ public class Bidder extends User implements Serializable {
 		if(!this.myBiddingHistory.containsKey(auction)) {
 			return items;
 		} else {
-			items.addAll(this.myBiddingHistory.get(auction).keySet());	//TODO TEST THIS CAREFULLY !
+			items.addAll(this.myBiddingHistory.get(auction).keySet());	
 		}
 
 		return items;
 
 	} 
 	/**
-	 * Pre: user must have placed bids on at least one item.
+	 * Precondition: user must have placed bids on at least one item.
 	 * @return Map with auction as key value and another Map with Item
-	 * as the key and the bid amount as the value
+	 * as the key and the bid amount as the value. Empty map if no auction
+	 * recorded. Empty map if no bids have been placed in the past. 
 	 * 
-	 * TODO create display method. Look how to display information in SceneBuilder
 	 */
 	public Map<Auction, Map<Item, Double>> getAllIntemsInAllAuctions(){
 		return this.myBiddingHistory;
-	}
+	}	
 	
-	
-	private int myTotalBidAllFutureAuctions() {
+	public int totalBidAllFutureActions() {
 		int totalBid = 0;		
 		LocalDate today = LocalDate.now();	
 		for(Auction auction : this.myBiddingHistory.keySet()) {
@@ -115,31 +108,4 @@ public class Bidder extends User implements Serializable {
 		}
 		return numOfBids;
 	}
-
-
-	
-	public Auction findAuction(AuctionCentral ac, String auctionName) {
-		ArrayList<Auction> auctions = ac.getFutureAuctions();
-		Auction auction = null;
-		for(int i = 0; i < auctions.size(); i++) {
-			if(auctions.get(i).getAuctionName().equals(auctionName))
-				auction = auctions.get(i);				
-		}
-		return auction;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @param myBid The bid passed by user.
-	 * @return True if bid is valid, false otherwise.
-	 * THIS GOES IN AUCTION
-	 */
-	public boolean isBidGreaterThanMinAmount(double theBid, Item item) {
-		return theBid > item.getStartingBid();
-	}
-	public boolean isMaxTotalBid(Auction auction) {
-		return (myTotalBidAllFutureAuctions() == MAX_BIDS_ALLOWED_PER_BIDDER);
-	}
-
 }

@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 /**
  * 
- * @author Benjamin Yuen, Raisa Meneses, Aayush Shah, 
- * 		   Allen Whitemarsh, Jake Yang
+ * @author Benjamin Yuen, Raisa Meneses
  * @version May 4, 2018
  */
 public class Auction implements Serializable, Comparable<Auction> {
@@ -18,7 +16,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 	private static final long serialVersionUID = -5620536666756226632L;
 	
 	private static final int MAX_AMOUNT_OF_ITEMS = 10;
+	public static final int MAX_BIDS_PER_AUCTION = 4;
+	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 	
+	public static final int MIN_BIDS_PER_ITEM = 0;
 	private ArrayList<Item> myItems;
+	private ArrayList<Bidder> myBidders;
 	private LocalDate myStartDate;
 	private LocalTime myStartTime;
 	private LocalDate myEndDate;
@@ -28,6 +30,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	public Auction(LocalDate theStartDate, LocalTime theStartTime, 
 					LocalTime theEndTime, String theName) {
 		myItems = new ArrayList<Item>();
+		myBidders = new ArrayList<Bidder>();
 		myStartDate = theStartDate;
 		myStartTime = theStartTime;
 		myEndTime = theEndTime;
@@ -139,6 +142,19 @@ public class Auction implements Serializable, Comparable<Auction> {
 		this.myEndTime = theEndTime;
 	}
 	
+	
+
+	/**
+	 * 
+	 * 
+	 * @param myBid The bid passed by user.
+	 * @return True if bid is valid, false otherwise.
+	 * THIS GOES IN AUCTION
+	 */
+	public boolean isBidGreaterThanMinAmount(double theBid, Item item) {
+		return theBid > item.getStartingBid();
+	}
+
 	/**
 	 * This option will only show if 
 	 * the date is valid for a bid
