@@ -16,15 +16,11 @@ import java.util.List;
  * @version 5/7/18
  *
  */
-public class NonProfit implements Serializable, User {
+public class NonProfit extends User implements Serializable {
 
 
 	/** Serial id. */
 	private static final long serialVersionUID = 6004350978105195837L;
-
-	/** Stores the type of user. */
-	private static final String USER_TYPE = "nonprofit";
-
 
 	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
 
@@ -32,12 +28,6 @@ public class NonProfit implements Serializable, User {
 
 	// Date.
 	private Long myDate;
-
-	/** My Organizations.*/
-	private String myOrg;
-
-	/** Name of nonprofit org.*/
-	private String myName;
 
 	/** List that stores all the non-profit's auction .*/
 	private ArrayList<Auction> myAuctions;
@@ -52,8 +42,7 @@ public class NonProfit implements Serializable, User {
 	 * @param theName Type of organization.
 	 */
 	public NonProfit(String theOrg, String theName) {
-		myOrg = theOrg;
-		myName = theName;
+		super(theOrg, theName, "nonprofit");
 		myAuctions = new ArrayList<Auction>();
 		myLastAuctionDate = null;
 	}
@@ -101,60 +90,6 @@ public class NonProfit implements Serializable, User {
 	}
 
 	/**
-	 * Getter for non profit.
-	 * @return The organization.
-	 */
-	public String getOrg() {
-		return myOrg;
-	}
-
-	/**
-	 * Sets the name of org.
-	 * @param theOrg The name of org passed in.
-	 */
-	public void setOrg(String theOrg) {
-		myOrg = theOrg;
-	}
-
-	/**
-	 * Get User name method.
-	 * @return Getter for user name.
-	 */
-	@Override
-	public String getUsername() { 
-		return this.myOrg;
-	}
-
-	/**
-	 * Set's the name of user name.
-	 * @param userName The user name passed in.
-	 */
-	@Override
-	public void setUsername(String userName) {
-		this.myOrg = userName;
-
-	}
-
-	/**
-	 * Name of non- profit.
-	 * @return name associated with non-profit.
-	 */
-	@Override
-	public String getName() {
-		return myName;
-	}
-
-	/**
-	 * Setter for the name.
-	 * @param name name for non profit.
-	 */
-	@Override
-	public void setName(String name) {
-		this.myName = name;
-
-	}
-
-	/**
 	 * Method that keeps track of when
 	 * was last auction of Non-profit.
 	 * @return The date of last auction.
@@ -169,15 +104,6 @@ public class NonProfit implements Serializable, User {
 	 */
 	public void setLastAuctionDate(LocalDate ld) {
 		myLastAuctionDate = ld;
-	}
-
-	/**
-	 * Getter for user type.
-	 * @return the type of user.
-	 */
-	@Override
-	public String getUserType() {
-		return USER_TYPE;
 	}
 
 	/**

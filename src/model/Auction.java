@@ -11,7 +11,7 @@ import java.util.List;
  * 		   Allen Whitemarsh, Jake Yang
  * @version May 4, 2018
  */
-public class Auction implements Serializable {
+public class Auction implements Serializable, Comparable<Auction> {
 
 
 	//Serial Number ID
@@ -203,4 +203,20 @@ public class Auction implements Serializable {
 //	public boolean isMaxBidPerAuction(Auction auction) {
 //		return (myTotalBidPerAuction(auction) == MAX_BIDS_PER_AUCTION);
 //	}
+	@Override
+	public int compareTo(Auction other) {
+		if (this.getStartDate().isBefore(other.getStartDate())) {
+			return -1;
+		} else if (this.getStartDate().isAfter(other.getStartDate())) {
+			return 1;
+		} else {
+			if (this.getStartTime().isBefore(other.getStartTime())) {
+				return -1;
+			} else if (this.getStartTime().isAfter(other.getStartTime())) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+	}
 }

@@ -73,7 +73,7 @@ public class NonProfitMenuOptions {
 		System.out.println("\tPlease enter an auction name");
 		myScan.nextLine();
 		String theName = myScan.nextLine();
-		HashMap<Integer, LocalDate> aucReqMap = myAucCent.auctionRequest(myNonProfit, 
+		HashMap<Integer, String> aucReqMap = myAucCent.auctionRequest(myNonProfit, 
 													theStartDate, theStartTime, 5, theName);
 		if (aucReqMap.isEmpty()) {	
 			System.out.println("Congratulations!! Your Auction Request has been submitted!");
@@ -88,17 +88,17 @@ public class NonProfitMenuOptions {
 				nonProfitMenuOptions();
 			}			
 		} else if (aucReqMap.containsKey(0)) {
-			System.out.println("The start date is after the end date.");
+			System.out.println(aucReqMap.get(0));
 		} else if (aucReqMap.containsKey(1)) {
-			System.out.println("Hasn't been a year since last auction");
+			System.out.println(aucReqMap.get(1));
 		} else if (aucReqMap.containsKey(2)) {
-			System.out.println("The start date is less than 14 days away from todays date.");
+			System.out.println(aucReqMap.get(2));
 		} else if (aucReqMap.containsKey(3)) {
-			System.out.println("The start date is less than 14 days away from todays date.");
+			System.out.println(aucReqMap.get(3));
 		} else if (aucReqMap.containsKey(4)) {
-			System.out.println("The dates requested are more than 60 days away from todays date.");
+			System.out.println(aucReqMap.get(4));
 		} else if (aucReqMap.containsKey(5)) {
-			System.out.println("There is a day or days requested with 2 or more auctions scheduled that day.");
+			System.out.println(aucReqMap.get(5));
 		}
 		
 	}

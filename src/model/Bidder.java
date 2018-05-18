@@ -12,23 +12,19 @@ import java.util.TreeMap;
  * @author Raisa
  *
  */
-public class Bidder implements Serializable, User{
+public class Bidder extends User implements Serializable {
 
 	private static final long serialVersionUID = 8268184277531088723L;
 	
-	private static final String USER_TYPE = "bidder";
 	private Map<Auction, Map<Item, Double>> myBiddingHistory;
 	
-	private String userName;
-	private String name;
 	public static final int MIN_BIDS_PER_ITEM = 0;
 	public static final int MAX_BIDS_PER_AUCTION = 4;
 	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 10; 
 	
 
-	public Bidder(String userName, String name) { 
-		this.name = name;
-		this.userName = userName;
+	public Bidder(String theUserName, String theName) { 
+		super(theUserName, theName, "bidder");
 		myBiddingHistory = new HashMap<Auction, Map<Item, Double>>();
 	}
 
@@ -132,7 +128,6 @@ public class Bidder implements Serializable, User{
 		return auction;
 	}
 
-
 	/**
 	 * 
 	 * 
@@ -147,30 +142,4 @@ public class Bidder implements Serializable, User{
 		return (myTotalBidAllFutureAuctions() == MAX_BIDS_ALLOWED_PER_BIDDER);
 	}
 
-	@Override
-	public void setUsername(String userName) {
-		this.userName = userName;
-		
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-		
-	}
-
-	@Override
-	public String getUsername() {
-		return this.userName;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public String getUserType() {
-		return this.USER_TYPE;
-	}
 }
