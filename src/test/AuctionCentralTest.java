@@ -60,12 +60,12 @@ public class AuctionCentralTest {
 		auctionCentralWithMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithOneLessThanMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithOneAuction = new AuctionCentral();
-		HashMap<Integer, LocalDate> auction1 = auctionCentralWithOneAuction.auctionRequest(nonProfitForMultipleAuctionsTest1, 
+		HashMap<Integer, String> auction1 = auctionCentralWithOneAuction.auctionRequest(nonProfitForMultipleAuctionsTest1, 
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
 		auctionCentralWithMaxAuctionsSameDay = new AuctionCentral();
-		HashMap<Integer, LocalDate> auction2 = auctionCentralWithMaxAuctionsSameDay.auctionRequest(nonProfitForMultipleAuctionsTest2,
+		HashMap<Integer, String> auction2 = auctionCentralWithMaxAuctionsSameDay.auctionRequest(nonProfitForMultipleAuctionsTest2,
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
-		HashMap<Integer, LocalDate> auction3 = auctionCentralWithMaxAuctionsSameDay.auctionRequest(nonProfitForMultipleAuctionsTest3,
+		HashMap<Integer, String> auction3 = auctionCentralWithMaxAuctionsSameDay.auctionRequest(nonProfitForMultipleAuctionsTest3,
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
 		nonProfitLessThanYearSinceLastAuction = new NonProfit("org", "name");
 		nonProfitNoPriorAuctions = new NonProfit("org", "name");
@@ -89,18 +89,18 @@ public class AuctionCentralTest {
 		}
 		
 		for (int i = 0; i < 25; i++) {
-			HashMap<Integer, LocalDate> auctions = auctionCentralWithMaxTotalAuctions.auctionRequest(npListMaxAuctions.get(i), 
+			HashMap<Integer, String> auctions = auctionCentralWithMaxTotalAuctions.auctionRequest(npListMaxAuctions.get(i), 
 					AUCTION_START_DATE_VALID.plusDays(i), AUCTION_START_TIME, 5, "Testing" + i);
 		}
 
 		for (int i = 0; i < 24; i++) {
-			HashMap<Integer, LocalDate> auctions2 = auctionCentralWithOneLessThanMaxTotalAuctions.auctionRequest(npListOneLessThanMaxAuctions.get(i), 
+			HashMap<Integer, String> auctions2 = auctionCentralWithOneLessThanMaxTotalAuctions.auctionRequest(npListOneLessThanMaxAuctions.get(i), 
 					AUCTION_START_DATE_VALID.plusDays(i), AUCTION_START_TIME, 5, "Testing" + i);
-			HashMap<Integer, LocalDate> auctions3 = auctionCentralWithSeveralFutureAuctions.auctionRequest(npListOneLessThanMaxAuctions.get(i), 
+			HashMap<Integer, String> auctions3 = auctionCentralWithSeveralFutureAuctions.auctionRequest(npListOneLessThanMaxAuctions.get(i), 
 					AUCTION_START_DATE_VALID.plusDays(i), AUCTION_START_TIME, 5, "Testing" + i);
 		}
 		for (int i = 0; i < 5; i++) {
-			HashMap<Integer, LocalDate> auctions3 = auctionCentralWithSeveralFutureAuctions.auctionRequest(fiveNonProfits.get(i), 
+			HashMap<Integer, String> auctions3 = auctionCentralWithSeveralFutureAuctions.auctionRequest(fiveNonProfits.get(i), 
 					AUCTION_START_DATE_VALID.plusDays(i), AUCTION_START_TIME, 5, "Testing" + i);
 		}
 	}

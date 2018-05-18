@@ -289,28 +289,28 @@ public class AuctionCentral implements java.io.Serializable {
 	 * @return a Map that is empty if all tests pass, or contains error codes
 	 * when they fail.
 	 */
-	public HashMap<Integer, LocalDate> auctionRequest(NonProfit theNonProfit, LocalDate theStartDate,  
+	public HashMap<Integer, String> auctionRequest(NonProfit theNonProfit, LocalDate theStartDate,  
 												   LocalTime theStartTime, int theDuration, String theName) {
-		HashMap<Integer, LocalDate> errorMap = new HashMap<>();
+		HashMap<Integer, String> errorMap = new HashMap<>();
 		updateNumberOfCurrentAuctions();
 		if (!isDurationValid(theStartTime, theDuration)) {
-			errorMap.put(0, null); //Error code 0: Duration extends into next day.
+			errorMap.put(0, "Duration extends auction into the next day");
 		}
 		LocalTime theEndTime = theStartTime.plusHours(theDuration);
 		if (!isYearSinceLastAuction(theNonProfit)) {
-			errorMap.put(1, null); //Error code 1: Hasn't been a year since last auction
+			errorMap.put(1, "There has not been a year since your last auction date");
 		}
 		if (!isStartDateAfterMinDaysAway(theStartDate)) {
-			errorMap.put(2, null); //Error code 2: The start date is less than 14 days away from todays date.
+			errorMap.put(2, "The start date is too close to today's date.");
 		}
 		if (!isDateBeforeMaxDaysAway(theStartDate)) {
-			errorMap.put(3, null); //Error code 3: The start date is less than 14 days away from todays date.
+			errorMap.put(3, "The start date is too far away from today's date");
 		}
 		if (!isLessThanMaxAuctionsScheduled()) {
-			errorMap.put(4, null); //Error code 4: The dates requested are more than 60 days away from todays date.
+			errorMap.put(4, "The maximum number of auctions are scheduled");
 		}
 		if (!checkNumberOfAuctionsPerDay(theStartDate)) {
-			errorMap.put(5, theStartDate); // Error code 5: There is a day or days requested with 2 or more auctions scheduled that day.
+			errorMap.put(5, "The maximum number of auctions are scheduled for " + theStartDate);
 		}
 		if (errorMap.isEmpty()) {
 			createAuction(theNonProfit, theStartDate, theStartTime, theEndTime, theName);
