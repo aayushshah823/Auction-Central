@@ -138,4 +138,69 @@ public class Auction implements Serializable {
 	public void setEndTime(LocalTime theEndTime) {
 		this.myEndTime = theEndTime;
 	}
+	
+	/**
+	 * This option will only show if 
+	 * the date is valid for a bid
+	 * return 2 if bid amount < minMidAmout
+	 * return 3 if the user has bid in the max # if bids fir auctions
+	 * return 4 if the user has bid in the max # of total items
+	 * return 1 if the bid was successful 
+	 * @param bid amount and Item to bid on
+	 * @param theItem
+	 */
+	//TODO: TRANSFER TO AUCTION
+//	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
+//		Auction auction = findAuction(ac, auctionName);		
+//		Item item = findItemInAuction(auction, itemName);
+//		ArrayList<Item> items = new ArrayList<Item>();
+//		int success = 0;
+//		if(!(isBidGreaterThanMinAmount(bid, item)))
+//			success = 2;
+//		else if(isMaxBidPerAuction(auction))
+//			success = 3;	
+//		else if(isMaxTotalBid(auction))
+//			success = 4;
+//		else {
+//			if (!this.myBiddingHistory.containsKey(auction)) { //The user has not bid on this auction yet
+//				items.add(item);
+//				//this.myBiddingHistory.put(auction, items); //TODO refactor to new map
+//				updateItemHighestBid(item, bid);
+//			} 
+//			
+//			if(this.myBiddingHistory.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
+//				//this.myBiddingHistory.get(auction).add(item); //TODO refactor to new map
+//				updateItemHighestBid(item, bid);
+//			} 
+//			success = 1;
+//		}
+//		
+//		return success;
+//	}
+//	
+	//AUCTION SHOULD DO THIS
+//	private Item findItemInAuction(Auction auction, String itemName) {
+//		ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
+//		Item theItem = null;
+//		for(int i = 0; i < items.size(); i ++) {
+//			if(items.get(i).getItemName().equals(itemName)) {
+//				theItem = items.get(i);
+//			}
+//		}
+//		return theItem;
+//	}
+	
+	//AUCTION SHOULD DO THIS
+
+//	private void updateItemHighestBid(Item item, double bid) {
+//		if(bid > item.getCurrentBid()) {
+//			item.setCurrentBid(bid);
+//		}
+//	}
+	
+	
+	//THIS GOES IN AUCTION	
+//	public boolean isMaxBidPerAuction(Auction auction) {
+//		return (myTotalBidPerAuction(auction) == MAX_BIDS_PER_AUCTION);
+//	}
 }

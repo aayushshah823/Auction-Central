@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 /**
  * 
  * @author Raisa
@@ -51,14 +52,17 @@ public class Bidder implements Serializable, User{
 	
 	}
 	/**
-	 * If the bidding is successful, add item to 
-	 * the user's history
+	 * Pre: Bidder has successfully placed a bid
+	 * Post: Auction, Item and bid amount is added to bidder bidding history 
 	 * @param auction
 	 * @param Map with Item Object and Bid amount
 	 */
-	public void addInfoToBidderHistory(Auction auction, Map<Item, Double> itemsAndBid) {
-		this.myBiddingHistory.put(auction, itemsAndBid);
+	public void addBid(Auction auction, Item item, Double bidAmount) {
+		Map <Item, Double>temp = new HashMap<Item, Double>();
+		temp.put(item, bidAmount);
+		this.myBiddingHistory.put(auction, temp);
 	}
+	
 
 	/**
 	 * Pre: User must have placed an bid in any items of the given auction	 
@@ -116,61 +120,7 @@ public class Bidder implements Serializable, User{
 		return numOfBids;
 	}
 
-	/**
-	 * This option will only show if 
-	 * the date is valid for a bid
-	 * return 2 if bid amount < minMidAmout
-	 * return 3 if the user has bid in the max # if bids fir auctions
-	 * return 4 if the user has bid in the max # of total items
-	 * return 1 if the bid was successful 
-	 * @param bid amount and Item to bid on
-	 * @param theItem
-	 */
-	public int makeBid(String itemName, String auctionName, double bid, AuctionCentral ac) {
-		Auction auction = findAuction(ac, auctionName);		
-		Item item = findItemInAuction(auction, itemName);
-		ArrayList<Item> items = new ArrayList<Item>();
-		int success = 0;
-		if(!(isBidGreaterThanMinAmount(bid, item)))
-			success = 2;
-		else if(isMaxBidPerAuction(auction))
-			success = 3;	
-		else if(isMaxTotalBid(auction))
-			success = 4;
-		else {
-			if (!this.myBiddingHistory.containsKey(auction)) { //The user has not bid on this auction yet
-				items.add(item);
-				//this.myBiddingHistory.put(auction, items); //TODO refactor to new map
-				updateItemHighestBid(item, bid);
-			} 
-			
-			if(this.myBiddingHistory.containsKey(auction) && !(isExistingBidOnItem(auction, item))) {
-				//this.myBiddingHistory.get(auction).add(item); //TODO refactor to new map
-				updateItemHighestBid(item, bid);
-			} 
-			success = 1;
-		}
-		
-		return success;
-	}
-	
-	private Item findItemInAuction(Auction auction, String itemName) {
-		ArrayList<Item> items = (ArrayList<Item>) auction.getItems();
-		Item theItem = null;
-		for(int i = 0; i < items.size(); i ++) {
-			if(items.get(i).getItemName().equals(itemName)) {
-				theItem = items.get(i);
-			}
-		}
-		return theItem;
-	}
 
-	private void updateItemHighestBid(Item item, double bid) {
-		if(bid > item.getCurrentBid()) {
-			item.setCurrentBid(bid);
-		}
-	}
-	
 	
 	public Auction findAuction(AuctionCentral ac, String auctionName) {
 		ArrayList<Auction> auctions = ac.getFutureAuctions();
@@ -181,28 +131,6 @@ public class Bidder implements Serializable, User{
 		}
 		return auction;
 	}
-	/**
-	 * Checks if the user has a previous bid 
-	 * on a Item. Used as a helper to not add the 
-	 * same item twice to the list of items
-	 * @param auction
-	 * @param item
-	 * @return true if item has already bid on for a specific auction
-	 */
-	private boolean isExistingBidOnItem(Auction auction, Item item) {
-		int numberOfItems = this.myBiddingHistory.get(auction).size() - 1;
-		if(numberOfItems == 0) {
-			return false; 
-		}else {
-			//ArrayList<Item> items = this.myBiddingHistory.get(auction); //TODO REFACTOR TO NEW MAP
-			for(int i = 0; i < numberOfItems; i++) {
-			//	if(items.get(i).getItemName().equals(item.getItemName())) //TODO REFACTOR TO NEW MAP
-					return true;
-			}
-		}
-	
-		return false;
-	}
 
 
 	/**
@@ -210,16 +138,11 @@ public class Bidder implements Serializable, User{
 	 * 
 	 * @param myBid The bid passed by user.
 	 * @return True if bid is valid, false otherwise.
+	 * THIS GOES IN AUCTION
 	 */
 	public boolean isBidGreaterThanMinAmount(double theBid, Item item) {
 		return theBid > item.getStartingBid();
 	}
-
-	
-	public boolean isMaxBidPerAuction(Auction auction) {
-		return (myTotalBidPerAuction(auction) == MAX_BIDS_PER_AUCTION);
-	}
-	
 	public boolean isMaxTotalBid(Auction auction) {
 		return (myTotalBidAllFutureAuctions() == MAX_BIDS_ALLOWED_PER_BIDDER);
 	}
