@@ -46,11 +46,8 @@ public class Bidder extends User implements Serializable {
 
 	/**
 	 * Precondition: Bidder has successfully placed a bid Postcondition: Auction,
-	 * Item and bid amount is added to bidder bidding history
-	 * 
-	 * @param auction
-	 * @param Map
-	 *            with Item Object and Bid amount
+	 * Item and bid amount is added to bidder bidding history 
+	 * @param auction, item, bidAmount
 	 */
 	public void addNewToBiddingHistory(Auction auction, Item item, Double bidAmount) {
 		Map<Item, Double> temp = new HashMap<Item, Double>();
