@@ -95,22 +95,24 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	public HashMap<Integer, String> updateAuctionLimit(int max) {
 		HashMap<Integer, String> errorMap = new HashMap<>();
-		int currentCount = 0;
-		for (NonProfit nonProfit : myAuctions.keySet()) {
-			currentCount += myAuctions.get(nonProfit).size();
-		}
-		if (max <= currentCount) {
-			errorMap.put(0, "Current amount of auctions is equal or "
-					+ "less than the max"); 
+//		int currentCount = 0;
+//		for (NonProfit nonProfit : myAuctions.keySet()) {
+//			currentCount += myAuctions.get(nonProfit).size();
+//		}
+		if (max <= numCurrentAuctions) {
+			errorMap.put(0, "Current amount of auctions is equal to or "
+					+ "greater than the given max"); 
 		}
 		if (max < 1) {
-			errorMap.put(1, "Max is non-positive");
+			errorMap.put(1, "Given max is non-positive");
 		}
 		if (errorMap.isEmpty()) {
 			maxUpcomingAuctions = max;
 		}
 		return errorMap;
 	}
+	
+	
 
 	/**
 	 * Method to return all auctions within the system.
@@ -237,6 +239,27 @@ public class AuctionCentral implements java.io.Serializable {
 			auctions.addAll(myAuctions.get(nonProfit));
 		}
 		Collections.sort(auctions);
+		return auctions;
+	}
+	
+	
+	/**
+	 * Gets a list of all auctions between two given dates
+	 * 
+	 * @param theFirstDate - the date that comes first
+	 * @param theSecondDate - the date that comes second
+	 * @return list of auctions between two dates
+	 */
+	public ArrayList<Auction> getAuctionsBetweenDates(LocalDate theFirstDate, LocalDate theSecondDate) {
+		ArrayList<Auction> auctions = new ArrayList<Auction>();
+		for (NonProfit nonProfit : myAuctions.keySet()) {
+			for (Auction auction : myAuctions.get(nonProfit)) {
+				if ((auction.getStartDate().isAfter(theFirstDate) || auction.getStartDate().isEqual(theFirstDate)) && 
+						(auction.getEndDate().isBefore(theSecondDate) || auction.getEndDate().isEqual(theSecondDate))) {
+					auctions.add(auction);
+				}
+			}
+		}
 		return auctions;
 	}
 

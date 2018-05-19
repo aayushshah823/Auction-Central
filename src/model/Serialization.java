@@ -294,48 +294,48 @@ public class Serialization {
 //		bidder7.addAuction(auction6, bidder7Auction6Items);
 		
 		// Adds bids for future auctions
-		bidder3.makeBid(auction3.getItems().get(1).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder4.makeBid(auction3.getItems().get(1).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder4.makeBid(auction3.getItems().get(2).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder4.makeBid(auction3.getItems().get(3).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder4.makeBid(auction3.getItems().get(4).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction4.getItems().get(0).getItemName(), 
-				auction4.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction9.getItems().get(0).getItemName(), 
-				auction9.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction11.getItems().get(0).getItemName(), 
-				auction11.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction12.getItems().get(0).getItemName(), 
-				auction12.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction12.getItems().get(1).getItemName(), 
-				auction12.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction12.getItems().get(2).getItemName(), 
-				auction12.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction3.getItems().get(1).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction3.getItems().get(2).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction3.getItems().get(3).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder6.makeBid(auction4.getItems().get(0).getItemName(), 
-				auction4.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction3.getItems().get(2).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction3.getItems().get(3).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction3.getItems().get(4).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction3.getItems().get(5).getItemName(), 
-				auction3.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction12.getItems().get(1).getItemName(), 
-				auction12.getAuctionName(), 30000, auctionCentral);
-		bidder7.makeBid(auction12.getItems().get(2).getItemName(), 
-				auction12.getAuctionName(), 30000, auctionCentral);
+		bidder3.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(1), 30000.0);
+		bidder4.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(1), 30000.0);
+		bidder4.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(2), 30000.0);
+		bidder4.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(3), 30000.0);
+		bidder4.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(4), 30000.0);
+		bidder6.addNewToBiddingHistory(auction4, 
+				auction4.getItems().get(0), 30000.0);
+		bidder6.addNewToBiddingHistory(auction9, 
+				auction9.getItems().get(0), 30000.0);
+		bidder6.addNewToBiddingHistory(auction11, 
+				auction11.getItems().get(0), 30000.0);
+		bidder6.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(0), 30000.0);
+		bidder6.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(1), 30000.0);
+		bidder6.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(2), 30000.0);
+		bidder6.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(1), 30000.0);
+		bidder6.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(2), 30000.0);
+		bidder6.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(3), 30000.0);
+		bidder6.addNewToBiddingHistory(auction4, 
+				auction4.getItems().get(0), 30000.0);
+		bidder7.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(2), 30000.0);
+		bidder7.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(3), 30000.0);
+		bidder7.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(4), 30000.0);
+		bidder7.addNewToBiddingHistory(auction3, 
+				auction3.getItems().get(5), 30000.0);
+		bidder7.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(1), 30000.0);
+		bidder7.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(2), 30000.0);
 		
 		serialize("auctionCentralDefault", auctionCentral);	
 		
