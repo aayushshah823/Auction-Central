@@ -16,7 +16,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 
 	//Serial Number ID
 	private static final long serialVersionUID = -5620536666756226632L;
-	
+
 	private static final int MAX_AMOUNT_OF_ITEMS = 10;
 	public static final int MAX_BIDS_PER_AUCTION = 8;
 	public static final int MAX_BIDS_ALLOWED_PER_BIDDER = 12; 	
@@ -25,12 +25,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 	private Map<Bidder, Integer> myBidders;
 	private LocalDate myStartDate;
 	private LocalTime myStartTime;
-	private LocalDate myEndDate;
 	private LocalTime myEndTime;
 	private String myAuctionName;
-	
+
 	public Auction(LocalDate theStartDate, LocalTime theStartTime, 
-					LocalTime theEndTime, String theName) {
+			LocalTime theEndTime, String theName) {
 		myItems = new ArrayList<Item>();
 		myBidders = new HashMap<Bidder, Integer>();
 		myStartDate = theStartDate;
@@ -38,15 +37,21 @@ public class Auction implements Serializable, Comparable<Auction> {
 		myEndTime = theEndTime;
 		myAuctionName = theName;
 	}
-	
+
 	/**
-	 * 
-	 * @param theItem
+	 * Adds an item to this Auction
+	 * @param theItem item to be added
 	 */
 	public void addItem(Item theItem) {
 		myItems.add(theItem);
 	}
-	
+
+	/**
+	 * Checks whether or not item size is less than or equal to 
+	 * max amount of items for Auction.
+	 * @return true if item size is less than or equal to max amount 
+	 * 			of item, false otherwise
+	 */
 	public boolean isAddItemValid() {
 		boolean result = false;
 		if (myItems.size() <= MAX_AMOUNT_OF_ITEMS) {
@@ -54,11 +59,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 		}
 		return result;
 	}
-	
-	
+
+
 	/**
-	 * 
-	 * @return
+	 * Getter for items in this Auction. 
+	 * @return ArrayList of items in this Auction
 	 */
 	public ArrayList<Item> getItems() {
 		return myItems;
@@ -71,7 +76,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	public void setMyItems(ArrayList<Item> myItems) {
 		this.myItems = myItems;
 	}
-	
+
 	/**
 	 * Getter for name of auction.
 	 * @return auction name.
@@ -81,22 +86,25 @@ public class Auction implements Serializable, Comparable<Auction> {
 	}
 
 	/**
-	 * Setter for auction name
-	 * @param name 
+	 * Setter for Auction name
+	 * @param name Auction name to be set 
 	 */
 	public void setAuctionName(String name) {
 		myAuctionName = name;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Getter for Auction start date
+	 * @return start date for Auction
 	 */
 	public LocalDate getStartDate() {
 		return myStartDate;
 	}
 
-
+	/**
+	 * Setter for Auction start date.
+	 * @param myDate start date to be set
+	 */
 	public void setStartDate(LocalDate myDate) {
 		if (myDate != null) {
 			this.myStartDate = myDate;
@@ -106,44 +114,37 @@ public class Auction implements Serializable, Comparable<Auction> {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Getter for Auction start time
+	 * @return start time for Auction
 	 */
 	public LocalTime getStartTime() {
 		return myStartTime;
 	}
 
-
+	/**
+	 * Setter for Auction start time
+	 * @param myTime start time to be set
+	 */
 	public void setStartTime(LocalTime myTime) {
 		this.myStartTime = myTime;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public LocalDate getEndDate() {
-		return myEndDate;
-	}
-
-
-	public void setEndDate(LocalDate myDate) {
-		this.myEndDate = myDate;
-	}
 
 	/**
-	 * 
-	 * @return
+	 * Getter for Auction end time
+	 * @return end time for Auction
 	 */
-	public LocalTime getMyEndTime() {
+	public LocalTime getEndTime() {
 		return myEndTime;
 	}
 
-
+	/**
+	 * Setter for Auction end time
+	 * @param theEndTime end time to be set
+	 */
 	public void setEndTime(LocalTime theEndTime) {
 		this.myEndTime = theEndTime;
 	}
-	
+
 	//............Biding methods start .......................//
 
 	/**
@@ -155,7 +156,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	public boolean isBidGreaterThanMinAmount(double theBid,Item item) {
 		return theBid > item.getStartingBid();
 	}
-	
+
 	/**
 	 * Pre: bidder wishes to make a bid on an auction
 	 * @param bidder 
@@ -166,8 +167,8 @@ public class Auction implements Serializable, Comparable<Auction> {
 		if( this.myBidders.containsKey(bidder)) {
 			return this.myBidders.get(bidder) == 4;
 		} 
-		
-		  return false; 
+
+		return false; 
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	 * @param bid amount and Item to bid on
 	 * @param theItem
 	 */
-	
+
 	public int makeBid(Item item, double bidAmount, Bidder bidder) {
 		int success = 0;		
 		if(bidAmount < item.getStartingBid()){
@@ -191,11 +192,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 				numberOfBids++;
 				this.myBidders.put(bidder, numberOfBids);
 			}
-			
+
 			bidder.addNewToBiddingHistory(this, item, bidAmount);
 		}
-				
-		
+
+
 		return success;
 	}
 
@@ -212,7 +213,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	 * 3: The auction will take place today.
 	 */
 
-	public ArrayList<Integer>checkBiddingConditions(Bidder bidder){
+	public ArrayList<Integer> checkBiddingConditions(Bidder bidder){
 		LocalDate today = LocalDate.now();
 		ArrayList<Integer> errors = new ArrayList<Integer>();
 		if(bidder.getTotalNumberOfBids() == this.MAX_BIDS_ALLOWED_PER_BIDDER)
