@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="451.0" layoutY="119.0" lineSpacing="10.0" prefHeight="146.0" prefWidth="496.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="System Bold Italic" size="56.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <AnchorPane layoutX="29.0" layoutY="45.0" prefHeight="146.0" prefWidth="127.0">
+         <children>
+            <Button layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" text="Back" />
+            <Button layoutX="2.0" layoutY="73.0" mnemonicParsing="false" text="Logout" />
+         </children>
+      </AnchorPane>
+      <VBox layoutX="519.0" layoutY="318.0" prefHeight="101.0" prefWidth="344.0" spacing="15.0">
+         <children>
+            <Label prefHeight="90.0" prefWidth="340.0" text="Welcome Bidder (TEST)">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
