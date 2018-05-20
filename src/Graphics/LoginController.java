@@ -28,11 +28,15 @@ public class LoginController implements Initializable{
 	
 	public void login(ActionEvent event) throws IOException {
 		Parent bidderParent = FXMLLoader.load(getClass()
-				.getResource("/Bidder.fxml"));
+				.getResource("/Graphics/Bidder.fxml"));
 		Scene bidderScene = new Scene(bidderParent);
 		
 		//This line gets the stage information
+		//We need to have a way to connect this with our model to get 
+		//the user information.
 		Stage bidderWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		bidderWindow.setScene(bidderScene);
+		bidderWindow.show();
 	}
 
 	@Override

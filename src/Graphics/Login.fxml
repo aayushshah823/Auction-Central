@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.LoginController">
    <children>
       <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="451.0" layoutY="119.0" lineSpacing="10.0" prefHeight="132.0" prefWidth="413.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
@@ -37,7 +36,7 @@
                </font>
             </Text>
             <TextField />
-            <Button mnemonicParsing="false" text="Sign in" />
+            <Button mnemonicParsing="false" onAction="#login" text="Sign in" />
          </children>
       </VBox>
    </children>
