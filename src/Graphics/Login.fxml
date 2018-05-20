@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="451.0" layoutY="119.0" lineSpacing="10.0" prefHeight="132.0" prefWidth="413.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font size="56.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <AnchorPane layoutX="29.0" layoutY="45.0" prefHeight="146.0" prefWidth="127.0">
+         <children>
+            <Button layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" text="Exit" />
+         </children>
+      </AnchorPane>
+      <VBox layoutX="519.0" layoutY="318.0" prefHeight="326.0" prefWidth="277.0" spacing="15.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please sign in." wrappingWidth="166.2529296875">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UserName:" wrappingWidth="108.837890625">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <TextField />
+            <Button mnemonicParsing="false" text="Sign in" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
