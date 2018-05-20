@@ -255,7 +255,7 @@ public class AuctionCentral implements java.io.Serializable {
 		for (NonProfit nonProfit : myAuctions.keySet()) {
 			for (Auction auction : myAuctions.get(nonProfit)) {
 				if ((auction.getStartDate().isAfter(theFirstDate) || auction.getStartDate().isEqual(theFirstDate)) && 
-						(auction.getEndDate().isBefore(theSecondDate) || auction.getEndDate().isEqual(theSecondDate))) {
+						(auction.getStartDate().isBefore(theSecondDate) || auction.getStartDate().isEqual(theSecondDate))) {
 					auctions.add(auction);
 				}
 			}
