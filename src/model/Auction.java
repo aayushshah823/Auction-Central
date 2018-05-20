@@ -165,7 +165,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	 */
 	public boolean isMaxBidsPerAuction(Bidder bidder) { 
 		if( this.myBidders.containsKey(bidder)) {
-			return this.myBidders.get(bidder) == 4;
+			return this.myBidders.get(bidder) == MAX_BIDS_PER_AUCTION;
 		} 
 
 		return false; 
