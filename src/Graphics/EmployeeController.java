@@ -13,10 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionCentral;
+import model.AuctionCentralEmployee;
 
 public class EmployeeController implements Initializable{
 
 	private AuctionCentral myAuctionCentral;
+	private AuctionCentralEmployee myEmployee;
 	
 	Label myName;
 
@@ -51,8 +53,9 @@ public class EmployeeController implements Initializable{
 	}
 	
 	
-	public void setAuctionCentral(AuctionCentral ac) {
+	public void construct(AuctionCentral ac, AuctionCentralEmployee employee) {
 		myAuctionCentral = ac;
+		myEmployee = employee;
 	}
 	
 	public void setName(String theText) {
