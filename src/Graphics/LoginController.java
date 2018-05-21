@@ -69,8 +69,8 @@ public class LoginController implements Initializable{
 		this.ac = ac;
 	}
 
-	public void setButtonText(String theText) {
-		button.setText(theText);
+	public void setButtonText() {
+		button.setText(ac.getAuctionsSortedByDate().get(1).getAuctionName());
 	}
 	
 

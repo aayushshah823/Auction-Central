@@ -47,7 +47,7 @@ public class Main  extends Application{
 	        
 	        LoginController controller = (LoginController) loader.getController();
 	        controller.setAuctionCentral(auctionCentral);
-	        controller.setButtonText(auctionCentral.getAuctionsSortedByDate().get(1).getAuctionName());
+	        controller.setButtonText();
 	        
 	        Scene scene = new Scene(anchorPane);
 	        primaryStage.setScene(scene);
