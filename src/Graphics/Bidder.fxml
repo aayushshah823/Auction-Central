@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="1079.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.BidderController">
    <children>
       <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="451.0" layoutY="119.0" lineSpacing="10.0" prefHeight="146.0" prefWidth="496.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
@@ -26,7 +26,7 @@
       </AnchorPane>
       <VBox layoutX="519.0" layoutY="318.0" prefHeight="101.0" prefWidth="344.0" spacing="15.0">
          <children>
-            <Label prefHeight="90.0" prefWidth="340.0" text="Welcome Bidder (TEST)">
+            <Label fx:id="name" prefHeight="90.0" prefWidth="340.0" text="Welcome Bidder (TEST)">
                <font>
                   <Font size="27.0" />
                </font>

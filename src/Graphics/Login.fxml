@@ -36,7 +36,7 @@
                </font>
             </Text>
             <TextField />
-            <Button mnemonicParsing="false" onAction="#login" text="Sign in" />
+            <Button fx:id="button" mnemonicParsing="false" onAction="#login" text="Sign in" />
          </children>
       </VBox>
    </children>
