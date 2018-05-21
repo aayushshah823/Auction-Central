@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
 
-public abstract class User {
+public abstract class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6717302967141036965L;
 	private String name;
 	private String userName;
 	private String userType;
