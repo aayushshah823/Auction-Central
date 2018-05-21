@@ -51,7 +51,7 @@ public class LoginController implements Initializable{
         Stage bidderWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidderWindow.setScene(scene);
-        
+        //NonProfitController
         BidderController controller = (BidderController) loader.getController();
         controller.setAuctionCentral(ac);
         controller.setName("Welcome " + ac.getAuctionsSortedByDate().get(4).getAuctionName());
