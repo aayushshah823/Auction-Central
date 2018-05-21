@@ -181,26 +181,26 @@ public class Serialization {
 		
 		AuctionCentral auctionCentral = new AuctionCentral();
 		
-		NonProfit nonProfit1 = new NonProfit("ProYouthFoundation",
+		NonProfit nonProfit1 = new NonProfit("BillyTheKid", "Pro Youth Foundation",
 				"Billy Pilgrim");
-		NonProfit nonProfit2 = new NonProfit("ChicagoMen'sClub",
+		NonProfit nonProfit2 = new NonProfit("johnyBoi", "Chicago Men's Club",
 				"John Doe");
-		NonProfit nonProfit3 = new NonProfit("ProjectAlert",
+		NonProfit nonProfit3 = new NonProfit("janey", "Project Alert",
 				"Jane Doe");
-		NonProfit nonProfit4 = new NonProfit("GoingGreenFoundation",
+		NonProfit nonProfit4 = new NonProfit("noided47", "Going-Green Foundation",
 				"Donald");
-		NonProfit nonProfit5 = new NonProfit("NursingMothersFoundation",
+		NonProfit nonProfit5 = new NonProfit("abcdefg", "Nursing Mothers Foundation",
 				"Naomi");	
-		NonProfit nonProfit6 = new NonProfit("YoBois",
+		NonProfit nonProfit6 = new NonProfit("theBossBaby", "Yo Bois",
 				"Paul Lazaro");
-		NonProfit nonProfit7 = new NonProfit("DreamAliveCenter",
+		NonProfit nonProfit7 = new NonProfit("numberOfTheBeast", "Dream-Alive Center",
 				"Satan");
-		NonProfit nonProfit8 = new NonProfit("GracefulAgingClub",
+		NonProfit nonProfit8 = new NonProfit("twoheadedboy", "Graceful Aging Club",
 				"Son Goku");
-		NonProfit nonProfit9 = new NonProfit("Pro–LifeFoundation",
+		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Pro–Life Foundation",
 				"Catherine of Aragon");
-		NonProfit nonProfit10 = new NonProfit("Exmilitary",
-				"MC Ride");
+		NonProfit nonProfit10 = new NonProfit("MCRide", "Exmilitary",
+				"Stefan Burnett");
 		
 		Bidder bidder1 = new Bidder("bidderguy31", "Julius Caesar");
 		Bidder bidder2 = new Bidder("kungfuKenny", "Augustus Caesar");
@@ -209,7 +209,7 @@ public class Serialization {
 		Bidder bidder5 = new Bidder("username", "Kelly");
 		Bidder bidder6 = new Bidder("Franks814", "Charlemagne The Great");
 		Bidder bidder7 = new Bidder("Transcontinental", "Dagny Taggart");
-		
+		AuctionCentralEmployee employee1 = new AuctionCentralEmployee("KingOfCarrotFlowers", "Antonio");
 		auctionCentral.addNewUser(bidder1); // No bids
 		auctionCentral.addNewUser(bidder2); // 1 bid in previous auction
 		auctionCentral.addNewUser(bidder3); // 1 bid in current auction
@@ -342,7 +342,7 @@ public class Serialization {
 		// 25 future auctions
 		auctionCentral = new AuctionCentral();
 		for (int i = 1; i <= 25; i++) {
-			NonProfit nonProfit = new NonProfit("nonProfit" + i, 
+			NonProfit nonProfit = new NonProfit("userName" + i, "nonProfit" + i, 
 					"contactPerson" + i);
 			auctionCentral.addNewUser(nonProfit);
 			Auction auction = new Auction(today.plus(2*i, ChronoUnit.DAYS), 
