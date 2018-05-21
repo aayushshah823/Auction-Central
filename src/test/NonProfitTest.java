@@ -36,7 +36,7 @@ public class NonProfitTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		nonProfit = new NonProfit(NAME, USERNAME);
+		nonProfit = new NonProfit(USERNAME, NAME, USERNAME);
 		nonProfit.setUsername(NAME);
 		nonProfit.setName(USERNAME);
 		preiousAuctionDate = LocalDate.of(2018, 05, 1);
