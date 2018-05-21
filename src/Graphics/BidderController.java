@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.AuctionCentral;
+import model.Bidder;
 /**
  * 
  * @author Raisa
@@ -14,7 +15,8 @@ import model.AuctionCentral;
  */
 public class BidderController implements Initializable {
 
-	private AuctionCentral ac;
+	private AuctionCentral myAuctionCentral;
+	private Bidder myBidder;
 	
 	@FXML
 	Label name;
@@ -24,8 +26,9 @@ public class BidderController implements Initializable {
 		// TODO Auto-generated method stub
 	}
 	
-	public void setAuctionCentral(AuctionCentral ac) {
-		this.ac = ac;
+	public void construct(AuctionCentral ac, Bidder bidder) {
+		this.myAuctionCentral = ac;
+		this.myBidder = bidder;
 	}
 
 	public void setName(String theText) {
