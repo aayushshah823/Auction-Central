@@ -1,7 +1,5 @@
 package Graphics;
 
-import java.awt.Color;
-import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.AuctionCentral;
 import model.AuctionCentralEmployee;
@@ -22,7 +22,7 @@ import model.NonProfit;
 import model.User;
 /**
  * 
- * @author Raisa
+ * @author Raisa, Jake
  *
  */
 public class LoginController implements Initializable{
@@ -45,10 +45,10 @@ public class LoginController implements Initializable{
 	public void login(ActionEvent event) throws IOException {
 		User user = myAuctionCentral.login(username.getText());
 		if (username.getText().equals("")) {
-			userNotFound.setBackground(Color.RED);
+			userNotFound.setTextFill(Color.web("#ff0000"));
 			userNotFound.setText("Please enter username");
 		} else if (user == null) {
-			userNotFound.setBackground(Color.RED);
+			userNotFound.setTextFill(Color.web("#ff0000"));
 			userNotFound.setText("User Not Found");
 		} else if (user.getUserType().equals("bidder")) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder.fxml"));
