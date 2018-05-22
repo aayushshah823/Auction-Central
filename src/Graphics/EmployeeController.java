@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -20,12 +21,12 @@ public class EmployeeController implements Initializable{
 	private AuctionCentral myAuctionCentral;
 	private AuctionCentralEmployee myEmployee;
 	
+	@FXML
 	Label myName;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public void changeMaxAuctions(ActionEvent theEvent) throws IOException {
@@ -52,14 +53,10 @@ public class EmployeeController implements Initializable{
         allAuctions.setScene(scene);
 	}
 	
-	
 	public void construct(AuctionCentral ac, AuctionCentralEmployee employee) {
-		myAuctionCentral = ac;
-		myEmployee = employee;
-	}
-	
-	public void setName(String theText) {
-		myName.setText(theText);
+		//myAuctionCentral = ac;
+		//myEmployee = employee;
+		myName.setText("Welcome" + employee.getName() + " .You are logged in as an Employee of Auction Central. What would you like to do?");
 	}
 
 }

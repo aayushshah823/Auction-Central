@@ -41,9 +41,9 @@ public class LoginController implements Initializable{
 	public void login(ActionEvent event) throws IOException {
 		User user = myAuctionCentral.login(username.getText());
 		if (username.getText().equals("")) {
-			// if empty - needs work
+			// if empty username field - needs work
 		} else if (user == null) {
-			// if nonexistent - needs work
+			// if nonexistent user - needs work
 		} else if (user.getUserType().equals("bidder")) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder.fxml"));
 	        AnchorPane anchorPane = loader.load();
@@ -52,7 +52,6 @@ public class LoginController implements Initializable{
 	        bidderWindow.setScene(scene);
 	        BidderController controller = (BidderController) loader.getController();
 	        controller.construct(myAuctionCentral, (Bidder) user);
-	        controller.setName("Welcome " + myAuctionCentral.getAuctionsSortedByDate().get(4).getAuctionName());
 	        bidderWindow.show();
 		} else if (user.getUserType().equals("nonprofit")) {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfit.fxml"));
@@ -71,7 +70,6 @@ public class LoginController implements Initializable{
 	        employeeWindow.setScene(scene);
 	        EmployeeController controller = (EmployeeController) loader.getController();
 	        controller.construct(myAuctionCentral, (AuctionCentralEmployee) user);
-	        controller.setName("Welcome " + myAuctionCentral.getAuctionsSortedByDate().get(4).getAuctionName());
 	        employeeWindow.show();
 		}
         
