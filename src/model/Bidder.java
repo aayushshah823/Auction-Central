@@ -30,7 +30,7 @@ public class Bidder extends User implements Serializable {
 	 * @return ArrayList containing all auction user has placed bids on
 	 * 
 	 */
-	public ArrayList<Auction> getBiddingHistory() {
+	public ArrayList<Auction> getAllAuctionsIveBidOn() {
 		ArrayList<Auction> auctions = new ArrayList<Auction>();
 		if (this.myBiddingHistory == null) {
 			return auctions;
@@ -84,7 +84,7 @@ public class Bidder extends User implements Serializable {
 	 *         Empty map if no bids have been placed in the past.
 	 * 
 	 */
-	public Map<Auction, Map<Item, Double>> getAllIntemsInAllAuctions() {
+	public Map<Auction, Map<Item, Double>> getAllItemsInAllAuctions() {
 		return this.myBiddingHistory;
 	}
 

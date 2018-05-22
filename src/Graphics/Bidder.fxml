@@ -29,7 +29,7 @@
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="385.0" text="View all auctions available to bid" />
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="385.0" text="View items available in an auction" />
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="385.0" text="View all items I have bid on in one auction" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="385.0" text="View all items I have bid on for all aucitons" />
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="385.0" text="View all items I have bid on for all auctions" />
          </children>
       </VBox>
       <Label fx:id="name" layoutX="440.0" layoutY="289.0" prefHeight="71.0" prefWidth="420.0" text="Label" />
