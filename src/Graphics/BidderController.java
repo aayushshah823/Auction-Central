@@ -29,10 +29,7 @@ public class BidderController implements Initializable {
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder;
-	}
-
-	public void setName(String theText) {
-		name.setText(theText);
+		name.setText("Welcome, " + myBidder.getName());
 	}
 
 }
