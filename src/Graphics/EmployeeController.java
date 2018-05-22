@@ -36,7 +36,7 @@ public class EmployeeController implements Initializable{
         Stage changeMaxAuctionsWindow = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         changeMaxAuctionsWindow.setScene(scene);
-        ChangeMaxLoginsController controller = (ChangeMaxLoginsController) loader.getController();
+        ChangeMaxAuctionsController controller = (ChangeMaxAuctionsController) loader.getController();
         controller.setAuctionCentral(myAuctionCentral);
         changeMaxAuctionsWindow.show();
 	}

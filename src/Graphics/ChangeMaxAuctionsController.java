@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionCentral;
 
-public class ChangeMaxLoginsController implements Initializable{
+public class ChangeMaxAuctionsController implements Initializable{
 
 	private AuctionCentral myAuctionCentral;
 	
@@ -65,7 +65,7 @@ public class ChangeMaxLoginsController implements Initializable{
         Scene scene = new Scene(anchorPane);
         login.setScene(scene);
         LoginController controller = (LoginController) loader.getController();
-        controller.setAuctionCentral(myAuctionCentral);
+        controller.construct(myAuctionCentral);
         login.show();
 	}
 	
