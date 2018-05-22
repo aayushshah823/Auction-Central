@@ -210,6 +210,9 @@ public class Serialization {
 		Bidder bidder6 = new Bidder("Franks814", "Charlemagne The Great");
 		Bidder bidder7 = new Bidder("Transcontinental", "Dagny Taggart");
 		AuctionCentralEmployee employee1 = new AuctionCentralEmployee("KingOfCarrotFlowers", "Antonio");
+		AuctionCentralEmployee employee2 = new AuctionCentralEmployee("QueenOfCarrotFlowers", "Antonia");
+		auctionCentral.addNewUser(employee1);
+		auctionCentral.addNewUser(employee2);
 		auctionCentral.addNewUser(bidder1); // No bids
 		auctionCentral.addNewUser(bidder2); // 1 bid in previous auction
 		auctionCentral.addNewUser(bidder3); // 1 bid in current auction
