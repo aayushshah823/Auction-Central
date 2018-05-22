@@ -31,5 +31,21 @@ public class BidderController implements Initializable {
 		this.myBidder = bidder;
 		name.setText("Welcome, " + myBidder.getName());
 	}
+	
+	public void viewAuctionsAvailableToBid(AuctionCentral ac, Bidder bidder) {
+		
+	}
+	
+    public void viewItemsInOneAuction(AuctionCentral ac, Bidder bidder) {
+		
+	}
+    
+    public void viewItemsIHaveBidOnInOneAuction(AuctionCentral ac, Bidder bidder) {
+		
+   	}
+    
+    public void viewAllItemsIHaveBidOnAllAuctions(AuctionCentral ac, Bidder bidder) {
+		
+   	}
 
 }

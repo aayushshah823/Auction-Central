@@ -1,5 +1,7 @@
 package Graphics;
 
+import java.awt.Color;
+import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,15 +37,19 @@ public class LoginController implements Initializable{
 	
 	@FXML
 	TextField username;
+	@FXML
+	Label userNotFound;
 	
 	private AuctionCentral myAuctionCentral;
 	
 	public void login(ActionEvent event) throws IOException {
 		User user = myAuctionCentral.login(username.getText());
 		if (username.getText().equals("")) {
-			// if empty username field - needs work
+			userNotFound.setBackground(Color.RED);
+			userNotFound.setText("Please enter username");
 		} else if (user == null) {
-			// if nonexistent user - needs work
+			userNotFound.setBackground(Color.RED);
+			userNotFound.setText("User Not Found");
 		} else if (user.getUserType().equals("bidder")) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder.fxml"));
 	        AnchorPane anchorPane = loader.load();
@@ -77,7 +83,7 @@ public class LoginController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		userNotFound.setText("");
 	}
 
 	public void construct(AuctionCentral ac) {
