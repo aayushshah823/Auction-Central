@@ -21,8 +21,8 @@ public class NonProfitController implements Initializable {
 	@FXML
 	Button button2;
 	
-	private AuctionCentral ac;
-	private NonProfit nonProfit;
+	private AuctionCentral myAuctionCentral;
+	private NonProfit myNonProfit;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -31,8 +31,8 @@ public class NonProfitController implements Initializable {
 	}
 	
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
-		this.ac = ac;
-		this.nonProfit = nonProfit;
+		this.myAuctionCentral = ac;
+		this.myNonProfit = nonProfit;
 	}
 
 

@@ -22,13 +22,6 @@ public class Main  extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 		try {
-			//Read the fxml and draw the interface
-//			Parent root = FXMLLoader.load(getClass()
-//					.getResource("/Graphics/Login.fxml"));
-//			
-//			primaryStage.setTitle("Auction Central");
-//			primaryStage.setScene(new Scene(root));
-//	        primaryStage.show();
 			AuctionCentral auctionCentral = null;
 			try {   
 		        FileInputStream file = new FileInputStream("auctionCentralDefault.ser");
@@ -46,8 +39,7 @@ public class Main  extends Application{
 	        AnchorPane anchorPane = loader.load();
 	        
 	        LoginController controller = (LoginController) loader.getController();
-	        controller.setAuctionCentral(auctionCentral);
-	        controller.setButtonText();
+	        controller.construct(auctionCentral);
 	        
 	        Scene scene = new Scene(anchorPane);
 	        primaryStage.setScene(scene);
@@ -56,6 +48,7 @@ public class Main  extends Application{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void main(String[] args) {

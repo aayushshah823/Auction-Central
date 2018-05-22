@@ -23,6 +23,8 @@ public class NonProfit extends User implements Serializable {
 
 	/** Last day when non profit auctioned.*/
 	private LocalDate myLastAuctionDate;
+	
+	private String myOrg;
 
 
 	/**
@@ -30,13 +32,17 @@ public class NonProfit extends User implements Serializable {
 	 * @param theOrg Name of organization.
 	 * @param theName Type of organization.
 	 */
-	public NonProfit(String theOrg, String theName) {
-		super(theOrg, theName, "nonprofit");
+	public NonProfit(String theUsername, String theOrg, String theName) {
+		super(theUsername, theName, "nonprofit");
 		myAuctions = new ArrayList<Auction>();
+		myOrg = theOrg;
 		myLastAuctionDate = null;
 	}
 
-
+	public String getOrg() {
+		return myOrg;
+	}
+	
 	/**
 	 * Add's Non Profit's auction to list.
 	 * @param theAuction The auction happening.

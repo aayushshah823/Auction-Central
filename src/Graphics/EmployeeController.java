@@ -8,17 +8,20 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionCentral;
+import model.AuctionCentralEmployee;
 
 public class EmployeeController implements Initializable{
 
 	private AuctionCentral myAuctionCentral;
 	
+	@FXML
 	Label myName;
 
 	@Override
@@ -65,7 +68,7 @@ public class EmployeeController implements Initializable{
         Scene scene = new Scene(anchorPane);
         login.setScene(scene);
         LoginController controller = (LoginController) loader.getController();
-        controller.setAuctionCentral(myAuctionCentral);
+        controller.construct(myAuctionCentral);
         login.show();
 	}
 	
@@ -76,6 +79,12 @@ public class EmployeeController implements Initializable{
 	
 	public void setName(String theText) {
 		myName.setText(theText);
+	}
+	
+	public void construct(AuctionCentral ac, AuctionCentralEmployee employee) {
+		//myAuctionCentral = ac;
+		//myEmployee = employee;
+		myName.setText("Welcome" + employee.getName() + " .You are logged in as an Employee of Auction Central. What would you like to do?");
 	}
 
 }
