@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class keeps tracks of non profit's auctions
- * items they place bid on in each auction,
- * their last day of auctin etc.
  * 
  * @author Aayush Shah
  * @version 5/7/18
@@ -18,22 +15,16 @@ import java.util.List;
  */
 public class NonProfit extends User implements Serializable {
 
-
 	/** Serial id. */
 	private static final long serialVersionUID = 6004350978105195837L;
-
-	public static final int MAX_DAYS_AWAY_FOR_AUCTION = 60;
-
-	public static final int MIN_DAYS_AWAY_FOR_AUCTION = 14;
-
-	// Date.
-	private Long myDate;
 
 	/** List that stores all the non-profit's auction .*/
 	private ArrayList<Auction> myAuctions;
 
 	/** Last day when non profit auctioned.*/
 	private LocalDate myLastAuctionDate;
+	
+	private String myOrg;
 
 
 	/**
@@ -41,13 +32,17 @@ public class NonProfit extends User implements Serializable {
 	 * @param theOrg Name of organization.
 	 * @param theName Type of organization.
 	 */
-	public NonProfit(String theOrg, String theName) {
-		super(theOrg, theName, "nonprofit");
+	public NonProfit(String theUsername, String theOrg, String theName) {
+		super(theUsername, theName, "nonprofit");
 		myAuctions = new ArrayList<Auction>();
+		myOrg = theOrg;
 		myLastAuctionDate = null;
 	}
 
-
+	public String getOrg() {
+		return myOrg;
+	}
+	
 	/**
 	 * Add's Non Profit's auction to list.
 	 * @param theAuction The auction happening.
@@ -105,57 +100,4 @@ public class NonProfit extends User implements Serializable {
 	public void setLastAuctionDate(LocalDate ld) {
 		myLastAuctionDate = ld;
 	}
-
-	/**
-	 * Keeps track of days away from auction.
-	 * @return days away from auction
-	 */
-	public int getMaxDays() {
-		return MAX_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * Sets the max days after which 
-	 * user_type can request an auction.
-	 * @param theMaxDays The days after which they can book aution.
-	 */
-	public void setMaxDays(int theMaxDays) {
-		theMaxDays = MAX_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * Get's the least days away from auction.
-	 * @return The num of days.
-	 */
-	public int getMinDays() {
-		return MIN_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * Sets the min days after which 
-	 * user_type can't request an auction.
-	 * @param theMinDays The days after which they can book aution.
-	 */
-	public void setMinDays(int theMinDays) {
-		theMinDays = MIN_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * checking if max days are valid or not.
-	 * @param theDays the auction request start this days before.
-	 * @return True if days valid, false otherwise.
-	 */
-	public boolean isMaxDaysForAuction(int theDays) {
-		return theDays <= MAX_DAYS_AWAY_FOR_AUCTION;
-	}
-
-	/**
-	 * checking if dates are valid or not.
-	 * @param theDays the auction request stops after this.
-	 * @return True if dates valid, false otherwise.
-	 */
-	public boolean isMinDaysForAuctionValid(int theDays) {
-		return theDays >= MIN_DAYS_AWAY_FOR_AUCTION;
-	}
-
 }

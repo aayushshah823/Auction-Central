@@ -52,10 +52,10 @@ public class AuctionCentralTest {
 	@Before
 	public void setUp() throws Exception {
 		auctionCentral = new AuctionCentral();
-		defaultNonProfit = new NonProfit("org", "name");
-		nonProfitForMultipleAuctionsTest1 = new NonProfit("org", "name");
-		nonProfitForMultipleAuctionsTest2 = new NonProfit("org", "name");
-		nonProfitForMultipleAuctionsTest3 = new NonProfit("org", "name");
+		defaultNonProfit = new NonProfit("username", "org", "name");
+		nonProfitForMultipleAuctionsTest1 = new NonProfit("username", "org", "name");
+		nonProfitForMultipleAuctionsTest2 = new NonProfit("username", "org", "name");
+		nonProfitForMultipleAuctionsTest3 = new NonProfit("username", "org", "name");
 		auctionCentralWithSeveralFutureAuctions = new AuctionCentral();
 		auctionCentralWithMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithOneLessThanMaxTotalAuctions = new AuctionCentral();
@@ -67,9 +67,9 @@ public class AuctionCentralTest {
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
 		HashMap<Integer, String> auction3 = auctionCentralWithMaxAuctionsSameDay.auctionRequest(nonProfitForMultipleAuctionsTest3,
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
-		nonProfitLessThanYearSinceLastAuction = new NonProfit("org", "name");
-		nonProfitNoPriorAuctions = new NonProfit("org", "name");
-		nonProfitExactlyOneYearAgoSinceLastAuction = new NonProfit("org", "name");
+		nonProfitLessThanYearSinceLastAuction = new NonProfit("username", "org", "name");
+		nonProfitNoPriorAuctions = new NonProfit("username", "org", "name");
+		nonProfitExactlyOneYearAgoSinceLastAuction = new NonProfit("username", "org", "name");
 		
 		defaultFutureAuction = new Auction(AUCTION_START_DATE_VALID, 
 					AUCTION_START_TIME, AUCTION_END_TIME, ""); 
@@ -77,15 +77,15 @@ public class AuctionCentralTest {
 											AUCTION_END_TIME, "");
 		ArrayList<NonProfit> npListMaxAuctions = new ArrayList<>();
 		for (int i = 0; i < 25; i++) {
-			npListMaxAuctions.add(new NonProfit("",""));
+			npListMaxAuctions.add(new NonProfit("","",""));
 		}
 		ArrayList<NonProfit> npListOneLessThanMaxAuctions = new ArrayList<>();
 		for (int i = 0; i < 24; i++) {
-			npListOneLessThanMaxAuctions.add(new NonProfit("",""));
+			npListOneLessThanMaxAuctions.add(new NonProfit("","",""));
 		}
 		ArrayList<NonProfit> fiveNonProfits = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
-			fiveNonProfits.add(new NonProfit("",""));
+			fiveNonProfits.add(new NonProfit("","",""));
 		}
 		
 		for (int i = 0; i < 25; i++) {
@@ -112,9 +112,9 @@ public class AuctionCentralTest {
 	
 	@Test
 	public void getAuctionsSortedByDate_MultipleNonProfits_SortedList() {
-		NonProfit nonProfit1 = new NonProfit("org1", "name1");
-		NonProfit nonProfit2 = new NonProfit("org2", "name2");
-		NonProfit nonProfit3 = new NonProfit("org3", "name3");
+		NonProfit nonProfit1 = new NonProfit("username1", "org1", "name1");
+		NonProfit nonProfit2 = new NonProfit("username2", "org2", "name2");
+		NonProfit nonProfit3 = new NonProfit("username3", "org3", "name3");
 		auctionCentral.auctionRequest(nonProfit1, AUCTION_START_DATE_VALID.plusDays(2), AUCTION_START_TIME, 5, "second");
 		auctionCentral.auctionRequest(nonProfit2, AUCTION_START_DATE_VALID.plusDays(5), AUCTION_START_TIME, 5, "third");
 		auctionCentral.auctionRequest(nonProfit3, AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "first");
@@ -125,7 +125,7 @@ public class AuctionCentralTest {
 	
 	@Test
 	public void getAuctionsSortedByDate_OneNoneProfit_SortedList() {
-		NonProfit nonProfit = new NonProfit("org", "name");
+		NonProfit nonProfit = new NonProfit("username", "org", "name");
 		Auction auction1 = new Auction(AUCTION_START_DATE_VALID.minusDays(370), AUCTION_START_TIME, AUCTION_START_TIME.plusHours(5), "second");
 		Auction auction2 = new Auction(AUCTION_START_DATE_VALID.minusDays(1000), AUCTION_START_TIME, AUCTION_START_TIME.plusHours(5), "first");
 		auctionCentral.addAuction(nonProfit, auction1);
@@ -138,8 +138,8 @@ public class AuctionCentralTest {
 	
 	@Test
 	public void getAuctionsSortedByDate_SameDay_SortedList() {
-		NonProfit nonProfit1 = new NonProfit("org1", "name1");
-		NonProfit nonProfit2 = new NonProfit("org2", "name2");
+		NonProfit nonProfit1 = new NonProfit("username1", "org1", "name1");
+		NonProfit nonProfit2 = new NonProfit("username2", "org2", "name2");
 		auctionCentral.auctionRequest(nonProfit1, AUCTION_START_DATE_VALID, AUCTION_START_TIME.plusHours(2), 5, "second");
 		auctionCentral.auctionRequest(nonProfit2, AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "first");
 		assertEquals("first", auctionCentral.getAuctionsSortedByDate().get(0).getAuctionName());

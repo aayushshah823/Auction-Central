@@ -30,13 +30,13 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UserName:" wrappingWidth="108.837890625">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="108.837890625">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <TextField />
-            <Button mnemonicParsing="false" onAction="#login" text="Sign in" />
+            <TextField fx:id="username" />
+            <Button fx:id="button" mnemonicParsing="false" onAction="#login" text="Sign in" />
          </children>
       </VBox>
    </children>
