@@ -25,12 +25,15 @@
                   <ListView fx:id="listOfAuctions" prefHeight="431.0" prefWidth="349.0" />
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="150.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="169.0" text="Go to this Auction" />
+                  <Button mnemonicParsing="false" onAction="#goToAuction" prefHeight="60.0" prefWidth="169.0" text="Go to this Auction" />
                </children>
             </StackPane>
+            <VBox prefHeight="440.0" prefWidth="300.0">
+               <children>
+                  <Label fx:id="cannotBid" prefHeight="148.0" prefWidth="250.0" text="Label" />
+               </children></VBox>
          </children>
       </HBox>
    </children>
