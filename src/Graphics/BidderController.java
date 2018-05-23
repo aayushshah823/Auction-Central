@@ -2,6 +2,7 @@ package Graphics;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Auction;
 import model.AuctionCentral;
 import model.Bidder;
 /**
@@ -29,6 +31,9 @@ public class BidderController implements Initializable {
 	
 	@FXML
 	Label name;
+	
+	@FXML
+	ListView<String> listOfAuctions;
 	
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
@@ -49,8 +54,6 @@ public class BidderController implements Initializable {
         bidderAuction.show();
 	}
 	
-
-	
 	public void showAuctionsWhereICanBid() {
 		
 	}
@@ -63,7 +66,14 @@ public class BidderController implements Initializable {
    	}
     
     public void viewAllItemsIHaveBidOnAllAuctions(ActionEvent event) throws IOException{
-		
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/BidderViewAllBids.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        bidderAuction.setScene(scene);
+        BidderViewAllBidsController controller = (BidderViewAllBidsController) loader.getController();
+        controller.construct(myAuctionCentral, myBidder); 
+        bidderAuction.show();
    	}    
 	
 	@Override
