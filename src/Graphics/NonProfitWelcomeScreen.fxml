@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonProfitController">
    <children>
       <Label alignment="CENTER" layoutX="247.0" layoutY="179.0" prefHeight="66.0" prefWidth="578.0" text="Welcome Pro Youth Foundation. What would you like to do today?" AnchorPane.bottomAnchor="555.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="179.0">
          <font>
@@ -44,7 +44,7 @@
          </rowConstraints>
          <children>
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="570.0" text="View All Auctions I have submitted" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="570.0" text="Schedule a new auction" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#viewAuctionRequestScene" prefHeight="51.0" prefWidth="570.0" text="Schedule a new auction" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="288.0" layoutY="14.0" lineSpacing="10.0" prefHeight="146.0" prefWidth="496.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
