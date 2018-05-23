@@ -14,6 +14,7 @@ import model.NonProfit;
 
 /**
  * @author aayushshah
+ * @author Benjamin Yuen
  *
  */
 public class NonProfitController implements Initializable {
