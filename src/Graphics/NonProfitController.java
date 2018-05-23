@@ -48,6 +48,9 @@ public class NonProfitController implements Initializable {
 	@FXML
 	private Button submitButton;
 	
+	@FXML
+	private Label userName;
+	
 	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
@@ -61,6 +64,12 @@ public class NonProfitController implements Initializable {
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
+		userName.setText("Welcome " + myNonProfit.getUsername() + ". What would you like to do today?");
+	}
+	
+	@FXML
+	public void viewAllAuction(ActionEvent theEvent) throws IOException {
+		
 	}
 	
 	@FXML

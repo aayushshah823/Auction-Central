@@ -60,7 +60,7 @@ public class LoginController implements Initializable{
 	        controller.construct(myAuctionCentral, (Bidder) user);
 	        bidderWindow.show();
 		} else if (user.getUserType().equals("nonprofit")) {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfit.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfitWelcomeScreen.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        Stage nonProfitWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        Scene scene = new Scene(anchorPane);
