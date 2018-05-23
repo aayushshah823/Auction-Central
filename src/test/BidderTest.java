@@ -28,20 +28,20 @@ public class BidderTest {
 	
 	@Test
 	public void getBiddingHistory_NoBiddingHistory_EmptyList() {
-		assertTrue(bidder.getBiddingHistory().isEmpty());
+		assertTrue(bidder.getAllAuctionsIveBidOn().isEmpty());
 	}
 	@Test
 	public void getBiddingHistory_NoBiddingHistory_NotEmptyList() {
 		double bidAmount = ITEM_PRICE + 10;
 		bidder.addNewToBiddingHistory(futureAuction, dress, bidAmount);
-		assertTrue(!bidder.getBiddingHistory().isEmpty());
+		assertTrue(!bidder.getAllAuctionsIveBidOn().isEmpty());
 	}
 	
 	@Test
 	public void addNewToBiddingHistory_oneBid_AddOneItem_MapNotEmpty() {
 		double bidAmount = ITEM_PRICE + 10;
 		bidder.addNewToBiddingHistory(futureAuction, dress, bidAmount);
-		assertTrue(!bidder.getBiddingHistory().isEmpty());
+		assertTrue(!bidder.getAllAuctionsIveBidOn().isEmpty());
 	}
 	
 	@Test

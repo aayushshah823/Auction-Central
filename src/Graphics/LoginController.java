@@ -51,7 +51,7 @@ public class LoginController implements Initializable{
 			userNotFound.setTextFill(Color.web("#ff0000"));
 			userNotFound.setText("User Not Found");
 		} else if (user.getUserType().equals("bidder")) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/BidderMainMenu.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        Stage bidderWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        Scene scene = new Scene(anchorPane);
