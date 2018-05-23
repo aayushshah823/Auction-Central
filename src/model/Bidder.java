@@ -50,9 +50,13 @@ public class Bidder extends User implements Serializable {
 	 * @param auction, item, bidAmount
 	 */
 	public void addNewToBiddingHistory(Auction auction, Item item, Double bidAmount) {
-		Map<Item, Double> temp = new HashMap<Item, Double>();
-		temp.put(item, bidAmount);
-		this.myBiddingHistory.put(auction, temp);
+		if (myBiddingHistory.containsKey(auction)) {
+			myBiddingHistory.get(auction).put(item, bidAmount);
+		} else {
+			Map<Item, Double> temp = new HashMap<Item, Double>();
+			temp.put(item, bidAmount);
+			this.myBiddingHistory.put(auction, temp);
+		}
 	}
 
 	/**
