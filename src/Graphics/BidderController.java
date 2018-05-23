@@ -29,9 +29,6 @@ public class BidderController implements Initializable {
 	
 	@FXML
 	Label name;
-	//These are for controlling the list of auction 
-	@FXML private ListView listOfAuctions; 
-	@FXML private ListView listOfItems; 
 	
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
@@ -47,6 +44,8 @@ public class BidderController implements Initializable {
         Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidderAuction.setScene(scene);
+        AuctionsAvailableToBid controller = (AuctionsAvailableToBid) loader.getController();
+        controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
 	}
 	
@@ -69,7 +68,6 @@ public class BidderController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
-		//name.setText("");
 	}
 
 }
