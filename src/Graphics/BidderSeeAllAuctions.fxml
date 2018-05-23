@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <Label text="Auctions vailable to Bid">
+                  <Label text="Auctions Available to Bid">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
