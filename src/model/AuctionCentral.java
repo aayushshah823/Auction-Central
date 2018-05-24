@@ -423,4 +423,8 @@ public class AuctionCentral implements java.io.Serializable {
 	public int getNumCurrentAuctions() {
 		return numCurrentAuctions;
 	}
+	
+	public int getMaxUpcomingAuctions() {
+		return maxUpcomingAuctions;
+	}
 }

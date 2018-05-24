@@ -7,15 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Graphics.EmployeeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.EmployeeController">
    <children>
       <Label layoutX="429.0" layoutY="53.0" prefHeight="124.0" prefWidth="342.0" text="Auction Central">
          <font>
             <Font size="48.0" />
          </font>
-      </Label>
-      <Label fx:id="myName" layoutX="199.0" layoutY="167.0" prefHeight="80.0" prefWidth="803.0" text="Welcome John Doe! You are logged in as an Employee of Auction Central. What would you like to do?" textAlignment="CENTER" wrapText="true" />
+      </Label >
       <GridPane layoutX="314.0" layoutY="350.0" prefHeight="219.0" prefWidth="573.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,9 +24,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="570.0" text="Change Maximum Number of Upcoming Auctions" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="570.0" text="View All Auctions Within A Date Range" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="570.0" text="View All Auctions" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#changeMaxAuctions" prefHeight="51.0" prefWidth="570.0" text="Change Maximum Number of Upcoming Auctions" />
+            <Button mnemonicParsing="false" onAction="#inputDateRange" prefHeight="51.0" prefWidth="570.0" text="View All Auctions Within A Date Range" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#viewAllAuctions" prefHeight="51.0" prefWidth="570.0" text="View All Auctions" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="1074.0" layoutY="662.0" prefHeight="124.0" prefWidth="112.0">
@@ -40,9 +38,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Exit" />
-            <Button mnemonicParsing="false" prefWidth="110.0" text="Logout" GridPane.rowIndex="1" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" />
+            <Button mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Label fx:id ="myMainLabel" alignment="CENTER" layoutX="199.0" layoutY="177.0" prefHeight="80.0" prefWidth="803.0" text="Welcome John Doe! You are logged in as an Employee of Auction Central. What would you like to do?" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

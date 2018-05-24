@@ -2,6 +2,10 @@ package Graphics;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -12,8 +16,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Auction;
 import model.AuctionCentral;
 import model.AuctionCentralEmployee;
 
@@ -21,8 +27,27 @@ public class EmployeeController implements Initializable{
 
 	private AuctionCentral myAuctionCentral;
 	
+	private AuctionCentralEmployee myEmployee;
+	
+	private ArrayList<Auction> myAuctionsBetweenDates;
+	
 	@FXML
-	Label myName;
+	TextField myStartDate;
+	
+	@FXML
+	TextField myEndDate;
+	
+	@FXML 
+	Label currMaxAuctionsLabel;
+	
+	@FXML
+	TextField maxAuctions;
+	
+	@FXML
+	Label myMainLabel;
+	
+	@FXML
+	Label myChangedMaxAuctionsSuccessLabel;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -35,14 +60,13 @@ public class EmployeeController implements Initializable{
         AnchorPane anchorPane = loader.load();
         Stage changeMaxAuctionsWindow = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
+        //currMaxAuctions.setText(Integer.toString(myAuctionCentral.getMaxUpcomingAuctions()));
         changeMaxAuctionsWindow.setScene(scene);
-        ChangeMaxAuctionsController controller = (ChangeMaxAuctionsController) loader.getController();
-        controller.setAuctionCentral(myAuctionCentral);
         changeMaxAuctionsWindow.show();
 	}
 	
 	public void inputDateRange(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/inputDateRange.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/InputDateRange.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage inputDateRange = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
@@ -72,19 +96,55 @@ public class EmployeeController implements Initializable{
         login.show();
 	}
 	
-	
-	public void setAuctionCentral(AuctionCentral ac) {
-		myAuctionCentral = ac;
+	public void submit(ActionEvent theEvent) throws IOException {
+		String theNewMaxString = maxAuctions.getText();
+		int theNewMax = Integer.parseInt(theNewMaxString);
+		System.out.println(theNewMaxString);
+		System.out.println(theNewMax);
+//		System.out.println(myAuctionCentral.getNumCurrentAuctions());
+//		HashMap<Integer, String> errorMap = myAuctionCentral.updateAuctionLimit(theNewMax);
+//		if (errorMap.isEmpty()) {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/EmployeeMainMenu.fxml"));
+	        AnchorPane anchorPane = loader.load();
+	        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+	        Scene scene = new Scene(anchorPane);
+	        back.setScene(scene);
+//	        myMainLabel.setText("The maximum number of auctions at a time has been changed! What would you like to do next?");
+	        back.show();
+//		} else {
+//			//figure out how to display errors.
+//		}
 	}
 	
-	public void setName(String theText) {
-		myName.setText(theText);
+	public void submitDates(ActionEvent theEvent) throws IOException {
+		String start = myStartDate.getText();
+//		String end = myEndDate.getText();
+//		LocalDate startDate= LocalDate.parse(start, DateTimeFormatter.BASIC_ISO_DATE);
+//		LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.BASIC_ISO_DATE);
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/AuctionsBetweenDates.fxml"));
+//        AnchorPane anchorPane = loader.load();
+//        Stage auctionsBetweenDates = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(anchorPane);
+//        AuctionsBetweenDates controller = (AuctionsBetweenDates) loader.getController();
+//        controller.construct(myAuctionCentral, myEmployee, startDate, endDate);
+//        auctionsBetweenDates.setScene(scene);
+//        auctionsBetweenDates.show();		
+	}
+	
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/EmployeeMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        back.setScene(scene);
+        back.show();
 	}
 	
 	public void construct(AuctionCentral ac, AuctionCentralEmployee employee) {
-		//myAuctionCentral = ac;
-		//myEmployee = employee;
-		myName.setText("Welcome" + employee.getName() + " .You are logged in as an Employee of Auction Central. What would you like to do?");
+		this.myAuctionCentral = ac;
+		this.myEmployee = employee;
+		myMainLabel.setText("Welcome " + employee.getName() + "! You are logged in as an Employee of Auction Central. What would you like to do?");
 	}
 
 }

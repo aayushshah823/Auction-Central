@@ -148,6 +148,7 @@ public class AuctionCentralTest {
 	
 	@Test
 	public void isDurationValid_One_Hour_Before_NextDay_True() {
+		System.out.println(LocalDate.now());
 		assertTrue(auctionCentral.isDurationValid(AUCTION_START_TIME, 11));
 	}
 	

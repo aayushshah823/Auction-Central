@@ -14,7 +14,6 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="240.0" layoutY="458.0" prefHeight="80.0" prefWidth="735.0" text="Please enter the new maximum number of auctions to be scheduled. " textAlignment="CENTER" wrapText="true" />
       <GridPane layoutX="1078.0" layoutY="609.0" prefHeight="177.0" prefWidth="108.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,17 +25,12 @@
         </rowConstraints>
          <children>
             <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <HBox alignment="CENTER" layoutX="391.0" layoutY="538.0" prefHeight="69.0" prefWidth="418.0" spacing="10.0" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="391.0" AnchorPane.rightAnchor="391.0" AnchorPane.topAnchor="538.0">
-         <children>
-            <TextField fx:id="maxAuctions" />
-            <Button mnemonicParsing="false" onAction="#submit" text="Submit" />
-         </children>
-      </HBox>
-      <GridPane layoutX="271.0" layoutY="279.0" prefHeight="62.0" prefWidth="658.0" AnchorPane.bottomAnchor="459.0" AnchorPane.leftAnchor="271.0" AnchorPane.rightAnchor="271.0" AnchorPane.topAnchor="279.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="184.0" prefHeight="73.0" prefWidth="666.0" text="Please enter the date range you would like see all auctions for: ex: 20180523" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="543.0" AnchorPane.leftAnchor="286.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="184.0" />
+      <GridPane layoutX="331.0" layoutY="312.0" prefHeight="177.0" prefWidth="538.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -45,9 +39,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="currMaxAuctionsLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="670.0" text="25" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="650.0" text="Current maximum number of auctions that can be scheduled:" />
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="422.0" spacing="10.0">
+               <children>
+                  <Label text="Start Date" />
+                  <TextField fx:id="startDate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="422.0" spacing="10.0" GridPane.rowIndex="1">
+               <children>
+                  <Label text="End Date" />
+                  <TextField fx:id="endDate" prefHeight="50.0" prefWidth="300.0" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
+      <Button alignment="CENTER" layoutX="696.0" layoutY="500.0" mnemonicParsing="false" onAction="#submitDates" text="Submit" textAlignment="CENTER" />
    </children>
 </AnchorPane>
