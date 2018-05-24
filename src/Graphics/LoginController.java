@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Graphics.Bidder.BidderController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +52,7 @@ public class LoginController implements Initializable{
 			userNotFound.setTextFill(Color.web("#ff0000"));
 			userNotFound.setText("User Not Found");
 		} else if (user.getUserType().equals("bidder")) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/BidderMainMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderMainMenu.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        Stage bidderWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        Scene scene = new Scene(anchorPane);
