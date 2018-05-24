@@ -6,6 +6,9 @@ package Graphics;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -34,17 +37,10 @@ public class NonProfitController implements Initializable {
 	Button button2;
 	
 	@FXML
-	private TextField startDateTxtField;
+	private TextField auctionNameTxtField, monthField, dayField, yearField, 
+						hourField, minField, endHourField, endMinField;
 	@FXML
-	private TextField startTimeTxtField;
-	@FXML
-	private TextField endTimeTxtField;
-	@FXML
-	private Label startDateLabel;
-	@FXML
-	private Label startTimeLabel;
-	@FXML
-	private Label endTimeLabel;
+	private Label startDateLabel, startDateLabel2, startTimeLabel, startTimeLabel2, endTimeLabel, endTimeLabel2;
 	@FXML
 	private Button submitButton;
 	
@@ -90,9 +86,35 @@ public class NonProfitController implements Initializable {
 	
 	@FXML
 	public void submit(ActionEvent event) throws IOException {
-		//LocalDate inputDate = LocalDate.of(year,month,dayOfMonth);
-//		LocalDate startDate = LocalDate.of(year,month,dayOfMonth);
-//		myAuctionCentral.auctionRequest(myNonProfit, startDate, startTime, duration, theName);
+		int year = Integer.parseInt(yearField.getText());
+		int month = Integer.parseInt(monthField.getText());
+		int day = Integer.parseInt(dayField.getText());
+		LocalDate startDate = LocalDate.of(year, month, day);
+		
+		int startHr = Integer.parseInt(hourField.getText());
+		int startMin = Integer.parseInt(minField.getText());
+		LocalTime startTime = LocalTime.of(startHr, startMin);
+		
+		int endHr = Integer.parseInt(endHourField.getText());
+		int endMin = Integer.parseInt(endMinField.getText());
+		LocalTime endTime = LocalTime.of(endHr, endMin);
+		
+		int duration = (int) startTime.until(endTime, ChronoUnit.HOURS);
+		
+		HashMap<Integer, String> aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, startDate, 
+											startTime, duration, auctionNameTxtField.getText());
+		
+		//Error checking for auction
+		// Error check: Months only 1-12, Hour: 1-12, Min: 0-59
+		if (aucReqMap.isEmpty()) {
+			
+		} else {
+			// 2, 3, 5: start date
+			// 
+		}
+		
+		
+	
 	}
 
 
