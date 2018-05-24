@@ -243,60 +243,43 @@ public class Serialization {
 		auctionCentral.addAuction(nonProfit9, auction11);
 		auctionCentral.addAuction(nonProfit10, auction12);
 		
-		// Adds bids for past auctions
-		ArrayList<Item> bidder1Auction1Items = new ArrayList<Item>();
-		bidder1Auction1Items.add(new Item("White Gold Diamond Necklace", 
-				8000.35, "20.57ct 18k White Gold Diamond Necklace.", 1));
-		ArrayList<Item> bidder5Auction1Items = new ArrayList<Item>();
-		bidder5Auction1Items.add(new Item("White Gold Diamond Necklace", 
-				8000.35, "20.57ct 18k White Gold Diamond Necklace.", 1));
-		bidder5Auction1Items.add(new Item("24\" Computer Monitor", 5.00, "Dell"
-				+ " 24\" Monitor: P2418D", 2));
-		bidder5Auction1Items.add(new Item("iPhone Screen Protectors", 21.99, 
-				"Premium Real Screen Protector Tempered Glass Film For iPhone "
-				+ "6 6s 7 Plus", 150));
-		bidder5Auction1Items.add(new Item("Children's building blocks", 10, 
-				"120 Piece Magnetic Tiles magnetic Building Blocks Toys for "
-				+ "Kids", 1));
-		ArrayList<Item> bidder7Auction2Items = new ArrayList<Item>();
-		bidder7Auction2Items.add(new Item("Destroy All Humans - Xbox", 4.20, 
-				"Destroy All Humans Videogame for the Original Xbox", 1));
-		bidder7Auction2Items.add(new Item("Razor Hoverboard", 300.00, "Razor "
-				+ "Hovertrax 2.0 Hoverboard Self-Balancing Smart Scooter", 1));
-		bidder7Auction2Items.add(new Item("Penny", 0.007, "1996 Copper Penny",
-				1));
-		ArrayList<Item> bidder7Auction6Items = new ArrayList<Item>();
-		bidder7Auction6Items.add(new Item("Corn Desilker", 0.020252, "Amco "
-				+ "Corn Desilker", 5));
-		bidder7Auction6Items.add(new Item("Cartoon Striped Socks", 0.98, 
-				"Toraway 3D Animals Cartoon Striped Socks Cat Footprints "
-				+ "Cotton Socks (Pink)", 9));
-		bidder7Auction6Items.add(new Item("Storage Bag Hanger", 1, "16-pocket "
-				+ "Green Storage Bag Hanger", 1));
-		ArrayList<Item> bidder5Auction6Items = new ArrayList<Item>();
-		bidder5Auction6Items.add(new Item("Nail Stencil Sticker", 0.01, 
-				"TOPBeauty Nail Stencil Sticker", 1));
-		bidder5Auction6Items.add(new Item("Nail Stencil Sticker Set", 40.0215,
-				"TOPBeauty Nail Stencil Sticker Set (60 Pieces)", 30));
-		bidder5Auction6Items.add(new Item("Cartoon Striped Socks", 0.98, 
-				"Toraway 3D Animals Cartoon Striped Socks Cat Footprints "
-				+ "Cotton Socks (Pink)", 9));
-		ArrayList<Item> bidder5Auction7Items = new ArrayList<Item>();
-		bidder5Auction7Items.add(new Item("Vacuum Bags", 1.00, "SINMA "
-				+ "Practical Handheld Vacuum Bags", 23));
-		bidder5Auction7Items.add(new Item("Unicorn Meat", 3.00, "ThinkGeek "
-				+ "Easy-Open Canned Unicorn Meat, 5.5 Ounce, Stuffed Plush "
-				+ "Toy", 1));
-		bidder5Auction7Items.add(new Item("Rechargeable Light up Glasses", 
-				17.00, "Satu Brown Rechargeable Slotted Shutter Light up LED"
-				+ " Flash Glasses, Black", 1));
-//		bidder2.addAuction(auction1, bidder1Auction1Items);
-//		bidder5.addAuction(auction1, bidder5Auction1Items);
-//		bidder5.addAuction(auction6,  bidder5Auction6Items);
-//		bidder7.addAuction(auction2, bidder7Auction2Items);
-//		bidder7.addAuction(auction6, bidder7Auction6Items);
+		//past bids
+		bidder1.addNewToBiddingHistory(auction1, 
+				auction1.getItems().get(4), 8500.0);
+		bidder5.addNewToBiddingHistory(auction1, 
+				auction1.getItems().get(4), 8200.00);
+		bidder5.addNewToBiddingHistory(auction1, 
+				auction1.getItems().get(3), 7.00);
+		bidder5.addNewToBiddingHistory(auction1, 
+				auction1.getItems().get(2), 21.99);
+		bidder5.addNewToBiddingHistory(auction1, 
+				auction1.getItems().get(1), 11.0);
+		bidder7.addNewToBiddingHistory(auction2, 
+				auction2.getItems().get(6), 4.20);
+		bidder7.addNewToBiddingHistory(auction2, 
+				auction2.getItems().get(5), 310.00);
+		bidder7.addNewToBiddingHistory(auction2, 
+				auction2.getItems().get(9), 0.01);
+		bidder7.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(2), 0.10);
+		bidder7.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(4), 0.98);
+		bidder7.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(5), 2.0);
+		bidder5.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(0), 1.15);
+		bidder5.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(3), 42.24);
+		bidder5.addNewToBiddingHistory(auction6, 
+				auction6.getItems().get(4), 2.98);
+		bidder5.addNewToBiddingHistory(auction7, 
+				auction7.getItems().get(0), 1.00);
+		bidder5.addNewToBiddingHistory(auction7, 
+				auction7.getItems().get(1), 4.20);
+		bidder5.addNewToBiddingHistory(auction7, 
+				auction7.getItems().get(2), 18.35);
 		
-		// Adds bids for future auctions
+		//future bids
 		bidder3.addNewToBiddingHistory(auction3, 
 				auction3.getItems().get(1), 30000.0);
 		bidder4.addNewToBiddingHistory(auction3, 

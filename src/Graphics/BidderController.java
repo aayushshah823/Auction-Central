@@ -54,27 +54,20 @@ public class BidderController implements Initializable {
         bidderAuction.show();
 	}
 	
-	public void showAuctionsWhereICanBid() {
-		
-	}
     public void viewItemsInOneAuction(ActionEvent event) throws IOException{
 		
 	}
     
-    public void viewItemsIHaveBidOnInOneAuction(ActionEvent event) throws IOException{
-		
-   	}
-    
-    public void viewAllItemsIHaveBidOnAllAuctions(ActionEvent event) throws IOException{
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/BidderViewAllBids.fxml"));
+    public void viewBids(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/BidderViewBids.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidderAuction.setScene(scene);
-        BidderViewAllBidsController controller = (BidderViewAllBidsController) loader.getController();
+        BidderViewBidsController controller = (BidderViewBidsController) loader.getController();
         controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
-   	}    
+    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
