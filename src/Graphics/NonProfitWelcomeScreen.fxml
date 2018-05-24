@@ -16,6 +16,7 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label fx:id="userName" prefHeight="431.0" prefWidth="349.0" />
       <GridPane layoutX="1084.0" layoutY="672.0" prefHeight="124.0" prefWidth="112.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
