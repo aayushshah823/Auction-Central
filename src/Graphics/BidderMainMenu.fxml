@@ -17,8 +17,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#viewAuctionsAvailableToBid" prefHeight="51.0" prefWidth="509.0" text="View all auctions in which I can bid" />
             <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="511.0" text="View all items in one auction" />
-            <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="512.0" text="View items I have bid on in one auction" />
-            <Button mnemonicParsing="false" onAction="#viewAllItemsIHaveBidOnAllAuctions" prefHeight="64.0" prefWidth="514.0" text="View items I have bid on in all auctions" />
+            <Button mnemonicParsing="false" onAction="#viewBids" prefHeight="64.0" prefWidth="514.0" text="View bids" />
          </children>
       </VBox>
       <Label fx:id="name" layoutX="414.0" layoutY="147.0" prefHeight="35.0" prefWidth="304.0" text="Label" />
