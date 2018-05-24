@@ -73,7 +73,6 @@ public class NonProfitController implements Initializable {
 		AnchorPane ap = loader.load();
         Stage auctionRequest = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
 		Scene scene = new Scene(ap);
-		userName.setVisible(true);
 		auctionRequest.setScene(scene);
         auctionRequest.show();
 		
