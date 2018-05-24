@@ -24,7 +24,7 @@ import model.AuctionCentral;
 import model.NonProfit;
 
 /**
- * @author aayushshah
+ * @author aayush shah
  * @author Benjamin Yuen
  *
  */
