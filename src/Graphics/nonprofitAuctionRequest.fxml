@@ -28,7 +28,7 @@
          <children>
             <GridPane prefHeight="50.0" prefWidth="402.0">
                <children>
-                  <Label text="What is the Auction Name?" />
+                  <Label fx:id="aucNameLabel" text="What is the Auction Name?" />
                   <TextField fx:id="auctionNameTxtField" prefHeight="6.0" prefWidth="405.0" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
@@ -41,10 +41,10 @@
             </GridPane>
             <GridPane prefHeight="54.0" prefWidth="460.0">
                <children>
-                  <Label fx:id="startDateLabel" prefHeight="21.0" prefWidth="397.0" text="What is the Start Date? ie. 'year-month-day' or '2011-05-03' " />
+                  <Label fx:id="startDateLabel" prefHeight="21.0" prefWidth="397.0" text="What is the Start Date? Use format 'year-month-day' ie. '2011-05-03' " />
                   <HBox prefHeight="17.0" prefWidth="460.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="startDateField" />
+                        <DatePicker fx:id="startDatePicker" />
                      </children>
                   </HBox>
                </children>
@@ -126,5 +126,6 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label fx:id="nameErrorLabel" layoutX="843.0" layoutY="227.0" prefHeight="56.0" prefWidth="364.0" text="Error" textFill="RED" />
    </children>
 </AnchorPane>

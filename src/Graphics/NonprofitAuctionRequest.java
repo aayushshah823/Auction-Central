@@ -41,11 +41,12 @@ import model.NonProfit;
 public class NonprofitAuctionRequest implements Initializable{
 
 	@FXML
-	private TextField durationField, auctionNameTxtField, startDateField, 
+	private TextField durationField, auctionNameTxtField,  
 						hourField, minField, endHourField, endMinField;
 	@FXML
 	private Label startDateLabel, startDateLabel2, startTimeLabel, startTimeLabel2, durationLabel,
-					startDateErrorLabel, startTimeErrorLabel, durationErrorLabel, maxAuctionsErrorLabel;
+					startDateErrorLabel, startTimeErrorLabel, durationErrorLabel, maxAuctionsErrorLabel, 
+					nameErrorLabel,aucNameLabel;
 	@FXML
 	private ComboBox startTimeMinCombo, startTimeHrCombo,endTimeHrCombo, endTimeMinCombo;
 	@FXML
@@ -70,15 +71,17 @@ public class NonprofitAuctionRequest implements Initializable{
 		startTimeErrorLabel.setVisible(false);
 		durationErrorLabel.setVisible(false);
 		maxAuctionsErrorLabel.setVisible(false);
+		nameErrorLabel.setVisible(false);
 		startDateErrorLabel.setTextFill(Color.RED);
 		startTimeErrorLabel.setTextFill(Color.RED);
 		durationErrorLabel.setTextFill(Color.RED);
-		
-		startDatePicker = new DatePicker(LocalDate.now());
-		startDatePicker.setValue(LocalDate.MIN);		
+
+//		submitButton.setDisable(true);
+//		if (!durationField.getText().equals("") && !auctionNameTxtField.getText().equals("")) {
+//			submitButton.setDisable(false);
+//		}
 		makeMinutes();
-		makeHours();
-		
+		makeHours();		
 	}
 	
 	private void makeMinutes() {
@@ -122,38 +125,34 @@ public class NonprofitAuctionRequest implements Initializable{
 	@FXML
 	public void submit(ActionEvent event) throws IOException {	
 		if (auctionNameTxtField.getText().equals("")) {
-			
+			nameErrorLabel.setVisible(true);
+			nameErrorLabel.setText("Please enter an auction name");
+			aucNameLabel.setTextFill(Color.RED);
+		} else {
+			nameErrorLabel.setVisible(false);
+			aucNameLabel.setTextFill(Color.BLACK);
 		}
-		
-//		LocalDate startDate = LocalDate.parse(startDatePicker.getEditor().getText(), 
-//												DateTimeFormatter.BASIC_ISO_DATE);
-		LocalDate startDate = null;
-		try {
-			String date = startDateField.getText();
-			startDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
-			System.out.println(startDate.toString());
-		} catch( DateTimeParseException e) {
-			startDateLabel.setTextFill(Color.RED);
-			startDateErrorLabel.setVisible(true);
-			startDateErrorLabel.setText("Please use format 'year-month-day' or '2011-05-03'");
-		}
-		
-		startTimeMinCombo.getUserData();
+
+		//start date
+		LocalDate startDate = startDatePicker.getValue();
+		System.out.println(startDate.toString());		
+		//duration
 		int duration=0;
-		try {
-			durationLabel.setTextFill(Color.BLACK);
+		try {				
 			durationErrorLabel.setVisible(false);
+			durationLabel.setTextFill(Color.BLACK);
 			duration = Integer.parseInt(durationField.getText());
 		} catch (NumberFormatException e) {
 			durationLabel.setTextFill(Color.RED);
 			durationErrorLabel.setVisible(true);
 			durationErrorLabel.setText("Please enter a number");
-		}
+		} 
 		
+		//Start time
 		int startHr = Integer.parseInt((String) startTimeHrCombo.getValue());
-		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 
+		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 		
+		LocalTime startTime = LocalTime.of(startHr, startMin);		
 		
-		LocalTime startTime = LocalTime.of(startHr, startMin);
 		HashMap<Integer, String> aucReqMap = null;
 		try {
 			aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, startDate, 
@@ -171,31 +170,29 @@ public class NonprofitAuctionRequest implements Initializable{
 				// start time: 0
 				String startDateErrorTxt = "Error! ";
 				if (aucReqMap.containsKey(0)) {
+					startTimeErrorLabel.setVisible(true);
 					startTimeErrorLabel.setText(aucReqMap.get(0));
 				} 
 				if (aucReqMap.containsKey(1)) {
-					startDateErrorTxt += aucReqMap.get(1) + "\n";
+					startDateErrorTxt += aucReqMap.get(1);
 				} 
 				if (aucReqMap.containsKey(2)) {
-					startDateErrorTxt += aucReqMap.get(2) + "\n";
+					startDateErrorTxt += aucReqMap.get(2);
 				} 
 				if (aucReqMap.containsKey(3)) {
-					startDateErrorTxt += aucReqMap.get(3) + "\n";
+					startDateErrorTxt += aucReqMap.get(3);
 				} 
 				if (aucReqMap.containsKey(4)) {
-					maxAuctionsErrorLabel.setText(aucReqMap.get(4));
+					startDateErrorTxt += aucReqMap.get(4);
 				} 
 				if (aucReqMap.containsKey(5)) {
-					startDateErrorTxt += aucReqMap.get(5) + "\n";
-				}			
-				if (startDateErrorTxt != "") {
-					startDateErrorLabel.setText(startDateErrorTxt);
-				}	
+					startDateErrorTxt += aucReqMap.get(5);
+				}						
 				maxAuctionsErrorLabel.setVisible(true);
 				maxAuctionsErrorLabel.setText(startDateErrorTxt);
 			}	
 		} catch (NullPointerException e) {
-			
+			System.out.println("something");
 		}
 
 
