@@ -120,8 +120,11 @@ public class NonprofitAuctionRequest implements Initializable{
 	}
 	
 	@FXML
-	public void submit(ActionEvent event) throws IOException {				
-		int startHr=0, startMin=0;
+	public void submit(ActionEvent event) throws IOException {	
+		if (auctionNameTxtField.getText().equals("")) {
+			
+		}
+		
 //		LocalDate startDate = LocalDate.parse(startDatePicker.getEditor().getText(), 
 //												DateTimeFormatter.BASIC_ISO_DATE);
 		LocalDate startDate = null;
@@ -147,8 +150,8 @@ public class NonprofitAuctionRequest implements Initializable{
 			durationErrorLabel.setText("Please enter a number");
 		}
 		
-		startHr = Integer.parseInt((String) startTimeHrCombo.getValue());
-		startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 
+		int startHr = Integer.parseInt((String) startTimeHrCombo.getValue());
+		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 
 		
 		LocalTime startTime = LocalTime.of(startHr, startMin);
 		HashMap<Integer, String> aucReqMap = null;
