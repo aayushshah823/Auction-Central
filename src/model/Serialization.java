@@ -322,6 +322,8 @@ public class Serialization {
 				auction12.getItems().get(1), 30000.0);
 		bidder7.addNewToBiddingHistory(auction12, 
 				auction12.getItems().get(2), 30000.0);
+		bidder7.addNewToBiddingHistory(auction12, 
+				auction12.getItems().get(0), 30000.0);
 		
 		serialize("auctionCentralDefault", auctionCentral);	
 		
