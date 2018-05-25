@@ -153,13 +153,20 @@ public class NonprofitAuctionRequest implements Initializable{
 		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 		
 		LocalTime startTime = LocalTime.of(startHr, startMin);		
 		
-		HashMap<Integer, String> aucReqMap = null;
+//		HashMap<Integer, String> aucReqMap = null;
+		HashMap<Integer, String> aucReqMap = new HashMap<>();
+		aucReqMap = myAuctionCentral.auctionRequest(
+				myNonProfit, 
+				startDate, 
+				startTime, 
+				duration, 
+				auctionNameTxtField.getText());
 		try {
-			aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, startDate, 
-					startTime, duration, auctionNameTxtField.getText());
+//			aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, startDate, 
+//					startTime, duration, auctionNameTxtField.getText());
 			//Error checking for auction
 			if (aucReqMap.isEmpty()) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/ViewAllAuctionSubmittd.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfitComfirmAucReq.fxml"));
 		        AnchorPane anchorPane = loader.load();
 		        Stage back = (Stage)((Node)event.getSource()).getScene().getWindow();
 		        Scene scene = new Scene(anchorPane);
@@ -192,12 +199,12 @@ public class NonprofitAuctionRequest implements Initializable{
 				maxAuctionsErrorLabel.setText(startDateErrorTxt);
 			}	
 		} catch (NullPointerException e) {
-			System.out.println("something");
+			System.out.println("im null");
 		}
 
 
 	}
-	
+		
 	public void back(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfitWelcomeScreen.fxml"));
         AnchorPane anchorPane = loader.load();
