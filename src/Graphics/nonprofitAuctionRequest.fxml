@@ -19,12 +19,12 @@
             <Font name="System Bold Italic" size="56.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="333.0" layoutY="125.0" prefHeight="66.0" prefWidth="578.0" text="Schedule a New Auction. Please fill out the information below.">
+      <Label alignment="CENTER" layoutX="330.0" layoutY="99.0" prefHeight="66.0" prefWidth="578.0" text="Schedule a New Auction. Please fill out the information below.">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="389.0" layoutY="198.0" prefHeight="405.0" prefWidth="460.0" spacing="30.0">
+      <VBox layoutX="380.0" layoutY="241.0" prefHeight="351.0" prefWidth="460.0" spacing="30.0">
          <children>
             <GridPane prefHeight="50.0" prefWidth="402.0">
                <children>
@@ -39,19 +39,33 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <GridPane prefHeight="67.0" prefWidth="410.0">
+            <GridPane prefHeight="54.0" prefWidth="460.0">
                <children>
-                  <Label fx:id="startDateLabel" prefHeight="21.0" prefWidth="320.0" text="What is the Start Date? Example: 5/24/2018" />
-                  <Label fx:id="startDateLabel2" prefHeight="23.0" prefWidth="214.0" text="  Month      \        Day         \        Year" GridPane.rowIndex="1" />
-                  <HBox prefHeight="25.0" prefWidth="215.0" GridPane.rowIndex="2">
+                  <Label fx:id="startDateLabel" prefHeight="21.0" prefWidth="397.0" text="What is the Start Date? ie. 'year-month-day' or '2011-05-03' " />
+                  <HBox prefHeight="17.0" prefWidth="460.0" GridPane.rowIndex="1">
                      <children>
-                        <HBox prefHeight="25.0" prefWidth="214.0" spacing="10.0">
+                        <TextField fx:id="startDateField" />
+                     </children>
+                  </HBox>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane prefHeight="53.0" prefWidth="460.0">
+               <children>
+                  <Label fx:id="startTimeLabel" prefHeight="17.0" prefWidth="239.0" text="What is the Start Time?   ie. 12:00" />
+                  <HBox prefHeight="25.0" prefWidth="118.0" GridPane.rowIndex="1">
+                     <children>
+                        <HBox prefHeight="21.0" prefWidth="242.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="monthField" prefHeight="8.0" prefWidth="131.0" />
-                              <Label prefHeight="25.0" prefWidth="14.0" text="\\" />
-                              <TextField fx:id="dayField" prefHeight="8.0" prefWidth="131.0" />
-                              <Label prefHeight="25.0" prefWidth="14.0" text="\\" />
-                              <TextField fx:id="yearField" prefHeight="8.0" prefWidth="131.0" />
+                              <ComboBox fx:id="startTimeHrCombo" layoutX="34.0" layoutY="10.0" prefHeight="25.0" prefWidth="66.0" />
+                              <Label prefHeight="25.0" prefWidth="14.0" text=":" />
+                              <ComboBox fx:id="startTimeMinCombo" prefHeight="25.0" prefWidth="66.0" />
                            </children>
                         </HBox>
                      </children>
@@ -61,24 +75,17 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
             <GridPane prefHeight="61.0" prefWidth="393.0">
                <children>
-                  <Label fx:id="startTimeLabel" prefHeight="17.0" prefWidth="239.0" text="What is the Start Time? Example : 2:00" />
-                  <Label fx:id="startTimeLabel2" prefHeight="23.0" prefWidth="192.0" text="Hour      :  Minutes" GridPane.rowIndex="1" />
-                  <HBox prefHeight="25.0" prefWidth="118.0" GridPane.rowIndex="2">
+                  <Label fx:id="durationLabel" text="How long will the auction last?" />
+                  <HBox prefHeight="25.0" prefWidth="118.0" GridPane.rowIndex="1">
                      <children>
-                        <HBox prefHeight="25.0" prefWidth="94.0" spacing="10.0">
-                           <children>
-                              <TextField fx:id="hourField" prefHeight="8.0" prefWidth="131.0" />
-                              <Label prefHeight="25.0" prefWidth="14.0" text=":" />
-                              <TextField fx:id="minField" prefHeight="8.0" prefWidth="131.0" />
-                           </children>
-                        </HBox>
+                        <TextField fx:id="durationField" prefHeight="30.0" prefWidth="81.0" />
+                        <Label prefHeight="52.0" prefWidth="95.0" text="hours" />
                      </children>
                   </HBox>
                </children>
@@ -86,32 +93,6 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <GridPane prefHeight="61.0" prefWidth="393.0">
-               <children>
-                  <Label fx:id="endTimeLabel" text="What is the End Time? Example : 2:00" />
-                  <Label fx:id="endTimeLabel2" prefHeight="23.0" prefWidth="192.0" text="Hour      :  Minutes" GridPane.rowIndex="1" />
-                  <HBox prefHeight="25.0" prefWidth="118.0" GridPane.rowIndex="2">
-                     <children>
-                        <HBox prefHeight="25.0" prefWidth="94.0" spacing="10.0">
-                           <children>
-                              <TextField fx:id="endHourField" prefHeight="8.0" prefWidth="131.0" />
-                              <Label prefHeight="25.0" prefWidth="14.0" text=":" />
-                              <TextField fx:id="endMinField" prefHeight="8.0" prefWidth="131.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
@@ -121,15 +102,9 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="startDateErrorLabel" layoutX="849.0" layoutY="279.0" prefHeight="56.0" prefWidth="198.0" textFill="RED" />
-      <Button fx:id="submitButton" layoutX="587.0" layoutY="603.0" mnemonicParsing="false" onAction="#submit" text="Submit">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <HBox layoutX="32.0" layoutY="294.0" prefHeight="25.0" prefWidth="215.0" />
-      <Label fx:id="startTimeErrorLabel" layoutX="849.0" layoutY="372.0" prefHeight="56.0" prefWidth="198.0" text="Error!" textFill="RED" />
-      <Label fx:id="endTimeErrorLabel" layoutX="849.0" layoutY="457.0" prefHeight="56.0" prefWidth="198.0" text="Error!" textFill="RED" />
+      <Label fx:id="startDateErrorLabel" layoutX="840.0" layoutY="319.0" prefHeight="56.0" prefWidth="364.0" text="Error" textFill="RED" />
+      <Label fx:id="startTimeErrorLabel" layoutX="840.0" layoutY="412.0" prefHeight="56.0" prefWidth="346.0" text="Error!" textFill="RED" />
+      <Label fx:id="durationErrorLabel" layoutX="840.0" layoutY="497.0" prefHeight="56.0" prefWidth="370.0" text="Error!" textFill="RED" />
       <GridPane layoutX="1078.0" layoutY="597.0" prefHeight="177.0" prefWidth="108.0">
          <children>
             <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" />
@@ -145,6 +120,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="maxAuctionsErrorLabel" layoutX="520.0" layoutY="641.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="114.0" prefWidth="198.0" text="Error!" textFill="RED" />
+      <Label fx:id="maxAuctionsErrorLabel" layoutX="353.0" layoutY="145.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="96.0" prefWidth="578.0" text="Error!" textFill="RED" />
+      <Button fx:id="submitButton" layoutX="578.0" layoutY="641.0" mnemonicParsing="false" onAction="#submit" text="Submit">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
