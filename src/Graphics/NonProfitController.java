@@ -54,7 +54,7 @@ public class NonProfitController implements Initializable {
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
-		userName.setText("Welcome " + myNonProfit.getUsername() + ". What would you like to do today?");
+		userName.setText("Welcome " + myNonProfit.getName() + ". What would you like to do today?");
 	}
 	
 	@FXML
@@ -78,6 +78,15 @@ public class NonProfitController implements Initializable {
         NonprofitAuctionRequest aucReqController = (NonprofitAuctionRequest) loader.getController();
         aucReqController.construct(myAuctionCentral, myNonProfit);
         auctionRequest.show();
+	}
+	
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/NonProfitWelcomeScreen.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        back.setScene(scene);
+        back.show();
 	}
 	
 	public void exit(ActionEvent theEvent) throws IOException {
