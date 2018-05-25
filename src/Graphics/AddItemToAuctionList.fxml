@@ -13,8 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonprofitViewAllAuctions">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonprofitViewAllAuction">
    <children>
+      <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <effect>
             <Bloom />
@@ -23,7 +24,7 @@
             <Font name="System Bold Italic" size="56.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="68.0" layoutY="116.0" prefHeight="66.0" prefWidth="367.0" text="Here are the your auction so far!" textFill="#b0336b">
+      <Label alignment="CENTER" layoutX="68.0" layoutY="116.0" prefHeight="66.0" prefWidth="367.0" text="Here are the items you can add." textFill="#b0336b">
          <font>
             <Font size="18.0" />
          </font>
@@ -43,34 +44,23 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <HBox layoutX="38.0" layoutY="164.0" prefHeight="472.0" prefWidth="1146.0" spacing="50.0">
+      <HBox layoutX="38.0" layoutY="196.0" prefHeight="440.0" prefWidth="1146.0" spacing="150.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <ListView fx:id="listOfAuctions" prefHeight="431.0" prefWidth="349.0" />
+                  <ListView fx:id="listOfItems" prefHeight="440.0" prefWidth="431.0" />
                </children>
             </VBox>
-            <VBox prefHeight="472.0" prefWidth="334.0">
+            <StackPane prefHeight="440.0" prefWidth="238.0">
                <children>
-                  <ListView fx:id="listOfItems" prefHeight="440.0" prefWidth="334.0" />
-                  <VBox prefHeight="50.0" prefWidth="100.0" />
-               </children>
-            </VBox>
-            <StackPane prefHeight="427.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="add" mnemonicParsing="false" text="ADD">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="207.0" text="Submit">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </StackPane>
          </children>
       </HBox>
-      <Label alignment="CENTER" layoutX="571.0" layoutY="106.0" prefHeight="66.0" prefWidth="367.0" text="Items currently in your auction" textFill="#b0336b">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
