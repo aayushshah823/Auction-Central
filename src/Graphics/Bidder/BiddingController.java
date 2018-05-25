@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Graphics.LoginController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,63 +30,73 @@ public class BiddingController  implements Initializable {
 	private AuctionCentral myAuctionCentral;
 	private Bidder myBidder;
 	private Auction currentAuction;
+	private Item item;
 	@FXML
 	Label feedBack;
 	@FXML
-	Button bid;
-	@FXML
-	ListView<String> listOfItems;
+	Label itemName;
 	@FXML
 	TextArea ItemDetails;
 	@FXML
 	TextField bidAmount;
 	@FXML
 	Button submitBidAmount;
-	@FXML
-	Label biddingFeedback;
 	
-	public void construct(AuctionCentral ac, Bidder bidder, String auctionName) {
+	
+	public void construct(AuctionCentral ac, Bidder bidder, Auction auction, Item item) {
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder; 
-		currentAuction = null; 
-		ArrayList<Auction> auctions = myAuctionCentral.getFutureAuctions();
-		for(int i = 0; i < auctions.size(); i ++) { 
-			if(auctions.get(i).getAuctionName().equals(auctionName)) {
-				currentAuction = auctions.get(i);
-				break;
-			}
-		}
-		//showing the list of items
+		this.currentAuction = auction;  
+		this.item = item;
+		feedBack.setText("");
 		if(currentAuction.isMaxBidsPerAuction(myBidder)) {
 			this.feedBack.setText("You have achived the maximum number of "
 					+ "allowed bids per auction: " +  currentAuction.MAX_BIDS_ALLOWED_PER_BIDDER);
-			this.bid.setDisable(true);
-		}else {
-			ArrayList<Item> items = currentAuction.getItems();				
-			for(int i = 0; i < items.size(); i ++) {
-				this.listOfItems.getItems().add(items.get(i).getItemName());
-			}
+			this.submitBidAmount.setDisable(true);
 		}
+		this.itemName.setText(this.item.getItemName());
 		
+		String details = "Item Description: "+ "\n" + this.item.getItemDesciption() + "\n"
+				+ "Starting Bid: " + this.item.getStartingBid();
+		this.ItemDetails.setText(details);
 	}
 	
-	//TODO Maybe I should have a new controller for this.. 
+
 	@FXML
-	public void bidOnItem(ActionEvent event) throws IOException { 		
-		String selectedItem = listOfItems.getSelectionModel().getSelectedItem();
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BiddingConditionsClear.fxml"));
+	public void exit(ActionEvent theEvent) throws IOException {
+		Platform.exit();
+	}
+	@FXML
+	public void logout(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
         AnchorPane anchorPane = loader.load();
-        Stage biddingCleared = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
-        biddingCleared.setScene(scene);
-        biddingCleared.show();
+        login.setScene(scene);
+        LoginController controller = (LoginController) loader.getController();
+        controller.construct(myAuctionCentral);
+        login.show();
+	} 
+	@FXML
+	public void enterBidAmount(ActionEvent event) throws IOException { 		
+		String bid = this.bidAmount.getText();
+		Double bidAmount = Double.parseDouble(bid);
+		int attemptedBid = this.currentAuction.makeBid(this.item, bidAmount, this.myBidder);
+		String fb = "";
+		if(attemptedBid == 2) {
+		   fb = "Bid Amount is lower" + "\n" + "than starting bid";
+		} else {
+		   fb = "Congratulations!" + "\n" + "Your Bid has been placed!";
+		}
+		
+
+		this.feedBack.setText(fb);
+	
 	}
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		feedBack.setText("");
 		
 	}
 
