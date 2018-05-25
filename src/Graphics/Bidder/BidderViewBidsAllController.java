@@ -2,11 +2,14 @@ package Graphics.Bidder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import Graphics.LoginController;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,22 +35,46 @@ public class BidderViewBidsAllController implements Initializable {
 	private Bidder myBidder;
 	
 	@FXML
-	Label name;
-	
-	@FXML
 	ListView<String> listOfBids;
 	
 	public void construct(AuctionCentral ac, Bidder bidder) {
+		DecimalFormat df = new DecimalFormat("0.00"); 
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder;
 		Map<Auction, Map<Item, Double>> bids = myBidder.getAllItemsInAllAuctions();
 		for (Auction auction : bids.keySet()) {
 			Map<Item, Double> auctionBids = bids.get(auction);
 			for (Item item : auctionBids.keySet()) {
-				this.listOfBids.getItems().add(item.getItemName() + " - " + item.getItemDesciption() + " | " + auction.getAuctionName() + " | " + "Minimum bid: $" 
-			+ item.getStartingBid() + " My bid: $" + auctionBids.get(item));
+				this.listOfBids.getItems().add(item.getItemName() + " - " + item.getItemDesciption() + "\n\tMinimum bid: $" 
+			+ df.format(item.getStartingBid()) + " | My bid: $" + df.format(auctionBids.get(item)) + " | " + auction.getAuctionName());
 			}
 		}
+	}
+	
+	public void exit(ActionEvent theEvent) throws IOException {
+		Platform.exit();
+	}
+	
+	public void logout(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        LoginController controller = (LoginController) loader.getController();
+        controller.construct(myAuctionCentral);
+        login.show();
+	}
+	
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderViewBids.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        BidderViewBidsController controller = (BidderViewBidsController) loader.getController();
+        controller.construct(myAuctionCentral, myBidder);
+        back.setScene(scene);
+        back.show();
 	}
 	
 	@Override

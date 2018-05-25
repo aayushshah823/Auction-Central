@@ -5,7 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Graphics.LoginController;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +63,7 @@ public class BidderController implements Initializable {
         Scene scene = new Scene(anchorPane);
         bidderAuction.setScene(scene);
         BidderViewAuctionsController controller = (BidderViewAuctionsController) loader.getController();
-        controller.construct(myAuctionCentral); 
+        controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
 	}
     
@@ -75,6 +77,21 @@ public class BidderController implements Initializable {
         controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
     }
+    
+	public void exit(ActionEvent theEvent) throws IOException {
+		Platform.exit();
+	}
+	
+	public void logout(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        LoginController controller = (LoginController) loader.getController();
+        controller.construct(myAuctionCentral);
+        login.show();
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
