@@ -6,21 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.BidderController">
+<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.BidderController">
    <children>
-      <Label layoutX="414.0" layoutY="56.0" prefHeight="75.0" prefWidth="473.0" text="Auction Central">
+      <Label layoutX="434.0" layoutY="52.0" prefHeight="75.0" prefWidth="333.0" text="Auction Central">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
       <VBox layoutX="344.0" layoutY="262.0" prefHeight="327.0" prefWidth="512.0" spacing="25.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#viewAuctionsAvailableToBid" prefHeight="51.0" prefWidth="509.0" text="View all auctions in which I can bid" />
+            <Button mnemonicParsing="false" onAction="#viewAuctionsAvailableToBid" prefHeight="54.0" prefWidth="511.0" text="View all auctions in which I can bid" />
             <Button mnemonicParsing="false" onAction="#viewItemsInOneAuction" prefHeight="54.0" prefWidth="511.0" text="View all items in one auction" />
-            <Button mnemonicParsing="false" onAction="#viewBids" prefHeight="64.0" prefWidth="514.0" text="View bids" />
+            <Button mnemonicParsing="false" onAction="#viewBids" prefHeight="54.0" prefWidth="511.0" text="View bids" />
          </children>
       </VBox>
-      <Label fx:id="name" layoutX="414.0" layoutY="147.0" prefHeight="35.0" prefWidth="304.0" text="Label" />
+      <Label fx:id="name" alignment="CENTER" layoutX="448.0" layoutY="148.0" prefHeight="35.0" prefWidth="304.0" text="Label">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
       <GridPane layoutX="1078.0" layoutY="639.0" prefHeight="158.0" prefWidth="108.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -33,7 +36,7 @@
          <children>
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="2" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="1" />
-            <Button visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Back" GridPane.rowIndex="0" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Back" visible="false" GridPane.rowIndex="0" />
          </children>
       </GridPane>
 

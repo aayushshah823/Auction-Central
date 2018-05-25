@@ -13,21 +13,8 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <HBox layoutX="75.0" layoutY="149.0" prefHeight="512.0" prefWidth="1099.0" spacing="80.0">
+      <HBox layoutX="75.0" layoutY="149.0" prefHeight="512.0" prefWidth="1099.0" spacing="180.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="400.0" spacing="50.0">
-               <children>
-                  <Label fx:id="itemName" prefHeight="51.0" prefWidth="397.0" textAlignment="CENTER">
-                     <font>
-                        <Font size="33.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="ItemDetails" prefHeight="342.0" prefWidth="400.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font></TextArea>
-               </children>
-            </VBox>
             <VBox prefHeight="512.0" prefWidth="392.0" spacing="20.0">
                <children>
                   <Label fx:id="feedBack" prefHeight="194.0" prefWidth="392.0" text="Label">
@@ -47,6 +34,14 @@
                   </StackPane>
                </children>
             </VBox>
+            <HBox prefHeight="512.0" prefWidth="685.0">
+               <children>
+                  <Label fx:id="itemDetails" prefHeight="512.0" prefWidth="476.0" text="Label">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
+               </children>
+            </HBox>
          </children>
       </HBox>
         <GridPane layoutX="1074.0" layoutY="662.0" prefHeight="124.0" prefWidth="112.0">

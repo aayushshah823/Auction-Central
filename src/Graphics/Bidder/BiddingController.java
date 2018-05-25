@@ -34,9 +34,7 @@ public class BiddingController  implements Initializable {
 	@FXML
 	Label feedBack;
 	@FXML
-	Label itemName;
-	@FXML
-	TextArea ItemDetails;
+	Label itemDetails;	
 	@FXML
 	TextField bidAmount;
 	@FXML
@@ -54,11 +52,10 @@ public class BiddingController  implements Initializable {
 					+ "allowed bids per auction: " +  currentAuction.MAX_BIDS_ALLOWED_PER_BIDDER);
 			this.submitBidAmount.setDisable(true);
 		}
-		this.itemName.setText(this.item.getItemName());
-		
-		String details = "Item Description: "+ "\n" + this.item.getItemDesciption() + "\n"
-				+ "Starting Bid: " + this.item.getStartingBid();
-		this.ItemDetails.setText(details);
+			
+		String details = this.item.getItemName() + "\n" 
+				+ "Starting Bid: " + "\n" + "$" + this.item.getStartingBid();
+		this.itemDetails.setText(details);
 	}
 	
 
@@ -84,7 +81,7 @@ public class BiddingController  implements Initializable {
 		int attemptedBid = this.currentAuction.makeBid(this.item, bidAmount, this.myBidder);
 		String fb = "";
 		if(attemptedBid == 2) {
-		   fb = "Bid Amount is lower" + "\n" + "than starting bid";
+		   fb = "Bid Amount is lower" + "\n" + "han starting bid";
 		} else {
 		   fb = "Congratulations!" + "\n" + "Your Bid has been placed!";
 		}
