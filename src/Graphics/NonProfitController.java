@@ -59,11 +59,13 @@ public class NonProfitController implements Initializable {
 	
 	@FXML
 	public void viewAllAuction(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/ViewAllAuctionSubmittd.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/ViewItemList.fxml"));
 		AnchorPane ap = loader.load();
         Stage auctionRequest = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
 		Scene scene = new Scene(ap);
 		auctionRequest.setScene(scene);
+		NonprofitViewAllAuctions viewAllAuctionController = (NonprofitViewAllAuctions) loader.getController();
+		viewAllAuctionController.construct(myAuctionCentral, myNonProfit);
         auctionRequest.show();
 		
 	}
