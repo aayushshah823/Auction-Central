@@ -8,6 +8,7 @@
     primary-text-color: #212121; 
     secondary-text-color: #757575; 
     divider-color: #BDBDBD; 
+    error-color: #FF0000; 
 }
 
 .root{
@@ -23,7 +24,15 @@
 	-fx-brackground-radius: 8;
 }
 
-.label{
-	-fx-font:  48px "Arial";
-	-fx-text-fill:  primary-text-color;
+.label{ 
+	-fx-text-fill:  secondary-text-color;
+}
+
+#Title{
+	-fx-font: 50px "Arial";
+	-fx-text-fill: primary-text-color;
+}
+
+#Error{
+	-fx-text-fill: error-color;
 }

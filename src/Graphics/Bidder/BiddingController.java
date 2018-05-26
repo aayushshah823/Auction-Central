@@ -53,7 +53,8 @@ public class BiddingController  implements Initializable {
 			this.submitBidAmount.setDisable(true);
 		}
 			
-		String details = this.item.getItemName() + "\n" 
+		String details = this.currentAuction.getAuctionName() + "\n"+
+				this.item.getItemName() + "\n" 
 				+ "Starting Bid: " + "\n" + "$" + this.item.getStartingBid();
 		this.itemDetails.setText(details);
 	}
