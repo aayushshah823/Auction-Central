@@ -28,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 import model.AuctionCentral;
@@ -114,7 +115,7 @@ public class NonprofitAuctionRequest implements Initializable{
 		hour.add("07");
 		hour.add("08");
 		hour.add("09");
-		for (int i = 10; i <= 12; i++) {
+		for (int i = 10; i <= 23; i++) {
 			String num = "" + i;
 			hour.add(num);
 		}
@@ -171,16 +172,18 @@ public class NonprofitAuctionRequest implements Initializable{
 		        Stage back = (Stage)((Node)event.getSource()).getScene().getWindow();
 		        Scene scene = new Scene(anchorPane);
 		        back.setScene(scene);
+		        NonProfitComfirmAucReq controller = (NonProfitComfirmAucReq) loader.getController();
+		        controller.construct(myAuctionCentral, myNonProfit);
 		        back.show();
 			} else {
 				// 1, 2, 3, 5: start date
 				// start time: 0
 				String startDateErrorTxt = "Error! ";
 				if (aucReqMap.containsKey(0)) {
-					startTimeErrorLabel.setVisible(true);
-					startTimeErrorLabel.setText(aucReqMap.get(0));
+					startDateErrorTxt += aucReqMap.get(0);
 				} 
 				if (aucReqMap.containsKey(1)) {
+					// error check 
 					startDateErrorTxt += aucReqMap.get(1);
 				} 
 				if (aucReqMap.containsKey(2)) {
@@ -194,15 +197,16 @@ public class NonprofitAuctionRequest implements Initializable{
 				} 
 				if (aucReqMap.containsKey(5)) {
 					startDateErrorTxt += aucReqMap.get(5);
-				}						
+				}	
+				//WRAP TEXT
+				maxAuctionsErrorLabel.setWrapText(true);
+				maxAuctionsErrorLabel.setTextAlignment(TextAlignment.JUSTIFY);
 				maxAuctionsErrorLabel.setVisible(true);
 				maxAuctionsErrorLabel.setText(startDateErrorTxt);
 			}	
 		} catch (NullPointerException e) {
 			System.out.println("im null");
 		}
-
-
 	}
 		
 	public void back(ActionEvent theEvent) throws IOException {
@@ -211,6 +215,8 @@ public class NonprofitAuctionRequest implements Initializable{
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
+        NonProfitController controller = (NonProfitController) loader.getController();
+        controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	}
 	

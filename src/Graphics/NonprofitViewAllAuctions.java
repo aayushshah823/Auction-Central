@@ -28,6 +28,11 @@ import model.Bidder;
 import model.Item;
 import model.NonProfit;
 
+/**
+ * @author aayush shah
+ * @author Benjamin Yuen
+ *
+ */
 public class NonprofitViewAllAuctions implements Initializable {
 
 	
@@ -44,6 +49,8 @@ public class NonprofitViewAllAuctions implements Initializable {
 	private ListView<Item> listOfItems; 
 	@FXML
 	private Button add;
+	@FXML
+	private Label itemLabel;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -120,9 +127,15 @@ public class NonprofitViewAllAuctions implements Initializable {
 	
 	public void displayCurrentAuction() {
 		this.listOfItems.getItems().clear();
+		itemLabel.setText("Number of Current Items: " + myCurrentAuction.getItems().size());
 		if(myCurrentAuction.getItems()  != null) {
 			for (Item item : myCurrentAuction.getItems()) {
 				this.listOfItems.getItems().add(item);
+			}
+			if (myCurrentAuction.getItems().size() >= 10) {
+				add.setDisable(true);
+			} else {
+				add.setDisable(false);
 			}
 		}
 	}
@@ -142,6 +155,8 @@ public class NonprofitViewAllAuctions implements Initializable {
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
+        NonProfitController controller = (NonProfitController) loader.getController();
+        controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	}
 	

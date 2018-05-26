@@ -66,8 +66,7 @@ public class NonProfitController implements Initializable {
 		auctionRequest.setScene(scene);
 		NonprofitViewAllAuctions viewAllAuctionController = (NonprofitViewAllAuctions) loader.getController();
 		viewAllAuctionController.construct(myAuctionCentral, myNonProfit);
-        auctionRequest.show();
-		
+        auctionRequest.show();		
 	}
 	
 	@FXML
