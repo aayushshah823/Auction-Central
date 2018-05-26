@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.BidderViewBidsAllController">
    <children>
-      <Label layoutX="448.0" layoutY="75.0" text="Bidding History">
+      <Label id="Title" layoutX="448.0" layoutY="75.0" text="Bidding History">
          <font>
             <Font size="47.0" />
          </font>

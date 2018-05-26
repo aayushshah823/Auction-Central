@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
+import Graphics.Employee.EmployeeController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +20,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Auction;
 import model.AuctionCentral;
+import model.AuctionCentralEmployee;
 import model.Bidder;
 import model.Item;
 
@@ -48,6 +51,7 @@ public class BiddingController  implements Initializable {
 		this.item = item;
 		feedBack.setText("");
 		if(currentAuction.isMaxBidsPerAuction(myBidder)) {
+			this.feedBack.setTextFill(Color.web("#ff0000"));
 			this.feedBack.setText("You have achived the maximum number of "
 					+ "allowed bids per auction: " +  currentAuction.MAX_BIDS_ALLOWED_PER_BIDDER);
 			this.submitBidAmount.setDisable(true);
@@ -75,6 +79,30 @@ public class BiddingController  implements Initializable {
         controller.construct(myAuctionCentral);
         login.show();
 	} 
+	
+	@FXML
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderSeeAllAuctions.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        AuctionsAvailableToBid controller = (AuctionsAvailableToBid) loader.getController();
+        controller.construct(myAuctionCentral, this.myBidder);
+        login.show();
+	}
+	@FXML
+	public void BackToBidderMainMenu(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        BidderController controller = (BidderController) loader.getController();
+        controller.construct(myAuctionCentral, this.myBidder);
+        login.show();
+	}
+
 	@FXML
 	public void enterBidAmount(ActionEvent event) throws IOException { 		
 		String bid = this.bidAmount.getText();

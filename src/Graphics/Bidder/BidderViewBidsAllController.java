@@ -76,6 +76,17 @@ public class BidderViewBidsAllController implements Initializable {
         back.setScene(scene);
         back.show();
 	}
+	@FXML
+	public void BackToBidderMainMenu(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        BidderController controller = (BidderController) loader.getController();
+        controller.construct(myAuctionCentral, this.myBidder);
+        login.show();
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
