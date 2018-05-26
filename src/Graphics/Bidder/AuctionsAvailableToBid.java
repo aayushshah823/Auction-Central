@@ -69,6 +69,7 @@ public class AuctionsAvailableToBid implements Initializable{
 						public void handle(MouseEvent event) {
 							if(event.getButton().equals(MouseButton.PRIMARY)){
 					            if(event.getClickCount() == 2){
+					              listOfItems.getItems().clear();
 						          myCurrentAuction = cell.getItem(); 	
 						          displayCurrentAuction();
 					         }

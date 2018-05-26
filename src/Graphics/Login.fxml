@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.LoginController">
    <children>
       <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="451.0" layoutY="119.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="360.0" layoutY="113.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="System Bold Italic" size="56.0" />
          </font>
@@ -18,12 +18,8 @@
             <Bloom />
          </effect>
       </Label>
-      <AnchorPane layoutX="29.0" layoutY="45.0" prefHeight="146.0" prefWidth="127.0">
-         <children>
-            <Button layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" text="Exit" />
-         </children>
-      </AnchorPane>
-      <VBox layoutX="519.0" layoutY="318.0" prefHeight="326.0" prefWidth="277.0" spacing="15.0">
+      <AnchorPane layoutX="29.0" layoutY="45.0" prefHeight="146.0" prefWidth="127.0" />
+      <VBox layoutX="452.0" layoutY="306.0" prefHeight="326.0" prefWidth="277.0" spacing="15.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please sign in." wrappingWidth="166.2529296875">
                <font>
@@ -40,5 +36,6 @@
          </children>
       </VBox>
       <Label fx:id="userNotFound" layoutX="813.0" layoutY="414.0" text="userNotFound" />
+      <Button layoutX="1063.0" layoutY="689.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" text="Exit" />
    </children>
 </AnchorPane>

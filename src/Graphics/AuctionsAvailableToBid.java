@@ -29,7 +29,6 @@ public class AuctionsAvailableToBid implements Initializable{
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder;
-		//TODO TEST THIS. ASK JAKE WHICH BIDDER TO USE
 		if(this.myBidder.getTotalNumberOfBids() == this.MAX_TOTAL_BIDS) {
 			this.cannotBid.setText("You have reached the Maximum number"
 					+ " of allowed bids per bidder: " + this.MAX_TOTAL_BIDS);
