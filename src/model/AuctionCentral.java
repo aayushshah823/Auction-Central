@@ -95,13 +95,9 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	public HashMap<Integer, String> updateAuctionLimit(int max) {
 		HashMap<Integer, String> errorMap = new HashMap<>();
-//		int currentCount = 0;
-//		for (NonProfit nonProfit : myAuctions.keySet()) {
-//			currentCount += myAuctions.get(nonProfit).size();
-//		}
 		if (max <= numCurrentAuctions) {
 			errorMap.put(0, "Current amount of auctions is equal to or "
-					+ "greater than the given max"); 
+					+ "greater than the number of current Auctions"); 
 		}
 		if (max < 1) {
 			errorMap.put(1, "Given max is non-positive");
@@ -112,6 +108,34 @@ public class AuctionCentral implements java.io.Serializable {
 		return errorMap;
 	}
 	
+	public int cancelAuction(Auction theAuction) {
+		if (theAuction.isCancelAvailable() == true) {
+			for (Map.Entry<NonProfit, ArrayList<Auction>> map : myAuctions.entrySet()) {
+				NonProfit np = map.getKey();
+				ArrayList<Auction> auctions = map.getValue();
+				for (Auction auction : auctions) {
+					if (auction.getAuctionName().equals(theAuction.getAuctionName()) &&
+							auction.getStartDate().isEqual(theAuction.getStartDate())) {
+						if (myAuctions.get(np).size() == 1) {
+							myAuctions.remove(np);
+						} else {
+							myAuctions.get(np).remove(auction);
+						}
+						numCurrentAuctions--;
+						if (myCalendar.get(theAuction.getStartDate()) == 1) {
+							myCalendar.remove(theAuction.getStartDate());
+						} else {
+							int auctionsThatDay = myCalendar.get(theAuction.getStartDate());
+							auctionsThatDay--;
+							myCalendar.put(theAuction.getStartDate(), auctionsThatDay);
+						}
+						return 1;
+					}
+				}
+			}
+		}
+		return 0;
+	}
 	
 
 	/**
