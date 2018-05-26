@@ -49,7 +49,7 @@ public class AuctionTest {
 		itemsList = new ArrayList<>();
 		auction.setAuctionName(AUCTION_NAME_GOODW);
 	}
-
+	
 	@Test
 	public void getAuctionName_GoodwillAuction_equals() {
 		assertEquals(AUCTION_NAME_GOODW, auction.getAuctionName());

@@ -59,6 +59,11 @@ public class Auction implements Serializable, Comparable<Auction> {
 		}
 		return result;
 	}
+	
+	
+	public boolean isCancelAvailable() {
+		return myBidders.isEmpty();
+	}
 
 
 	/**

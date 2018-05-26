@@ -166,7 +166,7 @@ public class Serialization {
 				"Semi-Annual Pro-Life Foundation Giveaway");
 		auction11.addItem(new Item("Pressure Cooker", 50.95, "Instant Pot Duo "
 				+ "Mini 3 Qt 7-in-1 Multi- Use Programmable Pressure Cooker, "
-				+ "Slow Cooker, Rice Cooker, Steamer, Sauté, Yogurt Maker and "
+				+ "Slow Cooker, Rice Cooker, Steamer, Sautï¿½, Yogurt Maker and "
 				+ "Warmer", 1));
 		Auction auction12 = new Auction(today.plus(12, ChronoUnit.DAYS), 
 				noon.minus(8, ChronoUnit.HOURS), noon.plus(1, ChronoUnit.HOURS)
@@ -197,7 +197,7 @@ public class Serialization {
 				"Satan");
 		NonProfit nonProfit8 = new NonProfit("twoheadedboy", "Graceful Aging Club",
 				"Son Goku");
-		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Pro–Life Foundation",
+		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Proï¿½Life Foundation",
 				"Catherine of Aragon");
 		NonProfit nonProfit10 = new NonProfit("MCRide", "Exmilitary",
 				"Stefan Burnett");
@@ -358,4 +358,3 @@ public class Serialization {
 	}
 
 }
-
