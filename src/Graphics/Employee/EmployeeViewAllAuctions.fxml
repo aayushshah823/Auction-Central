@@ -48,7 +48,7 @@
         </rowConstraints>
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#viewItem" prefWidth="200.0" text="View Item" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAuction" prefWidth="200.0" text="Delete Auction" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAuction" prefWidth="200.0" text="Cancel Auction" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Label fx:id="myAuctionCancelledLabel" alignment="CENTER" layoutX="4.0" layoutY="170.0" prefHeight="35.0" prefWidth="1200.0" text="Label" textAlignment="CENTER" />
