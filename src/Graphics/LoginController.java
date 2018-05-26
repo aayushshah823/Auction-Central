@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Graphics.Bidder.BidderController;
+import Graphics.Employee.EmployeeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,13 +71,13 @@ public class LoginController implements Initializable{
 	        controller.construct(myAuctionCentral, (NonProfit) user);
 	        nonProfitWindow.show();
 		} else {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/EmployeeMainMenu.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/EmployeeMainMenu.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        Stage employeeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        Scene scene = new Scene(anchorPane);
 	        employeeWindow.setScene(scene);
 	        EmployeeController controller = (EmployeeController) loader.getController();
-	        controller.construct(myAuctionCentral, (AuctionCentralEmployee) user);
+	        controller.construct(myAuctionCentral, (AuctionCentralEmployee) user, 0);
 	        employeeWindow.show();
 		}
         

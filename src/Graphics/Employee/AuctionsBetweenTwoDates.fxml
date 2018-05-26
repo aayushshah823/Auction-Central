@@ -53,7 +53,7 @@
       </GridPane>
       <Label fx:id="myAuctionCancelledLabel" alignment="CENTER" layoutX="4.0" layoutY="170.0" prefHeight="35.0" prefWidth="1200.0" text="Label" textAlignment="CENTER">
          <font>
-            <Font size="30.0" />
+            <Font size="26.0" />
          </font>
       </Label>
       <GridPane layoutX="1088.0" layoutY="643.0" prefHeight="159.0" prefWidth="114.0">
