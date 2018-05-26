@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Graphics.Bidder.BidderController;
+import Graphics.Employee.EmployeeController;
+import Graphics.Nonprofit.NonProfitController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

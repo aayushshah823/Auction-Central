@@ -8,10 +8,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonprofitAuctionRequest">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonprofitAuctionRequest">
    <children>
       <HBox layoutX="297.0" layoutY="81.0" prefHeight="64.0" prefWidth="143.0" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label id="Title" alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <effect>
             <Bloom />
          </effect>
@@ -102,9 +102,9 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="startDateErrorLabel" layoutX="840.0" layoutY="319.0" text="Error" textFill="RED" />
-      <Label fx:id="startTimeErrorLabel" layoutX="840.0" layoutY="412.0" text="Error!" textFill="RED" />
-      <Label fx:id="durationErrorLabel" layoutX="840.0" layoutY="497.0" text="Error!" textFill="RED" />
+      <Label id="Error" fx:id="startDateErrorLabel" layoutX="840.0" layoutY="319.0" text="Error" textFill="RED" />
+      <Label id="Error" fx:id="startTimeErrorLabel" layoutX="840.0" layoutY="412.0" text="Error!" textFill="RED" />
+      <Label id="Error" fx:id="durationErrorLabel" layoutX="840.0" layoutY="497.0" text="Error!" textFill="RED" />
       <GridPane layoutX="1078.0" layoutY="597.0" prefHeight="177.0" prefWidth="108.0">
          <children>
             <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" />
@@ -120,12 +120,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="maxAuctionsErrorLabel" layoutX="354.0" layoutY="165.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="143.0" text="Error!" textFill="RED" />
+      <Label id="Error" fx:id="maxAuctionsErrorLabel" layoutX="354.0" layoutY="165.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="143.0" text="Error!" textFill="RED" />
       <Button fx:id="submitButton" layoutX="578.0" layoutY="641.0" mnemonicParsing="false" onAction="#submit" text="Submit">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="nameErrorLabel" layoutX="840.0" layoutY="241.0" text="Error" textFill="RED" />
+      <Label id="Error" fx:id="nameErrorLabel" layoutX="840.0" layoutY="241.0" text="Error" textFill="RED" />
    </children>
 </AnchorPane>
