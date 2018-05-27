@@ -37,7 +37,7 @@ public class NonProfitComfirmAucReq implements Initializable {
 	}
 	
 	@FXML
-	public void mainmenu(ActionEvent theEvent) throws IOException {
+	public void home(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonProfitWelcomeScreen.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
