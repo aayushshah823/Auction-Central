@@ -5,6 +5,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -73,7 +74,6 @@ public class AuctionsAvailableToBid implements Initializable{
 		        	 @Override
 		        	 public void handle(MouseEvent event) {
 		        		 if(event.getButton().equals(MouseButton.PRIMARY)){
-		        			 listOfItems.getItems().clear();
 		        			 myCurrentAuction = cell.getItem();
 		        			 displayCurrentAuction();
 		        		 }
@@ -100,6 +100,8 @@ public class AuctionsAvailableToBid implements Initializable{
 			                      "Item Description: " + item.getItemDesciption() + "\n" 
 					                + "Starting Bid: "	+ df.format(item.getStartingBid()) + "\n";		                	
 			                	setText(toDisplay);
+			                } else {
+			                	setText("");
 			                }
 			            }
 				 };
