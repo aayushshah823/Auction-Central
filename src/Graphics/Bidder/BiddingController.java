@@ -2,6 +2,7 @@ package Graphics.Bidder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -56,10 +57,10 @@ public class BiddingController  implements Initializable {
 					+ "allowed bids per auction: " +  currentAuction.MAX_BIDS_ALLOWED_PER_BIDDER);
 			this.submitBidAmount.setDisable(true);
 		}
-			
+		DecimalFormat df = new DecimalFormat("0.00"); 
 		String details = this.currentAuction.getAuctionName() + "\n"+
 				this.item.getItemName() + "\n" 
-				+ "Starting Bid: " + "\n" + "$" + this.item.getStartingBid();
+				+ "Starting Bid: " + "\n" + "$" + df.format(this.item.getStartingBid());
 		this.itemDetails.setText(details);
 	}
 	

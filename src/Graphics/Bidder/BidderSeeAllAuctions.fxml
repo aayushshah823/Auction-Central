@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,33 +9,38 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.AuctionsAvailableToBid">
    <children>
-      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="448.0" layoutY="75.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Available Auctions">
+      <Label id="Title" layoutX="448.0" layoutY="75.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Available Auctions" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="47.0" />
          </font>
       </Label>
       <HBox layoutX="28.0" layoutY="154.0" prefHeight="472.0" prefWidth="1146.0" spacing="50.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="500.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
                <children>
-                  <Label text="Available Auctions">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="listOfAuctions" prefHeight="431.0" prefWidth="349.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="472.0" prefWidth="334.0">
-               <children>
-                  <Label fx:id="itemTitle" prefHeight="92.0" prefWidth="205.0" text="Available items">
+                  <Label prefHeight="58.0" prefWidth="286.0" text="Available Auctions">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfItems" prefHeight="468.0" prefWidth="331.0" />
-                  <VBox prefHeight="50.0" prefWidth="100.0" />
+                  <ListView fx:id="listOfAuctions" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="450.0" />
                </children>
+            </VBox>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="itemTitle" prefHeight="58.0" prefWidth="286.0" text="Available Items">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listOfItems" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="585.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></ListView>
+               </children>
+               <HBox.margin>
+                  <Insets left="-50.0" right="-50.0" />
+               </HBox.margin>
             </VBox>
             <StackPane prefHeight="427.0" prefWidth="200.0">
                <children>
@@ -46,6 +52,9 @@
                </children>
             </StackPane>
          </children>
+         <padding>
+            <Insets top="-15.0" />
+         </padding>
       </HBox>
       <Label fx:id="cannotBid" layoutX="28.0" layoutY="14.0" prefHeight="148.0" prefWidth="220.0" text="Label" />
         <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">

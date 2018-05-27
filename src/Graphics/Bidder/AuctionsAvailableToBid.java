@@ -2,6 +2,7 @@ package Graphics.Bidder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import model.Auction;
 import model.AuctionCentral;
 import model.Bidder;
 import model.Item;
+import model.NonProfit;
 
 public class AuctionsAvailableToBid implements Initializable{
 	private static final int MAX_TOTAL_BIDS = 12;
@@ -56,9 +58,14 @@ public class AuctionsAvailableToBid implements Initializable{
 		            protected void updateItem(Auction auction, boolean empty) {
 		                super.updateItem(auction, empty);
 		                if(auction != null) {
-		                	String toDisplay = auction.getAuctionName() + " | " + auction.getStartDate() + " " 
-				                	+ auction.getStartTime() + "-" + auction.getEndTime() + " | ";		                	
-		                	setText(toDisplay);
+		                	String toDisplay = auction.getAuctionName() + " | " + getNonProfitName(auction) + " | " + auction.getStartDate() + " " 
+									+ auction.getStartTime() + "-" + auction.getEndTime() + " | " + auction.getItems().size();
+							if (auction.getItems().size() == 1) {
+								toDisplay += " item";
+							} else {
+								toDisplay += " items";
+							}
+							setText(toDisplay);
 		                }
 		            }
 		         };
@@ -76,9 +83,11 @@ public class AuctionsAvailableToBid implements Initializable{
 		    }
 		});
 		for (Auction auction : myAuctionCentral.getFutureAuctions()) {
-			this.listOfAuctions.getItems().add(auction);
+			if (auction.getItems().size() > 0) {
+				this.listOfAuctions.getItems().add(auction);
+			}
 		}
-		
+		DecimalFormat df = new DecimalFormat("0.00"); 
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
 			@Override
 			public ListCell<Item> call(ListView<Item> arg0) {
@@ -89,7 +98,7 @@ public class AuctionsAvailableToBid implements Initializable{
 			                if(item != null) {
 			                	String toDisplay = "Item Name: " + item.getItemName() + "\n" +
 			                      "Item Description: " + item.getItemDesciption() + "\n" 
-					                + "Starting Bid: "	+ item.getStartingBid() + "\n";		                	
+					                + "Starting Bid: "	+ df.format(item.getStartingBid()) + "\n";		                	
 			                	setText(toDisplay);
 			                }
 			            }
@@ -117,6 +126,18 @@ public class AuctionsAvailableToBid implements Initializable{
 			this.listOfItems.getItems().add(item);
 		}
 	}
+	
+	private String getNonProfitName(Auction theAuction) {
+		for (NonProfit nonProfit : myAuctionCentral.getAllAuctions().keySet()) {
+			for (Auction auction : myAuctionCentral.getAllAuctions().get(nonProfit)) {
+				if (auction.equals(theAuction)) {
+					return nonProfit.getOrg();
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Precondition: user can bid
 	 * Postcondition: user will be sent to 

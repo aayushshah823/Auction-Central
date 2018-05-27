@@ -57,17 +57,22 @@ public class BidderViewAuctionsController implements Initializable{
 						super.updateItem(auction, empty);
 						if(auction != null) {
 							String toDisplay = auction.getAuctionName() + " | " + getNonProfitName(auction) + " | " + auction.getStartDate() + " " 
-									+ auction.getStartTime() + "-" + auction.getEndTime();
-							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
-								toDisplay += " | CLOSED";
+									+ auction.getStartTime() + "-" + auction.getEndTime() + " | " + auction.getItems().size();
+							if (auction.getItems().size() == 1) {
+								toDisplay += " item";
+							} else {
+								toDisplay += " items";
 							}
 							if (bids.containsKey(auction)) {
-								toDisplay += " | " + bids.get(auction).size();
+								toDisplay += " - " + bids.get(auction).size();
 								if (bids.get(auction).size() > 1) {
 									toDisplay += " bids";
 								} else {
 									toDisplay += " bid";
 								}
+							}
+							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
+								toDisplay += " | CLOSED";
 							}
 							setText(toDisplay);
 						}

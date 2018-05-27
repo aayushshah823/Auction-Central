@@ -36,7 +36,6 @@ import model.NonProfit;
 public class BidderViewBidsController implements Initializable{
 	
 	private AuctionCentral myAuctionCentral;
-	private Auction myCurrentAuction;
 	private Bidder myBidder;
 
 	@FXML
