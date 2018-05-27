@@ -120,9 +120,7 @@ public class AuctionsAvailableToBid implements Initializable{
 	
 	public void displayCurrentAuction() {
 		this.listOfItems.getItems().clear();
-		System.out.println("out");
 		for (Item item : myCurrentAuction.getItems()) {
-			System.out.println("\tloop");
 			this.listOfItems.getItems().add(item);
 		}
 	}
