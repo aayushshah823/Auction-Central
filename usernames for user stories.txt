@@ -1,0 +1,41 @@
+auctionCentralDefault.ser
+---------------------------------------------------
+BIDDERS
+-----------------------------
+0 bids - bidderguy31
+1 bid in future auction - kungfuKenny
+1 bid in future auction - theDonald
+8 bids in future auction - Kelly
+12 bids over past auctions - username
+12 bids over future auctions - Franks814
+12 bids over all auctions - Transcontinental
+
+NONPROFITS
+-----------------------------
+no previous auction - MCRide
+last auction > 1 year ago - johnyBoi
+last auction < 1 year ago - janey
+auction scheduled 10 days in future - noided47
+previous auctions + scheduled auction - abcdefg
+scheduled empty auction - theBossBaby
+auction tomorrow - numberOfTheBeast
+auction today - twoheadedboy
+auctions on the same days - LongLiveTheQueen, BillyTheKid
+
+EMPLOYEES
+-----------------------------
+KingOfCarrotFlowers
+QueenOfCarrotFlowers
+
+AUCTIONS
+-----------------------------
+*shown in the ui
+
+
+auctionCentralFull.ser
+------------------------------------------------------
+usernames - employee, bidder, nonprofit1 - nonprofit25
+
+auctionCentralEmpty.ser
+------------------------------------------------------
+usernames - employee, bidder, nonprofit
