@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 
 import Graphics.LoginController;
+import Graphics.Bidder.BidderController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -193,6 +194,17 @@ public class AuctionsBetweenDates implements Initializable{
         login.show();
 	}
 
+	public void home(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/EmployeeMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        EmployeeController controller = (EmployeeController) loader.getController();
+        controller.construct(myAuctionCentral, myEmployee, 0);
+        login.show();
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		myAuctionCancelledLabel.setText("");

@@ -100,6 +100,8 @@ public class EmployeeViewAllAuctionsController implements Initializable{
 			                      "Item Description: " + item.getItemDesciption() + "\n" 
 					                + "Starting Bid: "	+ item.getStartingBid() + "\n";		                	
 			                	setText(toDisplay);
+			                } else {
+			                	setText("");
 			                }
 			            }
 				 };

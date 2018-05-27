@@ -45,13 +45,13 @@ public class EmployeeViewItemController implements Initializable {
 	}
 	
 	public void back(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/AuctionsBetweenTwoDates.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/EmployeeViewAllAuctions.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
-        AuctionsBetweenDates controller = (AuctionsBetweenDates) loader.getController();
-        controller.construct(myAuctionCentral, (AuctionCentralEmployee) myEmployee, myStartDate, myEndDate, "");
+        EmployeeViewAllAuctionsController controller = (EmployeeViewAllAuctionsController) loader.getController();
+        controller.construct(myAuctionCentral, (AuctionCentralEmployee) myEmployee, "");
         back.show();
 	}
 	
@@ -67,6 +67,17 @@ public class EmployeeViewItemController implements Initializable {
         login.setScene(scene);
         LoginController controller = (LoginController) loader.getController();
         controller.construct(myAuctionCentral);
+        login.show();
+	}
+	
+	public void home(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/EmployeeMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        EmployeeController controller = (EmployeeController) loader.getController();
+        controller.construct(myAuctionCentral, myEmployee, 0);
         login.show();
 	}
 	
