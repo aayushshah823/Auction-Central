@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -95,7 +96,13 @@ public class LoginController implements Initializable{
 
 	public void construct(AuctionCentral ac) {
 		this.myAuctionCentral = ac;
+		username.setOnAction((event) -> {
+			try {
+				login(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
-
 }

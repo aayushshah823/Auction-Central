@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.AuctionCentral;
 /**
@@ -24,7 +25,7 @@ public class Main  extends Application{
 		try {
 			AuctionCentral auctionCentral = null;
 			try {   
-		        FileInputStream file = new FileInputStream("auctionCentralDefault.ser");
+		        FileInputStream file = new FileInputStream("auctionCentralFull.ser");
 		        ObjectInputStream in = new ObjectInputStream(file);        
 		        auctionCentral = (AuctionCentral)in.readObject();
 		        in.close();
@@ -34,7 +35,8 @@ public class Main  extends Application{
 		    } catch(ClassNotFoundException exception) {
 		        System.out.println("ClassNotFoundException");
 		    }
-			
+			primaryStage.setTitle("Auction Central");
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        
