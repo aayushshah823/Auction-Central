@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.AuctionsAvailableToBid">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.AuctionsAvailableToBid">
    <children>
-      <Label id="Title" layoutX="448.0" layoutY="75.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Auction Central">
+      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="448.0" layoutY="75.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Available Auctions">
          <font>
             <Font size="47.0" />
          </font>
