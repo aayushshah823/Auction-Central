@@ -31,7 +31,6 @@ import model.NonProfit;
 
 /**
  * @author aayush shah
- * @author Benjamin Yuen
  *
  */
 public class NonprofitViewAllAuctions implements Initializable {
@@ -91,10 +90,14 @@ public class NonprofitViewAllAuctions implements Initializable {
 		    }
 		});
 		
-		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
 			   listOfAuctions.getItems().add(auction);
 		}
 		
+//		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+//			   listOfAuctions.getItems().add(auction);
+//		}
+
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
 			@Override
 			public ListCell<Item> call(ListView<Item> arg0) {
