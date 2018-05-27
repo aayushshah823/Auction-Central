@@ -23,8 +23,7 @@ public class Serialization {
 		LocalTime noon = LocalTime.NOON;
 		
 		Auction auction1 = new Auction(today.minus(370, ChronoUnit.DAYS), 
-				noon, noon.plus(4, ChronoUnit.HOURS), "Chicago Men's Club "
-						+ "Annual Auction");
+				noon, noon.plus(4, ChronoUnit.HOURS), "CMC AA");
 		auction1.addItem(new Item("A Random Walk Down Wall Street: The "
 				+ "Time-tested Strategy for Successful Investing", 5.00, 
 				"Reassuring, authoritative, and perennially best-selling "
@@ -122,8 +121,7 @@ public class Serialization {
 		auction6.addItem(new Item("Storage Bag Hanger", 1, "16-pocket Green "
 				+ "Storage Bag Hanger", 1));
 		Auction auction7 = new Auction(today.minus(1500, ChronoUnit.DAYS), 
-				noon, noon.plus(10, ChronoUnit.HOURS), "Nursing Mothers "
-						+ "Foundation Auction");
+				noon, noon.plus(10, ChronoUnit.HOURS), "NMF Auction");
 		auction7.addItem(new Item("Vacuum Bags", 1.00, "SINMA Practical "
 				+ "Handheld Vacuum Bags", 23));
 		auction7.addItem(new Item("Unicorn Meat", 3.00, "ThinkGeek Easy-Open"
@@ -163,7 +161,7 @@ public class Serialization {
 				+ "Brush Makeup Brush Kit", 10));
 		Auction auction11 = new Auction(today.plus(13, ChronoUnit.DAYS), 
 				noon.plus(1, ChronoUnit.HOURS), noon.plus(5, ChronoUnit.HOURS),
-				"Semi-Annual Pro-Life Foundation Giveaway");
+				"Semi-Annual Pro-Life Auction");
 		auction11.addItem(new Item("Pressure Cooker", 50.95, "Instant Pot Duo "
 				+ "Mini 3 Qt 7-in-1 Multi- Use Programmable Pressure Cooker, "
 				+ "Slow Cooker, Rice Cooker, Steamer, Saut�, Yogurt Maker and "
@@ -180,9 +178,8 @@ public class Serialization {
 				+ "Mix 0.87 oz", 3));
 		
 		AuctionCentral auctionCentral = new AuctionCentral();
-		
-		NonProfit nonProfit1 = new NonProfit("BillyTheKid", "Pro Youth Foundation",
-				"Billy Pilgrim");
+		NonProfit nonProfit1 = new NonProfit("MCRide", "Exmilitary",
+				"Stefan Burnett");
 		NonProfit nonProfit2 = new NonProfit("johnyBoi", "Chicago Men's Club",
 				"John Doe");
 		NonProfit nonProfit3 = new NonProfit("janey", "Project Alert",
@@ -197,10 +194,10 @@ public class Serialization {
 				"Satan");
 		NonProfit nonProfit8 = new NonProfit("twoheadedboy", "Graceful Aging Club",
 				"Son Goku");
-		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Pro�Life Foundation",
+		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Pro-Life Foundation",
 				"Catherine of Aragon");
-		NonProfit nonProfit10 = new NonProfit("MCRide", "Exmilitary",
-				"Stefan Burnett");
+		NonProfit nonProfit10 = new NonProfit("BillyTheKid", "Pro Youth Foundation",
+				"Billy Pilgrim");
 		
 		Bidder bidder1 = new Bidder("bidderguy31", "Julius Caesar");
 		Bidder bidder2 = new Bidder("kungfuKenny", "Augustus Caesar");
@@ -329,18 +326,23 @@ public class Serialization {
 		
 		// 25 future auctions
 		auctionCentral = new AuctionCentral();
+		auctionCentral.addNewUser(new AuctionCentralEmployee("employee", "employeeName"));
+		auctionCentral.addNewUser(new Bidder("bidder", "bidderName"));
 		for (int i = 1; i <= 25; i++) {
-			NonProfit nonProfit = new NonProfit("userName" + i, "nonProfit" + i, 
-					"contactPerson" + i);
+			NonProfit nonProfit = new NonProfit("nonprofit" + i, "nonprofitName" + i, 
+					"contactName" + i);
 			auctionCentral.addNewUser(nonProfit);
 			Auction auction = new Auction(today.plus(2*i, ChronoUnit.DAYS), 
-					noon, noon.plus(7, ChronoUnit.HOURS), "Auction1");
-			auction.setAuctionName("auction"+i);
+					noon, noon.plus(7, ChronoUnit.HOURS), "Auction"+i);
 			auctionCentral.addAuction(nonProfit, auction);
 		}
 		serialize("auctionCentralFull", auctionCentral);
 		// empty auctionCentral
-		serialize("auctionCentralEmpty", new AuctionCentral());
+		auctionCentral = new AuctionCentral();
+		auctionCentral.addNewUser(new AuctionCentralEmployee("employee", "employeeName"));
+		auctionCentral.addNewUser(new Bidder("bidder", "bidderName"));
+		auctionCentral.addNewUser(new NonProfit("nonprofit", "nonprofitName", "contactName"));
+		serialize("auctionCentralEmpty", auctionCentral);
 	}
 	
 	// Helper method to serialize a given AuctionCentral as a target filename.
