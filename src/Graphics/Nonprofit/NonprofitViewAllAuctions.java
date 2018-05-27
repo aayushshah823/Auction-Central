@@ -90,13 +90,15 @@ public class NonprofitViewAllAuctions implements Initializable {
 		    }
 		});
 		
-		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
-			   listOfAuctions.getItems().add(auction);
-		}
-		
-//		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+		//Below code throws null pointer
+//		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
 //			   listOfAuctions.getItems().add(auction);
 //		}
+		
+		//But your old code works
+		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+			   listOfAuctions.getItems().add(auction);
+		}
 
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
 			@Override
@@ -151,7 +153,7 @@ public class NonprofitViewAllAuctions implements Initializable {
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         NonProfitAddItemController controller = (NonProfitAddItemController) loader.getController();
-        controller.construct(myAuctionCentral, myNonProfit);
+        controller.construct(myAuctionCentral, myNonProfit, myCurrentAuction);
         back.setScene(scene);
         back.show();
 	}

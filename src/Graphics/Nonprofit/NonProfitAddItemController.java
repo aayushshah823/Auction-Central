@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Auction;
 import model.AuctionCentral;
 import model.Item;
 import model.NonProfit;
@@ -33,7 +34,7 @@ public class NonProfitAddItemController implements Initializable {
 	@FXML
 	private TextField myItemNameField;
 	@FXML
-	private TextField myQuantityField;
+	private TextField myCountField;
 	@FXML
 	private TextArea myDescripArea;
 	@FXML
@@ -41,7 +42,7 @@ public class NonProfitAddItemController implements Initializable {
 	@FXML
 	private Label myItemNameLabel; 
 	@FXML
-	private Label myQuantityLabel;
+	private Label myCountLabel;
 	@FXML
 	private Label myDescripLabel;
 	@FXML
@@ -53,18 +54,18 @@ public class NonProfitAddItemController implements Initializable {
 
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
+	private Auction myCurrAuction;
 	private Item myItem;
-	private String errorTxt;
-	private int myErrorCount;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		myErrorLabel.setVisible(false);
 	}
 	
-	public void construct(AuctionCentral ac, NonProfit nonProfit) {
+	public void construct(AuctionCentral ac, NonProfit nonProfit, Auction auc) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
+		this.myCurrAuction = auc;
 	}
 	
 	@FXML
@@ -72,18 +73,18 @@ public class NonProfitAddItemController implements Initializable {
 		int errorCount = 0;		
 		errorCount =checkEmpty(myStartBidField, myDescripLabel, errorCount);
 		errorCount =checkEmpty(myItemNameField, myItemNameLabel, errorCount);
-		errorCount = checkEmpty(myQuantityField, myQuantityLabel, errorCount);
+		errorCount = checkEmpty(myCountField, myCountLabel, errorCount);
 		errorCount = checkArea(errorCount);
 		
 		int itemCount = -1;
 		double startBid = -1;		
 		try {		
-			myQuantityLabel.setTextFill(Color.BLACK);
-			myQuantityLabel.setText("Total Quantity?");
-			itemCount = Integer.parseInt(myQuantityField.getText());
+			myCountLabel.setTextFill(Color.BLACK);
+			myCountLabel.setText("What is the Item Count?");
+			itemCount = Integer.parseInt(myCountField.getText());
 		} catch (NumberFormatException e) {
-			myQuantityLabel.setTextFill(Color.RED);
-			myQuantityLabel.setText("Total Quantity? Please enter a number.");
+			myCountLabel.setTextFill(Color.RED);
+			myCountLabel.setText("What is the Item Count? Please enter a number.");
 		}
 		try {		
 			myStartBidLabel.setTextFill(Color.BLACK);
@@ -94,14 +95,15 @@ public class NonProfitAddItemController implements Initializable {
 			myStartBidLabel.setText("What is the starting bid? Please enter a number.");
 		}
 		
-
 		
 		if (checkAllEntriesFilled() && itemCount != -1 && startBid != -1) {	
 			myErrorLabel.setVisible(false);
 
 			myItem = new Item(myItemNameField.getText(), startBid, myDescripArea.getText(), itemCount);
 			
-			myNonProfit.addItem(myItem);
+//			myAuctionCentral.getAllAuctions().get(myNonProfit).get;
+//			myNonProfit.addItem(myItem);
+			myCurrAuction.addItem(myItem);
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonprofitComfirmItem.fxml"));
 	        AnchorPane anchorPane = loader.load();
@@ -120,7 +122,7 @@ public class NonProfitAddItemController implements Initializable {
 	private boolean checkAllEntriesFilled() {		
 		return !myDescripArea.getText().equals("") && !myItemNameField.getText().equals("")
 				&& !myStartBidField.getText().equals("")
-				&& !myQuantityField.getText().equals("");
+				&& !myCountField.getText().equals("");
 	}
 	
 	private int checkEmpty(TextField field, Label label, int count) {
@@ -144,20 +146,6 @@ public class NonProfitAddItemController implements Initializable {
 		}
 		return count;
 	}
-
-//	private double checkNumber(Label label, TextField field) {
-//		Double value = -1.0;
-//		try {				
-//			myErrorLabel2.setVisible(false);
-//			label.setTextFill(Color.BLACK);
-//			value = Double.parseDouble(field.getText());
-//		} catch (NumberFormatException e) {
-//			label.setTextFill(Color.RED);
-//			myErrorLabel2.setVisible(true);
-//			myErrorLabel2.setText("Please enter a number for quantity or starting bid.");
-//		}
-//		return value;
-//	}
 	
 	public void back(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/ViewItemList.fxml"));
