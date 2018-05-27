@@ -25,7 +25,7 @@ public class Main  extends Application{
 		try {
 			AuctionCentral auctionCentral = null;
 			try {   
-		        FileInputStream file = new FileInputStream("auctionCentralFull.ser");
+		        FileInputStream file = new FileInputStream("auctionCentralDefault.ser");
 		        ObjectInputStream in = new ObjectInputStream(file);        
 		        auctionCentral = (AuctionCentral)in.readObject();
 		        in.close();
