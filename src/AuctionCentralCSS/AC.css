@@ -27,6 +27,7 @@
 #Title{
 	-fx-font: 50px "Arial";
 	-fx-text-fill: primary-text-color;
+	-fx-alignment: center;
 }
 
 #Error{

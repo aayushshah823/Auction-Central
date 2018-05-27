@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import Graphics.Bidder.BidderController;
 import Graphics.Employee.EmployeeController;
 import Graphics.Nonprofit.NonProfitController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +82,10 @@ public class LoginController implements Initializable{
 	        controller.construct(myAuctionCentral, (AuctionCentralEmployee) user, 0);
 	        employeeWindow.show();
 		}
-        
+	}
+	
+	public void exit(ActionEvent theEvent) throws IOException {
+		Platform.exit();
 	}
 
 	@Override
