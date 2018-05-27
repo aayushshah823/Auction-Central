@@ -33,7 +33,7 @@ public class AuctionsAvailableToBid implements Initializable{
 	private static final int MAX_TOTAL_BIDS = 12;
 	public AuctionCentral myAuctionCentral;
 	public Bidder myBidder;
-	public Auction myCurrentAuction ;
+	public Auction myCurrentAuction;
 	public Item myCurrentItem;
 	@FXML 
 	private Label cannotBid;
@@ -65,18 +65,16 @@ public class AuctionsAvailableToBid implements Initializable{
 		            }
 		         };
 		         cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
-						@Override
-						public void handle(MouseEvent event) {
-							if(event.getButton().equals(MouseButton.PRIMARY)){
-					            if(event.getClickCount() == 2){
-					              //listOfItems.getItems().clear();
-						          myCurrentAuction = cell.getItem(); 	
-						          displayCurrentAuction();
-					         }
-					    }
-					}
-            	});
-		        return cell;
+		        	 @Override
+		        	 public void handle(MouseEvent event) {
+		        		 if(event.getButton().equals(MouseButton.PRIMARY)){
+		        			 listOfItems.getItems().clear();
+		        			 myCurrentAuction = cell.getItem();
+		        			 displayCurrentAuction();
+		        		 }
+		        	 }
+		         });
+		         return cell;
 		    }
 		});
 		for (Auction auction : myAuctionCentral.getFutureAuctions()) {
@@ -102,11 +100,10 @@ public class AuctionsAvailableToBid implements Initializable{
 						@Override
 						public void handle(MouseEvent event) {
 							if(event.getButton().equals(MouseButton.PRIMARY)){
-					            if(event.getClickCount() == 1){
-					            	myCurrentItem = cell.getItem();
+					            myCurrentItem = cell.getItem();
 					         }
 					    }
-					}
+					
          	});
 				return cell;
 			}
@@ -117,10 +114,10 @@ public class AuctionsAvailableToBid implements Initializable{
 	public void displayCurrentAuction() {
 		this.itemTitle.setText("Available Items");
 		this.listOfItems.getItems().clear();
-		if(myCurrentAuction.getItems()  != null) {
-			for (Item item : myCurrentAuction.getItems()) {
-				this.listOfItems.getItems().add(item);
-			}
+		System.out.println("out");
+		for (Item item : myCurrentAuction.getItems()) {
+			System.out.println("\tloop");
+			this.listOfItems.getItems().add(item);
 		}
 	}
 	/**
@@ -155,6 +152,17 @@ public class AuctionsAvailableToBid implements Initializable{
         LoginController controller = (LoginController) loader.getController();
         controller.construct(myAuctionCentral);
         login.show();
+	}
+	
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderMainMenu.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        BidderController controller = (BidderController) loader.getController();
+        controller.construct(myAuctionCentral, myBidder);
+        back.setScene(scene);
+        back.show();
 	}
 	
 	@FXML
