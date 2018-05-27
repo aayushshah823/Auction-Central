@@ -28,7 +28,7 @@
             </VBox>
          </children>
       </HBox>
-        <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">
+      <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>

@@ -91,33 +91,33 @@ public class AuctionsAvailableToBid implements Initializable{
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
 			@Override
 			public ListCell<Item> call(ListView<Item> arg0) {
-				 ListCell<Item> cell = new ListCell<Item>() {
-				       @Override
-			            protected void updateItem(Item item, boolean empty) {
-			                super.updateItem(item, empty);
-			                if(item != null) {
-			                	String toDisplay = "Item Name: " + item.getItemName() + "\n" +
-			                      "Item Description: " + item.getItemDesciption() + "\n" 
-					                + "Starting Bid: "	+ df.format(item.getStartingBid()) + "\n";		                	
-			                	setText(toDisplay);
-			                } else {
-			                	setText("");
-			                }
-			            }
-				 };
-				 cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
-						@Override
-						public void handle(MouseEvent event) {
-							if(event.getButton().equals(MouseButton.PRIMARY)){
-					            myCurrentItem = cell.getItem();
-					         }
-					    }
-					
-         	});
+				ListCell<Item> cell = new ListCell<Item>() {
+					@Override
+					protected void updateItem(Item item, boolean empty) {
+						super.updateItem(item, empty);
+						if(item != null) {
+							String toDisplay = "Item Name: " + item.getItemName() + "\n" +
+									"Item Description: " + item.getItemDesciption() + "\n" 
+									+ "Starting Bid: "	+ df.format(item.getStartingBid()) + "\n";		                	
+							setText(toDisplay);
+						} else {
+							setText("");
+						}
+					}
+				};
+				cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						if(event.getButton().equals(MouseButton.PRIMARY)){
+							myCurrentItem = cell.getItem();
+						}
+					}
+
+				});
 				return cell;
 			}
 		});
-		
+
 	}	
 	
 	public void displayCurrentAuction() {

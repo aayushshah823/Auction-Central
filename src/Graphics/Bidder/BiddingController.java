@@ -53,7 +53,7 @@ public class BiddingController  implements Initializable {
 		feedBack.setText("");
 		if(currentAuction.isMaxBidsPerAuction(myBidder)) {
 			this.feedBack.setTextFill(Color.web("#ff0000"));
-			this.feedBack.setText("You have achived the maximum number of "
+			this.feedBack.setText("You have achieved the maximum number of "
 					+ "allowed bids per auction: " +  currentAuction.MAX_BIDS_ALLOWED_PER_BIDDER);
 			this.submitBidAmount.setDisable(true);
 		}

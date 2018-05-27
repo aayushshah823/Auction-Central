@@ -76,7 +76,7 @@ public class BidderViewBidsAllController implements Initializable {
         back.setScene(scene);
         back.show();
 	}
-	@FXML
+	
 	public void BackToBidderMainMenu(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderMainMenu.fxml"));
         AnchorPane anchorPane = loader.load();
