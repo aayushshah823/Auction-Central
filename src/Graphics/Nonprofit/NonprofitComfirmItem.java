@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionCentral;
@@ -22,7 +21,7 @@ import model.NonProfit;
  * @author Benjamin Yuen
  *
  */
-public class NonProfitComfirmAucReq implements Initializable {	
+public class NonprofitComfirmItem implements Initializable {	
 	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
@@ -49,7 +48,7 @@ public class NonProfitComfirmAucReq implements Initializable {
 	} 
 	@FXML
 	public void back(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/nonprofitAuctionRequest.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/AddItemToAuctionList.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.NonprofitViewAllAuctions">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Nonprofit.NonprofitViewAllAuctions">
    <children>
       <Label id="Title" alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <effect>
@@ -67,7 +67,7 @@
             </VBox>
             <StackPane prefHeight="427.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="add" mnemonicParsing="false" text="Add An Item">
+                  <Button fx:id="add" mnemonicParsing="false" onAction="#add" text="Add An Item">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

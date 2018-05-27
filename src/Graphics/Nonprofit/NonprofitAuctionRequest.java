@@ -46,9 +46,9 @@ public class NonprofitAuctionRequest implements Initializable{
 	private TextField durationField, auctionNameTxtField,  
 						hourField, minField, endHourField, endMinField;
 	@FXML
-	private Label startDateLabel, startDateLabel2, startTimeLabel, startTimeLabel2, durationLabel,
+	private Label startDateLabel, startTimeLabel,  durationLabel, aucNameLabel,
 					startDateErrorLabel, startTimeErrorLabel, durationErrorLabel, maxAuctionsErrorLabel, 
-					nameErrorLabel,aucNameLabel;
+					nameErrorLabel;
 	@FXML
 	private ComboBox startTimeMinCombo, startTimeHrCombo,endTimeHrCombo, endTimeMinCombo;
 	@FXML
@@ -58,6 +58,9 @@ public class NonprofitAuctionRequest implements Initializable{
 	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
+	private int myDuration;
+	private LocalDate myStartDate;
+	private LocalTime myStartTime;
 	
 	private ObservableList<String> minutes = FXCollections.observableArrayList();
 	private ObservableList<String> hour = FXCollections.observableArrayList();
@@ -74,16 +77,39 @@ public class NonprofitAuctionRequest implements Initializable{
 		durationErrorLabel.setVisible(false);
 		maxAuctionsErrorLabel.setVisible(false);
 		nameErrorLabel.setVisible(false);
+		
 		startDateErrorLabel.setTextFill(Color.RED);
 		startTimeErrorLabel.setTextFill(Color.RED);
 		durationErrorLabel.setTextFill(Color.RED);
 
-//		submitButton.setDisable(true);
-//		if (!durationField.getText().equals("") && !auctionNameTxtField.getText().equals("")) {
-//			submitButton.setDisable(false);
-//		}
 		makeMinutes();
 		makeHours();		
+	}
+	
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonProfitWelcomeScreen.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        back.setScene(scene);
+        NonProfitController controller = (NonProfitController) loader.getController();
+        controller.construct(myAuctionCentral, myNonProfit);
+        back.show();
+	}
+	
+	public void exit(ActionEvent theEvent) throws IOException {
+		Platform.exit();
+	}
+	
+	public void logout(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        login.setScene(scene);
+        LoginController controller = (LoginController) loader.getController();
+        controller.construct(myAuctionCentral);
+        login.show();
 	}
 	
 	private void makeMinutes() {
@@ -116,46 +142,14 @@ public class NonprofitAuctionRequest implements Initializable{
 	
 	@FXML
 	public void submit(ActionEvent event) throws IOException {	
-		if (auctionNameTxtField.getText().equals("")) {
-			nameErrorLabel.setVisible(true);
-			nameErrorLabel.setText("Please enter an auction name");
-			aucNameLabel.setTextFill(Color.RED);
-		} else {
-			nameErrorLabel.setVisible(false);
-			aucNameLabel.setTextFill(Color.BLACK);
-		}
-
-		//start date
-		LocalDate startDate = startDatePicker.getValue();
-		System.out.println(startDate.toString());		
-		//duration
-		int duration=0;
-		try {				
-			durationErrorLabel.setVisible(false);
-			durationLabel.setTextFill(Color.BLACK);
-			duration = Integer.parseInt(durationField.getText());
-		} catch (NumberFormatException e) {
-			durationLabel.setTextFill(Color.RED);
-			durationErrorLabel.setVisible(true);
-			durationErrorLabel.setText("Please enter a number");
-		} 
-		
-		//Start time
-		int startHr = Integer.parseInt((String) startTimeHrCombo.getValue());
-		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 		
-		LocalTime startTime = LocalTime.of(startHr, startMin);		
-		
-//		HashMap<Integer, String> aucReqMap = null;
+		makeAuctionName();
+		makeStartDate();
+		makeStartTime();
+		makeDuration();
 		HashMap<Integer, String> aucReqMap = new HashMap<>();
-		aucReqMap = myAuctionCentral.auctionRequest(
-				myNonProfit, 
-				startDate, 
-				startTime, 
-				duration, 
-				auctionNameTxtField.getText());
 		try {
-//			aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, startDate, 
-//					startTime, duration, auctionNameTxtField.getText());
+			aucReqMap = myAuctionCentral.auctionRequest(myNonProfit, myStartDate, 
+					myStartTime, myDuration, auctionNameTxtField.getText());
 			//Error checking for auction
 			if (aucReqMap.isEmpty()) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonProfitComfirmAucReq.fxml"));
@@ -169,61 +163,82 @@ public class NonprofitAuctionRequest implements Initializable{
 			} else {
 				// 1, 2, 3, 5: start date
 				// start time: 0
-				String startDateErrorTxt = "Error! ";
+				String errorText = "Error! ";
 				if (aucReqMap.containsKey(0)) {
-					startDateErrorTxt += aucReqMap.get(0);
+					startTimeErrorLabel.setTextFill(Color.RED);
+					errorText += aucReqMap.get(0) + " ";
 				} 
 				if (aucReqMap.containsKey(1)) {
-					// error check 
-					startDateErrorTxt += aucReqMap.get(1);
+					startDateErrorLabel.setTextFill(Color.RED);
+					errorText += aucReqMap.get(1) + " ";
 				} 
 				if (aucReqMap.containsKey(2)) {
-					startDateErrorTxt += aucReqMap.get(2);
+					startDateErrorLabel.setTextFill(Color.RED);
+					errorText += aucReqMap.get(2) + " ";
 				} 
 				if (aucReqMap.containsKey(3)) {
-					startDateErrorTxt += aucReqMap.get(3);
+					startDateErrorLabel.setTextFill(Color.RED);
+					errorText += aucReqMap.get(3) + " ";
 				} 
-				if (aucReqMap.containsKey(4)) {
-					startDateErrorTxt += aucReqMap.get(4);
+				if (aucReqMap.containsKey(4)) {					
+					errorText += aucReqMap.get(4) + " ";
 				} 
 				if (aucReqMap.containsKey(5)) {
-					startDateErrorTxt += aucReqMap.get(5);
+					startDateErrorLabel.setTextFill(Color.RED);
+					errorText += aucReqMap.get(5) + " ";
 				}	
 				//WRAP TEXT
 				maxAuctionsErrorLabel.setWrapText(true);
 				maxAuctionsErrorLabel.setTextAlignment(TextAlignment.JUSTIFY);
 				maxAuctionsErrorLabel.setVisible(true);
-				maxAuctionsErrorLabel.setText(startDateErrorTxt);
+				maxAuctionsErrorLabel.setText(errorText);
 			}	
 		} catch (NullPointerException e) {
-			System.out.println("im null");
+			
 		}
 	}
-		
-	public void back(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonProfitWelcomeScreen.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(anchorPane);
-        back.setScene(scene);
-        NonProfitController controller = (NonProfitController) loader.getController();
-        controller.construct(myAuctionCentral, myNonProfit);
-        back.show();
+	
+	private void makeAuctionName() {
+		if (auctionNameTxtField.getText().equals("")) {
+			nameErrorLabel.setVisible(true);
+			nameErrorLabel.setText("Please enter an auction name");
+			aucNameLabel.setTextFill(Color.RED);
+		} else {
+			nameErrorLabel.setVisible(false);
+			aucNameLabel.setTextFill(Color.BLACK);
+		}
 	}
 	
-	public void exit(ActionEvent theEvent) throws IOException {
-		Platform.exit();
+	private void makeStartDate() {
+		if (startDatePicker.getValue() == null) {
+			startDateErrorLabel.setVisible(true);
+			startDateErrorLabel.setText("Please enter a date");
+			startDateLabel.setTextFill(Color.RED);
+		} else {
+			startDateErrorLabel.setVisible(false);
+			startDateLabel.setTextFill(Color.BLACK);
+		}
+		myStartDate = startDatePicker.getValue();
 	}
 	
-	public void logout(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(anchorPane);
-        login.setScene(scene);
-        LoginController controller = (LoginController) loader.getController();
-        controller.construct(myAuctionCentral);
-        login.show();
+	private void makeStartTime() {
+		int startHr = Integer.parseInt((String) startTimeHrCombo.getValue());
+		int startMin = Integer.parseInt((String) startTimeMinCombo.getValue()); 		
+		myStartTime = LocalTime.of(startHr, startMin);
 	}
+	
+	private void makeDuration() {
+		myDuration=0;
+		try {				
+			durationErrorLabel.setVisible(false);
+			durationLabel.setTextFill(Color.BLACK);
+			myDuration = Integer.parseInt(durationField.getText());
+		} catch (NumberFormatException e) {
+			durationLabel.setTextFill(Color.RED);
+			durationErrorLabel.setVisible(true);
+			durationErrorLabel.setText("Please enter a number");
+		}
+	}
+
 
 }

@@ -141,11 +141,14 @@ public class NonprofitViewAllAuctions implements Initializable {
 		}
 	}
 	
+	@FXML
 	public void add(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/AddItemToAuction.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/AddItemToAuctionList.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
+        NonProfitAddItemController controller = (NonProfitAddItemController) loader.getController();
+        controller.construct(myAuctionCentral, myNonProfit);
         back.setScene(scene);
         back.show();
 	}

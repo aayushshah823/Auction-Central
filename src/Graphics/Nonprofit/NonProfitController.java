@@ -35,21 +35,15 @@ import model.NonProfit;
  *
  */
 public class NonProfitController implements Initializable {
-
-	@FXML
-	Button button2;
 		
 	@FXML
-	private Label userName;
-	
+	private Label userName;	
 	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+	public void initialize(URL location, ResourceBundle resources) {		
 	}
 	
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
