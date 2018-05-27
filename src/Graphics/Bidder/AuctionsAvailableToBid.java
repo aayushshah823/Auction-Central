@@ -37,8 +37,6 @@ public class AuctionsAvailableToBid implements Initializable{
 	public Item myCurrentItem;
 	@FXML 
 	private Label cannotBid;
-	@FXML
-	private Label itemTitle; 
 	@FXML 
 	private ListView<Auction> listOfAuctions; 
 	@FXML 
@@ -112,7 +110,6 @@ public class AuctionsAvailableToBid implements Initializable{
 	}	
 	
 	public void displayCurrentAuction() {
-		this.itemTitle.setText("Available Items");
 		this.listOfItems.getItems().clear();
 		System.out.println("out");
 		for (Item item : myCurrentAuction.getItems()) {
@@ -180,7 +177,6 @@ public class AuctionsAvailableToBid implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.cannotBid.setText("");
-		this.itemTitle.setText("");
 	}
 
 }

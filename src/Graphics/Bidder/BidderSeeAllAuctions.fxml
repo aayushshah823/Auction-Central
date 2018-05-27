@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <Label text="Auctions Available to Bid">
+                  <Label text="Available Auctions">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -27,7 +27,7 @@
             </VBox>
             <VBox prefHeight="472.0" prefWidth="334.0">
                <children>
-                  <Label fx:id="itemTitle" prefHeight="92.0" prefWidth="205.0" text="Label">
+                  <Label fx:id="itemTitle" prefHeight="92.0" prefWidth="205.0" text="Available items">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
