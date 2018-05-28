@@ -19,7 +19,7 @@
          <children>
             <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
                <children>
-                  <ListView fx:id="listOfBids" fixedCellSize="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="800.0">
+                  <ListView fx:id="listOfBids" fixedCellSize="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="800.0">
                      <VBox.margin>
                         <Insets bottom="-140.0" right="-600.0" />
                      </VBox.margin>

@@ -58,9 +58,9 @@ public class BiddingController  implements Initializable {
 			this.submitBidAmount.setDisable(true);
 		}
 		DecimalFormat df = new DecimalFormat("0.00"); 
-		String details = this.currentAuction.getAuctionName() + "\n"+
-				this.item.getItemName() + "\n" 
-				+ "Starting Bid: " + "\n" + "$" + df.format(this.item.getStartingBid());
+		String details = "Item: "+
+				this.item.getItemName() + "\n\nDescription: " + item.getItemDesciption() 
+				+ "\n\nStarting Bid: " + "$" + df.format(this.item.getStartingBid());
 		this.itemDetails.setText(details);
 	}
 	

@@ -37,7 +37,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfBids" fixedCellSize="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="585.0">
+                  <ListView fx:id="listOfBids" fixedCellSize="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="585.0">
                      <VBox.margin>
                         <Insets bottom="-10.0" right="25.0" />
                      </VBox.margin>

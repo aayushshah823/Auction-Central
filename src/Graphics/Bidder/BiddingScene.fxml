@@ -36,9 +36,9 @@
             </VBox>
             <HBox prefHeight="512.0" prefWidth="685.0">
                <children>
-                  <Label fx:id="itemDetails" prefHeight="512.0" prefWidth="476.0" text="Label">
+                  <Label fx:id="itemDetails" prefHeight="512.0" prefWidth="476.0" wrapText="true" text="Label">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font></Label>
                </children>
             </HBox>

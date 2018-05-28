@@ -40,7 +40,7 @@ public class BidderController implements Initializable {
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder;
-		name.setText("Welcome, " + myBidder.getName());
+		name.setText("Welcome " + myBidder.getName() + "! You are logged in as a bidder. What would you like to do?");
 	}
 
 	

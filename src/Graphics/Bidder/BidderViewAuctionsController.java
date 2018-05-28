@@ -100,8 +100,8 @@ public class BidderViewAuctionsController implements Initializable{
 		Map<Auction, Map<Item, Double>> bids = myBidder.getAllItemsInAllAuctions();
 		Map<Item, Double> auctionBids = bids.get(auction);
 		for (Item item : auction.getItems()) {
-			String toDisplay = item.getItemName() + " - " + item.getItemDesciption() + "\n\tMinimum bid: $" 
-					+ df.format(item.getStartingBid());
+			String toDisplay = "Item: " + item.getItemName() + "\nDescription: " + item.getItemDesciption() + "\nMinimum bid: $" 
+		+ df.format(item.getStartingBid());
 			if (auctionBids != null && auctionBids.containsKey(item)) {
 				toDisplay += " | My bid: $" + df.format(auctionBids.get(item));
 			}

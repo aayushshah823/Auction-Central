@@ -96,9 +96,8 @@ public class AuctionsAvailableToBid implements Initializable{
 					protected void updateItem(Item item, boolean empty) {
 						super.updateItem(item, empty);
 						if(item != null) {
-							String toDisplay = "Item Name: " + item.getItemName() + "\n" +
-									"Item Description: " + item.getItemDesciption() + "\n" 
-									+ "Starting Bid: "	+ df.format(item.getStartingBid()) + "\n";		                	
+							String toDisplay = item.getItemName() + "\n\tMinimum bid: $" 
+									+ df.format(item.getStartingBid());          	
 							setText(toDisplay);
 						} else {
 							setText("");

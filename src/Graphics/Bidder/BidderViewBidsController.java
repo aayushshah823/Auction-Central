@@ -114,7 +114,9 @@ public class BidderViewBidsController implements Initializable{
 		this.listOfBids.getItems().clear();
 		Map<Item, Double> bids = myBidder.getBidsInOneAuction(auction);
 		for (Item item : bids.keySet()) {
-			this.listOfBids.getItems().add(item.getItemName() + " - " + item.getItemDesciption() + "\n\tMinimum bid: $" 
+//			this.listOfBids.getItems().add(item.getItemName() + " - " + item.getItemDesciption() + "\n\tMinimum bid: $" 
+//					+ df.format(item.getStartingBid()) + " | My bid: $" + df.format(bids.get(item)));
+			this.listOfBids.getItems().add("Item: " + item.getItemName() + "\nDescription: " + item.getItemDesciption() + "\nMinimum bid: $" 
 					+ df.format(item.getStartingBid()) + " | My bid: $" + df.format(bids.get(item)));
 		}
 	}	
