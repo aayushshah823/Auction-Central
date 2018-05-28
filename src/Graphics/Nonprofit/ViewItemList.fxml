@@ -63,20 +63,16 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-               </children>
-            </VBox>
-            <StackPane prefHeight="427.0" prefWidth="200.0">
-               <children>
                   <Button fx:id="add" mnemonicParsing="false" onAction="#add" text="Add An Item">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
-            </StackPane>
+            </VBox>
          </children>
       </HBox>
-      <Label alignment="CENTER" layoutX="571.0" layoutY="106.0" prefHeight="66.0" prefWidth="367.0" text="Items currently in your auction" textFill="#b0336b">
+      <Label alignment="CENTER" layoutX="571.0" layoutY="106.0" prefHeight="66.0" prefWidth="367.0" text="Items in selected auction" textFill="#b0336b">
          <font>
             <Font size="18.0" />
          </font>

@@ -133,6 +133,7 @@ public class NonprofitViewAllAuctions implements Initializable {
 	
 	public void displayCurrentAuction() {
 		this.listOfItems.getItems().clear();
+		
 		itemLabel.setText("Number of Current Items: " + myCurrentAuction.getItems().size());
 		if(myCurrentAuction.getItems()  != null) {
 			for (Item item : myCurrentAuction.getItems()) {

@@ -54,7 +54,7 @@ public class NonProfitComfirmAucReq implements Initializable {
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
-        NonProfitController controller = (NonProfitController) loader.getController();
+        NonprofitAuctionRequest controller = (NonprofitAuctionRequest) loader.getController();
         controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	}

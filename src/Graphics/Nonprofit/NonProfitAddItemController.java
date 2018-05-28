@@ -34,15 +34,11 @@ public class NonProfitAddItemController implements Initializable {
 	@FXML
 	private TextField myItemNameField;
 	@FXML
-	private TextField myCountField;
-	@FXML
 	private TextArea myDescripArea;
 	@FXML
 	private TextField myStartBidField;
 	@FXML
 	private Label myItemNameLabel; 
-	@FXML
-	private Label myCountLabel;
 	@FXML
 	private Label myDescripLabel;
 	@FXML
@@ -73,19 +69,9 @@ public class NonProfitAddItemController implements Initializable {
 		int errorCount = 0;		
 		errorCount =checkEmpty(myStartBidField, myDescripLabel, errorCount);
 		errorCount =checkEmpty(myItemNameField, myItemNameLabel, errorCount);
-		errorCount = checkEmpty(myCountField, myCountLabel, errorCount);
 		errorCount = checkArea(errorCount);
 		
-		int itemCount = -1;
-		double startBid = -1;		
-		try {		
-			myCountLabel.setTextFill(Color.BLACK);
-			myCountLabel.setText("What is the Item Count?");
-			itemCount = Integer.parseInt(myCountField.getText());
-		} catch (NumberFormatException e) {
-			myCountLabel.setTextFill(Color.RED);
-			myCountLabel.setText("What is the Item Count? Please enter a number.");
-		}
+		double startBid = -1;			
 		try {		
 			myStartBidLabel.setTextFill(Color.BLACK);
 			myStartBidLabel.setText("What is the starting bid?");
@@ -96,13 +82,10 @@ public class NonProfitAddItemController implements Initializable {
 		}
 		
 		
-		if (checkAllEntriesFilled() && itemCount != -1 && startBid != -1) {	
+		if (checkAllEntriesFilled() && startBid != -1) {	
 			myErrorLabel.setVisible(false);
 
-			myItem = new Item(myItemNameField.getText(), startBid, myDescripArea.getText(), itemCount);
-			
-//			myAuctionCentral.getAllAuctions().get(myNonProfit).get;
-//			myNonProfit.addItem(myItem);
+			myItem = new Item(myItemNameField.getText(), startBid, myDescripArea.getText(), 0);
 			myCurrAuction.addItem(myItem);
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/NonprofitComfirmItem.fxml"));
@@ -110,8 +93,10 @@ public class NonProfitAddItemController implements Initializable {
 	        Stage back = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        Scene scene = new Scene(anchorPane);
 	        back.setScene(scene);
-	        NonProfitComfirmAucReq controller = (NonProfitComfirmAucReq) loader.getController();
-	        controller.construct(myAuctionCentral, myNonProfit);
+	        NonprofitComfirmItem controller = (NonprofitComfirmItem) loader.getController();
+	        controller.construct(myAuctionCentral, myNonProfit, 
+	        		myItemNameField.getText(), startBid, myDescripArea.getText(),
+	        		myCurrAuction);
 	        back.show();
 		} else {
 			myErrorLabel.setVisible(true);
@@ -121,8 +106,7 @@ public class NonProfitAddItemController implements Initializable {
 	
 	private boolean checkAllEntriesFilled() {		
 		return !myDescripArea.getText().equals("") && !myItemNameField.getText().equals("")
-				&& !myStartBidField.getText().equals("")
-				&& !myCountField.getText().equals("");
+				&& !myStartBidField.getText().equals("");
 	}
 	
 	private int checkEmpty(TextField field, Label label, int count) {
@@ -153,7 +137,7 @@ public class NonProfitAddItemController implements Initializable {
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
-        NonProfitController controller = (NonProfitController) loader.getController();
+        NonprofitViewAllAuctions controller = (NonprofitViewAllAuctions) loader.getController();
         controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	}
