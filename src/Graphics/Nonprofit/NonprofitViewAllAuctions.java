@@ -79,7 +79,7 @@ public class NonprofitViewAllAuctions implements Initializable {
 						@Override
 						public void handle(MouseEvent event) {
 							if(event.getButton().equals(MouseButton.PRIMARY)){
-					            if(event.getClickCount() == 2){
+					            if(event.getClickCount() == 1){
 						          myCurrentAuction = cell.getItem(); 	
 						          displayCurrentAuction();
 					         }
