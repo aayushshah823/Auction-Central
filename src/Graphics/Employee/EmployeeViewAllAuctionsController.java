@@ -2,7 +2,9 @@ package Graphics.Employee;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -26,7 +28,9 @@ import javafx.util.Callback;
 import model.Auction;
 import model.AuctionCentral;
 import model.AuctionCentralEmployee;
+import model.Bidder;
 import model.Item;
+import model.NonProfit;
 
 public class EmployeeViewAllAuctionsController implements Initializable{
 	
@@ -62,10 +66,20 @@ public class EmployeeViewAllAuctionsController implements Initializable{
 		             @Override
 		            protected void updateItem(Auction auction, boolean empty) {
 		                super.updateItem(auction, empty);
+
 		                if(auction != null) {
-		                	String toDisplay = auction.getAuctionName() + " | " + auction.getStartDate() + " " 
-				                	+ auction.getStartTime() + "-" + auction.getEndTime() + " | ";		                	
-		                	setText(toDisplay);
+		                	System.out.println("asgasg");
+		                	String toDisplay = auction.getAuctionName() + " | " + getNonProfitName(auction) + " | " + auction.getStartDate() + " " 
+									+ auction.getStartTime() + "-" + auction.getEndTime() + " | " + auction.getItems().size();
+							if (auction.getItems().size() == 1) {
+								toDisplay += " item";
+							} else {
+								toDisplay += " items";
+							}
+							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
+								toDisplay += " | CLOSED";
+							}
+							setText(toDisplay);
 		                }
 		            }
 		         };
@@ -95,14 +109,14 @@ public class EmployeeViewAllAuctionsController implements Initializable{
 				       @Override
 			            protected void updateItem(Item item, boolean empty) {
 			                super.updateItem(item, empty);
-			                if(item != null) {
-			                	String toDisplay = "Item Name: " + item.getItemName() + "\n" +
-			                      "Item Description: " + item.getItemDesciption() + "\n" 
-					                + "Starting Bid: "	+ item.getStartingBid() + "\n";		                	
-			                	setText(toDisplay);
-			                } else {
-			                	setText("");
-			                }
+							if(item != null) {
+								DecimalFormat df = new DecimalFormat("0.00"); 
+								String toDisplay = item.getItemName() + " | Minimum bid: $" 
+										+ df.format(item.getStartingBid());          	
+								setText(toDisplay);
+							} else {
+								setText("");
+							}
 			            }
 				 };
 				 cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -119,6 +133,17 @@ public class EmployeeViewAllAuctionsController implements Initializable{
 			}
 		});
 	}	
+	
+	private String getNonProfitName(Auction theAuction) {
+		for (NonProfit nonProfit : myAuctionCentral.getAllAuctions().keySet()) {
+			for (Auction auction : myAuctionCentral.getAllAuctions().get(nonProfit)) {
+				if (auction.equals(theAuction)) {
+					return nonProfit.getOrg();
+				}
+			}
+		}
+		return null;
+	}
 	
 	public void displayCurrentAuction() {
 		this.listOfItems.getItems().clear();

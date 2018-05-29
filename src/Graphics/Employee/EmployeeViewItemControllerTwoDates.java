@@ -22,11 +22,13 @@ import model.AuctionCentral;
 import model.AuctionCentralEmployee;
 import model.Item;
 
-public class EmployeeViewItemController implements Initializable {
+public class EmployeeViewItemControllerTwoDates implements Initializable {
 
 	private AuctionCentral myAuctionCentral;
 	private AuctionCentralEmployee myEmployee;
 	private Item myItem;
+	private LocalDate myStartDate;
+	private LocalDate myEndDate;
 	
 	@FXML Label itemDetails;
 	
@@ -35,6 +37,8 @@ public class EmployeeViewItemController implements Initializable {
 		myAuctionCentral = theAuctionCentral;
 		myEmployee = theEmployee;
 		myItem = theItem;
+		myStartDate = theStartTime;
+		myEndDate = theEndTime;
 		DecimalFormat df = new DecimalFormat("0.00"); 
 		String details = "Item: "+
 				this.myItem.getItemName() + "\n\nDescription: " + myItem.getItemDesciption() 
@@ -43,13 +47,13 @@ public class EmployeeViewItemController implements Initializable {
 	}
 	
 	public void back(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/EmployeeViewAllAuctions.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/AuctionsBetweenTwoDates.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         back.setScene(scene);
-        EmployeeViewAllAuctionsController controller = (EmployeeViewAllAuctionsController) loader.getController();
-        controller.construct(myAuctionCentral, (AuctionCentralEmployee) myEmployee, "");
+        AuctionsBetweenDates controller = (AuctionsBetweenDates) loader.getController();
+        controller.construct(myAuctionCentral, (AuctionCentralEmployee) myEmployee, myStartDate, myEndDate, "");
         back.show();
 	}
 	
