@@ -158,7 +158,8 @@ public class NonprofitAuctionRequest implements Initializable{
 		        Scene scene = new Scene(anchorPane);
 		        back.setScene(scene);
 		        NonProfitComfirmAucReq controller = (NonProfitComfirmAucReq) loader.getController();
-		        controller.construct(myAuctionCentral, myNonProfit);
+		        controller.construct(myAuctionCentral, myNonProfit, auctionNameTxtField.getText(), 
+		        						myStartDate, myStartTime, myDuration);
 		        back.show();
 			} else {
 				// 1, 2, 3, 5: start date
