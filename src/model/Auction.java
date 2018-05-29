@@ -60,7 +60,10 @@ public class Auction implements Serializable, Comparable<Auction> {
 		return result;
 	}
 	
-	
+	/**
+	 * Checks whether or not bidder can cancel
+	 * @return true is cancel available, false otherwise
+	 */
 	public boolean isCancelAvailable() {
 		return myBidders.isEmpty();
 	}
@@ -75,7 +78,7 @@ public class Auction implements Serializable, Comparable<Auction> {
 	}
 
 	/**
-	 * 
+	 * Setter for List of items
 	 * @param myItems
 	 */
 	public void setMyItems(ArrayList<Item> myItems) {
