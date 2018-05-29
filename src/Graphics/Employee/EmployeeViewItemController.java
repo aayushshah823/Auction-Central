@@ -1,6 +1,8 @@
 package Graphics.Employee;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -54,6 +56,15 @@ public class EmployeeViewItemController implements Initializable {
 	}
 	
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
 	
