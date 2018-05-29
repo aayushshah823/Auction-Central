@@ -91,14 +91,14 @@ public class NonprofitViewAllAuctions implements Initializable {
 		});
 		
 		//Below code throws null pointer
-//		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
-//			   listOfAuctions.getItems().add(auction);
-//		}
-		
-		//But your old code works
-		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
 			   listOfAuctions.getItems().add(auction);
 		}
+		
+		//But your old code works
+//		for (Auction auction : myAuctionCentral.getAuctionsSortedByDate()) {
+//			   listOfAuctions.getItems().add(auction);
+//		}
 
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
 			@Override

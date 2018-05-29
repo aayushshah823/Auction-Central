@@ -40,13 +40,15 @@ public class BidderController implements Initializable {
 	public void construct(AuctionCentral ac, Bidder bidder) {
 		this.myAuctionCentral = ac;
 		this.myBidder = bidder;
-		name.setText("Welcome " + myBidder.getName() + "! You are logged in as a bidder. What would you like to do?");
+		name.setText("Welcome " + myBidder.getName() + 
+				"! You are logged in as a bidder. What would you like to do?");
 	}
 
 	
 	@FXML
 	public void viewAuctionsAvailableToBid(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderSeeAllAuctions.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/Bidder/BidderSeeAllAuctions.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
@@ -57,23 +59,27 @@ public class BidderController implements Initializable {
 	}
 	
     public void viewItemsInOneAuction(ActionEvent event) throws IOException{
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderViewAuctions.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().
+    			getResource("/Graphics/Bidder/BidderViewAuctions.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidderAuction.setScene(scene);
-        BidderViewAuctionsController controller = (BidderViewAuctionsController) loader.getController();
+        BidderViewAuctionsController controller = 
+        		(BidderViewAuctionsController) loader.getController();
         controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
 	}
     
     public void viewBids(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderViewBids.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().
+    			getResource("/Graphics/Bidder/BidderViewBids.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage bidderAuction = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidderAuction.setScene(scene);
-        BidderViewBidsController controller = (BidderViewBidsController) loader.getController();
+        BidderViewBidsController controller = 
+        		(BidderViewBidsController) loader.getController();
         controller.construct(myAuctionCentral, myBidder); 
         bidderAuction.show();
     }
@@ -83,7 +89,8 @@ public class BidderController implements Initializable {
 	}
 	
 	public void logout(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/Login.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
@@ -94,7 +101,8 @@ public class BidderController implements Initializable {
 	}
 	@FXML
 	public void BackToBidderMainMenu(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderMainMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/bidder/BidderMainMenu.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);

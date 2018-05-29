@@ -59,8 +59,10 @@ public class AuctionsAvailableToBid implements Initializable{
 		            protected void updateItem(Auction auction, boolean empty) {
 		                super.updateItem(auction, empty);
 		                if(auction != null) {
-		                	String toDisplay = auction.getAuctionName() + " | " + getNonProfitName(auction) + " | " + auction.getStartDate() + " " 
-									+ auction.getStartTime() + "-" + auction.getEndTime() + " | " + auction.getItems().size();
+		                	String toDisplay = auction.getAuctionName() + " | " 
+		                + getNonProfitName(auction) + " | " + auction.getStartDate() + " " 
+									+ auction.getStartTime() + "-" + auction.getEndTime() 
+									+ " | " + auction.getItems().size();
 							if (auction.getItems().size() == 1) {
 								toDisplay += " item";
 							} else {
@@ -96,7 +98,8 @@ public class AuctionsAvailableToBid implements Initializable{
 					protected void updateItem(Item item, boolean empty) {
 						super.updateItem(item, empty);
 						if(item != null) {
-							String toDisplay = item.getItemName() + "\n\tMinimum bid: $" 
+							String toDisplay = item.getItemName() 
+									+ "\n\tMinimum bid: $" 
 									+ df.format(item.getStartingBid());          	
 							setText(toDisplay);
 						} else {
@@ -128,7 +131,8 @@ public class AuctionsAvailableToBid implements Initializable{
 	
 	private String getNonProfitName(Auction theAuction) {
 		for (NonProfit nonProfit : myAuctionCentral.getAllAuctions().keySet()) {
-			for (Auction auction : myAuctionCentral.getAllAuctions().get(nonProfit)) {
+			for (Auction auction : myAuctionCentral.
+					getAllAuctions().get(nonProfit)) {
 				if (auction.equals(theAuction)) {
 					return nonProfit.getOrg();
 				}
@@ -145,9 +149,11 @@ public class AuctionsAvailableToBid implements Initializable{
 	 */
 	@FXML
 	public void goToBiddingScene(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BiddingScene.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/Bidder/BiddingScene.fxml"));
         AnchorPane anchorPane = loader.load();
-        Stage bidingScene = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage bidingScene = (Stage)((Node)event.
+        		getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
         bidingScene.setScene(scene);
         BiddingController controller = (BiddingController) loader.getController();
@@ -161,7 +167,8 @@ public class AuctionsAvailableToBid implements Initializable{
 	}
 	@FXML
 	public void logout(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/Login.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
@@ -172,7 +179,8 @@ public class AuctionsAvailableToBid implements Initializable{
 	}
 	
 	public void back(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Bidder/BidderMainMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/Bidder/BidderMainMenu.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);
@@ -184,7 +192,8 @@ public class AuctionsAvailableToBid implements Initializable{
 	
 	@FXML
 	public void BackToBidderMainMenu(ActionEvent theEvent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bidder/BidderMainMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().
+				getResource("/Graphics/bidder/BidderMainMenu.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage login = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(anchorPane);

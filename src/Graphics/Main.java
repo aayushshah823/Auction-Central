@@ -25,7 +25,8 @@ public class Main  extends Application{
 		try {
 			AuctionCentral auctionCentral = null;
 			try {   
-		        FileInputStream file = new FileInputStream("auctionCentralDefault.ser");
+		        FileInputStream file = 
+		        		new FileInputStream("auctionCentralDefault.ser");
 		        ObjectInputStream in = new ObjectInputStream(file);        
 		        auctionCentral = (AuctionCentral)in.readObject();
 		        in.close();
@@ -36,8 +37,10 @@ public class Main  extends Application{
 		        System.out.println("ClassNotFoundException");
 		    }
 			primaryStage.setTitle("Auction Central");
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
+			primaryStage.getIcons().add(new Image(getClass()
+					.getResourceAsStream("icon.png")));
+			FXMLLoader loader = new FXMLLoader(getClass()
+					.getResource("/Graphics/Login.fxml"));
 	        AnchorPane anchorPane = loader.load();
 	        
 	        LoginController controller = (LoginController) loader.getController();
