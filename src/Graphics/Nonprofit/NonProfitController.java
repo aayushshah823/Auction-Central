@@ -3,7 +3,9 @@
  */
 package Graphics.Nonprofit;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,7 +39,7 @@ import model.NonProfit;
 public class NonProfitController implements Initializable {
 		
 	@FXML
-	private Label userName;	
+	private Label name;	
 	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
@@ -49,7 +51,7 @@ public class NonProfitController implements Initializable {
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
-		userName.setText("Welcome " + myNonProfit.getName() + ". What would you like to do today?");
+		name.setText("Welcome " + myNonProfit.getName() + "! You are logged in as a member of " + myNonProfit.getOrg() + ". What would you like to do?");
 	}
 	
 	@FXML
@@ -86,6 +88,15 @@ public class NonProfitController implements Initializable {
 	}
 	
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
 	

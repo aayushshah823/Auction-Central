@@ -20,12 +20,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Nonprofit.NonProfitAddItemController">
    <children>
-      <Label id="Title" alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
-         <effect>
-            <Bloom />
-         </effect>
+ <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Add Item">
          <font>
-            <Font name="System Bold Italic" size="56.0" />
+            <Font size="48.0" />
          </font>
       </Label>
         <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">
@@ -39,8 +36,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Home" visible="false" GridPane.rowIndex="0" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
+           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#home" prefWidth="110.0" text="Home" visible="true" GridPane.rowIndex="0" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" visible="true" text="Back" GridPane.rowIndex="1" />
          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="3" />
          </children>
@@ -72,10 +69,5 @@
             <TextArea fx:id="myDescripArea" prefHeight="84.0" prefWidth="471.0" />
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="423.0" layoutY="104.0" prefHeight="70.0" prefWidth="471.0" text="Add Item to Auction" textFill="#111010">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

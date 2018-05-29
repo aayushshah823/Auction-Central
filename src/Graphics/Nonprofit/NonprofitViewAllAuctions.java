@@ -1,7 +1,11 @@
 package Graphics.Nonprofit;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -60,7 +64,7 @@ public class NonprofitViewAllAuctions implements Initializable {
 	public void construct(AuctionCentral ac, NonProfit nonProfit) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
-		
+		DecimalFormat df = new DecimalFormat("0.00"); 
 		listOfAuctions.setCellFactory(new Callback<ListView<Auction>, ListCell<Auction>>() {
 		    @Override
 		    public ListCell<Auction> call(ListView<Auction> param) {
@@ -70,8 +74,16 @@ public class NonprofitViewAllAuctions implements Initializable {
 		                super.updateItem(auction, empty);
 		                if(auction != null) {
 		                	String toDisplay = auction.getAuctionName() + " | " + auction.getStartDate() + " " 
-				                	+ auction.getStartTime() + "-" + auction.getEndTime() + " | ";		                	
-		                	setText(toDisplay);
+									+ auction.getStartTime() + "-" + auction.getEndTime() + " | " + auction.getItems().size();
+							if (auction.getItems().size() == 1) {
+								toDisplay += " item";
+							} else {
+								toDisplay += " items";
+							}
+							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
+								toDisplay += " | CLOSED";
+							}
+							setText(toDisplay);
 		                }
 		            }
 		         };
@@ -107,12 +119,11 @@ public class NonprofitViewAllAuctions implements Initializable {
 			            protected void updateItem(Item item, boolean empty) {
 			                super.updateItem(item, empty);
 			                if(item != null) {
-			                	String toDisplay = "Item Name: " + item.getItemName() + "\n" +
-			                      "Item Description: " + item.getItemDesciption() + "\n" 
-					                + "Starting Bid: "	+ item.getStartingBid() + "\n";		                	
+			                	String toDisplay = "Item: " + item.getItemName() + "\nDescription: " + item.getItemDesciption() + "\nMinimum bid: $" 
+			                			+ df.format(item.getStartingBid());
 			                	setText(toDisplay);
-			                } else {
-			                	setText("");
+							} else {
+								setText("");
 			                }
 			            }
 				 };
@@ -172,6 +183,15 @@ public class NonprofitViewAllAuctions implements Initializable {
 	}
 	
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
 	
