@@ -94,6 +94,9 @@ public class NonprofitViewAllAuctions implements Initializable {
 		if (myAuctionCentral.getNonProfitAuctions(myNonProfit) != null) {
 			for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit))
 			 	  listOfAuctions.getItems().add(auction);
+			this.add.setDisable(false);
+		} else {
+			this.add.setDisable(true);
 		}
 
 		listOfItems.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
