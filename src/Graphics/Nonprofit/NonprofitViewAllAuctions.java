@@ -80,9 +80,9 @@ public class NonprofitViewAllAuctions implements Initializable {
 							} else {
 								toDisplay += " items";
 							}
-							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
-								toDisplay += " | CLOSED";
-							}
+//							if (auction.getStartDate().isBefore(LocalDate.now()) || auction.getStartDate().isEqual(LocalDate.now())) {
+//								toDisplay += " | CLOSED";
+//							}
 							setText(toDisplay);
 		                }
 		            }
