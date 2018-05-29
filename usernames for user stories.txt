@@ -12,7 +12,7 @@ BIDDERS
 
 NONPROFITS
 -----------------------------
-no previous auction - MCRide
+no previous auction - BillyTheKid
 last auction > 1 year ago - johnyBoi
 last auction < 1 year ago - janey
 auction scheduled 10 days in future(full) - noided47
@@ -20,7 +20,7 @@ previous auctions + scheduled auction - abcdefg
 scheduled empty auction - theBossBaby
 auction tomorrow - numberOfTheBeast
 auction today - twoheadedboy
-auctions on the same days - LongLiveTheQueen, BillyTheKid
+auctions on the same days - LongLiveTheQueen, MCRide
 
 EMPLOYEES
 -----------------------------
@@ -30,6 +30,9 @@ QueenOfCarrotFlowers
 AUCTIONS
 -----------------------------
 *shown in the ui
+only 1 bid - Semi-Annual Pro-Life Auction
+more than one bid - The Going Green Emporium
+no bids - Yo Bois Fundraising Event
 
 
 auctionCentralFull.ser
