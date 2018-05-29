@@ -1,13 +1,13 @@
 package Graphics.Bidder;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
-import Graphics.Employee.EmployeeController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +17,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Auction;
 import model.AuctionCentral;
-import model.AuctionCentralEmployee;
 import model.Bidder;
 import model.Item;
 
@@ -65,10 +62,19 @@ public class BiddingController  implements Initializable {
 	}
 	
 
-	@FXML
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
+	
 	@FXML
 	public void logout(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));

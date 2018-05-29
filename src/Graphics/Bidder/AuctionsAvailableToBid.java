@@ -1,11 +1,10 @@
 package Graphics.Bidder;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -33,7 +32,6 @@ import model.Item;
 import model.NonProfit;
 
 public class AuctionsAvailableToBid implements Initializable{
-	private static final int MAX_TOTAL_BIDS = 12;
 	public AuctionCentral myAuctionCentral;
 	public Bidder myBidder;
 	public Auction myCurrentAuction;
@@ -96,7 +94,7 @@ public class AuctionsAvailableToBid implements Initializable{
 					protected void updateItem(Item item, boolean empty) {
 						super.updateItem(item, empty);
 						if(item != null) {
-							String toDisplay = item.getItemName() + "\n\tMinimum bid: $" 
+							String toDisplay = item.getItemName() + " | Minimum bid: $" 
 									+ df.format(item.getStartingBid());          	
 							setText(toDisplay);
 						} else {
@@ -155,10 +153,19 @@ public class AuctionsAvailableToBid implements Initializable{
         bidingScene.show();
 	}
 	
-	@FXML
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
+	
 	@FXML
 	public void logout(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));

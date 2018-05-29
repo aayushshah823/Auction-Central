@@ -10,9 +10,9 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.BidderViewBidsController">
    <children>
-      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="448.0" layoutY="75.0" text="Bidding History">
+      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Bidding History">
          <font>
-            <Font size="47.0" />
+            <Font size="48.0" />
          </font>
       </Label>
       <HBox layoutX="10.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="1180.0">

@@ -9,9 +9,9 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Bidder.AuctionsAvailableToBid">
    <children>
-      <Label id="Title" layoutX="448.0" layoutY="75.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Available Auctions" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Available Auctions">
          <font>
-            <Font size="47.0" />
+            <Font size="48.0" />
          </font>
       </Label>
       <HBox layoutX="28.0" layoutY="154.0" prefHeight="472.0" prefWidth="1146.0" spacing="50.0">
@@ -25,7 +25,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfAuctions" prefHeight="431.0" prefWidth="349.0" />
+                  <ListView fx:id="listOfAuctions" fixedCellSize="50.0" prefHeight="431.0" prefWidth="349.0" />
                </children>
             </VBox>
             <VBox prefHeight="409.0" prefWidth="334.0">
@@ -35,7 +35,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfItems" prefHeight="468.0" prefWidth="331.0" />
+                  <ListView fx:id="listOfItems" fixedCellSize="30.0" prefHeight="468.0" prefWidth="331.0" />
                   <VBox prefHeight="50.0" prefWidth="100.0" />
                </children>
             </VBox>
@@ -43,7 +43,7 @@
       </HBox>
             <StackPane prefHeight="427.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="bid" mnemonicParsing="false" onAction="#goToBiddingScene" text="BID">
+                  <Button fx:id="bid" mnemonicParsing="false" onAction="#goToBiddingScene" text="View Item / Place Bid ">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
