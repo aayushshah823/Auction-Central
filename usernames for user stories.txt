@@ -3,7 +3,7 @@ auctionCentralDefault.ser
 BIDDERS
 -----------------------------
 0 bids - bidderguy31
-1 bid in future auction - kungfuKenny
+1 bid in past auction - kungfuKenny
 1 bid in future auction - theDonald
 8 bids in future auction - Kelly
 12 bids over past auctions - username
