@@ -15,7 +15,7 @@ NONPROFITS
 no previous auction - BillyTheKid
 last auction > 1 year ago - johnyBoi
 last auction < 1 year ago - janey
-auction scheduled 10 days in future(full) - noided47
+auction scheduled 10 days in future(full) - noided47 <----
 previous auctions + scheduled auction - abcdefg
 scheduled empty auction - theBossBaby
 auction tomorrow - numberOfTheBeast
