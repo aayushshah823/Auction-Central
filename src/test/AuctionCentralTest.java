@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import model.Auction;
 import model.AuctionCentral;
+import model.Bidder;
+import model.Item;
 import model.NonProfit;
 
 public class AuctionCentralTest {
@@ -41,6 +43,7 @@ public class AuctionCentralTest {
 	
 	Auction defaultFutureAuction;
 	Auction defaultPastAuction;	
+	Auction auctionWithOneBid;
 	
 	AuctionCentral auctionCentral;
 	AuctionCentral auctionCentralWithSeveralFutureAuctions;
@@ -60,6 +63,8 @@ public class AuctionCentralTest {
 		auctionCentralWithMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithOneLessThanMaxTotalAuctions = new AuctionCentral();
 		auctionCentralWithOneAuction = new AuctionCentral();
+		
+
 		HashMap<Integer, String> auction1 = auctionCentralWithOneAuction.auctionRequest(nonProfitForMultipleAuctionsTest1, 
 				AUCTION_START_DATE_VALID, AUCTION_START_TIME, 5, "Testing");
 		auctionCentralWithMaxAuctionsSameDay = new AuctionCentral();
@@ -246,7 +251,81 @@ public class AuctionCentralTest {
 	}
 	
 	@Test
-	public void getFutureAuctions_FutureAuctionsExist_AuctionListSize() {
+	public void getFutureAuctions_FutureAuctionsExist_AuctionListSize_true() {
 		assertEquals(5, auctionCentralWithSeveralFutureAuctions.getFutureAuctions().size());
+	}
+	
+	@Test
+	public void cancelAuction_AuctionWithNoBid_True() {
+		HashMap<Integer, String> auction0 = auctionCentral.auctionRequest(defaultNonProfit, 
+				AUCTION_START_DATE_VALID.plusDays(1), AUCTION_START_TIME, 5, "Testing");
+		Auction theAuction = auctionCentral.getSingleAuction(defaultNonProfit);
+		assertEquals(1, auctionCentral.cancelAuction(theAuction));
+	}
+	
+	@Test
+	public void cancelAuction_AuctionWithOneBid_False() {
+		HashMap<Integer, String> auction0 = auctionCentral.auctionRequest(defaultNonProfit, 
+				AUCTION_START_DATE_VALID.plusDays(1), AUCTION_START_TIME, 5, "Testing");
+		Auction theAuction = auctionCentral.getSingleAuction(defaultNonProfit);
+		Item item = new Item();
+		Bidder bidder = new Bidder("", "");
+		theAuction.addItem(item);
+		theAuction.makeBid(item, 25, bidder);
+		assertEquals(0, auctionCentral.cancelAuction(theAuction));
+	}
+	
+	@Test
+	public void cancelAuction_AuctionWithMultipleBid_False() {
+		HashMap<Integer, String> auction0 = auctionCentral.auctionRequest(defaultNonProfit, 
+				AUCTION_START_DATE_VALID.plusDays(1), AUCTION_START_TIME, 5, "Testing");
+		Auction theAuction = auctionCentral.getSingleAuction(defaultNonProfit);
+		Item item = new Item();
+		Item item2 = new Item();
+		Bidder bidder = new Bidder("", "");
+		theAuction.addItem(item);
+		theAuction.addItem(item2);
+		theAuction.makeBid(item, 25, bidder);
+		theAuction.makeBid(item2, 25, bidder);
+		assertEquals(0, auctionCentral.cancelAuction(theAuction));
+	}
+	
+	@Test
+	public void updateAuctionLimit_negativeValue_false() {
+		HashMap<Integer, String> errorMap = auctionCentral.updateAuctionLimit(-1);
+		assertFalse(errorMap.isEmpty());
+	}
+	
+	@Test
+	public void updateAuctionLimit_PositiveValue_true() {
+		HashMap<Integer, String> errorMap = auctionCentral.updateAuctionLimit(100);
+		assertTrue(errorMap.isEmpty());
+	}
+	
+	@Test
+	public void updateAuctionLimit_PositiveValueLessThanCurrentAuctionsScheduled_false() {
+		HashMap<Integer, String> errorMap = auctionCentralWithMaxTotalAuctions.updateAuctionLimit(1);
+		assertFalse(errorMap.isEmpty());
+	}
+	
+	@Test
+	public void getAuctionsBetweenDates_SecondDateEarlierThanFirst_false() {
+		ArrayList<Auction> list = auctionCentralWithMaxTotalAuctions.getAuctionsBetweenDates(
+							 LocalDate.now(), LocalDate.now().minusDays(1));
+		assertFalse(!list.isEmpty());
+	}
+	
+	@Test
+	public void getAuctionsBetweenDates_SecondDateSameAsFirst_true() {
+		ArrayList<Auction> list = auctionCentralWithMaxTotalAuctions.getAuctionsBetweenDates(
+							 LocalDate.now(), LocalDate.now());
+		assertTrue(list.isEmpty());
+	}
+	
+	@Test 
+	public void getAuctionsBetweenDates_SecondDateAfterFirst_true() {
+		ArrayList<Auction> list = auctionCentralWithMaxTotalAuctions.getAuctionsBetweenDates(
+							 LocalDate.now(), LocalDate.now().plusDays(1));
+		assertTrue(list.isEmpty());
 	}
 }
