@@ -1,8 +1,9 @@
 package Graphics.Bidder;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -13,12 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Auction;
 import model.AuctionCentral;
 import model.Bidder;
 /**
@@ -85,6 +84,15 @@ public class BidderController implements Initializable {
     }
     
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
 	

@@ -1,6 +1,8 @@
 package Graphics.Nonprofit;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -68,21 +70,29 @@ public class NonprofitComfirmItem implements Initializable {
         controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	} 
-//	@FXML
-//	public void back(ActionEvent theEvent) throws IOException {
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/AddItemToAuctionList.fxml"));
-//        AnchorPane anchorPane = loader.load();
-//        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(anchorPane);
-//        back.setScene(scene);
-//        NonProfitAddItemController controller = (NonProfitAddItemController) loader.getController();
-//        controller.construct(myAuctionCentral, myNonProfit);
-//        back.show();
-//	}
 	@FXML
-	public void exit(ActionEvent theEvent) throws IOException {
-		Platform.exit();
+	public void back(ActionEvent theEvent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Nonprofit/AddItemToAuctionList.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Stage back = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(anchorPane);
+        back.setScene(scene);
+        NonProfitAddItemController controller = (NonProfitAddItemController) loader.getController();
+        controller.construct(myAuctionCentral, myNonProfit, myAuc);
+        back.show();
 	}
+	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
+		Platform.exit();
+	} 
 	@FXML
 	public void logout(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));

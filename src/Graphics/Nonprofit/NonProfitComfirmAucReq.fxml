@@ -9,15 +9,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Nonprofit.NonProfitComfirmAucReq">
    <children>
-      <Label id="Title" alignment="CENTER" contentDisplay="TOP" layoutX="428.0" lineSpacing="10.0" prefHeight="139.0" prefWidth="460.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
-         <effect>
-            <Bloom />
-         </effect>
+ <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Auction Scheduled">
          <font>
-            <Font name="System Bold Italic" size="56.0" />
+            <Font size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="311.0" layoutY="176.0" prefHeight="66.0" prefWidth="578.0" text="Congratulations! Your Auction has been scheduled!">
+      <Label alignment="CENTER" layoutX="311.0" layoutY="176.0" prefHeight="66.0" prefWidth="578.0" text="Congratulations! Your auction has been scheduled!">
          <font>
             <Font size="18.0" />
          </font>

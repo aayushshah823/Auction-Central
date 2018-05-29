@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Nonprofit.NonProfitController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Nonprofit.NonProfitController">
    <children>
-      <Label fx:id="userName" alignment="CENTER" layoutX="247.0" layoutY="179.0" prefHeight="66.0" prefWidth="578.0" AnchorPane.bottomAnchor="555.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="179.0">
+      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Non-profit Menu">
          <font>
-            <Font size="18.0" />
+            <Font size="48.0" />
          </font>
       </Label>
+            <VBox layoutX="344.0" layoutY="323.0" prefHeight="327.0" prefWidth="512.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#viewAllAuction" prefHeight="54.0" prefWidth="511.0" text="View my auctions" />
+            <Button mnemonicParsing="false" onAction="#viewAuctionRequestScene" prefHeight="54.0" prefWidth="511.0" text="Schedule an auction" />
+         </children>
+      </VBox>
+        <Label fx:id="name" alignment="CENTER" layoutX="199.0" layoutY="177.0" prefHeight="80.0" prefWidth="803.0" text="" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
         <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -33,32 +35,10 @@
         </rowConstraints>
          <children>
            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Home" visible="false" GridPane.rowIndex="0" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" visible="false" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" visible="false" text="Back" GridPane.rowIndex="1" />
          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <GridPane layoutX="250.0" layoutY="303.0" prefHeight="222.0" prefWidth="573.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="140.08145141601562" minHeight="10.0" prefHeight="100.25186157226562" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="91.86666870117188" minHeight="5.918548583984375" prefHeight="45.748138427734375" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" onAction="#viewAllAuction" prefHeight="51.0" prefWidth="570.0" text="View All Auctions I have submitted" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#viewAuctionRequestScene" prefHeight="51.0" prefWidth="570.0" text="Schedule a new auction" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-      <Label id="Title" alignment="CENTER" contentDisplay="TOP" layoutX="288.0" layoutY="14.0" lineSpacing="10.0" prefHeight="146.0" prefWidth="496.0" stylesheets="@../../AuctionCentralCSS/AC.css" text="Auction Central " textFill="#522db5" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
-         <effect>
-            <Bloom />
-         </effect>
-         <font>
-            <Font name="System Bold Italic" size="56.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

@@ -1,6 +1,8 @@
 package Graphics.Nonprofit;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -78,10 +80,20 @@ public class NonProfitComfirmAucReq implements Initializable {
         controller.construct(myAuctionCentral, myNonProfit);
         back.show();
 	}
-	@FXML
+
 	public void exit(ActionEvent theEvent) throws IOException {
+	try {
+		FileOutputStream file = new FileOutputStream("auctionCentralDefault.ser");
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(myAuctionCentral);
+		out.close();
+		file.close();
+	} catch (IOException exception) {
+		System.out.println("IOException");
+	}
 		Platform.exit();
 	}
+	
 	@FXML
 	public void logout(ActionEvent theEvent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Login.fxml"));
