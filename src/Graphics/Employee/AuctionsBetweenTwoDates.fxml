@@ -17,12 +17,12 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <Label fx:id="myLabel" prefHeight="35.0" prefWidth="570.0" text="LABEL">
+                  <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="570.0" text="LABEL">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfAuctions" prefHeight="431.0" prefWidth="349.0" />
+                  <ListView fx:id="listOfAuctions" fixedCellSize="50.0" prefHeight="431.0" prefWidth="349.0" />
                </children>
             </VBox>
             <VBox prefHeight="409.0" prefWidth="334.0">
@@ -32,7 +32,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listOfItems" prefHeight="468.0" prefWidth="331.0" />
+                  <ListView fx:id="listOfItems" fixedCellSize="30.0" prefHeight="468.0" prefWidth="331.0" />
                   <VBox prefHeight="50.0" prefWidth="100.0" />
                </children>
             </VBox>
@@ -51,11 +51,7 @@
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAuction" prefWidth="200.0" text="Cancel Auction" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label fx:id="myAuctionCancelledLabel" alignment="CENTER" layoutX="4.0" layoutY="170.0" prefHeight="35.0" prefWidth="1200.0" text="Label" textAlignment="CENTER">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
+      <Label fx:id="myAuctionCancelledLabel" alignment="CENTER" layoutX="4.0" layoutY="170.0" prefHeight="35.0" prefWidth="1200.0" text="Label" textAlignment="CENTER" />
       <GridPane layoutX="1074.0" layoutY="617.0" prefHeight="169.0" prefWidth="112.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -67,10 +63,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#home" prefWidth="110.0" text="Home" GridPane.rowIndex="0" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="3" />
+         <Button maxHeight="-Infinity" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#home" prefWidth="110.0" text="Home" GridPane.rowIndex="0" />
+         <Button maxHeight="-Infinity" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
+         <Button maxHeight="-Infinity" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
+         <Button maxHeight="-Infinity" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

@@ -13,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import Graphics.LoginController;
 import model.AuctionCentral;
@@ -31,14 +33,18 @@ public class InputDateRangeController implements Initializable {
 	@FXML
 	DatePicker myEndDate;
 	
+	@FXML
+	Label myLabel;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	public void construct(AuctionCentral theAuctionCentral, AuctionCentralEmployee theEmployee) {
 		this.myAuctionCentral = theAuctionCentral;
 		this.myEmployee = theEmployee;
+		myLabel.setText("");
 	}
 	
 	public void back(ActionEvent theEvent) throws IOException {
@@ -69,15 +75,25 @@ public class InputDateRangeController implements Initializable {
 	
 	@FXML
 	public void submit(ActionEvent theEvent) throws IOException {
-		LocalDate startDate = myStartDate.getValue();
-		LocalDate endDate = myEndDate.getValue();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/AuctionsBetweenTwoDates.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Stage auctionsBetweenDates = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(anchorPane);
-        auctionsBetweenDates.setScene(scene);
-        AuctionsBetweenDates controller = (AuctionsBetweenDates) loader.getController();
-        controller.construct(myAuctionCentral, myEmployee, startDate, endDate, "");
-        auctionsBetweenDates.show();		
+		if (myStartDate.getValue() == null || myEndDate.getValue() == null) {
+			myLabel.setText("Please select a start date and an end date.");
+			myLabel.setTextFill(Color.web("#ff0000"));
+		} else {
+			LocalDate startDate = myStartDate.getValue();
+			LocalDate endDate = myEndDate.getValue();
+			if (endDate.isAfter(startDate) || endDate.isEqual(startDate)) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/Employee/AuctionsBetweenTwoDates.fxml"));
+		        AnchorPane anchorPane = loader.load();
+		        Stage auctionsBetweenDates = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
+		        Scene scene = new Scene(anchorPane);
+		        auctionsBetweenDates.setScene(scene);
+		        AuctionsBetweenDates controller = (AuctionsBetweenDates) loader.getController();
+		        controller.construct(myAuctionCentral, myEmployee, startDate, endDate, "");
+		        auctionsBetweenDates.show();
+			} else {
+				myLabel.setText("The end date is prior to the start date. Please change the end date to after the start date.");
+				myLabel.setTextFill(Color.web("#ff0000"));
+			}
+		}
 	}
 }

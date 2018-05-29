@@ -97,6 +97,8 @@ public class Serialization {
 				+ "Pack Of 36", 3000));
 		auction3.addItem(new Item("Wampa Plush", 42, "Star Wars Celebration V"
 				+ " Exclusive Wampa 18 Inch Plush With Detachable Arm", 1));
+		auction3.addItem(new Item("1 Month PlayStation Plus Membership", 5, 
+				"PS3/ PS4/ PS Vita [Digital Code]", 1));
 		Auction auction4 = new Auction(today.plus(50, ChronoUnit.DAYS), 
 				noon, noon.plus(11, ChronoUnit.HOURS), "NMF 2018");
 		auction4.addItem(new Item("SkincareGiftbox", 42, "Charlene"
@@ -159,7 +161,7 @@ public class Serialization {
 				+ " Brushes Premium Makeup Brush Set Synthetic Kabuki "
 				+ "Cosmetics Foundation Blending Blush Eyeliner Face Powder "
 				+ "Brush Makeup Brush Kit", 10));
-		Auction auction11 = new Auction(today.plus(13, ChronoUnit.DAYS), 
+		Auction auction11 = new Auction(today.plus(12, ChronoUnit.DAYS), 
 				noon.plus(1, ChronoUnit.HOURS), noon.plus(5, ChronoUnit.HOURS),
 				"Semi-Annual Pro-Life Auction");
 		auction11.addItem(new Item("Pressure Cooker", 50.95, "Instant Pot Duo "
@@ -178,8 +180,8 @@ public class Serialization {
 				+ "Mix 0.87 oz", 3));
 		
 		AuctionCentral auctionCentral = new AuctionCentral();
-		NonProfit nonProfit1 = new NonProfit("MCRide", "Exmilitary",
-				"Stefan Burnett");
+		NonProfit nonProfit1 = new NonProfit("BillyTheKid", "Pro Youth Foundation",
+				"Billy Pilgrim");
 		NonProfit nonProfit2 = new NonProfit("johnyBoi", "Chicago Men's Club",
 				"John Doe");
 		NonProfit nonProfit3 = new NonProfit("janey", "Project Alert",
@@ -196,9 +198,8 @@ public class Serialization {
 				"Son Goku");
 		NonProfit nonProfit9 = new NonProfit("LongLiveTheQueen", "Pro-Life Foundation",
 				"Catherine of Aragon");
-		NonProfit nonProfit10 = new NonProfit("BillyTheKid", "Pro Youth Foundation",
-				"Billy Pilgrim");
-		
+		NonProfit nonProfit10 = new NonProfit("MCRide", "Exmilitary",
+				"Stefan Burnett");
 		Bidder bidder1 = new Bidder("bidderguy31", "Julius Caesar");
 		Bidder bidder2 = new Bidder("kungfuKenny", "Augustus Caesar");
 		Bidder bidder3 = new Bidder("theDonald", "Donald Trump");
@@ -241,7 +242,7 @@ public class Serialization {
 		auctionCentral.addAuction(nonProfit10, auction12);
 		
 		//past bids
-		bidder1.addNewToBiddingHistory(auction1, 
+		bidder2.addNewToBiddingHistory(auction1, 
 				auction1.getItems().get(4), 8500.0);
 		bidder5.addNewToBiddingHistory(auction1, 
 				auction1.getItems().get(4), 8200.00);
@@ -275,52 +276,41 @@ public class Serialization {
 				auction7.getItems().get(1), 4.20);
 		bidder5.addNewToBiddingHistory(auction7, 
 				auction7.getItems().get(2), 18.35);
+		bidder5.addNewToBiddingHistory(auction7, 
+				auction7.getItems().get(4), 21.00);
+		bidder5.addNewToBiddingHistory(auction7, 
+				auction7.getItems().get(5), 349.21);
 		
 		//future bids
-		bidder3.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(1), 30000.0);
-		bidder4.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(1), 30000.0);
-		bidder4.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(2), 30000.0);
-		bidder4.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(3), 30000.0);
-		bidder4.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(4), 30000.0);
-		bidder6.addNewToBiddingHistory(auction4, 
-				auction4.getItems().get(0), 30000.0);
-		bidder6.addNewToBiddingHistory(auction9, 
-				auction9.getItems().get(0), 30000.0);
-		bidder6.addNewToBiddingHistory(auction11, 
-				auction11.getItems().get(0), 30000.0);
-		bidder6.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(0), 30000.0);
-		bidder6.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(1), 30000.0);
-		bidder6.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(2), 30000.0);
-		bidder6.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(1), 30000.0);
-		bidder6.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(2), 30000.0);
-		bidder6.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(3), 30000.0);
-		bidder6.addNewToBiddingHistory(auction4, 
-				auction4.getItems().get(0), 30000.0);
-		bidder7.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(2), 30000.0);
-		bidder7.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(3), 30000.0);
-		bidder7.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(4), 30000.0);
-		bidder7.addNewToBiddingHistory(auction3, 
-				auction3.getItems().get(5), 30000.0);
-		bidder7.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(1), 30000.0);
-		bidder7.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(2), 30000.0);
-		bidder7.addNewToBiddingHistory(auction12, 
-				auction12.getItems().get(0), 30000.0);
+		auction3.makeBid(auction3.getItems().get(1), 2.09, bidder3);
+		auction3.makeBid(auction3.getItems().get(1), 2.68, bidder4);
+		auction3.makeBid(auction3.getItems().get(2), 3.0, bidder4);
+		auction3.makeBid(auction3.getItems().get(3), 5.60, bidder4);
+		auction3.makeBid(auction3.getItems().get(4), 12.720, bidder4);
+		auction3.makeBid(auction3.getItems().get(5), 8.0, bidder4);
+		auction3.makeBid(auction3.getItems().get(6), 15.0, bidder4);
+		auction3.makeBid(auction3.getItems().get(7), 27.23, bidder4);
+		auction3.makeBid(auction3.getItems().get(8), 43.05, bidder4);
+		
+		auction4.makeBid(auction4.getItems().get(0), 58, bidder6);
+		auction9.makeBid(auction9.getItems().get(0), 12.49, bidder6);
+		auction11.makeBid(auction11.getItems().get(0), 52.95, bidder6);
+		auction12.makeBid(auction12.getItems().get(0), 6.00, bidder6);
+		auction12.makeBid(auction12.getItems().get(1), 21.00, bidder6);
+		auction12.makeBid(auction12.getItems().get(2), 301.00, bidder6);
+		auction3.makeBid(auction3.getItems().get(1), 2.5, bidder6);
+		auction3.makeBid(auction3.getItems().get(2), 3.45, bidder6);
+		auction3.makeBid(auction3.getItems().get(3), 4.56, bidder6);
+		auction3.makeBid(auction3.getItems().get(5), 6.75, bidder6);
+		auction3.makeBid(auction3.getItems().get(7), 28.89, bidder6);
+		auction3.makeBid(auction3.getItems().get(9), 11, bidder6);
+		
+		auction3.makeBid(auction3.getItems().get(2), 4.20, bidder7);
+		auction3.makeBid(auction3.getItems().get(3), 12.56, bidder7);
+		auction3.makeBid(auction3.getItems().get(4), 13.00, bidder7);
+		auction3.makeBid(auction3.getItems().get(5), 13.00, bidder7);
+		auction12.makeBid(auction12.getItems().get(1), 25.55, bidder7);
+		auction12.makeBid(auction12.getItems().get(2), 537.28, bidder7);
 		
 		serialize("auctionCentralDefault", auctionCentral);	
 		

@@ -2,6 +2,8 @@ package Graphics.Nonprofit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 import Graphics.LoginController;
@@ -24,12 +26,30 @@ import model.NonProfit;
  */
 public class NonProfitComfirmAucReq implements Initializable {	
 	
+	@FXML
+	private Label infoLabel;
+	
 	private AuctionCentral myAuctionCentral;
 	private NonProfit myNonProfit;
+	private String myName;
+	private LocalDate myStartDate;
+	private LocalTime myStartTime;
+	private int myDuration;
 	
-	public void construct(AuctionCentral ac, NonProfit nonProfit) {
+	public void construct(AuctionCentral ac, NonProfit nonProfit, String name, 
+								LocalDate date, LocalTime time, int duration) {
 		this.myAuctionCentral = ac;
 		this.myNonProfit = nonProfit;
+		this.myName = name;
+		this.myStartDate = date;
+		this.myStartTime = time;
+		this.myDuration = duration;
+		
+		infoLabel.setWrapText(true);
+		infoLabel.setText("Auction Name: " + myName + "\n" + 
+							"Start Date: " + myStartDate + "\n" + 
+							"Start Time: " + myStartTime+ "\n" +
+							"Duration: " + myDuration + "\n");
 	}
 
 	@Override

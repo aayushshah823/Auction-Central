@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../AuctionCentralCSS/AC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Employee.InputDateRangeController">
    <children>
-      <Label id="Title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Auctions Between Dates">
+      <Label id="Title" layoutX="434.0" layoutY="52.0" prefHeight="76.0" prefWidth="343.0" text="Auctions Between Dates" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="48.0" />
          </font>
@@ -50,11 +50,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" visible="false" prefWidth="110.0" text="Home" GridPane.rowIndex="0" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" GridPane.rowIndex="1" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" GridPane.rowIndex="2" />
-         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" GridPane.rowIndex="3" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="110.0" text="Home" visible="false" GridPane.rowIndex="0" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefWidth="110.0" text="Back" textAlignment="CENTER" GridPane.rowIndex="1" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" text="Logout" textAlignment="CENTER" GridPane.rowIndex="2" />
+         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="110.0" text="Exit" textAlignment="CENTER" GridPane.rowIndex="3" />
          </children>
       </GridPane>
+      <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="257.0" prefHeight="35.0" prefWidth="1200.0" text="ErrorMessage" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

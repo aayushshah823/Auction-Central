@@ -90,9 +90,13 @@ public class NonprofitViewAllAuctions implements Initializable {
 		    }
 		});
 		
-		//Below code throws null pointer
-		for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit)) {
-			   listOfAuctions.getItems().add(auction);
+	
+		if (myAuctionCentral.getNonProfitAuctions(myNonProfit) != null) {
+			for (Auction auction : myAuctionCentral.getNonProfitAuctions(myNonProfit))
+			 	  listOfAuctions.getItems().add(auction);
+			this.add.setDisable(false);
+		} else {
+			this.add.setDisable(true);
 		}
 		
 		//But your old code works

@@ -44,8 +44,8 @@ public class NonprofitComfirmItem implements Initializable {
 		myAuc = auc;
 		
 		congratLabel.setWrapText(true);
-		congratLabel.setText("Congratulations! You have added an Item to the "
-								+ myAuc.getAuctionName() + " Auction.");
+		congratLabel.setText("Congratulations! You have added an Item to "
+								+ myAuc.getAuctionName());
 		itemInforLabel.setWrapText(true);
 		itemInforLabel.setText("Item Name: " + myName + "\n" + 
 							"Starting Bid: " + myStartBid + "\n" + 

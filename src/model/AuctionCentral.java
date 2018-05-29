@@ -6,13 +6,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * This class is where all the auctions are held. By storing each non-profit
  * that submits an auction we can access every auction and keep track of all
- * future auctions.
+ * future auctions. 
  *
  * @author Allen Whitemarsh, Raisa, Jake
  * @version 5/4/2018
@@ -90,7 +89,7 @@ public class AuctionCentral implements java.io.Serializable {
 	/**
 	 * Modifies the number of future auctions that can be scheduled.
 	 * 
-	 * @param max - the new future auction limit
+	 * @param max - the new future auction limit- Must be an integer.
 	 * @return a map of errors encountered from given max
 	 */
 	public HashMap<Integer, String> updateAuctionLimit(int max) {
@@ -108,6 +107,16 @@ public class AuctionCentral implements java.io.Serializable {
 		return errorMap;
 	}
 	
+	/**
+	 * Method to cancel an auction.
+	 * 
+	 * Pre: There must be an auction to cancel.
+	 * Post: The auction is cancelled if and only if:
+	 * 		 There have not been any bids on any items within the auction.
+	 * 		 The auction is in the future.
+	 * @param theAuction
+	 * @return 1 if the auction has been cancelled. 0 otherwise.
+	 */
 	public int cancelAuction(Auction theAuction) {
 		if (theAuction.isCancelAvailable() == true) {
 			for (Map.Entry<NonProfit, ArrayList<Auction>> map : myAuctions.entrySet()) {
@@ -141,7 +150,7 @@ public class AuctionCentral implements java.io.Serializable {
 	/**
 	 * Method to return all auctions within the system.
 	 * 
-	 * @return a Map of auctions
+	 * @return a Map of all auctions within the system.
 	 */
 	public Map<NonProfit, ArrayList<Auction>> getAllAuctions() {
 		return myAuctions;
@@ -156,27 +165,16 @@ public class AuctionCentral implements java.io.Serializable {
 	public ArrayList<Auction> getNonProfitAuctions(NonProfit theNonProfit) {
 		return myAuctions.get(theNonProfit);
 	}
-	
-	public Auction getSingleAuction(Auction theAuction) {
-		for (Map.Entry<NonProfit, ArrayList<Auction>> map : myAuctions.entrySet()) {
-			ArrayList<Auction> auctions = map.getValue();
-			for (Auction auction : auctions) {
-				if (theAuction.equals(auction)) {
-					return theAuction;
-				}
-			}
-		}
-		return null;
-	}
-	
+		
 	/**
 	 * Method that disperses the work of adding an auction to the system.
 	 * 
-	 * @param theNonProfit
-	 * @param theAuction
+	 * Post: an auction is added to the Calendar and to the Map of nonprofits
+	 * 		 and auctions.
+	 * @param theNonProfit - must not be null.
+	 * @param theAuction - must not be null.
 	 */
 	public void addAuction(NonProfit theNonProfit, Auction theAuction) {
-		if (theNonProfit != null && theAuction != null) {
 			addAuctionToCalendar(theAuction);
 			if (!myAuctions.containsKey(theNonProfit)) {
 				ArrayList<Auction> newAuction = new ArrayList<>();
@@ -189,9 +187,6 @@ public class AuctionCentral implements java.io.Serializable {
 			}
 			theNonProfit.setLastAuctionDate(theAuction.getStartDate());
 			updateNumberOfCurrentAuctions();
-		} else {
-			throw new IllegalArgumentException();
-		}
 	}
 	
 	/**
@@ -199,7 +194,9 @@ public class AuctionCentral implements java.io.Serializable {
 	 * that contains a date and the number of auctions that day. This method
 	 * adds an auction to each day within the Auction Timeframe.
 	 * 
-	 * @param theAuction
+	 * Post: the auction is added to the calendar.
+	 * 
+	 * @param theAuction the Auction must not be null.
 	 */
 	private void addAuctionToCalendar(Auction theAuction) {
 		LocalDate temp = theAuction.getStartDate();
@@ -216,6 +213,8 @@ public class AuctionCentral implements java.io.Serializable {
 	 * This method iterates through all auctions and compares the end date of 
 	 * each to the current date. This ensures that the number of current
 	 * auctions stays below or at the maximum number of auctions.
+	 * 
+	 * post-the number of currentAuctions is updated.
 	 */
 	private void updateNumberOfCurrentAuctions() {
 		numCurrentAuctions = 0;
@@ -255,7 +254,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Gets a list of all auctions sorted by chronological order
 	 * 
 	 * @author Jake
-	 * @return list of sorted auctions
+	 * @return list of sorted auctions by date. Past - Future.
 	 */
 	public ArrayList<Auction> getAuctionsSortedByDate() {
 		ArrayList<Auction> auctions = new ArrayList<Auction>();
@@ -276,6 +275,9 @@ public class AuctionCentral implements java.io.Serializable {
 	 */
 	public ArrayList<Auction> getAuctionsBetweenDates(LocalDate theFirstDate, LocalDate theSecondDate) {
 		ArrayList<Auction> auctions = new ArrayList<Auction>();
+		if (theFirstDate.isAfter(theSecondDate)) {
+			return auctions;
+		}
 		for (NonProfit nonProfit : myAuctions.keySet()) {
 			for (Auction auction : myAuctions.get(nonProfit)) {
 				if ((auction.getStartDate().isAfter(theFirstDate) || auction.getStartDate().isEqual(theFirstDate)) && 
@@ -292,7 +294,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * This method is used when a user is logging in. It verifies that the
 	 * user is in the system before logging the user in.
 	 * 
-	 * @param username
+	 * @param username - username must not be null.
 	 * @return returns the user associated with the passed username.
 	 * @return null user if the user doesn't exist
 	 */
@@ -307,8 +309,10 @@ public class AuctionCentral implements java.io.Serializable {
 	}
 
 	/**
+	 * Method that checks to see if a bid can be placed based on the date.
+	 * 
 	 * @author Raisa
-	 * @param auction
+	 * @param auction - auction must not be null.
 	 * @return True if bid is placed before 12:00 am on the day of the Auction
 	 * @return False if is placed after 12:00 am on the day of the Auction
 	 */
@@ -329,10 +333,11 @@ public class AuctionCentral implements java.io.Serializable {
 	 * returned Map is used for giving a NonProfit a reason as to why they
 	 * cannot schedule an auction.
 	 * 
-	 * @param theNonProfit
-	 * @param theStartDate
-	 * @param theStartTime
-	 * @param theEndTime
+	 * @param theNonProfit - must not be null.
+	 * @param theStartDate - must not be null.
+	 * @param theStartTime - must not be null.
+	 * @param theDuration - must not be null and must be positive.
+	 * @param theName - must not be null.
 	 * @return a Map that is empty if all tests pass, or contains error codes
 	 * when they fail.
 	 */
@@ -365,6 +370,14 @@ public class AuctionCentral implements java.io.Serializable {
 		return errorMap;
 	}
 	
+	/**
+	 * Checks to see if the duration makes the auction go past midnight that night,
+	 * thus moving the "end date" to the next day.
+	 * 
+	 * @param theStartTime - must not be null.
+	 * @param duration - must not be null and must be positive.
+	 * @return True if the duration is a valid duration. False otherwise.
+	 */
 	public boolean isDurationValid(LocalTime theStartTime, int duration) {
 		if (theStartTime.plusHours(duration).isBefore(theStartTime)) {
 			return false;
@@ -372,6 +385,20 @@ public class AuctionCentral implements java.io.Serializable {
 		return theStartTime.plusHours(duration).isBefore(LocalTime.of(HOURS_IN_DAY, MINS_IN_HOUR));
 	}
 	
+	/**
+	 * Creates an auction once all preTests pass.
+	 * 
+	 * pre: the date is valid.
+	 * 	    There are less than the max number of auctions scheduled.
+	 * 		There are less than the max number of auctions that day.
+	 * post: an auction is created.
+	 * 
+	 * @param theNonProfit - must not be null.
+	 * @param theStartDate - must not be null.
+	 * @param theStartTime - must not be null.
+	 * @param theEndTime - must not be null.
+	 * @param theName - must not be null.
+	 */
 	private void createAuction(NonProfit theNonProfit, LocalDate theStartDate, 
 							LocalTime theStartTime, LocalTime theEndTime, String theName) {
 		Auction newAuction = new Auction(theStartDate, theStartTime, theEndTime, theName);
@@ -382,7 +409,7 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Method that checks if it has been a year since the last Auction by the 
 	 * same Non-Profit.
 	 * 
-	 * @param theNonProfit
+	 * @param theNonProfit - must not be null.
 	 * @return Returns 1 if it has been a year, returns a 0 otherwise.
 	 */
 	public boolean isYearSinceLastAuction(NonProfit theNonProfit) {
@@ -397,8 +424,8 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Method that checks to see if the dates requested are after a set number
 	 * of days from the current date.
 	 * 
-	 * @param theStartDate
-	 * @return
+	 * @param theStartDate - must not be null
+	 * @return True if the start date is more than the min days away. False otherwise
 	 */
 	public boolean isStartDateAfterMinDaysAway(LocalDate theStartDate) {
 		long startDateDaysAway = 
@@ -410,8 +437,8 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Method that checks to see if the dates requested are before a set number
 	 * of days from the current date.
 	 * 
-	 * @param theStartDate
-	 * @return
+	 * @param theStartDate - must not be null.
+	 * @return True if the start date is less than the max days away. false otherwise.
 	 */
 	public boolean isDateBeforeMaxDaysAway(LocalDate theStartDate) {
 		long startDateDaysAway = 
@@ -423,8 +450,9 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Method that checks to see if there are already a set number of auctions
 	 * per day in the requested date interval.
 	 * 
-	 * @param theStartDate
-	 * @return
+	 * @param theStartDate - must not be null
+	 * @return true if there are less than the max number of auctions per day.
+	 * @return false otherwise.
 	 */
 	public boolean checkNumberOfAuctionsPerDay(LocalDate theStartDate) {
 		if (myCalendar.containsKey(theStartDate)) {
@@ -437,18 +465,38 @@ public class AuctionCentral implements java.io.Serializable {
 	 * Checks to see if there are less than a set number of total auctions
 	 * scheduled at a time.
 	 * 
-	 * @return
+	 * @return true if there are less scheduled auctions then the number
+	 * @return of Total auctions possible to schedule.
 	 */
 	public boolean isLessThanMaxAuctionsScheduled() {
 		return numCurrentAuctions < maxUpcomingAuctions;
 	}
 	
-	
+	/**
+	 * Gets the number of current auctions within the system.
+	 * @return the number of current auctions.
+	 */
 	public int getNumCurrentAuctions() {
 		return numCurrentAuctions;
 	}
 	
+	
 	public int getMaxUpcomingAuctions() {
 		return maxUpcomingAuctions;
+	}
+	
+	/**
+	 * Method specifically for testing purposes.
+	 * 
+	 * @param theNonProfit - must not be null.
+	 * @return the NonProfit's auction.
+	 */
+	public Auction getSingleAuction(NonProfit theNonProfit) {
+		for (NonProfit nonProfit : myAuctions.keySet()) {
+			for (Auction auction : myAuctions.get(nonProfit)) {
+				return auction;
+			}
+		}
+		return null;
 	}
 }
